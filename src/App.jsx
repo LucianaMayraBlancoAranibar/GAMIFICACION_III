@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Routes, Outlet } from 'react-router-dom
 import './css/style.css';
 import './charts/ChartjsConfig';
 import Dashboard from './pages/Dashboard';
+import FacultadForm from './pages/FacultadForm'
+import SucursalForm from './pages/SucursalForm'
 
 function ScrollToTopOnRouteChange() {
   useEffect(() => {
@@ -28,6 +30,8 @@ function App() {
       <ScrollToTopOnRouteChange />
       <Routes>
         <Route path="/" element={<Dashboard />} />
+        <Route path="/FacultadForm" element={<FacultadForm />} />
+        <Route path="/SucursalForm" element={<SucursalForm />} />
         {/* Agrega aquí más rutas según sea necesario */}
       </Routes>
     </Router>
