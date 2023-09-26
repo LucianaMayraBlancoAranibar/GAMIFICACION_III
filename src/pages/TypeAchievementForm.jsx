@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Sidebar from "../partials/Sidebar";
 import Header from "../partials/Header";
 
-function SucursalForm() {
+function TypeAchievementForm() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [image, setImage] = useState(null);
 
@@ -33,7 +33,7 @@ function SucursalForm() {
         <div className="relative p-4 sm:p-6 rounded-sm overflow-hidden mb-8">
           <div className="relative">
             <h1 className="text-2xl md:text-3xl text-slate-800 dark:text-slate-100 font-bold mb-1">
-              Nueva Sucursal{" "}
+              Nuevo Tipo de Logro{" "}
             </h1>
           </div>
           <br></br>
@@ -44,7 +44,7 @@ function SucursalForm() {
                   className="text-gray-900 dark:text-gray-900"
                   htmlFor="Name"
                 >
-                  Nombre
+                  Nombre del tipo de logro
                 </label>
                 <input
                   type="text"
@@ -54,6 +54,51 @@ function SucursalForm() {
               </div>
               <br></br>
 
+              <br></br>
+              <div className="my-4">
+                <div className="flex items-left justify-left">
+                  <label className="flex flex-col border-4 border-dashed w-1/2 h-32 hover:bg-gray-100 hover:border-blue-300 group">
+                    <div className="flex flex-col items-center justify-center pt-7">
+                      <svg
+                        className="w-10 h-10 text-blue-400 group-hover:text-blue-600"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M15 19l-7-7 7-7"
+                        ></path>
+                      </svg>
+                      <p className="lowercase text-sm text-gray-400 group-hover:text-blue-600 pt-1 tracking-wider">
+                        Seleccione un logo
+                      </p>
+                    </div>
+                    <input
+                      className="hidden"
+                      type="file"
+                      id="image"
+                      name="image"
+                      accept="image/jpg, image/jpeg, image/png"
+                      onChange={handleImageChange}
+                    />
+                  </label>
+                  <div>
+                    {image && (
+                      <div className="ml-4">
+                        <img
+                          className="h-32 rounded-md object-cover"
+                          src={image}
+                          alt="Previsualización de la imagen"
+                        />
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
               <br></br>
               <div className="flex justify-left">
                 <button
@@ -71,4 +116,4 @@ function SucursalForm() {
   );
 }
 
-export default SucursalForm;
+export default TypeAchievementForm;

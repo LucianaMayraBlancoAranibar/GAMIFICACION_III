@@ -5,6 +5,9 @@ import './charts/ChartjsConfig';
 import Dashboard from './pages/Dashboard';
 import FacultadForm from './pages/FacultadForm'
 import SucursalForm from './pages/SucursalForm'
+import TypeAchievementForm from './pages/TypeAchievementForm'
+import AchievementForm from './pages/AchievementForm'
+import BadgeForm from './pages/BadgeForm'
 
 function ScrollToTopOnRouteChange() {
   useEffect(() => {
@@ -32,6 +35,9 @@ function App() {
         <Route path="/" element={<Dashboard />} />
         <Route path="/FacultadForm" element={<FacultadForm />} />
         <Route path="/SucursalForm" element={<SucursalForm />} />
+        <Route path="/TypeAchievementForm" element={<TypeAchievementForm />} />
+        <Route path="/AchievementForm" element={<AchievementForm />} />
+        <Route path="/BadgeForm" element={<BadgeForm />} />
         {/* Agrega aquí más rutas según sea necesario */}
       </Routes>
     </Router>
