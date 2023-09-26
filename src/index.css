@@ -2,6 +2,3 @@
 @tailwind components;
 @tailwind utilities;
 
-form {
-    margin-left: auto;
-  }
