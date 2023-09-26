@@ -14,6 +14,7 @@ import EditTypeArchivement from './pages/EditTypeArchivement'
 import TypeAchievementForm from './pages/TypeAchievementForm'
 import AchievementForm from './pages/AchievementForm'
 import BadgeForm from './pages/BadgeForm'
+import ViewTypeArchivement from './pages/ViewTypeArchivement'
 
 function ScrollToTopOnRouteChange() {
   useEffect(() => {
@@ -47,7 +48,7 @@ function App() {
         <Route path="/EditSanction" element={<EditSanction />} />
         <Route path="/RegisterTypeArchivement" element={<RegisterTypeArchivement />} />
         <Route path="/EditTypeArchivement" element={<EditTypeArchivement />} />
-
+        <Route path="/ViewTypeArchivement" element={<ViewTypeArchivement />} />
         <Route path="/TypeAchievementForm" element={<TypeAchievementForm />} />
         <Route path="/AchievementForm" element={<AchievementForm />} />
         <Route path="/BadgeForm" element={<BadgeForm />} />
