@@ -5,6 +5,12 @@ import './charts/ChartjsConfig';
 import Dashboard from './pages/Dashboard';
 import FacultadForm from './pages/FacultadForm'
 import SucursalForm from './pages/SucursalForm'
+import RegisterManager from './pages/RegisterManager'
+import EditManager from './pages/EditManager'
+import RegisterSanction from './pages/RegisterSanction'
+import EditSanction from './pages/EditSanction'
+import RegisterTypeArchivement from './pages/RegisterTypeArchivement'
+import EditTypeArchivement from './pages/EditTypeArchivement'
 
 function ScrollToTopOnRouteChange() {
   useEffect(() => {
@@ -32,6 +38,13 @@ function App() {
         <Route path="/" element={<Dashboard />} />
         <Route path="/FacultadForm" element={<FacultadForm />} />
         <Route path="/SucursalForm" element={<SucursalForm />} />
+        <Route path="/RegisterManager" element={<RegisterManager />} />
+        <Route path="/EditManager" element={<EditManager />} />
+        <Route path="/RegisterSanction" element={<RegisterSanction />} />
+        <Route path="/EditSanction" element={<EditSanction />} />
+        <Route path="/RegisterTypeArchivement" element={<RegisterTypeArchivement />} />
+        <Route path="/EditTypeArchivement" element={<EditTypeArchivement />} />
+
         {/* Agrega aquí más rutas según sea necesario */}
       </Routes>
     </Router>
