@@ -48,43 +48,45 @@ function FacultadTable() {
         <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
         <div className="relative p-4 sm:p-6 rounded-sm overflow-hidden mb-8">
           <h1 className="text-2xl font-semibold mb-4">Lista de Facultades</h1>
-          <div className="mb-4">
+          <div className="mr-10 grid grid-flow-col sm:auto-cols-max justify-start sm:justify-end gap-2">
             <Link to="/FacultadForm"> {/* Enlace a la página de añadir facultades */}
-              <button className="bg-green-500 hover:bg-green-600 text-white rounded-md px-2 py-1">
+              <button  className="px-10 py-5 leading-5 text-white transition-colors duration-200 transform bg-gray-800 rounded-md hover:bg-gray-700 focus:outline-none focus:bg-gray-600">
                 Añadir Facultad
               </button>
             </Link>
           </div>
-          <div className="max-h-[700px] overflow-y-auto">
-          <table className="table-auto w-full dark:text-slate-300 overflow-y-auto ">
-            <thead className="text-xs uppercase text-slate-400 dark:text-slate-500 bg-slate-50 dark:bg-slate-700 dark:bg-opacity-50 rounded-sm">
+          <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-5 max-h-[600px] overflow-y-auto">
+          <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <tr>
-                <th className="p-2">
+                <th scope="col" className="px-6 py-3 text-center">
                   <div className="font-semibold text-left">ID de Facultad</div>
                 </th>
-                <th className="p-2">
+                <th scope="col" className="px-6 py-3 text-center">
                   <div className="font-semibold text-left">
                     Nombre de Facultad
                   </div>
                 </th>
-                <th className="p-2">
+                <th scope="col" className="px-6 py-3 text-center">
                   <div className="font-semibold text-left">Acciones</div>
                 </th>
               </tr>
             </thead>
             <tbody className="text-sm font-medium divide-y divide-slate-100 dark:divide-slate-700">
               {facultades.map((Faculty) => (
-                <tr key={Faculty.idFaculty}>
-                  <td className="p-2">{Faculty.idFaculty}</td>
-                  <td className="p-2">{Faculty.facultyName}</td>
-                  <td className="p-2">
+                <tr key={Faculty.idFaculty} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                  <td className="px-6 py-4">{Faculty.idFaculty}</td>
+                  <td className="px-6 py-4">{Faculty.facultyName}</td>
+                  <td className="px-6 py-4 text-center">
+                  <Link to={`/FacultadEdit/${Faculty.idFaculty}`}> {/* Redirigir a la página de edición con el ID */}
                     <button
-                      className="bg-blue-500 hover:bg-blue-600 text-white rounded-md px-2 py-1 mx-1"
+                     className="px-4 py-4 mr-3 leading-5 text-white transition-colors duration-200 transform bg-green-700 rounded-md hover:bg-green-500 focus:outline-none focus:bg-gray-600"
                     >
                       Editar
                     </button>
+                    </Link>
                     <button
-                      className="bg-red-500 hover:bg-red-600 text-white rounded-md px-2 py-1 mx-1"
+                     className="px-4 py-4 ml-2 leading-5 text-white transition-colors duration-200 transform bg-red-500 rounded-md hover:bg-red-400 focus:outline-none focus:bg-gray-600"
                       onClick={() => setFacultyToDelete(Faculty.idFaculty)} // Establece el ID de la facultad para eliminar
                     >
                       Eliminar
@@ -121,3 +123,6 @@ function FacultadTable() {
 }
 
 export default FacultadTable;
+
+
+
