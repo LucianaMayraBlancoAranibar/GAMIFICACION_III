@@ -498,7 +498,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                           <li className="mb-1 last:mb-0">
                             <NavLink
                               end
-                              to="/SucursalForm"
+                              to="/SucursalTable"
                               className={({ isActive }) =>
                                 "block transition duration-150 truncate " +
                                 (isActive

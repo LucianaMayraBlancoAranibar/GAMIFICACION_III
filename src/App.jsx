@@ -17,6 +17,8 @@ import BadgeForm from './pages/BadgeForm'
 import ViewTypeArchivement from './pages/ViewTypeArchivement'
 import FacultadTable from "./pages/FacultadTable";
 import FacultadEdit from "./pages/FacultadEdit";
+import SucursalTable from "./pages/SucursalTable";
+import SucursalEdit from "./pages/SucursalEdit";
 
 function ScrollToTopOnRouteChange() {
   useEffect(() => {
@@ -56,7 +58,8 @@ function App() {
         <Route path="/BadgeForm" element={<BadgeForm />} />
         <Route path="/FacultadTable" element={<FacultadTable />} />
         <Route path="/FacultadEdit/:id" element={<FacultadEdit />} />
-
+        <Route path="/SucursalTable" element={<SucursalTable />} />
+        <Route path="/SucursalEdit/:id" element={<SucursalEdit />} />
       </Routes>
     </Router>
   );

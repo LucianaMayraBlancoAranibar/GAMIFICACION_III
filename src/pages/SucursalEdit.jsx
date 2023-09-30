@@ -1,37 +1,58 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import Sidebar from "../partials/Sidebar";
 import Header from "../partials/Header";
 import ModalConfirmacion from "../partials/ModalConfirmacion";
-import { Link } from "react-router-dom";
 
-function SucursalForm() {
+function SucursalEdit() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [AcademicUnityName, setNombreSucursal] = useState("");
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const { id } = useParams();
+  const [sucursal, setSucursal] = useState({
+    academicUnityName: "",
+  });
 
-  async function handleSubmit(event) {
+  useEffect(() => {
+    axios
+      .get(`https://localhost:7220/api/AcademicUnities/${id}`)
+      .then((response) => {
+        setSucursal(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [id]);
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setSucursal((prevSucursal) => ({
+      ...prevSucursal,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (event) => {
     event.preventDefault();
 
-    const data = {
-      AcademicUnityName: AcademicUnityName,
+    // Crear un objeto con los datos en formato JSON
+    const requestData = {
+      idAcademicUnity: id,
+      academicUnityName: sucursal.academicUnityName,
     };
 
-    try {
-      const response = await axios.post(
-        "https://localhost:7220/api/AcademicUnities",
-        data
-      );
-
-      console.log("Sucursal registrada con éxito:", response.data);
-
-      setModalIsOpen(true);
-      setNombreSucursal("");
-    } catch (error) {
-      console.error("Error al registrar la sucursal:", error);
-    }
-  }
-
+    axios
+      .put(`https://localhost:7220/api/AcademicUnities/${id}`, requestData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   function closeModal() {
     setModalIsOpen(false);
   }
@@ -44,7 +65,7 @@ function SucursalForm() {
         <div className="relative p-4 sm:p-6 rounded-sm overflow-hidden mb-8">
           <div className="relative">
             <h1 className="text-2xl md:text-3xl text-slate-800 dark:text-slate-100 font-bold mb-1">
-              Nueva Sucursal{" "}
+              Editar sucursal{" "}
             </h1>
           </div>
           <br></br>
@@ -52,17 +73,17 @@ function SucursalForm() {
             <div>
               <div>
                 <label
+                  htmlFor="editSucursalName"
                   className="text-gray-900 dark:text-gray-900"
-                  htmlFor="AcademicUnityName"
                 >
-                  Nombre de la Sucursal
+                  Nuevo Nombre de sucursal
                 </label>
                 <input
                   type="text"
-                  id="AcademicUnityName"
+                  name="academicUnityName"
                   className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                  value={AcademicUnityName}
-                  onChange={(e) => setNombreSucursal(e.target.value)}
+                  value={sucursal.academicUnityName}
+                  onChange={handleInputChange}
                 />
               </div>
               <br></br>
@@ -71,19 +92,19 @@ function SucursalForm() {
                   className="px-10 py-5 leading-5 text-white transition-colors duration-200 transform bg-gray-800 rounded-md hover:bg-gray-700 focus:outline-none focus:bg-gray-600"
                   type="submit"
                 >
-                  Registrar
+                  Guardar Cambios
                 </button>
+                
               </div>
+              <br></br>
+              <br></br>
+              <Link to="/SucursalTable">Volver a la lista de sucursales</Link>
             </div>
-            <br></br>
-            <Link to="/SucursalTable">Volver a la lista de sucursales</Link>
           </form>
-          {/* Modal de confirmación */}
-          <ModalConfirmacion isOpen={modalIsOpen} closeModal={closeModal} />
         </div>
       </div>
     </div>
   );
 }
 
-export default SucursalForm;
+export default SucursalEdit;
