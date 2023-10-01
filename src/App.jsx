@@ -19,6 +19,9 @@ import FacultadTable from "./pages/FacultadTable";
 import FacultadEdit from "./pages/FacultadEdit";
 import SucursalTable from "./pages/SucursalTable";
 import SucursalEdit from "./pages/SucursalEdit";
+import DepartamentoTable from "./pages/DepartamentoTable";
+import DepartamentoForm from "./pages/DepartamentoForm";
+import DepartamentoEdit from "./pages/DepartamentoEdit";
 
 function ScrollToTopOnRouteChange() {
   useEffect(() => {
@@ -60,6 +63,10 @@ function App() {
         <Route path="/FacultadEdit/:id" element={<FacultadEdit />} />
         <Route path="/SucursalTable" element={<SucursalTable />} />
         <Route path="/SucursalEdit/:id" element={<SucursalEdit />} />
+        <Route path="/DepartamentoTable" element={<DepartamentoTable />} />
+        <Route path="/DepartamentoForm" element={<DepartamentoForm />} />
+        <Route path="/DepartamentoEdit/:id" element={<DepartamentoEdit />} />
+
       </Routes>
     </Router>
   );
