@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 function DepartamentoTable() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [Departamento, setDepartamento] = useState([]);
+  const [Facultad, setFacultad] = useState([]);
   const [departamentoToDelete, setDepartamentoToDelete] = useState(null);
 
   useEffect(() => {
@@ -19,7 +20,17 @@ function DepartamentoTable() {
       })
       .catch((error) => {
         console.error(error); // Verifica si hay errores en la llamada a la API
-      });
+      });    
+
+      axios
+      .get("https://localhost:7220/api/Faculties")
+      .then((response) => {
+        console.log(response.data); // Verifica los datos que obtienes
+        setFacultad(response.data);
+      })
+      .catch((error) => {
+        console.error(error); // Verifica si hay errores en la llamada a la API
+      });    
   }, []);
 
   const handleDeleteSucursal = () => {
@@ -67,7 +78,7 @@ function DepartamentoTable() {
                 </th>
                 <th scope="col" className="px-6 py-3 text-center">
                   <div className="font-semibold text-left">
-                    Carrera
+                    Facultad
                   </div>
                 </th>
                 <th scope="col" className="px-6 py-3 text-center">
@@ -80,7 +91,8 @@ function DepartamentoTable() {
                 <tr key={Departamento.idDepartment} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                 
                   <td className="px-6 py-4">{Departamento.departmentName}</td>
-                  <td className="px-6 py-4">{Departamento.idFaculty}</td>
+
+                  <td className="px-6 py-4">{Facultad.find((Facultad) => Facultad.idFaculty === Departamento.idFaculty)?.facultyName}</td>
                   <td className="px-6 py-4 text-left">
                   <Link to={`/DepartamentoEdit/${Departamento.idDepartment}`}> {/* Redirigir a la página de edición con el ID */}
                     <button

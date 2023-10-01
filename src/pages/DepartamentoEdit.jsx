@@ -3,29 +3,47 @@ import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import Sidebar from "../partials/Sidebar";
 import Header from "../partials/Header";
+
 import ModalConfirmacion from "../partials/ModalConfirmacion";
 
 function DepartamentoEdit() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { id } = useParams();
+  const [idFaculty, setidFaculty] = useState("");
   const [departamento, setDepartamento] = useState({
     DepartmentName: "",
     IdFaculty: "",
   });
+  const [Facultad, setFacultad] = useState("");
 
   useEffect(() => {
     axios
       .get(`https://localhost:7220/api/Departments/${id}`)
       .then((response) => {
         setDepartamento(response.data);
+        setidFaculty(response.data.IdFaculty);
+
       })
       .catch((error) => {
         console.log(error);
       });
+    
+      axios
+      .get("https://localhost:7220/api/Faculties")
+      .then((response) => {
+        console.log(response.data); // Verifica los datos que obtienes
+        setFacultad(response.data);
+      })
+      .catch((error) => {
+        console.error(error); // Verifica si hay errores en la llamada a la API
+      });    
   }, [id]);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
+    if (name === "idFaculty") {
+      setidFaculty(value); // Actualiza idFaculty directamente
+    }
     setDepartamento((prevDepartamento) => ({
       ...prevDepartamento,
       [name]: value,
@@ -39,7 +57,7 @@ function DepartamentoEdit() {
     const requestData = {
       idDepartment: id,
       departmentName: departamento.DepartmentName,
-      idFaculty: departamento.IdFaculty,
+      idFaculty: idFaculty,
     };
 
     axios
@@ -94,13 +112,25 @@ function DepartamentoEdit() {
                 >
                   Nueva carrera
                 </label>
-                <input
-                  type="text"
-                  name="IdFaculty"
-                  className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                  value={departamento.IdFaculty}
-                  onChange={handleInputChange}
-                />
+                {Facultad.length === 0 ? (
+                  <p>Cargando datos...</p>
+                ) : (
+                  <select
+                    id="idFaculty"
+                    className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                    value={idFaculty}
+                    onChange={(e) => setidFaculty(e.target.value)}
+                  >
+                    {Facultad.map((facultad) => (
+                      <option
+                        key={facultad.idFaculty}
+                        value={facultad.idFaculty}
+                      >
+                        {facultad.facultyName}
+                      </option>
+                    ))}
+                  </select>
+                )}
               </div>
               <br></br>
               <div className="flex justify-left">
