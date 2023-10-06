@@ -5,10 +5,12 @@ import './charts/ChartjsConfig';
 import Dashboard from './pages/Dashboard';
 import FacultadForm from './pages/FacultadForm'
 import SucursalForm from './pages/SucursalForm'
-import RegisterManager from './pages/RegisterManager'
-import EditManager from './pages/EditManager'
-import RegisterSanction from './pages/RegisterSanction'
-import EditSanction from './pages/EditSanction'
+import ManagerForm from './pages/ManagerForm'
+import ManagerEdit from './pages/ManagerEdit'
+import ManagerTable from './pages/ManagerTable'
+import SanctionForm from './pages/SanctionForm'
+import SanctionEdit from './pages/SanctionEdit'
+import SanctionTable from './pages/SanctionTable'
 import RegisterTypeArchivement from './pages/RegisterTypeArchivement'
 import EditTypeArchivement from './pages/EditTypeArchivement'
 import TypeAchievementForm from './pages/TypeAchievementForm'
@@ -49,10 +51,12 @@ function App() {
         <Route path="/" element={<Dashboard />} />
         <Route path="/FacultadForm" element={<FacultadForm />} />
         <Route path="/SucursalForm" element={<SucursalForm />} />
-        <Route path="/RegisterManager" element={<RegisterManager />} />
-        <Route path="/EditManager" element={<EditManager />} />
-        <Route path="/RegisterSanction" element={<RegisterSanction />} />
-        <Route path="/EditSanction" element={<EditSanction />} />
+        <Route path="/ManagerForm" element={<ManagerForm />} />
+        <Route path="/ManagerEdit" element={<ManagerEdit />} />
+        <Route path="/ManagerTable" element={<ManagerTable />} />
+        <Route path="/SanctionForm" element={<SanctionForm />} />
+        <Route path="/SanctionEdit/:id" element={<SanctionEdit />} />
+        <Route path="/SanctionTable" element={<SanctionTable />} />
         <Route path="/RegisterTypeArchivement" element={<RegisterTypeArchivement />} />
         <Route path="/EditTypeArchivement" element={<EditTypeArchivement />} />
         <Route path="/ViewTypeArchivement" element={<ViewTypeArchivement />} />

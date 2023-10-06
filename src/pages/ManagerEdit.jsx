@@ -6,7 +6,7 @@ import DashboardAvatars from '../partials/dashboard/DashboardAvatars';
 import FilterButton from '../components/DropdownFilter';
 import Datepicker from '../components/Datepicker';
 
-function RegisterManager() {
+function ManagerEdit() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const handleSubmit = async (event) => {
@@ -16,6 +16,7 @@ function RegisterManager() {
   return (
 
     <div className="flex h-screen overflow-hidden">
+
       {/* Sidebar */}
       <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
       {/* Content area */}
@@ -24,11 +25,11 @@ function RegisterManager() {
         <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
         <div className="relative p-4 sm:p-6 rounded-sm overflow-hidden mb-8 w-1/2">
           <div className="relative">
-            <h1 className="text-2xl md:text-3xl text-slate-800 dark:text-slate-100 font-bold mb-1">Registrar Gestor </h1>
+            <h1 className="text-2xl md:text-3xl text-slate-800 dark:text-slate-100 font-bold mb-1">Editar Gestor </h1>
 
           </div>
 
-          <form className="relative p-4 sm:p-6 rounded-sm overflow-hidden mb-50" >
+          <form className="relative p-4 sm:p-6 rounded-sm overflow-hidden mb-50">
             <div className="mb-4">
               <label className="block text-gray-700 font-bold mb-2">Nombre:</label>
               <input
@@ -94,14 +95,14 @@ function RegisterManager() {
               type="submit"
               className="px-10 py-5 leading-5 text-white transition-colors duration-200 transform bg-gray-800 rounded-md hover:bg-gray-700 focus:outline-none focus:bg-gray-600"
               >
-              Registrar
+              Actualizar
             </button>
           </form>
         </div>
+
       </div>
     </div>
-
   );
 }
 
-export default RegisterManager;
+export default ManagerEdit;
