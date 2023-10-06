@@ -2,14 +2,16 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import Sidebar from "../partials/Sidebar";
 import Header from "../partials/Header";
+import { useParams } from "react-router-dom";
 
-function AchievementForm() {
+function AchievementEdit() {
+  const { id } = useParams(); // Obtén el ID del logro de la URL
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [formData, setFormData] = useState({
-    NameAchievemt: "",    // Cambiado a "NameAchievemt" para coincidir con el modelo del servidor
+    NameAchievemt: "",
     Punctuation: 0,
-    ProjectName: "",       // Cambiado a "ProjectName" para coincidir con el modelo del servidor
-    IdTypeAchievement: 0, // Asegúrate de proporcionar un valor adecuado para este campo
+    ProjectName: "",
+    IdTypeAchievement: 0,
   });
   const [achievementTypes, setAchievementTypes] = useState([]);
 
@@ -23,25 +25,35 @@ function AchievementForm() {
       .catch((error) => {
         console.error("Error al obtener tipos de logro:", error);
       });
-  }, []);
+
+    // Realiza una solicitud a la API para obtener los datos del logro actual
+    Axios.get(`https://localhost:7187/api/Achievements/${id}`)
+      .then((response) => {
+        // Almacena los datos del logro en el estado
+        setFormData(response.data);
+      })
+      .catch((error) => {
+        console.error("Error al obtener los datos del logro:", error);
+      });
+  }, [id]);
 
   function handleSubmit(event) {
     event.preventDefault();
 
-    // Verificar si los campos requeridos están llenos
-    if (!formData.NameAchievemt || !formData.ProjectName) {
-      console.error("Los campos NameAchievemt y ProjectName son requeridos.");
+    // Verificar si los campos requeridos están llenos y Punctuation es un número válido
+    if (!formData.NameAchievemt || !formData.ProjectName || isNaN(formData.Punctuation)) {
+      console.error("Los campos NameAchievemt, ProjectName y Punctuation son requeridos y Punctuation debe ser un número válido.");
       return;
     }
 
     // Enviar datos solo si los campos requeridos están llenos
-    Axios.post("https://localhost:7187/api/Achievements", formData)
+    Axios.put(`https://localhost:7187/api/Achievements/${id}`, formData)
       .then((response) => {
-        console.log("Logro creado con éxito:", response.data);
-        // Puedes redirigir o realizar otras acciones después de la creación exitosa
+        console.log("Logro actualizado con éxito:", response.data);
+        // Puedes redirigir o realizar otras acciones después de la actualización exitosa
       })
       .catch((error) => {
-        console.error("Error al crear el logro:", error);
+        console.error("Error al actualizar el logro:", error);
       });
   }
 
@@ -62,7 +74,7 @@ function AchievementForm() {
         <div className="relative p-4 sm:p-6 rounded-sm overflow-hidden mb-8">
           <div className="relative">
             <h1 className="text-2xl md:text-3xl text-slate-800 dark:text-slate-100 font-bold mb-1">
-              Nuevo Logro
+              Editar Logro
             </h1>
           </div>
           <br></br>
@@ -90,7 +102,7 @@ function AchievementForm() {
                   className="text-gray-900 dark:text-gray-900"
                   htmlFor="Punctuation"
                 >
-                  Puntuacion
+                  Puntuación
                 </label>
                 <input
                   type="number"
@@ -107,7 +119,7 @@ function AchievementForm() {
                   className="text-gray-900 dark:text-gray-900"
                   htmlFor="ProjectName"
                 >
-                  Nombre del proyecto
+                  Nombre del Proyecto
                 </label>
                 <input
                   type="text"
@@ -121,7 +133,7 @@ function AchievementForm() {
 
               <br></br>
               <div>
-                <label htmlFor="IdTypeAchievement">Tipo de logro</label>
+                <label htmlFor="IdTypeAchievement">Tipo de Logro</label>
                 <select
                   id="IdTypeAchievement"
                   name="IdTypeAchievement"
@@ -143,7 +155,7 @@ function AchievementForm() {
                   className="px-10 py-5 leading-5 text-white transition-colors duration-200 transform bg-gray-800 rounded-md hover:bg-gray-700 focus:outline-none focus:bg-gray-600"
                   type="submit"
                 >
-                  Registrar
+                  Actualizar
                 </button>
               </div>
             </div>
@@ -154,4 +166,4 @@ function AchievementForm() {
   );
 }
 
-export default AchievementForm;
+export default AchievementEdit;

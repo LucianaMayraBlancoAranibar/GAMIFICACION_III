@@ -10,6 +10,9 @@ import AchievementForm from './pages/AchievementForm'
 import BadgeForm from './pages/BadgeForm'
 import FacultadTable from "./pages/FacultadTable";
 import FacultadEdit from "./pages/FacultadEdit";
+import TypeAchievementTable from "./pages/TypeAchievementTable";
+import AchievementTable from "./pages/AchievementTable";
+import AchievementEdit from "./pages/AchievementEdit";
 
 function ScrollToTopOnRouteChange() {
   useEffect(() => {
@@ -42,7 +45,9 @@ function App() {
         <Route path="/BadgeForm" element={<BadgeForm />} />
         <Route path="/FacultadTable" element={<FacultadTable />} />
         <Route path="/FacultadEdit/:id" element={<FacultadEdit />} />
-
+        <Route path="/TypeAchievementTable" element={<TypeAchievementTable />} />
+        <Route path="/AchievementTable" element={<AchievementTable />} />
+        <Route path="/AchievementEdit/:id" element={<AchievementEdit />} />
       </Routes>
     </Router>
   );

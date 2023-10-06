@@ -19,7 +19,7 @@ function FacultadForm() {
 
     try {
       const response = await axios.post(
-        "https://localhost:7220/api/Faculties",
+        "https://localhost:7218/api/Faculties",
         data
       );
 

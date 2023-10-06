@@ -12,7 +12,7 @@ function FacultadTable() {
   useEffect(() => {
     // Realiza una solicitud a tu API para obtener la lista de facultades
     axios
-      .get("https://localhost:7220/api/Faculties")
+      .get("https://localhost:7218/api/Faculties")
       .then((response) => {
         console.log(response.data); // Verifica los datos que obtienes
         setFacultades(response.data);
@@ -26,7 +26,7 @@ function FacultadTable() {
     if (facultyToDelete) {
       // Realiza una solicitud DELETE a la API para eliminar la facultad
       axios
-        .delete(`https://localhost:7220/api/Faculties/${facultyToDelete}`)
+        .delete(`https://localhost:7218/api/Faculties/${facultyToDelete}`)
         .then((response) => {
           // Actualiza la lista de facultades después de la eliminación
           setFacultades((prevFacultades) =>

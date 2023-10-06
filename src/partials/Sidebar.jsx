@@ -349,7 +349,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                           <li className="mb-1 last:mb-0">
                             <NavLink
                               end
-                              to="/TypeAchievementForm"
+                              to="/TypeAchievementTable"
                               className={({ isActive }) =>
                                 "block transition duration-150 truncate " +
                                 (isActive
@@ -365,7 +365,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                           <li className="mb-1 last:mb-0">
                             <NavLink
                               end
-                              to="/AchievementForm"
+                              to="/AchievementTable"
                               className={({ isActive }) =>
                                 "block transition duration-150 truncate " +
                                 (isActive
