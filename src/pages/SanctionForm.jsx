@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 
 function SanctionForm() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [Sancion, setSancion] = useState("");
   const [description, setDescription] = useState("");
   const [sanction1, setSanction1] = useState("");
   const [idStudent, setIdStudent] = useState("");
@@ -46,12 +45,16 @@ function SanctionForm() {
         data
       );
 
-      console.log("Sucursal registrada con éxito:", response.data);
+      console.log("Sancion registrada con éxito:", response.data);
 
       setModalIsOpen(true);
-      setSancion("");
+      description("");
+      sanction1("");
+      idStudent("");
+      idProfessor("");
+      idAdministrator("");
     } catch (error) {
-      console.error("Error al registrar la sucursal:", error);
+      console.error("Error al registrar la Sancion:", error);
     }
   }
 
@@ -108,13 +111,30 @@ function SanctionForm() {
                 >
                   Estudiante:
                 </label>
-                <input
-                  type="number"
-                  id="idStudent"
-                  className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                  value={idStudent}
-                  onChange={(e) => setIdStudent(e.target.value)}
-                />
+                <br/>
+                {Estudiante.length === 0 ? (
+                  <p>Cargando datos...</p>
+                ) : (
+                  <select
+                    id="idStudent"
+                    className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                    value={idStudent}
+                    onChange={(e) => {
+                      console.log("Valor seleccionado en el select:", e.target.value); // Agrega este console.log
+                      setIdStudent(e.target.value);
+                    }} 
+                    >
+                    <option value="">Selecciona un estudiante</option>
+                    {Estudiante.map((estudiante) => (
+                      <option
+                        key={estudiante.idStudent}
+                        value={estudiante.idStudent}
+                      >
+                        {estudiante.firstName + " " + estudiante.lastName}
+                      </option>
+                    ))}
+                  </select>
+                )}
                 <br/>
                 <label
                   className="text-gray-900 dark:text-gray-900"

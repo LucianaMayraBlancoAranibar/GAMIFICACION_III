@@ -132,14 +132,27 @@ function SanctionEdit() {
                 >
                   Estudiante:
                 </label>
-                <input
-                  type="number"
-                  name="idStudent"
-                  className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                  value={sancion.idStudent}
-                  onChange={handleInputChange}
-                />
-                                <br/>
+                <br/>
+                {Estudiante.length === 0 ? (
+                  <p>Cargando datos...</p>
+                ) : (
+                  <select
+                    id="idStudent"
+                    className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                    value={idStudent}
+                    onChange={(e) => setIdStudent(e.target.value)}
+                  >
+                    {Estudiante.map((estudiante) => (
+                      <option
+                        key={estudiante.idStudent}
+                        value={estudiante.idStudent}
+                      >
+                        {estudiante.firstName + " " + estudiante.lastName}
+                      </option>
+                    ))}
+                  </select>
+                )}
+                <br/>
                 <label
                   className="text-gray-900 dark:text-gray-900"
                   htmlFor="idStudent"
@@ -153,7 +166,7 @@ function SanctionEdit() {
                   value={sancion.idProfessor}
                   onChange={(e) => setIdProfessor(e.target.value)}
                 />
-                                <br/>
+                <br/>
                 <label
                   className="text-gray-900 dark:text-gray-900"
                   htmlFor="idAdministrator"
