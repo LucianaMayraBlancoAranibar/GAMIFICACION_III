@@ -99,6 +99,7 @@ function DepartamentoForm() {
                     value={idFaculty}
                     onChange={(e) => setidFaculty(e.target.value)}
                   >
+                    <option value="">Selecciona una Carrera</option>
                     {Facultad.map((facultad) => (
                       <option
                         key={facultad.idFaculty}

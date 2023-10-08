@@ -52,7 +52,7 @@ function App() {
         <Route path="/FacultadForm" element={<FacultadForm />} />
         <Route path="/SucursalForm" element={<SucursalForm />} />
         <Route path="/ManagerForm" element={<ManagerForm />} />
-        <Route path="/ManagerEdit" element={<ManagerEdit />} />
+        <Route path="/ManagerEdit/:id" element={<ManagerEdit />} />
         <Route path="/ManagerTable" element={<ManagerTable />} />
         <Route path="/SanctionForm" element={<SanctionForm />} />
         <Route path="/SanctionEdit/:id" element={<SanctionEdit />} />
