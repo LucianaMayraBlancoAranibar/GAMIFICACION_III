@@ -11,6 +11,22 @@ function SucursalEdit() {
   const [sucursal, setSucursal] = useState({
     academicUnityName: "",
   });
+  const [AcademicUnityNameError, setAcademicUnityNameError] = useState("");
+
+  const validateForm = () => {
+    let isValid = true;
+
+    if (!sucursal.academicUnityName) {
+      setAcademicUnityNameError("El nombre de la sucursal es obligatorio");
+      isValid = false;
+    } else if (sucursal.academicUnityName.length < 3 || sucursal.academicUnityName.length > 15) {
+      setAcademicUnityNameError("El nombre de la sucursal debe tener entre 3 y 15 caracteres");
+      isValid = false;
+    } else {
+      setAcademicUnityNameError("");
+    }
+    return isValid;
+  };
 
   useEffect(() => {
     axios
@@ -33,25 +49,27 @@ function SucursalEdit() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (validateForm()) {
 
-    // Crear un objeto con los datos en formato JSON
-    const requestData = {
-      idAcademicUnity: id,
-      academicUnityName: sucursal.academicUnityName,
-    };
+      // Crear un objeto con los datos en formato JSON
+      const requestData = {
+        idAcademicUnity: id,
+        academicUnityName: sucursal.academicUnityName,
+      };
 
-    axios
-      .put(`https://localhost:7220/api/AcademicUnities/${id}`, requestData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      axios
+        .put(`https://localhost:7220/api/AcademicUnities/${id}`, requestData, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   };
   function closeModal() {
     setModalIsOpen(false);
@@ -85,6 +103,8 @@ function SucursalEdit() {
                   value={sucursal.academicUnityName}
                   onChange={handleInputChange}
                 />
+                  {AcademicUnityNameError && (
+                    <p className="text-red-500">{AcademicUnityNameError}</p>)}
               </div>
               <br></br>
               <div className="flex justify-left">

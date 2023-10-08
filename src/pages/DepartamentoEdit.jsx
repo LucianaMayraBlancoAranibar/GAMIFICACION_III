@@ -15,6 +15,22 @@ function DepartamentoEdit() {
     IdFaculty: "",
   });
   const [Facultad, setFacultad] = useState("");
+  const [departmentNameError, setDepartmentNameError] = useState("");
+
+  const validateForm = () => {
+    let isValid = true;
+
+    if (!departamento.DepartmentName) {
+      setDepartmentNameError("El nombre del departamento es obligatorio");
+      isValid = false;
+    } else if (departamento.DepartmentName.length < 3 || departamento.DepartmentName.length > 15) {
+      setDepartmentNameError("El nombre del departamento debe tener entre 3 y 15 caracteres");
+      isValid = false;
+    } else {
+      setDepartmentNameError("");
+    }
+    return isValid;
+  };
 
   useEffect(() => {
     axios
@@ -52,6 +68,7 @@ function DepartamentoEdit() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (validateForm()) {
 
     // Crear un objeto con los datos en formato JSON
     const requestData = {
@@ -72,6 +89,7 @@ function DepartamentoEdit() {
       .catch((error) => {
         console.log(error);
       });
+    }
   };
   function closeModal() {
     setModalIsOpen(false);
@@ -105,6 +123,8 @@ function DepartamentoEdit() {
                   value={departamento.DepartmentName}
                   onChange={handleInputChange}
                 />
+                {departmentNameError && (
+                  <p className="text-red-500">{departmentNameError}</p>)}
                 <br />
                 <label
                   htmlFor="editSucursalName"

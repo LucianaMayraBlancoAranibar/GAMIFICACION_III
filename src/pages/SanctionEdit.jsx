@@ -19,6 +19,35 @@ function SanctionEdit() {
   });
   const [Estudiante, setEstudiante] = useState("");
 
+  const [descriptionError, setDescriptionError] = useState("");
+  const [sanction1Error, setSanction1Error] = useState("");
+
+  const validateForm = () => {
+    let isValid = true;
+
+    if (!sancion.description) {
+      setDescriptionError("La descripción es obligatoria");
+      isValid = false;
+    } else if (sancion.description.length < 5 || sancion.description.length > 25) {
+      setDescriptionError("La descripción debe tener entre 3 y 25 caracteres");
+      isValid = false;
+    } else {
+      setDescriptionError("");
+    }
+
+    if (!sancion.sanction1) {
+      setSanction1Error("El puntaje es obligatorio");
+      isValid = false;
+    } else if (sancion.sanction1 == 0) {
+      setSanction1Error("El puntaje debe ser mayor a 0");
+      isValid = false;
+    } else {
+      setSanction1Error("");
+    }
+
+    return isValid;
+  };
+
   useEffect(() => {
     axios
       .get(`https://localhost:7220/api/sanctions/${id}`)
@@ -55,6 +84,7 @@ function SanctionEdit() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (validateForm()) {
 
     // Crear un objeto con los datos en formato JSON
     const requestData = {
@@ -78,6 +108,7 @@ function SanctionEdit() {
       .catch((error) => {
         console.log(error);
       });
+    }
   };
   function closeModal() {
     setModalIsOpen(false);
@@ -111,6 +142,8 @@ function SanctionEdit() {
                   value={sancion.description}
                   onChange={handleInputChange}
                 />
+                {descriptionError && (
+                  <p className="text-red-500">{descriptionError}</p>)}
                 <br />
                 <label
                   className="text-gray-900 dark:text-gray-900"
@@ -125,6 +158,8 @@ function SanctionEdit() {
                   value={sancion.sanction1}
                   onChange={handleInputChange}
                 />
+                {sanction1Error && (
+                  <p className="text-red-500">{sanction1Error}</p>)}
                 <br/>
                 <label
                   className="text-gray-900 dark:text-gray-900"

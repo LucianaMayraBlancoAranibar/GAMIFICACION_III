@@ -15,6 +15,44 @@ function SanctionForm() {
   const [Estudiante, setEstudiante] = useState("");
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
+  //Validacion
+  const [descriptionError, setDescriptionError] = useState("");
+  const [sanction1Error, setSanction1Error] = useState("");
+  const [idStudentError, setIdStudentError] = useState("");
+
+  const validateForm = () => {
+    let isValid = true;
+
+    if (!description) {
+      setDescriptionError("La descripción es obligatoria");
+      isValid = false;
+    } else if (description.length < 5 || description.length > 25) {
+      setDescriptionError("La descripción debe tener entre 3 y 25 caracteres");
+      isValid = false;
+    } else {
+      setDescriptionError("");
+    }
+
+    if (!sanction1) {
+      setSanction1Error("El puntaje es obligatorio");
+      isValid = false;
+    } else if (sanction1 == 0) {
+      setSanction1Error("El puntaje debe ser mayor a 0");
+      isValid = false;
+    } else {
+      setSanction1Error("");
+    }
+
+    if (!idStudent) {
+      setIdStudentError("Debes seleccionar un estudiante");
+      isValid = false;
+    } else {
+      setIdStudentError("");
+    }
+
+    return isValid;
+  };
+
   useEffect(() => {
     axios
       .get("https://localhost:7220/api/Students")
@@ -30,31 +68,33 @@ function SanctionForm() {
 
   async function handleSubmit(event) {
     event.preventDefault();
+    if (validateForm()) {
 
-    const data = {
-      description: description,
-      sanction1: sanction1,
-      idStudent: idStudent,
-      idProfessor: idProfessor,
-      idAdministrator: idAdministrator,
-    };
+      const data = {
+        description: description,
+        sanction1: sanction1,
+        idStudent: idStudent,
+        idProfessor: idProfessor,
+        idAdministrator: idAdministrator,
+      };
 
-    try {
-      const response = await axios.post(
-        "https://localhost:7220/api/Sanctions",
-        data
-      );
+      try {
+        const response = await axios.post(
+          "https://localhost:7220/api/Sanctions",
+          data
+        );
 
-      console.log("Sancion registrada con éxito:", response.data);
+        console.log("Sancion registrada con éxito:", response.data);
 
-      setModalIsOpen(true);
-      description("");
-      sanction1("");
-      idStudent("");
-      idProfessor("");
-      idAdministrator("");
-    } catch (error) {
-      console.error("Error al registrar la Sancion:", error);
+        setModalIsOpen(true);
+        description("");
+        sanction1("");
+        idStudent("");
+        idProfessor("");
+        idAdministrator("");
+      } catch (error) {
+        console.error("Error al registrar la Sancion:", error);
+      }
     }
   }
 
@@ -90,6 +130,8 @@ function SanctionForm() {
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                 />
+                {descriptionError && (
+                  <p className="text-red-500">{descriptionError}</p>)}
                 <br/>
                 <label
                   className="text-gray-900 dark:text-gray-900"
@@ -104,6 +146,8 @@ function SanctionForm() {
                   value={sanction1}
                   onChange={(e) => setSanction1(e.target.value)}
                 />
+                {sanction1Error && (
+                  <p className="text-red-500">{sanction1Error}</p>)}
                 <br/>
                 <label
                   className="text-gray-900 dark:text-gray-900"
@@ -134,6 +178,9 @@ function SanctionForm() {
                       </option>
                     ))}
                   </select>
+                )}
+                {idStudentError && (
+                  <p className="text-red-500">{idStudentError}</p>
                 )}
                 <br/>
                 <label

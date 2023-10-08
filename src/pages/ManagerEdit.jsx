@@ -22,6 +22,61 @@ function ManagerEdit() {
   const [Carrera, setCarrer] = useState("");
   const [AcademicUnity, setAcademicUnity] = useState("");
 
+  const [emailError, setemailError] = useState("");
+  const [passwordError, setpasswordError] = useState("");
+  const [firstNameError, setfirstNameError] = useState("");
+  const [lastNameError, setlastNameError] = useState("")
+
+  const validateForm = () => {
+    let isValid = true;
+  
+    if (!userManager.firstName) {
+      setfirstNameError("El nombre es obligatorio");
+      isValid = false;
+    } else if (userManager.firstName.length < 3 || userManager.firstName.length > 25) {
+      setfirstNameError("El nombre debe tener entre 3 y 25 caracteres");
+      isValid = false;
+    } else {
+      setfirstNameError("");
+    }
+
+    if (!userManager.lastName) {
+      setlastNameError("El apellido es obligatorio");
+      isValid = false;
+    } else if (userManager.lastName.length < 3 || userManager.lastName.length > 25) {
+      setlastNameError("El apellido debe tener entre 3 y 25 caracteres");
+      isValid = false;
+    } else {
+      setlastNameError("");
+    }
+
+    if (!userManager.email) {
+      setemailError("El email es obligatorio");
+      isValid = false;
+    } else {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(userManager.email)) {
+        setemailError("El email no tiene un formato válido");
+        isValid = false;
+      } else {
+        setemailError("");
+      }
+    }
+
+    if (!userManager.password) {
+      setpasswordError("La contraseña es obligatoria");
+      isValid = false;
+    } else if (userManager.password.length <= 5 || userManager.password.length > 10) {
+      setpasswordError("La contraseña debe tener entre 6 y 10 caracteres");
+      isValid = false;
+    } else {
+      setpasswordError("");
+    }
+      
+    return isValid;
+  };
+
+
   useEffect(() => {
     axios
       .get(`https://localhost:7220/api/Gestors/${id}`)
@@ -74,6 +129,7 @@ function ManagerEdit() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (validateForm()) {
 
     // Crear un objeto con los datos en formato JSON
     const requestData = {
@@ -98,6 +154,7 @@ function ManagerEdit() {
       .catch((error) => {
         console.log(error);
       });
+    }
   };
   function closeModal() {
     setModalIsOpen(false);
@@ -108,7 +165,7 @@ function ManagerEdit() {
       <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
       <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
         <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-        <div className="relative p-4 sm:p-6 rounded-sm overflow-hidden mb-8">
+        <div className="relative p-4 sm:p-6 rounded-sm overflow-hidden mb-8 overflow-y-scroll">
           <div className="relative">
             <h1 className="text-2xl md:text-3xl text-slate-800 dark:text-slate-100 font-bold mb-1">
               Editar Gestor{" "}
@@ -132,6 +189,8 @@ function ManagerEdit() {
                   value={userManager.firstName}
                   onChange={handleInputChange}
                 />
+                {firstNameError && (
+                  <p className="text-red-500">{firstNameError}</p>)}
                 <br />
                 <label
                   className="text-gray-900 dark:text-gray-900"
@@ -147,6 +206,8 @@ function ManagerEdit() {
                   value={userManager.lastName}
                   onChange={handleInputChange}
                 />
+                {lastNameError && (
+                  <p className="text-red-500">{lastNameError}</p>)}
                 <br />
                 <label
                   className="text-gray-900 dark:text-gray-900"
@@ -162,6 +223,8 @@ function ManagerEdit() {
                   value={userManager.email}
                   onChange={handleInputChange}
                 />
+                {emailError && (
+                  <p className="text-red-500">{emailError}</p>)}
                 <br />
                 <label
                   className="text-gray-900 dark:text-gray-900"
@@ -170,13 +233,15 @@ function ManagerEdit() {
                   Contraseña
                 </label>
                 <input
-                  type="text"
+                  type="password"
                   id="password"
                   name="password"
                   className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                   value={userManager.password}
                   onChange={handleInputChange}
                 />
+                {passwordError && (
+                  <p className="text-red-500">{passwordError}</p>)}
                 <br />
                 <label
                   className="text-gray-900 dark:text-gray-900"
@@ -222,7 +287,6 @@ function ManagerEdit() {
                       setIdAcademicUnity(e.target.value);
                     }} 
                     >
-                    <option value="">Selecciona una Carrera</option>
                     {AcademicUnity.map((academicUnity) => (
                       <option
                         key={academicUnity.idAcademicUnity}
@@ -245,7 +309,7 @@ function ManagerEdit() {
               </div>
               <br></br>
               <br></br>
-              <Link to="/ManagerTable">Volver a la lista de facultades</Link>
+              <Link to="/ManagerTable">Volver a la lista de gestores</Link>
             </div>
           </form>
         </div>

@@ -9,26 +9,45 @@ function SucursalForm() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [AcademicUnityName, setNombreSucursal] = useState("");
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [AcademicUnityNameError, setAcademicUnityNameError] = useState("");
+
+  // Función para validar el formulario
+  const validateForm = () => {
+    let isValid = true;
+
+    if (!AcademicUnityName) {
+      setAcademicUnityNameError("El nombre de la sucursal es obligatorio");
+      isValid = false;
+    } else if (AcademicUnityName.length < 3 || AcademicUnityName.length > 15) {
+      setAcademicUnityNameError("El nombre de la sucursal debe tener entre 3 y 15 caracteres");
+      isValid = false;
+    } else {
+      setAcademicUnityNameError("");
+    }
+    return isValid;
+  };
 
   async function handleSubmit(event) {
     event.preventDefault();
+    if (validateForm()) {
 
-    const data = {
-      AcademicUnityName: AcademicUnityName,
-    };
+      const data = {
+        AcademicUnityName: AcademicUnityName,
+      };
 
-    try {
-      const response = await axios.post(
-        "https://localhost:7220/api/AcademicUnities",
-        data
-      );
+      try {
+        const response = await axios.post(
+          "https://localhost:7220/api/AcademicUnities",
+          data
+        );
 
-      console.log("Sucursal registrada con éxito:", response.data);
+        console.log("Sucursal registrada con éxito:", response.data);
 
-      setModalIsOpen(true);
-      setNombreSucursal("");
-    } catch (error) {
-      console.error("Error al registrar la sucursal:", error);
+        setModalIsOpen(true);
+        setNombreSucursal("");
+      } catch (error) {
+        console.error("Error al registrar la sucursal:", error);
+      }
     }
   }
 
@@ -64,6 +83,8 @@ function SucursalForm() {
                   value={AcademicUnityName}
                   onChange={(e) => setNombreSucursal(e.target.value)}
                 />
+                {AcademicUnityNameError && (
+                  <p className="text-red-500">{AcademicUnityNameError}</p>)}
               </div>
               <br></br>
               <div className="flex justify-left">

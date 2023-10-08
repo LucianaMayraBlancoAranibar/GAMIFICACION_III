@@ -11,6 +11,8 @@ function DepartamentoForm() {
   const [Facultad, setFacultad] = useState("");
   const [idFaculty, setidFaculty] = useState("");
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [departmentNameError, setDepartmentNameError] = useState("");
+  const [idFacultyError, setIdFacultyError] = useState("");
 
   useEffect(() => {
     axios
@@ -25,28 +27,53 @@ function DepartamentoForm() {
 
   }, []);
 
+    // Función para validar el formulario
+    const validateForm = () => {
+      let isValid = true;
+  
+      if (!departmentName) {
+        setDepartmentNameError("El nombre del departamento es obligatorio");
+        isValid = false;
+      } else if (departmentName.length < 3 || departmentName.length > 15) {
+        setDepartmentNameError("El nombre del departamento debe tener entre 3 y 15 caracteres");
+        isValid = false;
+      } else {
+        setDepartmentNameError("");
+      }
+      
+      if (!idFaculty) {
+        setIdFacultyError("Debes seleccionar una carrera");
+        isValid = false;
+      } else {
+        setIdFacultyError("");
+      }
+  
+      return isValid;
+    };
 
   async function handleSubmit(event) {
     event.preventDefault();
 
-    const data = {
-      departmentName: departmentName,
-      idFaculty: idFaculty,
-    };
+    if (validateForm()) {
+      const data = {
+        departmentName: departmentName,
+        idFaculty: idFaculty,
+      };
 
-    try {
-      const response = await axios.post(
-        "https://localhost:7220/api/Departments",
-        data
-      );
+      try {
+        const response = await axios.post(
+          "https://localhost:7220/api/Departments",
+          data
+        );
 
-      console.log("Sucursal registrada con éxito:", response.data);
+        console.log("Sucursal registrada con éxito:", response.data);
 
-      setModalIsOpen(true);
-      setDepartmentName("");
-      setidFaculty("");
-    } catch (error) {
-      console.error("Error al registrar la sucursal:", error);
+        setModalIsOpen(true);
+        setDepartmentName("");
+        setidFaculty("");
+      } catch (error) {
+        console.error("Error al registrar la sucursal:", error);
+      }
     }
   }
 
@@ -82,6 +109,8 @@ function DepartamentoForm() {
                   value={departmentName}
                   onChange={(e) => setDepartmentName(e.target.value)}
                 />
+                {departmentNameError && (
+                  <p className="text-red-500">{departmentNameError}</p>)}
                 <br />
                 <label
                   className="text-gray-900 dark:text-gray-900"
@@ -109,6 +138,9 @@ function DepartamentoForm() {
                       </option>
                     ))}
                   </select>
+                )}
+                {idFacultyError && (
+                  <p className="text-red-500">{idFacultyError}</p>
                 )}
               </div>
               <br></br>
