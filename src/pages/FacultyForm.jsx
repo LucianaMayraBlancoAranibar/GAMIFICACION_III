@@ -5,7 +5,7 @@ import Header from "../partials/Header";
 import ModalConfirmacion from "../partials/ModalConfirmacion";
 import { Link } from "react-router-dom";
 
-function FacultadForm() {
+function FacultyForm() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [FacultyName, setNombreFacultad] = useState("");
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -86,4 +86,4 @@ function FacultadForm() {
   );
 }
 
-export default FacultadForm;
+export default FacultyForm;

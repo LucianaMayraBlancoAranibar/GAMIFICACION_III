@@ -5,7 +5,7 @@ import Sidebar from "../partials/Sidebar";
 import Header from "../partials/Header";
 import ModalConfirmacion from "../partials/ModalConfirmacion";
 
-function FacultadEdit() {
+function FacultyEdit() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { id } = useParams();
   const [facultad, setFacultad] = useState({
@@ -107,4 +107,4 @@ function FacultadEdit() {
   );
 }
 
-export default FacultadEdit;
+export default FacultyEdit;

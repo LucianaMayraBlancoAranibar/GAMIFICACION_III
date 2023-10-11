@@ -4,7 +4,7 @@ import Sidebar from "../partials/Sidebar";
 import Header from "../partials/Header";
 import { Link } from "react-router-dom";
 
-function FacultadTable() {
+function FacultyTable() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [facultades, setFacultades] = useState([]);
   const [facultyToDelete, setFacultyToDelete] = useState(null);
@@ -120,7 +120,7 @@ function FacultadTable() {
   );
 }
 
-export default FacultadTable;
+export default FacultyTable;
 
 
 

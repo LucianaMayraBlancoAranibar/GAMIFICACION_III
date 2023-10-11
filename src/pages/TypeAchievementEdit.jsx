@@ -43,7 +43,6 @@ function TypeAchievementForm() {
       // Manejar errores de la solicitud
       console.error("Error al enviar la solicitud:", error.response);
 
-      // Puedes mostrar un mensaje de error al usuario si lo deseas
     }
   };
   function closeModal() {
