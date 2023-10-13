@@ -17,12 +17,12 @@ function TypeAchievementTable() {
         setTypeAchievements(response.data);
       })
       .catch((error) => {
-        console.error(error); // Verifica si hay errores en la llamada a la API
+        console.error(error); 
       });
   }, []);
   const handleDeleteTypeAchievement = () => {
     if (typeAchievementToDelete) {
-      // Realiza una solicitud DELETE a la API para eliminar la facultad
+     
       axios
         .delete(
           `https://localhost:7187/api/TypeAchievements/${typeAchievementToDelete}`

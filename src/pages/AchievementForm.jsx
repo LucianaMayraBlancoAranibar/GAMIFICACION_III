@@ -30,7 +30,7 @@ function AchievementForm() {
   function handleSubmit(event) {
     event.preventDefault();
 
-    // Realizar validaciones antes de enviar los datos
+   
     const validationErrors = {};
 
     if (!formData.NameAchievemt) {
@@ -49,7 +49,7 @@ function AchievementForm() {
     }
 
     if (Object.keys(validationErrors).length > 0) {
-      // Si hay errores, actualizar el estado de errores y detener el envío del formulario.
+   
       setErrors(validationErrors);
       return;
     }
@@ -68,7 +68,7 @@ function AchievementForm() {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
 
-    // Limpiar los errores cuando el usuario comienza a corregir los campos
+   
     if (errors[name]) {
       setErrors({ ...errors, [name]: undefined });
     }

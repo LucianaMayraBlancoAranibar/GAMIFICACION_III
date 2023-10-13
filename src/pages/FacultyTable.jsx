@@ -10,33 +10,33 @@ function FacultyTable() {
   const [facultyToDelete, setFacultyToDelete] = useState(null);
 
   useEffect(() => {
-    // Realiza una solicitud a tu API para obtener la lista de facultades
+   
     axios
       .get("https://localhost:7187/api/Faculties")
       .then((response) => {
-        console.log(response.data); // Verifica los datos que obtienes
+        console.log(response.data); 
         setFacultades(response.data);
       })
       .catch((error) => {
-        console.error(error); // Verifica si hay errores en la llamada a la API
+        console.error(error); 
       });
   }, []);
 
   const handleDeleteFaculty = () => {
     if (facultyToDelete) {
-      // Realiza una solicitud DELETE a la API para eliminar la facultad
+      
       axios
         .delete(`https://localhost:7187/api/Faculties/${facultyToDelete}`)
         .then((response) => {
-          // Actualiza la lista de facultades después de la eliminación
+        
           setFacultades((prevFacultades) =>
             prevFacultades.filter((faculty) => faculty.idFaculty !== facultyToDelete)
           );
-          setFacultyToDelete(null); // Restablece el estado
+          setFacultyToDelete(null); 
         })
         .catch((error) => {
           console.error(error);
-          setFacultyToDelete(null); // Restablece el estado en caso de error
+          setFacultyToDelete(null); 
         });
     }
   };
@@ -85,7 +85,7 @@ function FacultyTable() {
                     </Link>
                     <button
                      className="px-4 py-4 ml-3 leading-5 text-white transition-colors duration-200 transform bg-red-500 rounded-md hover:bg-red-400 focus:outline-none focus:bg-gray-600"
-                      onClick={() => setFacultyToDelete(Faculty.idFaculty)} // Establece el ID de la facultad para eliminar
+                      onClick={() => setFacultyToDelete(Faculty.idFaculty)} //  el ID de la facultad para eliminar
                     >
                       Eliminar
                     </button>

@@ -8,7 +8,7 @@ function BadgeForm() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    // Lógica para enviar el formulario con la imagen
+    
   }
 
   const handleImageChange = (e) => {

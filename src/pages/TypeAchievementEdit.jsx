@@ -48,10 +48,10 @@ function TypeAchievementEdit() {
     data.append("Image", formData.Image);
     data.append("IdAdministrator", formData.IdAdministrator);
 
-    // Reiniciar los errores en cada envío
+    
     setErrors({});
 
-    // Realizar validaciones
+    // validaciones
     let formIsValid = true;
     if (!formData.NameTypeAchievement) {
       setErrors((prevErrors) => ({

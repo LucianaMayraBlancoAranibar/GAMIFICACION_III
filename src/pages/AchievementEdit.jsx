@@ -45,7 +45,6 @@ function AchievementEdit() {
   function handleSubmit(event) {
     event.preventDefault();
 
-    // Realizar validaciones antes de enviar los datos
     const validationErrors = {};
 
     if (!formData.NameAchievemt) {
@@ -63,21 +62,20 @@ function AchievementEdit() {
     }
 
     if (Object.keys(validationErrors).length > 0) {
-      // Si hay errores, actualizar el estado de errores y detener el envío del formulario.
+    
       setErrors(validationErrors);
       return;
     }
 
-    // Si no hay errores, continuar con el envío del formulario
     Axios.put(`https://localhost:7187/api/Achievements/${id}`, formData)
       .then((response) => {
         console.log("Logro actualizado con éxito:", response.data);
         setModalIsOpen(true);
-        // Puedes mostrar un mensaje de éxito o redirigir al usuario a la lista de logros aquí
+     
       })
       .catch((error) => {
         console.error("Error al actualizar el logro:", error);
-        // Puedes mostrar un mensaje de error o manejar el error de otra manera
+      
       });
   }
 
@@ -85,7 +83,7 @@ function AchievementEdit() {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
 
-    // Limpiar los errores cuando el usuario comienza a corregir los campos
+  
     if (errors[name]) {
       setErrors({ ...errors, [name]: undefined });
     }

@@ -10,21 +10,21 @@ function AchievementTable() {
   const [achievementToDelete, setAchievementToDelete] = useState(null);
 
   useEffect(() => {
-    // Realiza una solicitud a tu API para obtener la lista de logros
+   
     axios
       .get("https://localhost:7187/api/Achievements")
       .then((response) => {
-        console.log(response.data); // Verifica los datos que obtienes
+        console.log(response.data); 
         setAchievements(response.data);
       })
       .catch((error) => {
-        console.error(error); // Verifica si hay errores en la llamada a la API
+        console.error(error); 
       });
   }, []);
 
   const handleDeleteAchievement = () => {
     if (achievementToDelete) {
-      // Verificar si el logro existe antes de eliminarlo
+      
       const achievementToDeleteIndex = achievements.findIndex(
         (achievement) => achievement.idAchievement === achievementToDelete
       );
@@ -35,21 +35,20 @@ function AchievementTable() {
         return;
       }
   
-      // Realiza una solicitud DELETE a la API para eliminar el logro
       axios
         .delete(`https://localhost:7187/api/Achievements/${achievementToDelete}`)
         .then((response) => {
-          // Actualiza la lista de logros después de la eliminación
+         
           setAchievements((prevAchievements) =>
             prevAchievements.filter(
               (achievement) => achievement.idAchievement !== achievementToDelete
             )
           );
-          setAchievementToDelete(null); // Restablece el estado
+          setAchievementToDelete(null); 
         })
         .catch((error) => {
           console.error(error);
-          setAchievementToDelete(null); // Restablece el estado en caso de error
+          setAchievementToDelete(null); 
         });
     }
   };
