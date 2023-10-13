@@ -2,22 +2,24 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import Sidebar from "../partials/Sidebar";
 import Header from "../partials/Header";
+import { Link } from "react-router-dom";
+import ModalConfirmacion from "../partials/ModalConfirmacion";
 
 function AchievementForm() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [formData, setFormData] = useState({
-    NameAchievemt: "",    // Cambiado a "NameAchievemt" para coincidir con el modelo del servidor
+    NameAchievemt: "",
     Punctuation: 0,
-    ProjectName: "",       // Cambiado a "ProjectName" para coincidir con el modelo del servidor
-    IdTypeAchievement: 0, // Asegúrate de proporcionar un valor adecuado para este campo
+    ProjectName: "",
+    IdTypeAchievement: 0,
   });
   const [achievementTypes, setAchievementTypes] = useState([]);
+  const [errors, setErrors] = useState({}); 
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   useEffect(() => {
-    // Realiza una solicitud a la API para obtener los tipos de logro
     Axios.get("https://localhost:7187/api/TypeAchievements")
       .then((response) => {
-        // Almacena los tipos de logro en el estado
         setAchievementTypes(response.data);
       })
       .catch((error) => {
@@ -28,17 +30,34 @@ function AchievementForm() {
   function handleSubmit(event) {
     event.preventDefault();
 
-    // Verificar si los campos requeridos están llenos
-    if (!formData.NameAchievemt || !formData.ProjectName) {
-      console.error("Los campos NameAchievemt y ProjectName son requeridos.");
+    // Realizar validaciones antes de enviar los datos
+    const validationErrors = {};
+
+    if (!formData.NameAchievemt) {
+      validationErrors.NameAchievemt = "El nombre del logro es requerido.";
+    }
+    if (!formData.ProjectName) {
+      validationErrors.ProjectName = "El nombre del proyecto es requerido.";
+    }
+    if (formData.Punctuation <= 0) {
+      validationErrors.Punctuation = "La puntuación debe ser mayor que cero.";
+    }
+
+    if (formData.IdTypeAchievement <= 0) {
+      validationErrors.IdTypeAchievement =
+        "Debes seleccionar un tipo de logro.";
+    }
+
+    if (Object.keys(validationErrors).length > 0) {
+      // Si hay errores, actualizar el estado de errores y detener el envío del formulario.
+      setErrors(validationErrors);
       return;
     }
 
-    // Enviar datos solo si los campos requeridos están llenos
+    // Si no hay errores, continuar con el envío del formulario
     Axios.post("https://localhost:7187/api/Achievements", formData)
       .then((response) => {
         console.log("Logro creado con éxito:", response.data);
-        // Puedes redirigir o realizar otras acciones después de la creación exitosa
       })
       .catch((error) => {
         console.error("Error al crear el logro:", error);
@@ -48,16 +67,20 @@ function AchievementForm() {
   function handleInputChange(event) {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
+
+    // Limpiar los errores cuando el usuario comienza a corregir los campos
+    if (errors[name]) {
+      setErrors({ ...errors, [name]: undefined });
+    }
+  }
+  function closeModal() {
+    setModalIsOpen(false);
   }
 
   return (
     <div className="flex h-screen overflow-hidden">
-      {/* Sidebar */}
       <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-
-      {/* Content area */}
       <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
-        {/* Site header */}
         <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
         <div className="relative p-4 sm:p-6 rounded-sm overflow-hidden mb-8">
           <div className="relative">
@@ -83,6 +106,9 @@ function AchievementForm() {
                   onChange={handleInputChange}
                   className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                 />
+                {errors.NameAchievemt && (
+                  <p className="text-red-600">{errors.NameAchievemt}</p>
+                )}
               </div>
               <br></br>
               <div>
@@ -90,7 +116,7 @@ function AchievementForm() {
                   className="text-gray-900 dark:text-gray-900"
                   htmlFor="Punctuation"
                 >
-                  Puntuacion
+                  Puntuación
                 </label>
                 <input
                   type="number"
@@ -100,6 +126,9 @@ function AchievementForm() {
                   onChange={handleInputChange}
                   className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                 />
+                {errors.Punctuation && (
+                  <p className="text-red-500 text-sm">{errors.Punctuation}</p>
+                )}
               </div>
               <br></br>
               <div>
@@ -107,7 +136,7 @@ function AchievementForm() {
                   className="text-gray-900 dark:text-gray-900"
                   htmlFor="ProjectName"
                 >
-                  Nombre del proyecto
+                  Nombre del Proyecto
                 </label>
                 <input
                   type="text"
@@ -117,11 +146,13 @@ function AchievementForm() {
                   onChange={handleInputChange}
                   className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                 />
+                {errors.ProjectName && (
+                  <p className="text-red-600">{errors.ProjectName}</p>
+                )}
               </div>
-
               <br></br>
               <div>
-                <label htmlFor="IdTypeAchievement">Tipo de logro</label>
+                <label htmlFor="IdTypeAchievement">Tipo de Logro</label>
                 <select
                   id="IdTypeAchievement"
                   name="IdTypeAchievement"
@@ -131,11 +162,19 @@ function AchievementForm() {
                 >
                   <option value="">Selecciona un Tipo de Logro</option>
                   {achievementTypes.map((type) => (
-                    <option key={type.idTypeAchievement} value={type.idTypeAchievement}>
+                    <option
+                      key={type.idTypeAchievement}
+                      value={type.idTypeAchievement}
+                    >
                       {type.nameTypeAchievement}
                     </option>
                   ))}
                 </select>
+                {errors.IdTypeAchievement && (
+                  <p className="text-red-500 text-sm">
+                    {errors.IdTypeAchievement}
+                  </p>
+                )}
               </div>
               <br></br>
               <div className="flex justify-left">
@@ -147,7 +186,11 @@ function AchievementForm() {
                 </button>
               </div>
             </div>
+            <br></br>
+            <br></br>
+            <Link to="/AchievementTable">Volver a la lista de Logros</Link>
           </form>
+          <ModalConfirmacion isOpen={modalIsOpen} closeModal={closeModal} />
         </div>
       </div>
     </div>

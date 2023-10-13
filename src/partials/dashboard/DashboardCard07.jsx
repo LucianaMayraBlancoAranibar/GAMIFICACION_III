@@ -1,5 +1,5 @@
 
-import FacultadTable from "../../pages/FacultadTable";
+import FacultadTable from "../../pages/FacultyTable";
 import Sidebar from "../../partials/Sidebar";
 import Header from "../../partials/Header";
 import React, { useState, useEffect } from "react";

@@ -24,13 +24,26 @@ function AchievementTable() {
 
   const handleDeleteAchievement = () => {
     if (achievementToDelete) {
+      // Verificar si el logro existe antes de eliminarlo
+      const achievementToDeleteIndex = achievements.findIndex(
+        (achievement) => achievement.idAchievement === achievementToDelete
+      );
+  
+      if (achievementToDeleteIndex === -1) {
+        console.error("Logro no encontrado");
+        setAchievementToDelete(null); // Restablecer el estado
+        return;
+      }
+  
       // Realiza una solicitud DELETE a la API para eliminar el logro
       axios
         .delete(`https://localhost:7187/api/Achievements/${achievementToDelete}`)
         .then((response) => {
           // Actualiza la lista de logros después de la eliminación
           setAchievements((prevAchievements) =>
-            prevAchievements.filter((achievement) => achievement.IdAchievement !== achievementToDelete)
+            prevAchievements.filter(
+              (achievement) => achievement.idAchievement !== achievementToDelete
+            )
           );
           setAchievementToDelete(null); // Restablece el estado
         })
@@ -40,6 +53,7 @@ function AchievementTable() {
         });
     }
   };
+  
 
   return (
     <div className="flex h-screen overflow-hidden">
@@ -60,7 +74,9 @@ function AchievementTable() {
               <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                   <th scope="col" className="px-6 py-3 text-center">
-                    <div className="font-semibold text-left">Nombre de Logro</div>
+                    <div className="font-semibold text-left">
+                      Nombre de Logro
+                    </div>
                   </th>
                   <th scope="col" className="px-6 py-3 text-center">
                     <div className="font-semibold text-left">Acciones</div>
@@ -68,26 +84,32 @@ function AchievementTable() {
                 </tr>
               </thead>
               <tbody className="text-sm font-medium divide-y divide-slate-100 dark:divide-slate-700">
-  {achievements.map((achievement) => (
-    <tr key={achievement.idAchievement} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-      <td className="px-6 py-4">{achievement.nameAchievemt}</td>
-      <td className="px-6 py-4 text-left">
-        <Link to={`/AchievementEdit/${achievement.idAchievement}`}>
-          <button className="px-4 py-4 mr-4 leading-5 text-white transition-colors duration-200 transform bg-green-700 rounded-md hover:bg-green-500 focus:outline-none focus:bg-gray-600">
-            Editar
-          </button>
-        </Link>
-        <button
-          className="px-4 py-4 ml-3 leading-5 text-white transition-colors duration-200 transform bg-red-500 rounded-md hover:bg-red-400 focus:outline-none focus:bg-gray-600"
-          onClick={() => setAchievementToDelete(achievement.idAchievement)}
-        >
-          Eliminar
-        </button>
-      </td>
-    </tr>
-  ))}
-</tbody>
-
+                {achievements.map((achievement) => (
+                  <tr
+                    key={achievement.idAchievement}
+                    className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                  >
+                    <td className="px-6 py-4">{achievement.nameAchievemt}</td>
+                    <td className="px-6 py-4 text-left">
+                      <Link
+                        to={`/AchievementEdit/${achievement.idAchievement}`}
+                      >
+                        <button className="px-4 py-4 mr-4 leading-5 text-white transition-colors duration-200 transform bg-green-700 rounded-md hover:bg-green-500 focus:outline-none focus:bg-gray-600">
+                          Editar
+                        </button>
+                      </Link>
+                      <button
+                        className="px-4 py-4 ml-3 leading-5 text-white transition-colors duration-200 transform bg-red-500 rounded-md hover:bg-red-400 focus:outline-none focus:bg-gray-600"
+                        onClick={() =>
+                          setAchievementToDelete(achievement.idAchievement)
+                        }
+                      >
+                        Eliminar
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
             </table>
           </div>
           {achievementToDelete && (

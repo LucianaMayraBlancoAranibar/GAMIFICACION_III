@@ -11,8 +11,10 @@ function TypeAchievementForm() {
   const [formData, setFormData] = useState({
     NameTypeAchievement: "",
     Image: null,
-    IdAdministrator: 1, // Establece el valor correcto aquí
+    IdAdministrator: 1, 
   });
+
+  const [errors, setErrors] = useState({});
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -22,28 +24,45 @@ function TypeAchievementForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Crear un objeto FormData para enviar los datos
     const data = new FormData();
     data.append("NameTypeAchievement", formData.NameTypeAchievement);
     data.append("Image", formData.Image);
     data.append("IdAdministrator", formData.IdAdministrator);
 
-    try {
-      // Realizar la solicitud POST a la API
-      const response = await axios.post(
-        "https://localhost:7187/api/TypeAchievements", // Reemplazar con la URL correcta de tu API
-        data
-      );
+    setErrors({});
 
-      // La respuesta contiene los datos devueltos por la API
-      console.log("Respuesta de la API:", response.data);
+   
+    let formIsValid = true;
+    if (!formData.NameTypeAchievement) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        NameTypeAchievement: "El nombre del tipo de logro es obligatorio",
+      }));
+      formIsValid = false;
+    }
+    if (!formData.Image) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        Image: "La imagen es obligatoria",
+      }));
+      formIsValid = false;
+    }
 
-      // Puedes realizar acciones adicionales aquí, como redirigir o mostrar un mensaje de éxito
-    } catch (error) {
-      // Manejar errores de la solicitud
-      console.error("Error al enviar la solicitud:", error.response);
+    if (formIsValid) {
+      try {
+       
+        const response = await axios.post(
+          "https://localhost:7187/api/TypeAchievements",
+          data
+        );
 
-      // Puedes mostrar un mensaje de error al usuario si lo deseas
+        console.log("Respuesta de la API:", response.data);
+
+      } catch (error) {
+        // Manejar errores de la solicitud
+        console.error("Error al enviar la solicitud:", error.response);
+
+      }
     }
   };
   function closeModal() {
@@ -52,8 +71,12 @@ function TypeAchievementForm() {
 
   return (
     <div className="flex h-screen overflow-hidden">
+      {/* Sidebar */}
       <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+
+      {/* Content area */}
       <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
+        {/* Site header */}
         <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
         <div className="relative p-4 sm:p-6 rounded-sm overflow-hidden mb-8">
           <div className="relative">
@@ -80,9 +103,12 @@ function TypeAchievementForm() {
                   })
                 }
               />
+              {errors.NameTypeAchievement && (
+                <p className="text-red-500 text-sm">{errors.NameTypeAchievement}</p>
+              )}
             </div>
             <br></br>
-            
+
             <div>
               <label htmlFor="Image">Seleccione una imagen:</label>
               <input
@@ -92,6 +118,9 @@ function TypeAchievementForm() {
                 accept="image/jpeg, image/png"
                 onChange={handleImageChange}
               />
+              {errors.Image && (
+                <p className="text-red-500 text-sm">{errors.Image}</p>
+              )}
             </div>
             <br></br>
             <button
@@ -100,6 +129,11 @@ function TypeAchievementForm() {
             >
               Registrar
             </button>
+            <br></br>
+            <br></br>
+            <Link to="/TypeAchievementTable">
+              Volver a la lista de Tipos de logros
+            </Link>
           </form>
           {/* Modal de confirmación */}
           <ModalConfirmacion isOpen={modalIsOpen} closeModal={closeModal} />

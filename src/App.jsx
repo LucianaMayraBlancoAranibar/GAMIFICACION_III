@@ -3,13 +3,14 @@ import { BrowserRouter as Router, Route, Routes, Outlet } from 'react-router-dom
 import './css/style.css';
 import './charts/ChartjsConfig';
 import Dashboard from './pages/Dashboard';
-import FacultadForm from './pages/FacultadForm'
+import FacultadForm from './pages/FacultyForm'
 import SucursalForm from './pages/SucursalForm'
 import TypeAchievementForm from './pages/TypeAchievementForm'
+import TypeAchievementEdit from './pages/TypeAchievementEdit'
 import AchievementForm from './pages/AchievementForm'
 import BadgeForm from './pages/BadgeForm'
-import FacultadTable from "./pages/FacultadTable";
-import FacultadEdit from "./pages/FacultadEdit";
+import FacultadTable from "./pages/FacultyTable";
+import FacultadEdit from "./pages/FacultyEdit";
 import TypeAchievementTable from "./pages/TypeAchievementTable";
 import AchievementTable from "./pages/AchievementTable";
 import AchievementEdit from "./pages/AchievementEdit";
@@ -48,6 +49,7 @@ function App() {
         <Route path="/TypeAchievementTable" element={<TypeAchievementTable />} />
         <Route path="/AchievementTable" element={<AchievementTable />} />
         <Route path="/AchievementEdit/:id" element={<AchievementEdit />} />
+        <Route path="/TypeAchievementEdit/:id" element={<TypeAchievementEdit />} />
       </Routes>
     </Router>
   );

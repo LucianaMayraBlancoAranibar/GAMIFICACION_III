@@ -9,9 +9,17 @@ function FacultyForm() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [FacultyName, setNombreFacultad] = useState("");
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [errors, setErrors] = useState({}); 
 
   async function handleSubmit(event) {
     event.preventDefault();
+
+    setErrors({});
+
+    if (!FacultyName) {
+      setErrors({ FacultyName: "El nombre de la facultad es obligatorio." });
+      return;
+    }
 
     const data = {
       FacultyName: FacultyName,
@@ -19,7 +27,7 @@ function FacultyForm() {
 
     try {
       const response = await axios.post(
-        "https://localhost:7218/api/Faculties",
+        "https://localhost:7187/api/Faculties",
         data
       );
 
@@ -60,10 +68,16 @@ function FacultyForm() {
                 <input
                   type="text"
                   id="FacultyName"
-                  className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                  className={`block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring ${
+                    errors.FacultyName ? "border-red-500" : ""
+                  }`}
                   value={FacultyName}
+                  maxLength={75} 
                   onChange={(e) => setNombreFacultad(e.target.value)}
                 />
+                {errors.FacultyName && (
+                  <p className="text-red-500 text-sm mt-1">{errors.FacultyName}</p>
+                )}
               </div>
               <br></br>
               <div className="flex justify-left">
