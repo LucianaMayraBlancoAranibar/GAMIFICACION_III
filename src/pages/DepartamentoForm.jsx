@@ -16,7 +16,7 @@ function DepartamentoForm() {
 
   useEffect(() => {
     axios
-      .get("https://localhost:7220/api/Faculties")
+      .get("https://localhost:7187/api/Faculties")
       .then((response) => {
         console.log(response.data); // Verifica los datos que obtienes
         setFacultad(response.data);
@@ -62,7 +62,7 @@ function DepartamentoForm() {
 
       try {
         const response = await axios.post(
-          "https://localhost:7220/api/Departments",
+          "https://localhost:7187/api/Departments",
           data
         );
 

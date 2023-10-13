@@ -50,7 +50,7 @@ function SanctionEdit() {
 
   useEffect(() => {
     axios
-      .get(`https://localhost:7220/api/sanctions/${id}`)
+      .get(`https://localhost:7187/api/sanctions/${id}`)
       .then((response) => {
         setSancion(response.data);
         setidStudent(response.data.idStudent);
@@ -61,7 +61,7 @@ function SanctionEdit() {
       });
     
       axios
-      .get("https://localhost:7220/api/Students")
+      .get("https://localhost:7187/api/Students")
       .then((response) => {
         console.log(response.data); // Verifica los datos que obtienes
         setEstudiante(response.data);
@@ -97,7 +97,7 @@ function SanctionEdit() {
     };
 
     axios
-      .put(`https://localhost:7220/api/sanctions/${id}`, requestData, {
+      .put(`https://localhost:7187/api/sanctions/${id}`, requestData, {
         headers: {
           "Content-Type": "application/json",
         },

@@ -79,7 +79,7 @@ function ManagerEdit() {
 
   useEffect(() => {
     axios
-      .get(`https://localhost:7220/api/Gestors/${id}`)
+      .get(`https://localhost:7187/api/Gestors/${id}`)
       .then((response) => {
         console.log(response.data); // Verifica los datos que obtienes
         setUserManager(response.data);
@@ -91,7 +91,7 @@ function ManagerEdit() {
       });
 
     axios
-      .get(`https://localhost:7220/api/Careers`)
+      .get(`https://localhost:7187/api/Careers`)
       .then((response) => {
         console.log(response.data); // Verifica los datos que obtienes
         setCarrer(response.data);
@@ -101,7 +101,7 @@ function ManagerEdit() {
       });
 
     axios
-      .get(`https://localhost:7220/api/AcademicUnities`)
+      .get(`https://localhost:7187/api/AcademicUnities`)
       .then((response) => {
         console.log(response.data); // Verifica los datos que obtienes
         setAcademicUnity(response.data);
@@ -143,7 +143,7 @@ function ManagerEdit() {
       idAcademicUnity: idAcademicUnity,
     };
     axios
-      .put(`https://localhost:7220/api/Gestors/${id}`, requestData, {
+      .put(`https://localhost:7187/api/Gestors/${id}`, requestData, {
         headers: {
           "Content-Type": "application/json",
         },

@@ -16,7 +16,7 @@ function SanctionTable() {
   useEffect(() => {
     // Realiza una solicitud a tu API para obtener la lista de Sancion
     axios
-      .get("https://localhost:7220/api/Sanctions")
+      .get("https://localhost:7187/api/Sanctions")
       .then((response) => {
         console.log(response.data); // Verifica los datos que obtienes
         setSancion(response.data);
@@ -26,7 +26,7 @@ function SanctionTable() {
       });    
 
       axios
-      .get("https://localhost:7220/api/Students")
+      .get("https://localhost:7187/api/Students")
       .then((response) => {
         console.log(response.data); // Verifica los datos que obtienes
         setEstudiante(response.data);
@@ -36,7 +36,7 @@ function SanctionTable() {
       });
 
       axios
-      .get("https://localhost:7220/api/Careers")
+      .get("https://localhost:7187/api/Careers")
       .then((response) => {
         console.log(response.data); // Verifica los datos que obtienes
         setCarrera(response.data);
@@ -46,7 +46,7 @@ function SanctionTable() {
       });   
 
       axios
-      .get("https://localhost:7220/api/Usuarios")
+      .get("https://localhost:7187/api/Usuarios")
       .then((response) => {
         console.log(response.data); // Verifica los datos que obtienes
         setUsuario(response.data);
@@ -61,7 +61,7 @@ function SanctionTable() {
     if (sancionToDelete) {
       // Realiza una solicitud DELETE a la API para eliminar la Sancion
       axios
-        .delete(`https://localhost:7220/api/Sanctions/${sancionToDelete}`)
+        .delete(`https://localhost:7187/api/Sanctions/${sancionToDelete}`)
         .then((response) => {
           // Actualiza la lista de Sancion después de la eliminación
           setSancion((prevSancion) =>

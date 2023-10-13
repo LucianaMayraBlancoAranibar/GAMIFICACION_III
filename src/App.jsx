@@ -14,6 +14,16 @@ import FacultadEdit from "./pages/FacultyEdit";
 import TypeAchievementTable from "./pages/TypeAchievementTable";
 import AchievementTable from "./pages/AchievementTable";
 import AchievementEdit from "./pages/AchievementEdit";
+import ManagerForm from './pages/ManagerForm'
+import ManagerEdit from './pages/ManagerEdit'
+import ManagerTable from './pages/ManagerTable'
+import SanctionForm from './pages/SanctionForm'
+import SanctionEdit from './pages/SanctionEdit'
+import SanctionTable from './pages/SanctionTable'
+import DepartamentoTable from "./pages/DepartamentoTable";
+import DepartamentoForm from "./pages/DepartamentoForm";
+import DepartamentoEdit from "./pages/DepartamentoEdit";
+
 
 function ScrollToTopOnRouteChange() {
   useEffect(() => {
@@ -50,6 +60,15 @@ function App() {
         <Route path="/AchievementTable" element={<AchievementTable />} />
         <Route path="/AchievementEdit/:id" element={<AchievementEdit />} />
         <Route path="/TypeAchievementEdit/:id" element={<TypeAchievementEdit />} />
+        <Route path="/ManagerForm" element={<ManagerForm />} />
+        <Route path="/ManagerEdit/:id" element={<ManagerEdit />} />
+        <Route path="/ManagerTable" element={<ManagerTable />} />
+        <Route path="/SanctionForm" element={<SanctionForm />} />
+        <Route path="/SanctionEdit/:id" element={<SanctionEdit />} />
+        <Route path="/SanctionTable" element={<SanctionTable />} />
+        <Route path="/DepartamentoTable" element={<DepartamentoTable />} />
+        <Route path="/DepartamentoForm" element={<DepartamentoForm />} />
+        <Route path="/DepartamentoEdit/:id" element={<DepartamentoEdit />} />
       </Routes>
     </Router>
   );

@@ -34,7 +34,7 @@ function DepartamentoEdit() {
 
   useEffect(() => {
     axios
-      .get(`https://localhost:7220/api/Departments/${id}`)
+      .get(`https://localhost:7187/api/Departments/${id}`)
       .then((response) => {
         setDepartamento(response.data);
         setidFaculty(response.data.IdFaculty);
@@ -45,7 +45,7 @@ function DepartamentoEdit() {
       });
     
       axios
-      .get("https://localhost:7220/api/Faculties")
+      .get("https://localhost:7187/api/Faculties")
       .then((response) => {
         console.log(response.data); // Verifica los datos que obtienes
         setFacultad(response.data);
@@ -78,7 +78,7 @@ function DepartamentoEdit() {
     };
 
     axios
-      .put(`https://localhost:7220/api/Departments/${id}`, requestData, {
+      .put(`https://localhost:7187/api/Departments/${id}`, requestData, {
         headers: {
           "Content-Type": "application/json",
         },

@@ -13,7 +13,7 @@ function DepartamentoTable() {
   useEffect(() => {
     // Realiza una solicitud a tu API para obtener la lista de Departamento
     axios
-      .get("https://localhost:7220/api/Departments")
+      .get("https://localhost:7187/api/Departments")
       .then((response) => {
         console.log(response.data); // Verifica los datos que obtienes
         setDepartamento(response.data);
@@ -23,7 +23,7 @@ function DepartamentoTable() {
       });    
 
       axios
-      .get("https://localhost:7220/api/Faculties")
+      .get("https://localhost:7187/api/Faculties")
       .then((response) => {
         console.log(response.data); // Verifica los datos que obtienes
         setFacultad(response.data);
@@ -37,7 +37,7 @@ function DepartamentoTable() {
     if (departamentoToDelete) {
       // Realiza una solicitud DELETE a la API para eliminar la Departamento
       axios
-        .delete(`https://localhost:7220/api/Departments/${departamentoToDelete}`)
+        .delete(`https://localhost:7187/api/Departments/${departamentoToDelete}`)
         .then((response) => {
           // Actualiza la lista de Departamento después de la eliminación
           setDepartamento((prevSucursal) =>

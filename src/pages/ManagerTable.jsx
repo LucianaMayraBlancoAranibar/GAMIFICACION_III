@@ -12,7 +12,7 @@ function ManagerTable() {
   useEffect(() => {
     // Realiza una solicitud a tu API para obtener la lista de gestorUser
     axios
-      .get("https://localhost:7220/api/Gestors")
+      .get("https://localhost:7187/api/Gestors")
       .then((response) => {
         console.log(response.data); // Verifica los datos que obtienes
         setGestorUser(response.data);
@@ -26,7 +26,7 @@ function ManagerTable() {
     if (gestorUserToDelete) {
       // Realiza una solicitud DELETE a la API para eliminar la facultad
       axios
-        .delete(`https://localhost:7220/api/Gestors/${gestorUserToDelete}`)
+        .delete(`https://localhost:7187/api/Gestors/${gestorUserToDelete}`)
         .then((response) => {
           // Actualiza la lista de gestorUser después de la eliminación
           setGestorUser((prevGestorUser) =>

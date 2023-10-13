@@ -55,7 +55,7 @@ function SanctionForm() {
 
   useEffect(() => {
     axios
-      .get("https://localhost:7220/api/Students")
+      .get("https://localhost:7187/api/Students")
       .then((response) => {
         console.log(response.data); // Verifica los datos que obtienes
         setEstudiante(response.data);
@@ -80,7 +80,7 @@ function SanctionForm() {
 
       try {
         const response = await axios.post(
-          "https://localhost:7220/api/Sanctions",
+          "https://localhost:7187/api/Sanctions",
           data
         );
 
