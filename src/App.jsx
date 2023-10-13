@@ -24,6 +24,14 @@ import SucursalEdit from "./pages/SucursalEdit";
 import DepartamentoTable from "./pages/DepartamentoTable";
 import DepartamentoForm from "./pages/DepartamentoForm";
 import DepartamentoEdit from "./pages/DepartamentoEdit";
+import EstudianteTable from './pages/EstudianteTable';
+import EstudianteForm from './pages/EstudianteForm';
+import EstudianteEdit from './pages/EstudianteEdit';
+import CarreraTable from './pages/CarreraTable';
+import CarreraEdit from './pages/CarreraEdit';
+import CarreraForm from './pages/CarreraForm';
+
+
 
 function ScrollToTopOnRouteChange() {
   useEffect(() => {
@@ -70,6 +78,12 @@ function App() {
         <Route path="/DepartamentoTable" element={<DepartamentoTable />} />
         <Route path="/DepartamentoForm" element={<DepartamentoForm />} />
         <Route path="/DepartamentoEdit/:id" element={<DepartamentoEdit />} />
+        <Route path="/EstudianteTable" element={<EstudianteTable />} />
+        <Route path="/EstudianteForm" element={<EstudianteForm />} />
+        <Route path="/EstudianteEdit/ :id" element={<EstudianteEdit />} />
+        <Route path="/CarreraTable" element={<CarreraTable />} />
+        <Route path="/CarreraEdit/ :id" element={<CarreraEdit />} />
+        <Route path="/CarreraForm" element={<CarreraForm />} />
 
       </Routes>
     </Router>
