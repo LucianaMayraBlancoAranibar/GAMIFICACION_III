@@ -12,7 +12,7 @@ function EstudianteTable() {
   useEffect(() => {
     // Realiza una solicitud a tu API para obtener la lista de estudianteUser
     axios
-      .get("https://localhost:7220/api/StudentUsuario")
+      .get("https://localhost:7187/api/StudentUsuario")
       .then((response) => {
         console.log(response.data); // Verifica los datos que obtienes
         setEstudianteUser(response.data);
@@ -26,7 +26,7 @@ function EstudianteTable() {
     if (estudianteUserToDelete) {
       // Realiza una solicitud DELETE a la API para eliminar la facultad
       axios
-        .delete(`https://localhost:7220/api/StudentUsuario/${estudianteUserToDelete}`)
+        .delete(`https://localhost:7187/api/StudentUsuario/${estudianteUserToDelete}`)
         .then((response) => {
           // Actualiza la lista de estudianteUser después de la eliminación
           setEstudianteUser((prevestudianteUser) =>

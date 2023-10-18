@@ -31,7 +31,7 @@ function EstudianteForm() {
 
   useEffect(() => {
     axios
-      .get("https://localhost:7220/api/Careers")
+      .get("https://localhost:7187/api/Careers")
       .then((response) => {
         console.log(response.data); // Verifica los datos que obtienes
         setCarrer(response.data);
@@ -41,7 +41,7 @@ function EstudianteForm() {
       });
 
     axios
-      .get("https://localhost:7220/api/AcademicUnities")
+      .get("https://localhost:7187/api/AcademicUnities")
       .then((response) => {
         console.log(response.data); // Verifica los datos que obtienes
         setUnidadAcademica(response.data);
@@ -75,7 +75,7 @@ function EstudianteForm() {
 
       try {
         const response = await axios.post(
-          "https://localhost:7220/api/StudentUsuario",
+          "https://localhost:7187/api/StudentUsuario",
           data
         );
 

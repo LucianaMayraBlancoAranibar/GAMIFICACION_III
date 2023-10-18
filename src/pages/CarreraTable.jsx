@@ -13,7 +13,7 @@ function CarreraTable() {
   useEffect(() => {
     // Realiza una solicitud a tu API para obtener la lista de Carrera
     axios
-      .get("https://localhost:7220/api/Careers")
+      .get("https://localhost:7187/api/Careers")
       .then((response) => {
         console.log(response.data); // Verifica los datos que obtienes
         setCarrera(response.data);
@@ -23,7 +23,7 @@ function CarreraTable() {
       });    
 
       axios
-      .get("'https://localhost:7220/api/Departments")
+      .get("'https://localhost:7187/api/Departments")
       .then((response) => {
         console.log(response.data); // Verifica los datos que obtienes
         setDepartamento(response.data);

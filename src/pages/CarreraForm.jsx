@@ -15,7 +15,7 @@ function CarreraForm() {
 
     useEffect(() => {
         axios
-          .get("https://localhost:7220/api/Usuarios")
+          .get("https://localhost:7187/api/Usuarios")
           .then((response) => {
             console.log(response.data); // Verifica los datos que obtienes
             setUsuario(response.data);
@@ -64,7 +64,7 @@ function CarreraForm() {
     
           try {
             const response = await axios.post(
-              "https://localhost:7220/api/Careers",
+              "https://localhost:7187/api/Careers",
               data
             );
     

@@ -78,7 +78,7 @@ function CarreraEdit() {
     };
 
     axios
-      .put(`https://localhost:7220/api/Careers/${id}`, requestData, {
+      .put(`https://localhost:7187/api/Careers/${id}`, requestData, {
         headers: {
           "Content-Type": "application/json",
         },
