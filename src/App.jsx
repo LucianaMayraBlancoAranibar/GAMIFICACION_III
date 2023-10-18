@@ -5,6 +5,8 @@ import './charts/ChartjsConfig';
 import Dashboard from './pages/Dashboard';
 import FacultadForm from './pages/FacultyForm'
 import SucursalForm from './pages/SucursalForm'
+import SucursalTable from './pages/SucursalTable'
+import SucursalEdit from './pages/SucursalEdit'
 import TypeAchievementForm from './pages/TypeAchievementForm'
 import TypeAchievementEdit from './pages/TypeAchievementEdit'
 import AchievementForm from './pages/AchievementForm'
@@ -23,6 +25,12 @@ import SanctionTable from './pages/SanctionTable'
 import DepartamentoTable from "./pages/DepartamentoTable";
 import DepartamentoForm from "./pages/DepartamentoForm";
 import DepartamentoEdit from "./pages/DepartamentoEdit";
+import EstudianteTable from './pages/EstudianteTable';
+import EstudianteForm from './pages/EstudianteForm';
+import EstudianteEdit from './pages/EstudianteEdit';
+import CarreraTable from './pages/CarreraTable';
+import CarreraEdit from './pages/CarreraEdit';
+import CarreraForm from './pages/CarreraForm';
 
 
 function ScrollToTopOnRouteChange() {
@@ -50,12 +58,14 @@ function App() {
       <Routes>
         <Route path="/" element={<Dashboard />} />
         <Route path="/FacultadForm" element={<FacultadForm />} />
+        <Route path="/FacultadTable" element={<FacultadTable />} />
+        <Route path="/FacultadEdit/:id" element={<FacultadEdit />} />
         <Route path="/SucursalForm" element={<SucursalForm />} />
+        <Route path="/SucursalTable" element={<SucursalTable />} />
+        <Route path="/SucursalEdit/:id" element={<SucursalEdit />} />
         <Route path="/TypeAchievementForm" element={<TypeAchievementForm />} />
         <Route path="/AchievementForm" element={<AchievementForm />} />
         <Route path="/BadgeForm" element={<BadgeForm />} />
-        <Route path="/FacultadTable" element={<FacultadTable />} />
-        <Route path="/FacultadEdit/:id" element={<FacultadEdit />} />
         <Route path="/TypeAchievementTable" element={<TypeAchievementTable />} />
         <Route path="/AchievementTable" element={<AchievementTable />} />
         <Route path="/AchievementEdit/:id" element={<AchievementEdit />} />
@@ -69,6 +79,13 @@ function App() {
         <Route path="/DepartamentoTable" element={<DepartamentoTable />} />
         <Route path="/DepartamentoForm" element={<DepartamentoForm />} />
         <Route path="/DepartamentoEdit/:id" element={<DepartamentoEdit />} />
+        <Route path="/EstudianteTable" element={<EstudianteTable />} />
+        <Route path="/EstudianteForm" element={<EstudianteForm />} />
+        <Route path="/EstudianteEdit/ :id" element={<EstudianteEdit />} />
+        <Route path="/CarreraTable" element={<CarreraTable />} />
+        <Route path="/CarreraEdit/ :id" element={<CarreraEdit />} />
+        <Route path="/CarreraForm" element={<CarreraForm />} />
+        
       </Routes>
     </Router>
   );
