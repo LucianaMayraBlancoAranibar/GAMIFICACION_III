@@ -13,7 +13,7 @@ function CarreraTable() {
   useEffect(() => {
     // Realiza una solicitud a tu API para obtener la lista de Carrera
     axios
-      .get("https://localhost:7187/api/Careers")
+      .get("https://localhost:7220/api/Careers")
       .then((response) => {
         console.log(response.data); // Verifica los datos que obtienes
         setCarrera(response.data);
@@ -23,7 +23,7 @@ function CarreraTable() {
       });    
 
       axios
-      .get("'https://localhost:7187/api/Departments")
+      .get("'https://localhost:7220/api/Departments")
       .then((response) => {
         console.log(response.data); // Verifica los datos que obtienes
         setDepartamento(response.data);
@@ -37,7 +37,7 @@ function CarreraTable() {
     if (CarreraToDelete) {
       // Realiza una solicitud DELETE a la API para eliminar la Carrera
       axios
-        .delete(`https://localhost:7187/api/Students/${CarreraToDelete}`)
+        .delete(`https://localhost:7220/api/Students/${CarreraToDelete}`)
         .then((response) => {
           // Actualiza la lista de Carrera después de la eliminación
           setCarrera((prevSucursal) =>

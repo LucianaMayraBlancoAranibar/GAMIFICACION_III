@@ -34,7 +34,7 @@ function CarreraEdit() {
 
   useEffect(() => {
     axios
-      .get(`https://localhost:7187/api/Careers/${id}`)
+      .get(`https://localhost:7220/api/Careers/${id}`)
       .then((response) => {
         setcarrera(response.data);
         setidDepartment(response.data.idDepartment);
@@ -45,7 +45,7 @@ function CarreraEdit() {
       });
     
       axios
-      .get("https://localhost:7187/api/Careers")
+      .get("https://localhost:7220/api/Careers")
       .then((response) => {
         console.log(response.data); // Verifica los datos que obtienes
         setUsuario(response.data);
@@ -78,7 +78,7 @@ function CarreraEdit() {
     };
 
     axios
-      .put(`https://localhost:7187/api/Careers/${id}`, requestData, {
+      .put(`https://localhost:7220/api/Careers/${id}`, requestData, {
         headers: {
           "Content-Type": "application/json",
         },
