@@ -37,7 +37,7 @@ function CarreraTable() {
     if (CarreraToDelete) {
       // Realiza una solicitud DELETE a la API para eliminar la Carrera
       axios
-        .delete(`https://localhost:7220/api/Students/${CarreraToDelete}`)
+        .delete(`https://localhost:7187/api/Students/${CarreraToDelete}`)
         .then((response) => {
           // Actualiza la lista de Carrera después de la eliminación
           setCarrera((prevSucursal) =>
