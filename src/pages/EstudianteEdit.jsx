@@ -43,7 +43,7 @@ function EstudianteEdit() {
 
   useEffect(() => {
     axios
-      .get(`https://localhost:7220/api/Usuarios/${id}`)
+      .get(`https://localhost:7220/api/StudentUsuario/${id}`)
       .then((response) => {
         setEstudiante(response.data);
         setidUser(response.data.idUser);
@@ -54,7 +54,7 @@ function EstudianteEdit() {
       });
     
       axios
-      .get("https://localhost:7220/api/Usuarios")
+      .get("https://localhost:7220/api/StudentUsuario")
       .then((response) => {
         console.log(response.data); // Verifica los datos que obtienes
         setUsuario(response.data);
