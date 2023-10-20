@@ -8,6 +8,7 @@ function ManagerTable() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [badge, setBadge] = useState([]);
   const [BadgeToDelete, setBadgeToDelete] = useState(null);
+  const [Estudiante, setEstudiante] = useState([]);
 
   useEffect(() => {
     // Realiza una solicitud a tu API para obtener la lista de badge
@@ -16,6 +17,16 @@ function ManagerTable() {
       .then((response) => {
         console.log(response.data); // Verifica los datos que obtienes
         setBadge(response.data);
+      })
+      .catch((error) => {
+        console.error(error); // Verifica si hay errores en la llamada a la API
+      });
+
+      axios
+      .get("https://localhost:7220/api/Students")
+      .then((response) => {
+        console.log(response.data); // Verifica los datos que obtienes
+        setEstudiante(response.data);
       })
       .catch((error) => {
         console.error(error); // Verifica si hay errores en la llamada a la API
@@ -59,15 +70,14 @@ function ManagerTable() {
             <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
               <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
-
                   <th scope="col" className="px-6 py-3 text-center">
                     <div className="font-semibold text-left">
-                      Nombre
+                      Estudante
                     </div>
                   </th>
                   <th scope="col" className="px-6 py-3 text-center">
                     <div className="font-semibold text-left">
-                      Imagen
+                      Badge
                     </div>
                   </th>
                   <th scope="col" className="px-6 py-3 text-center">
@@ -84,8 +94,8 @@ function ManagerTable() {
                 {badge.map((badge) => (
                   <tr key={badge.idBadge} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
 
+                    <td className="px-6 py-4">{Estudiante.find((Estudiante) => Estudiante.idStudent === badge.idStudent)?.firstName + " " + Estudiante.find((Estudiante) => Estudiante.idStudent === badge.idStudent)?.lastName }</td>
                     <td className="px-6 py-4">{badge.badgeName}</td>
-                    <td className="px-6 py-4">{badge.idBadgeImage}</td>
                     <td className="px-6 py-4">{badge.badgeLevel}</td>
                     <td className="px-6 py-4 text-left">
                       <Link to={`/BadgeEdit/${badge.idBadge}`}> {/* Redirigir a la página de edición con el ID */}

@@ -12,11 +12,11 @@ function BadgeForm() {
   const [BadgeImage, setBadgeImage] = useState("");
   const [idStudent, setIdStudent] = useState("");
   const [badgeName, setBadgeName] = useState("");
-  const [idAdministrator, setIdAdministrator] = useState("36");
+  const [idAdministrator, setIdAdministrator] = useState("1");
   const [badgeLevel, setBadgeLevel] = useState("");
   const [idBadgeImage, setidBadgeImage] = useState("");
   const [modalIsOpen, setModalIsOpen] = useState(false);
-
+  
   useEffect(() => {
     axios
       .get("https://localhost:7220/api/Students")
@@ -155,7 +155,9 @@ function BadgeForm() {
                     ))}
                   </select>
                 )}
+
               </div>
+
               <br/>
                 <label
                   className="text-gray-900 dark:text-gray-900"
@@ -186,6 +188,7 @@ function BadgeForm() {
                       </option>
                     ))}
                   </select>
+                  
                 )}
               <br/>
               <div className="flex justify-left">
