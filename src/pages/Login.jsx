@@ -11,6 +11,26 @@ function Login(){
     const [password, setpassword] = useState("");
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
+    useEffect(() => {
+      if(localStorage.getItem('user-info')){
+        history.push("/add")
+      }
+    })
+
+    async function login()
+    {
+      console.warn(email,password)
+      let item = {email, password};
+      let result = await fetch(""/*Api del login*/, {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": 'application/json'
+        },
+        body: JSON.stringify(item)
+      }) 
+    }
+
 
     function closeModal() {
         setModalIsOpen(false);
