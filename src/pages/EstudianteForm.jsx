@@ -69,8 +69,6 @@ function EstudianteForm() {
         password: password,
         idCareer: idCareer,
         idAcademicUnity: idAcademicUnity,     
-        
-        
       };
 
       try {
