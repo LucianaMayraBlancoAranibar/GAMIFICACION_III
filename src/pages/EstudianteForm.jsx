@@ -26,8 +26,78 @@ function EstudianteForm() {
   const [lastNameError, setlastNameError] = useState("");
   const [idAcademicUnityError, setidAcademicUnityError] = useState("");
   const [idCareerError, setidCareerError] = useState("");
+  const [scoreError, setScoreError] = useState("");
 
+  const validateForm = () => {
+    let isValid = true;
+    if(!firstName){
+      setfirstNameError("El nombre es obligatorio");
+      isValid = false;
+    } else if(firstName.length < 3 || firstName.length > 25) {
+      setfirstNameError("El nombre debe tener entre 3 y 25 caracteres")
+      isValid = false
+    } else {
+      setfirstNameError("");
+    }
 
+    if(!lastName){
+      setlastNameError("El apellido es obligatorio");
+      isValid = false;
+    } else if(lastName.length < 3 || lastName.length > 25){
+      isValid = false;
+    } else {
+      setlastNameError("");
+    }
+
+    if(!email) {
+      setemailError("El email es obligatorio");
+      isValid = false;
+    } else { 
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if(!emailRegex.test(email)) { 
+        setemailError("El email no tiene un formato valido");
+        isValid = false;
+      } else { 
+        setemailError("");
+      }
+    }
+
+    if(!password) {
+      setpasswordError("La contraseña es obligatorio");
+      isValid = false;
+    } else if(password.length <= 6 || password.length > 10) { 
+      setpasswordError("La contraseña debe tener entre 6 y 10 caracteres");
+      isValid = false;
+    } else {
+      setpasswordError("");
+    }
+
+    if (!idCareer) {
+      setidCareerError("Debes seleccionar una carrera");
+      isValid = false;
+    } else {
+      setidCareerError("");
+    }
+
+    if (!idAcademicUnity) {
+      setidAcademicUnityError("Debes seleccionar una carrera");
+      isValid = false;
+    } else {
+      setidAcademicUnityError("");
+    }
+
+    if(!score){
+      setScoreError("Debe poner una puntuación");
+      isValid = false;
+    } else if(score < 0){
+      setScoreError("La puntuacion no puede ser menor a cero");
+      isValid =  false;
+    } else {
+      setScoreError("");
+    }
+    
+    return isValid;
+  }
 
   useEffect(() => {
     axios
@@ -57,8 +127,7 @@ function EstudianteForm() {
 
   async function handleSubmit(event) {
     event.preventDefault();
-
-    
+    if(validateForm()){
       const data = {
         score: score,
         idRank: idRank,
@@ -68,10 +137,10 @@ function EstudianteForm() {
         rol: rol,
         password: password,
         idCareer: idCareer,
-        idAcademicUnity: idAcademicUnity,     
+        idAcademicUnity: idAcademicUnity,
       };
-
-      try {
+      
+      try{
         const response = await axios.post(
           "https://localhost:7220/api/StudentUsuario",
           data
@@ -88,13 +157,11 @@ function EstudianteForm() {
         setrol("");
         setpassword("");
         setidCareer("");
-        setidAcademicUnity("");       
-        
-        
-      } catch (error) {
-        //console.error("Error al registrar la estudiante:", error);
+        setidAcademicUnity("");
+      } catch(error){
+        console.error("Error al registrar al estudiante:", error)
       }
-    
+    };
   }
 
   function closeModal() {
@@ -217,13 +284,23 @@ function EstudianteForm() {
                 >
                   Academia
                 </label>
-                <input
-                  type="text"
-                  id="idAcademicUnity"
-                  className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                  value={idAcademicUnity}
-                  onChange={(e) => setidAcademicUnity(e.target.value)}
-                />
+                <br/>
+                {UnidadAcademica.length === 0? (
+                  <p>Cargando datos...</p>
+                ) : (
+                  <select 
+                    id="idAcademicUnity"
+                    className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                    value={idAcademicUnity}
+                    onChange={(e) => {setidAcademicUnity(e.target.value);}}>
+                      <option value="">Selecction academia</option>
+                      {UnidadAcademica.map((UnidadAcademica) => (
+                        <option 
+                          key={UnidadAcademica.idAcademicUnity}
+                          value={UnidadAcademica.idAcademicUnity}>{UnidadAcademica.idAcademicUnity}</option>
+                      ))}
+                  </select>
+                )}
 
                 <br />
                 <label

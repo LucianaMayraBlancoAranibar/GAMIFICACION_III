@@ -230,6 +230,7 @@ function ManagerForm() {
                 />
                 {passwordError && (
                   <p className="text-red-500">{passwordError}</p>)}
+                
                 <br />
                 <label
                   className="text-gray-900 dark:text-gray-900"
@@ -262,6 +263,7 @@ function ManagerForm() {
                 )}
                 {idCareerError && (
                   <p className="text-red-500">{idCareerError}</p>)}
+                
                 <br />
                 <label
                   className="text-gray-900 dark:text-gray-900"
