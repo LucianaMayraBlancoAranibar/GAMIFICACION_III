@@ -261,7 +261,7 @@ function EstudianteForm() {
                   value={idRank}
                   onChange={(e) => setIdRank(e.target.value)}
                 />
-
+                
                 <br />
                 <label
                   className="text-gray-900 dark:text-gray-900"
