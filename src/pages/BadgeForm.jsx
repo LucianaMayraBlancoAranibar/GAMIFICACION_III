@@ -135,25 +135,36 @@ function BadgeForm() {
                 {BadgeImage.length === 0 ? (
                   <p>Cargando datos...</p>
                 ) : (
-                  <select
-                    id="idBadgeImage"
-                    className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                    value={idBadgeImage}
-                    onChange={(e) => {
-                      console.log("Valor seleccionado en el select:", e.target.value); // Agrega este console.log
-                      setidBadgeImage(e.target.value);
-                    }} 
-                    >
-                    <option value="">Selecciona una imagen</option>
-                    {BadgeImage.map((badge) => (
-                      <option
-                        key={badge.idBadgeImage}
-                        value={badge.idBadgeImage}
+                    <div>
+                      <select
+                        id="idBadgeImage"
+                        className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                        value={idBadgeImage}
+                        onChange={(e) => {
+                          console.log("Valor seleccionado en el select:", e.target.value); // Agrega este console.log
+                          setidBadgeImage(e.target.value);
+                        }}
                       >
-                        {badge.nameImage}
-                      </option>
-                    ))}
-                  </select>
+                        <option value="">Selecciona una imagen</option>
+                        {BadgeImage.map((badge) => (
+                          <option
+                            key={badge.idBadgeImage}
+                            value={badge.idBadgeImage}
+                          >
+                            {badge.nameImage}
+                          </option>
+                        ))}
+                      </select>
+                      <div className="image-container">
+                        {idBadgeImage && (
+                          <img
+                          src={idBadgeImage ? `/src/images/${BadgeImage.find(badgeimage => badgeimage.idBadgeImage === parseInt(idBadgeImage))?.nameImage}` : ''}
+                          alt="imagen no encontrada"
+                          />
+                        )}
+                        {console.log("Valor de idBadgeImage:", idBadgeImage)}
+                      </div>
+                    </div>
                 )}
 
               </div>

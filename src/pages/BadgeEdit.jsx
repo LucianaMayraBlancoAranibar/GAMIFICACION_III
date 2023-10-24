@@ -184,7 +184,6 @@ function BadgeEdit() {
                       />
                     )}
                     {console.log("Valor de idBadgeImage:", idBadgeImage)}
-
                   </div>
                 </div>
               )}

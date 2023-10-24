@@ -26,6 +26,7 @@ import SucursalEdit from "./pages/SucursalEdit";
 import DepartamentoTable from "./pages/DepartamentoTable";
 import DepartamentoForm from "./pages/DepartamentoForm";
 import DepartamentoEdit from "./pages/DepartamentoEdit";
+import Main from "./pages/Main";
 
 
 function ScrollToTopOnRouteChange() {
@@ -75,6 +76,7 @@ function App() {
         <Route path="/DepartamentoTable" element={<DepartamentoTable />} />
         <Route path="/DepartamentoForm" element={<DepartamentoForm />} />
         <Route path="/DepartamentoEdit/:id" element={<DepartamentoEdit />} />
+        <Route path="/Main" element={<Main />} />
 
       </Routes>
     </Router>
