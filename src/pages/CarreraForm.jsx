@@ -12,6 +12,8 @@ function CarreraForm() {
   const [idDepartment, setidDepartment] = useState("");
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
+  
+
   useEffect(() => {
     axios
       .get("https://localhost:7220/api/Departments")
@@ -26,6 +28,7 @@ function CarreraForm() {
   }, []);
 
     // Función para validar el formulario
+    
     
 
   async function handleSubmit(event) {

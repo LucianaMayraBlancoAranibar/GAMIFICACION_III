@@ -12,7 +12,9 @@ function EstudianteForm() {
   const [password, setpassword] = useState("");
   const [firstName, setfirstName] = useState("");
   const [lastName, setlastName] = useState("");
+  const [Rank, setRank] = useState("");
   const [idRank, setIdRank] = useState("");
+  const [rankName, setRankName] = useState("");
   const [score, setScore] = useState("");
   const [idAcademicUnity, setidAcademicUnity] = useState("");
   const [idCareer, setidCareer] = useState("");
@@ -27,6 +29,7 @@ function EstudianteForm() {
   const [idAcademicUnityError, setidAcademicUnityError] = useState("");
   const [idCareerError, setidCareerError] = useState("");
   const [scoreError, setScoreError] = useState("");
+  const [idRankError, setRankError] = useState("");
 
   const validateForm = () => {
     let isValid = true;
@@ -77,6 +80,13 @@ function EstudianteForm() {
       isValid = false;
     } else {
       setidCareerError("");
+    }
+
+    if (!idRank) {
+      setRankError("Debes seleccionar un rank");
+      isValid = false;
+    } else {
+      setRankError("");
     }
 
     if (!idAcademicUnity) {
@@ -130,7 +140,9 @@ function EstudianteForm() {
     if(validateForm()){
       const data = {
         score: score,
+        Rank: Rank,
         idRank: idRank,
+        rankName: rankName,
         firstName: firstName,
         lastName: lastName,
         email: email,
@@ -150,7 +162,9 @@ function EstudianteForm() {
 
         setModalIsOpen(true);
         setScore("");
+        setRank("");
         setIdRank("");
+        setRankName("");
         setfirstName("");
         setlastName("");
         setemail("");
@@ -198,6 +212,9 @@ function EstudianteForm() {
                   value={firstName}
                   onChange={(e) => setfirstName(e.target.value)}
                 />
+                {firstNameError && (
+                  <p className="text-red-500">{firstNameError}</p>
+                )}
 
                 <br />
 
@@ -214,6 +231,9 @@ function EstudianteForm() {
                   value={lastName}
                   onChange={(e) => setlastName(e.target.value)}
                 />
+                {lastNameError && (
+                  <p className="text-red-500">{lastNameError}</p>
+                )}
 
                 <br />
 
@@ -231,6 +251,9 @@ function EstudianteForm() {
                   value={email}
                   onChange={(e) => setemail(e.target.value)}
                 />
+                {emailError && (
+                  <p className="text-red-500">{emailError}</p>
+                )}
 
                 <br />
                 <label
@@ -246,6 +269,9 @@ function EstudianteForm() {
                   value={password}
                   onChange={(e) => setpassword(e.target.value)}
                 />
+                {passwordError && (
+                  <p className="text-red-500">{passwordError}</p>
+                )}
 
                 <br />
                 <label
@@ -259,9 +285,29 @@ function EstudianteForm() {
                   id="idRank"
                   className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                   value={idRank}
-                  onChange={(e) => setIdRank(e.target.value)}
+                  onChange={(e) => setRank(e.target.value)}
                 />
-                
+                <br/>
+                {idRank.length === 0? (
+                  <p>Cargando datos...</p>
+                ) : (
+                  <select 
+                    id="idRank"
+                    className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                    value={idRank}
+                    onChange={(e) => {setIdRank(e.target.value);}}>
+                      <option value="">Selecction academia</option>
+                      {Rank.map((Rank) => (
+                        <option 
+                          key={Rank.idRank}
+                          value={Rank.idRank}>
+                            {Rank.rankName}</option>
+                      ))}
+                  </select>
+                )} 
+                {idRankError && (
+                  <p className="text-red-500">{idRankError}</p>)}
+                                
                 <br />
                 <label
                   className="text-gray-900 dark:text-gray-900"
@@ -276,6 +322,9 @@ function EstudianteForm() {
                   value={score}
                   onChange={(e) => setScore(e.target.value)}
                 />
+                {scoreError && (
+                  <p className="text-red-500">{scoreError}</p>
+                )}
 
                 <br />
                 <label
@@ -300,6 +349,9 @@ function EstudianteForm() {
                           value={UnidadAcademica.idAcademicUnity}>{UnidadAcademica.idAcademicUnity}</option>
                       ))}
                   </select>
+                )}
+                {idAcademicUnityError && (
+                  <p className="text-red-500">{idAcademicUnityError}</p>
                 )}
 
                 <br />
@@ -331,6 +383,9 @@ function EstudianteForm() {
                       </option>
                     ))}
                   </select>
+                )}
+                {idCareerError && (
+                  <p className="text-red-500">{idCareerError}</p>
                 )}
 
                 <br />
