@@ -28,7 +28,7 @@ import EstudianteTable from './pages/EstudianteTable';
 import EstudianteForm from './pages/EstudianteForm';
 import EstudianteEdit from './pages/EstudianteEdit';
 import CarreraTable from './pages/CarreraTable';
-import CarreraEdit from './pages/CarreraEdit';
+import CareerEdit from './pages/CareerEdit';
 import CarreraForm from './pages/CarreraForm';
 import Login from './pages/Login';
 
@@ -81,9 +81,9 @@ function App() {
         <Route path="/DepartamentoEdit/:id" element={<DepartamentoEdit />} />
         <Route path="/EstudianteTable" element={<EstudianteTable />} />
         <Route path="/EstudianteForm" element={<EstudianteForm />} />
-        <Route path="/EstudianteEdit/ :id" element={<EstudianteEdit />} />
+        <Route path="/EstudianteEdit/:id" element={<EstudianteEdit />} />
         <Route path="/CarreraTable" element={<CarreraTable />} />
-        <Route path="/CarreraEdit/ :id" element={<CarreraEdit />} />
+        <Route path="/CareerEdit/:id" element={<CareerEdit />} />
         <Route path="/CarreraForm" element={<CarreraForm />} />
         <Route path="/Login" element={<Login />} />
 

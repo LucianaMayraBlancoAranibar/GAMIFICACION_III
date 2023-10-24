@@ -6,31 +6,17 @@ import Header from "../partials/Header";
 
 import ModalConfirmacion from "../partials/ModalConfirmacion";
 
-function CarreraEdit() {
+function CareerEdit() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { id } = useParams();
+  const [department, setDepartment] = useState("");
   const [idDepartment, setidDepartment] = useState("");
   const [carrera, setcarrera] = useState({
-    CareersName: "",
+    careerName: "",
     idDepartment: "",
   });
-  const [Usuario, setUsuario] = useState("");
-  const [CareersNameError, setCareersNameError] = useState("");
 
-  const validateForm = () => {
-    let isValid = true;
-
-    if (!carrera.CareersName) {
-      setCareersNameError("El nombre del carrera es obligatorio");
-      isValid = false;
-    } else if (carrera.CareersName.length < 3 || carrera.CareersName.length > 15) {
-      setCareersNameError("El nombre del carrera debe tener entre 3 y 15 caracteres");
-      isValid = false;
-    } else {
-      setCareersNameError("");
-    }
-    return isValid;
-  };
+  
 
   useEffect(() => {
     axios
@@ -45,10 +31,10 @@ function CarreraEdit() {
       });
     
       axios
-      .get("https://localhost:7220/api/Careers")
+      .get("https://localhost:7220/api/Departments")
       .then((response) => {
         console.log(response.data); // Verifica los datos que obtienes
-        setUsuario(response.data);
+        setDepartment(response.data);
       })
       .catch((error) => {
         console.error(error); // Verifica si hay errores en la llamada a la API
@@ -68,12 +54,12 @@ function CarreraEdit() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (validateForm()) {
+    
 
     // Crear un objeto con los datos en formato JSON
     const requestData = {
-      idDepartment: id,
-      CareersName: carrera.CareersName,
+      idCareer: id,
+      careerName: carrera.careerName,
       idDepartment: idDepartment,
     };
 
@@ -89,7 +75,7 @@ function CarreraEdit() {
       .catch((error) => {
         console.log(error);
       });
-    }
+    
   };
   function closeModal() {
     setModalIsOpen(false);
@@ -118,21 +104,20 @@ function CarreraEdit() {
                 </label>
                 <input
                   type="text"
-                  name="CareersName"
+                  name="careerName"
                   className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                  value={carrera.CareersName}
+                  value={carrera.careerName}
                   onChange={handleInputChange}
                 />
-                {CareersNameError && (
-                  <p className="text-red-500">{CareersNameError}</p>)}
+                
                 <br />
                 <label
                   htmlFor="editSucursalName"
                   className="text-gray-900 dark:text-gray-900"
                 >
-                  Nueva carrera
+                  Nuevo Departemento
                 </label>
-                {Usuario.length === 0 ? (
+                {department.length === 0 ? (
                   <p>Cargando datos...</p>
                 ) : (
                   <select
@@ -141,12 +126,12 @@ function CarreraEdit() {
                     value={idDepartment}
                     onChange={(e) => setidDepartment(e.target.value)}
                   >
-                    {Usuario.map((Usuario) => (
+                    {department.map((Department) => (
                       <option
-                        key={Usuario.idDepartment}
-                        value={Usuario.idDepartment}
+                        key={Department.idDepartment}
+                        value={Department.idDepartment}
                       >
-                        {Usuario.facultyName}
+                        {Department.departmentName}
                       </option>
                     ))}
                   </select>
@@ -164,7 +149,7 @@ function CarreraEdit() {
               </div>
               <br></br>
               <br></br>
-              <Link to="/carreraTable">Volver a la lista de carrera</Link>
+              <Link to="/CarreraTable">Volver a la lista de carrera</Link>
             </div>
           </form>
         </div>
@@ -173,4 +158,4 @@ function CarreraEdit() {
   );
 }
 
-export default CarreraEdit;
+export default CareerEdit;

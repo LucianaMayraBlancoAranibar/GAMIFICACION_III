@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 function CarreraTable() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [Carrera, setCarrera] = useState([]);
-  const [Departamento, setDepartamento] = useState([]);
   const [CarreraToDelete, setCarreraToDelete] = useState(null);
 
   useEffect(() => {
@@ -20,17 +19,8 @@ function CarreraTable() {
       })
       .catch((error) => {
         console.error(error); // Verifica si hay errores en la llamada a la API
-      });    
-
-      axios
-      .get("'https://localhost:7220/api/Departments")
-      .then((response) => {
-        console.log(response.data); // Verifica los datos que obtienes
-        setDepartamento(response.data);
-      })
-      .catch((error) => {
-        console.error(error); // Verifica si hay errores en la llamada a la API
-      });    
+      }); 
+        
   }, []);
 
   const handleDeleteSucursal = () => {
@@ -41,7 +31,7 @@ function CarreraTable() {
         .then((response) => {
           // Actualiza la lista de Carrera después de la eliminación
           setCarrera((prevSucursal) =>
-            prevSucursal.filter((Carrera) => Carrera.idDepartment !== CarreraToDelete)
+            prevSucursal.filter((Carrera) => Carrera.idCareer !== CarreraToDelete)
           );
           setCarreraToDelete(null); // Restablece el estado
         })
@@ -76,11 +66,7 @@ function CarreraTable() {
                     Nombre de Carrera
                   </div>
                 </th>
-                <th scope="col" className="px-6 py-3 text-center">
-                  <div className="font-semibold text-left">
-                    Departamento
-                  </div>
-                </th>
+                
                 <th scope="col" className="px-6 py-3 text-center">
                   <div className="font-semibold text-left">Acciones</div>
                 </th>
@@ -88,13 +74,13 @@ function CarreraTable() {
             </thead>
             <tbody className="text-sm font-medium divide-y divide-slate-100 dark:divide-slate-700">
               {Carrera.map((Carrera) => (
-                <tr key={Carrera.idDepartment} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <tr key={Carrera.idCareer} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                 
-                  <td className="px-6 py-4">{Carrera.departmentName}</td>
+                  <td className="px-6 py-4">{Carrera.careerName}</td>
 
-                  <td className="px-6 py-4">{Departamento.find((Departamento) => Departamento.idFaculty === Carrera.idFaculty)?.facultyName}</td>
+                  
                   <td className="px-6 py-4 text-left">
-                  <Link to={`/CarreraEdit/${Carrera.idDepartment}`}> {/* Redirigir a la página de edición con el ID */}
+                  <Link to={`/CareerEdit/${Carrera.idCareer}`}> {/* Redirigir a la página de edición con el ID */}
                     <button
                      className="px-4 py-4 mr-4 leading-5 text-white transition-colors duration-200 transform bg-green-700 rounded-md hover:bg-green-500 focus:outline-none focus:bg-gray-600"
                     >
@@ -103,7 +89,7 @@ function CarreraTable() {
                     </Link>
                     <button
                      className="px-4 py-4 ml-3 leading-5 text-white transition-colors duration-200 transform bg-red-500 rounded-md hover:bg-red-400 focus:outline-none focus:bg-gray-600"
-                      onClick={() => setCarreraToDelete(Carrera.idDepartment)} // Establece el ID de la Carrera para eliminar
+                      onClick={() => setCarreraToDelete(Carrera.idCareer)} // Establece el ID de la Carrera para eliminar
                     >
                       Eliminar
                     </button>
