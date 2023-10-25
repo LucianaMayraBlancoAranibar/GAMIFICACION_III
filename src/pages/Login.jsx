@@ -4,103 +4,64 @@ import Sidebar from "../partials/Sidebar";
 import Header from "../partials/Header";
 import { Link } from "react-router-dom";
 
-function Login(){
-    const [sidebarOpen, setSidebarOpen] = useState(false);
-    const [email, setemail] = useState("");
-    const [rol, setrol] = useState("3");
-    const [password, setpassword] = useState("");
-    const [modalIsOpen, setModalIsOpen] = useState(false);
+function Login() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorResponse, setErrorResponse] = useState("");
 
-    useEffect(() => {
-      if(localStorage.getItem('user-info')){
-        history.push("/add")
-      }
-    })
+  const auth = useAuth();
 
-    async function login()
-    {
-      console.warn(email,password)
-      let item = {email, password};
-      let result = await fetch(""/*Api del login*/, {
-        method: 'POST',
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": 'application/json'
-        },
-        body: JSON.stringify(item)
-      }) 
+  /*function handleChange(e: React.ChangeEvent) {
+    const { name, value } = e.target as HTMLInputElement;
+    if (name === "username") {
+      setUsername(value);
     }
+    if (name === "password") {
+      setPassword(value);
+    }
+  }
 
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    // auth.setIsAuthenticated(true);
+    try {
+      const response = await fetch("http://localhost:3000/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+      });
+      if (response.ok) {
+        const json = (await response.json()) as AuthResponse;
+        console.log(json);
 
-    function closeModal() {
-        setModalIsOpen(false);
+        if (json.body.accessToken && json.body.refreshToken) {
+          auth.saveUser(json);
+        }
+      } else {
+        const json = (await response.json()) as AuthResponseError;
+
+        setErrorResponse(json.body.error);
       }
-
-    return (
-        <div className="flex h-screen overflow-hidden">
-          <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-          <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
-            <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-            <div className="relative p-4 sm:p-6 rounded-sm overflow-hidden mb-8">
-              <div className="relative">
-                <h1 className="text-2xl md:text-3xl text-slate-800 dark:text-slate-100 font-bold mb-1">
-                  Login{" "}
-                </h1>
-              </div>
-              <br></br>
-              <form onSubmit={handleSubmit}>
-                <div>
-                  <div>                
-                    
-                    <label
-                      className="text-gray-900 dark:text-gray-900"
-                      htmlFor="email"
-                    >
-                      Email
-                    </label>
-                    <input
-                      type="text"
-                      id="email"
-                      className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                      value={email}
-                      onChange={(e) => setemail(e.target.value)}
-                    />
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  if (auth.isAuthenticated) {
+    return <Navigate to="/dashboard" />;
+  }*/
+  return (
     
-                    <br />
-                    <label
-                      className="text-gray-900 dark:text-gray-900"
-                      htmlFor="password"
-                    >
-                      Contraseña
-                    </label>
-                    <input
-                      type="password"
-                      id="password"
-                      className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                      value={password}
-                      onChange={(e) => setpassword(e.target.value)}
-                    />          
-                        
-                    <br />
-                  </div>
-                  <br></br>
-                  <div className="flex justify-left">
-                    <button
-                      className="px-10 py-5 leading-5 text-white transition-colors duration-200 transform bg-gray-800 rounded-md hover:bg-gray-700 focus:outline-none focus:bg-gray-600"
-                      type="submit"
-                    >
-                      Login
-                    </button>
-                  </div>
-                </div>
-                <br></br>
-                <Link to="/EstudianteTable">Login</Link>
-              </form>
-              {/* Modal de confirmación */}
-              <ModalConfirmacion isOpen={modalIsOpen} closeModal={closeModal} />
-            </div>
-          </div>
-        </div>
-      );
+      <form>
+        <h1>Login</h1>
+        
+        <label>Username</label>
+        <input type="text"/>
+        <label>Password</label>
+        <input type="password"/>
+
+        <button>Login</button>
+      </form>
+    
+  );
 }
 export default Login;
