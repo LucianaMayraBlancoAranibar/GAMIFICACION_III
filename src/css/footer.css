@@ -26,7 +26,7 @@ footer {
 }
 
 .footer-distributed {
-    background-color: #212E40;
+    background-color: #860842;
     box-sizing: border-box;
     width: 100%;
     text-align: left;
@@ -80,6 +80,7 @@ footer {
 
 .footer-distributed .footer-center {
     width: 35%;
+    text-align: center;
 }
 
 
@@ -162,11 +163,11 @@ footer {
 }
 
 .footer-distributed .footer-icons a:hover {
-    background-color: #3F71EA;
+    background-color: #860842;
 }
 
 .footer-links a:hover {
-    color: #3F71EA;
+    color: #860842;
 }
 
 @media (max-width: 880px) {

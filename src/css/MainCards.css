@@ -1,0 +1,81 @@
+/* Estilos para el contenedor principal */
+.rounded-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 16px;
+}
+
+/* Estilos para el título "MAS INFORMACIÓN" */
+.container-title {
+  font-weight: bold;
+  font-size: 2rem;
+  margin-top: 2rem;
+}
+
+/* Estilos para el contenedor de los ítems */
+.item-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+/* Estilos para cada tarjeta de información */
+.card {
+  width: 25rem; /* Ancho original de las tarjetas */
+  padding: 2rem;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 0.5rem;
+  margin-bottom: 1rem;
+  margin-right: 0.5rem;
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para las imágenes dentro de las tarjetas */
+.card img {
+  border-radius: 50%;
+  width: 15rem;
+  /* Ajusta el tamaño de la imagen aquí */
+}
+
+/* Estilos para los títulos de las tarjetas */
+.card-title {
+  font-weight: bold;
+  font-size: 1.8rem;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+/* Estilos para el texto de las tarjetas */
+.card-text {
+  text-align: center;
+}
+
+/* Media query para pantallas pequeñas */
+@media screen and (max-width: 832px) {
+  .card {
+    width: 90%; /* Cambia el ancho de las tarjetas para que se ajusten en pantallas pequeñas */
+    margin: 1rem 0;
+  }
+  .card img {
+    max-width: 13rem;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-in;
+}

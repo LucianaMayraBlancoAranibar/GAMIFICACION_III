@@ -4,6 +4,8 @@ import Sidebar from "../partials/Sidebar";
 import Header from "../partials/Header";
 import Footer from "../partials/Footer";
 import { Link } from "react-router-dom";
+import '../css/MainCards.css'
+
 
 function Main() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -47,7 +49,7 @@ function Main() {
               DIAMANTE
             </button>
             {showDataListDiamante && (
-              <div className="bg-cyan-300 w-2/12 shadow rounded p-4 text-center text-white	">
+              <div className="bg-cyan-300 w-2/12 shadow rounded p-4 text-center text-white fade-in">
                 <div className="py-2">
                   <a href="#">Rango 1</a>
                 </div>
@@ -64,7 +66,7 @@ function Main() {
               PLATINO
             </button>
             {showDataListPlatino && (
-              <div className="bg-cyan-200 w-4/12 shadow rounded p-4 text-center text-white	">
+              <div className="bg-cyan-200 w-4/12 shadow rounded p-4 text-center text-white fade-in">
                 <div className="py-2">
                   <a href="#">Rango 1</a>
                 </div>
@@ -81,7 +83,7 @@ function Main() {
               ORO
             </button>
             {showDataListOro && (
-              <div className="bg-yellow-400 w-6/12 shadow rounded p-4 text-center text-white	">
+              <div className="bg-yellow-400 w-6/12 shadow rounded p-4 text-center text-white	fade-in">
                 <div className="py-2">
                   <a href="#">Rango 1</a>
                 </div>
@@ -98,7 +100,7 @@ function Main() {
               PLATA
             </button>
             {showDataListPlata && (
-              <div className="bg-gray-400 w-8/12 shadow rounded p-4 text-center text-white">
+              <div className="bg-gray-400 w-8/12 shadow rounded p-4 text-center text-white fade-in">
                 <div className="py-2">
                   <a href="#">Rango 1</a>
                 </div>
@@ -115,7 +117,7 @@ function Main() {
               BRONCE
             </button>
             {showDataListBronce && (
-              <div className="bg-amber-600 w-10/12 shadow rounded p-4 text-center text-white">
+              <div className="bg-amber-600 w-10/12 shadow rounded p-4 text-center text-white fade-in">
                 <div className="py-2">
                   <a href="#">Rango 1</a>
                 </div>
@@ -128,35 +130,29 @@ function Main() {
               </div>
             )}
           </div>
-          <div className="rounded flex flex-col items-center mt-16 bg-white">
-            <label className="font-bold text-4xl mt-4">MAS INFORMACIÓN</label>
-            <div className="flex flex-wrap justify-center mt-8">
-              <div className="w-1/4 p-4 rounded flex flex-col items-center px-14 py-14 mx-2">
-                <img src="/src/images/imgM1.png" className="rounded-full w-40 " alt="User" />
-                <br />
-                <label className="text-center font-bold text-xl">RANKING ESTUDIANTIL?</label>
-                <br />
-                <label className="text-center">
-                  El ranking estudiantil es una carrera entre los estudiantes para medir los logros que ganen en su tiempo de estudio
-                </label>
+
+          <div className="rounded-container">
+            <label className="container-title">DE QUE SE TRATA?</label>
+            <div className="item-container">
+              <div className="card">
+                <img src="/src/images/imgM1.png" alt="User" />
+                <label className="card-title">RANKING ESTUDIANTIL?</label>
+                <label className="card-text">El ranking estudiantil es una carrera entre los estudiantes para medir los logros que ganen en su tiempo de estudio.</label>
               </div>
-              <div className="w-1/4 p-4 rounded flex flex-col items-center px-14 py-14 mx-2">
-                <img src="/src/images/imgM2.png" className="rounded-full w-40" alt="User" />
-                <br />
-                <label className="text-center font-bold text-xl">COMO SUBIR DE RANGO?</label>
-                <br />
-                <label className="text-center ">
-                  Se podrá subir de rango dependiendo de los logros que ganen y de las materias que aprueben
-                </label>
+              <div className="card">
+                <img src="/src/images/imgM2.png" alt="User" />
+                <label className="card-title">COMO SUBIR DE RANGO?</label>
+                <label className="card-text">Se podrá subir de rango dependiendo de los logros que ganen</label>
               </div>
-              <div className="w-1/4 p-4 rounded flex flex-col items-center px-14 py-14 mx-2">
-                <img src="/src/images/imgM3.png" className="rounded-full w-40" alt="User" />
-                <br />
-                <label className="text-center font-bold text-xl">COMO PARTICIPO?</label>
-                <br />
-                <label className="text-center">
-                  Se podrá participar cuando la persona se inscriba en la Universidad Univalle y comenzará en el rango más bajo
-                </label>
+              <div className="card">
+                <img src="/src/images/imgM3.png" alt="User" />
+                <label className="card-title">COMO PARTICIPO EN ESTO?</label>
+                <label className="card-text">Se podrá participar cuando la persona se inscriba en la Universidad Univalle y comenzará en el rango más bajo</label>
+              </div>
+              <div className="card">
+                <img src="/src/images/imgM4.png" alt="User" />
+                <label className="card-title">QUE SON LOS BADGES?</label>
+                <label className="card-text">Los badges son pequeñas insignias que se utilizan para representar información adicional o destacar ciertos logros, características o estados.</label>
               </div>
             </div>
           </div>

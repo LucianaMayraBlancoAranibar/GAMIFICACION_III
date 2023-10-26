@@ -26,7 +26,7 @@ function Footer({ sidebarOpen, setSidebarOpen }) {
         <div className="footer-center">
             <div>
                 <i className="fa fa-map-marker"></i>
-                <p><h2>Contactos</h2></p>
+                <p>Contactos</p>
             </div>
 
             <div>
