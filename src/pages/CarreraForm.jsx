@@ -12,6 +12,10 @@ function CarreraForm() {
   const [idDepartment, setidDepartment] = useState("");
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
+  //Const para validar
+  const [careerNameError, setCarrerNameError] = useState("");
+  const [idDepartmentError, setidDepartmentError] = useState("");
+
   
 
   useEffect(() => {
@@ -28,13 +32,32 @@ function CarreraForm() {
   }, []);
 
     // Función para validar el formulario
-    
+    const validateForm = () => {
+      let isValid = true;
+
+      if(!careerName){
+        setCarrerNameError("El nombre de la carrera es obligatorio");
+        isValid = false;
+
+      } else if(careerName.length < 3 || careerName.length > 50){
+        setCarrerNameError("El nombre de la carrera debe tener mayor a 3 caracteres y 50 caracteres como maximo")
+        isValid = false;
+      } else {
+        setCarrerNameError("");
+      }
+
+      if (!idDepartment) {
+        setidDepartmentError("Debes seleccionar un departamento");
+        isValid = false;
+      } else {
+        setidDepartmentError("");
+      }
+    }
     
 
   async function handleSubmit(event) {
     event.preventDefault();
-
-    
+    if(validateForm()) {
       const data = {
         careerName: careerName,
         idDepartment: idDepartment,
@@ -52,9 +75,9 @@ function CarreraForm() {
         setCarrerName("");
         setidDepartment("");
       } catch (error) {
-        //console.error("Error al registrar la carrera:", error);
+        console.error("Error al registrar la carrera:", error);
       }
-    
+    }
   }
 
   function closeModal() {
@@ -89,6 +112,7 @@ function CarreraForm() {
                   value={careerName}
                   onChange={(e) => setCarrerName(e.target.value)}
                 />
+                {careerNameError && (<p className="text-red-500">{careerNameError}</p>)}
                 
                 <br />
                 <label
@@ -118,6 +142,7 @@ function CarreraForm() {
                     ))}
                   </select>
                 )}
+                {idDepartmentError && (<p className="text-red-500">{idDepartmentError}</p>)}
                 
               </div>
               <br></br>
