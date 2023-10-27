@@ -31,6 +31,10 @@ import CarreraTable from './pages/CarreraTable';
 import CareerEdit from './pages/CareerEdit';
 import CarreraForm from './pages/CarreraForm';
 import Login from './pages/Login';
+/*import Carrusel from './pages/Carrusel';
+
+<Route path="/Carrusel" element={<Carrusel/>} />*/
+
 
 
 
@@ -86,6 +90,7 @@ function App() {
         <Route path="/CareerEdit/:id" element={<CareerEdit />} />
         <Route path="/CarreraForm" element={<CarreraForm />} />
         <Route path="/Login" element={<Login />} />
+        
 
       </Routes>
     </Router>
