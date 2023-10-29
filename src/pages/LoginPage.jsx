@@ -9,7 +9,7 @@ function LoginComponent() {
     const [errors, setErrors] = useState({});
     const [loading, setLoading] = useState(false);
     const { setCurrentUser } = useAuth();
-    const [userType, setUserType] = useState("admin"); // valores: 'admin' o 'student'
+    const [userType, setUserType] = useState("admin"); 
 
     const API_BASE_URL = "https://localhost:7005/api/Usuarios";
     const navigate = useNavigate();  
@@ -40,7 +40,7 @@ function LoginComponent() {
             const data = await response.json();
             console.log("Respuesta completa:", data);
 
-            // Imprime el Rol que te está devolviendo el servidor.
+    
             console.log("Rol del usuario:", data.user?.rol);
     
 

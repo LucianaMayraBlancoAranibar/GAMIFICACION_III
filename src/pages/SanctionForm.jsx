@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useAuth } from '../AuthContext'; // Asumiendo que tienes este contexto.
+import { useAuth } from '../AuthContext'; 
 import Select from 'react-select';
 
 function SanctionForm() {
@@ -8,7 +8,7 @@ function SanctionForm() {
     const [sanctionValue, setSanctionValue] = useState("");
     const [errors, setErrors] = useState({});
     const [loading, setLoading] = useState(false);
-    const { currentUser } = useAuth(); // Asumiendo que tu contexto de autenticación provee el usuario actual.
+    const { currentUser } = useAuth(); 
     const [students, setStudents] = useState([]);
 
     const API_BASE_URL = "https://localhost:7005/api/Sanctions";
@@ -74,7 +74,7 @@ function SanctionForm() {
             console.log("Respuesta del servidor:", data);
     
             if (response.status === 200) {
-                // Trata el éxito de la operación aquí
+               
                 alert("Sanción creada exitosamente!");
             } else {
                 setErrors({ form: data.message || "Error al crear la sanción." });
