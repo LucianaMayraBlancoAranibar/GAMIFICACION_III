@@ -11,7 +11,7 @@ function LoginComponent() {
     const { setCurrentUser } = useAuth();
     const [userType, setUserType] = useState("admin"); 
 
-    const API_BASE_URL = "https://localhost:7005/api/Usuarios";
+    const API_BASE_URL = "https://localhost:7205/api/Usuarios";
     const navigate = useNavigate();  
 
     const handleLogin = async () => {
@@ -52,9 +52,9 @@ function LoginComponent() {
               setCurrentUser(data.user); 
 
               if (data.user.rol === 1) {
-                navigate("/SanctionForm");  // Redirecciona al admin
+                navigate("/");  // Redirecciona al admin
             } else if (data.user.rol === 2) {
-                navigate("/SanctionForm");  // Redirecciona al gestor
+                navigate("/");  // Redirecciona al gestor
             } else if (data.user.rol === 3) {
                 navigate("/FacultyForm");  // Redirecciona al estudiante
             } else {

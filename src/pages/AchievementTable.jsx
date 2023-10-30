@@ -12,7 +12,7 @@ function AchievementTable() {
   useEffect(() => {
     // Realiza una solicitud a tu API para obtener la lista de logros
     axios
-      .get("https://localhost:7187/api/Achievements")
+      .get("https://localhost:7205/api/Achievements")
       .then((response) => {
         console.log(response.data); // Verifica los datos que obtienes
         setAchievements(response.data);
@@ -37,7 +37,7 @@ function AchievementTable() {
   
       // Realiza una solicitud DELETE a la API para eliminar el logro
       axios
-        .delete(`https://localhost:7187/api/Achievements/${achievementToDelete}`)
+        .delete(`https://localhost:7205/api/Achievements/${achievementToDelete}`)
         .then((response) => {
           // Actualiza la lista de logros después de la eliminación
           setAchievements((prevAchievements) =>

@@ -11,7 +11,7 @@ function TypeAchievementTable() {
 
   useEffect(() => {
     axios
-      .get("https://localhost:7187/api/TypeAchievements")
+      .get("https://localhost:7205/api/TypeAchievements")
       .then((response) => {
         console.log(response.data);
         setTypeAchievements(response.data);
@@ -25,7 +25,7 @@ function TypeAchievementTable() {
       // Realiza una solicitud DELETE a la API para eliminar la facultad
       axios
         .delete(
-          `https://localhost:7187/api/TypeAchievements/${typeAchievementToDelete}`
+          `https://localhost:7205/api/TypeAchievements/${typeAchievementToDelete}`
         )
         .then((response) => {
           setTypeAchievements((prevFacultadesTypeAchievement) =>

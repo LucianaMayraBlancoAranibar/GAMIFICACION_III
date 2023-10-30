@@ -19,7 +19,7 @@ function AchievementEdit() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   useEffect(() => {
-    Axios.get("https://localhost:7187/api/TypeAchievements")
+    Axios.get("https://localhost:7205/api/TypeAchievements")
       .then((response) => {
         setAchievementTypes(response.data);
       })
@@ -27,7 +27,7 @@ function AchievementEdit() {
         console.error("Error al obtener tipos de logro:", error);
       });
 
-    Axios.get(`https://localhost:7187/api/Achievements/${id}`)
+    Axios.get(`https://localhost:7205/api/Achievements/${id}`)
       .then((response) => {
         const achievementData = response.data;
         setFormData({
@@ -69,7 +69,7 @@ function AchievementEdit() {
     }
 
     // Si no hay errores, continuar con el envío del formulario
-    Axios.put(`https://localhost:7187/api/Achievements/${id}`, formData)
+    Axios.put(`https://localhost:7205/api/Achievements/${id}`, formData)
       .then((response) => {
         console.log("Logro actualizado con éxito:", response.data);
         setModalIsOpen(true);

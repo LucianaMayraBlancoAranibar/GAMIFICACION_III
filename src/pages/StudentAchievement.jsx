@@ -1,23 +1,37 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import Select from 'react-select';
+import React, { Component, useState} from "react";
+import axios from "axios";
+import Select from "react-select";
+import Sidebar from "../partials/Sidebar";
+import Header from "../partials/Header";
+import ModalConfirmacion from "../partials/ModalConfirmacion";
+import { Link } from "react-router-dom";
 
 class StudentAchievement extends Component {
+  
   state = {
     selectedStudent: null,
     selectedAchievement: null,
-    message: '', // Mensaje para mostrar en caso de éxito o error
+    message: "", // Mensaje para mostrar en caso de éxito o error
     studentOptions: [],
     achievementOptions: [],
+    sidebarOpen: false,
+    modalIsOpen: false,
+  };
+  setSidebarOpen = (open) => {
+    this.setState({ sidebarOpen: open });
   };
 
+  setModalIsOpen = (isOpen) => {
+    this.setState({ modalIsOpen: isOpen });
+  };
   componentDidMount() {
     this.loadStudentOptions();
     this.loadAchievementOptions();
   }
 
   loadStudentOptions = () => {
-    axios.get('https://localhost:7005/api/Students')
+    axios
+      .get("https://localhost:7205/api/Students")
       .then((response) => {
         const studentOptions = response.data.map((student) => ({
           value: `${student.firstName}, ${student.lastName}`,
@@ -26,12 +40,13 @@ class StudentAchievement extends Component {
         this.setState({ studentOptions });
       })
       .catch((error) => {
-        console.error('Error al obtener estudiantes:', error);
+        console.error("Error al obtener estudiantes:", error);
       });
   };
 
   loadAchievementOptions = () => {
-    axios.get('https://localhost:7005/api/Achievements')
+    axios
+      .get("https://localhost:7205/api/Achievements")
       .then((response) => {
         const achievementOptions = response.data.map((achievement) => ({
           value: achievement.nameAchievemt,
@@ -40,7 +55,7 @@ class StudentAchievement extends Component {
         this.setState({ achievementOptions });
       })
       .catch((error) => {
-        console.error('Error al obtener logros:', error);
+        console.error("Error al obtener logros:", error);
       });
   };
 
@@ -60,13 +75,16 @@ class StudentAchievement extends Component {
     const { selectedStudent, selectedAchievement } = this.state;
 
     if (!selectedStudent || !selectedAchievement) {
-      this.setState({ message: 'Por favor, seleccione un estudiante y un logro.' });
+      this.setState({
+        message: "Por favor, seleccione un estudiante y un logro.",
+      });
       return;
     }
 
-    const studentNameParts = selectedStudent.value.split(', ');
+    const studentNameParts = selectedStudent.value.split(", ");
     const studentFirstName = studentNameParts[0];
     const studentLastName = studentNameParts[1];
+    
 
     const request = {
       StudentName: studentFirstName,
@@ -75,7 +93,10 @@ class StudentAchievement extends Component {
     };
 
     axios
-      .post('https://localhost:7005/api/StudentAchievements/AssignAchievement', request)
+      .post(
+        "https://localhost:7005/api/StudentAchievements/AssignAchievement",
+        request
+      )
       .then((response) => {
         this.setState({ message: response.data });
       })
@@ -85,29 +106,61 @@ class StudentAchievement extends Component {
   };
 
   render() {
-    const { selectedStudent, selectedAchievement, message, studentOptions, achievementOptions } = this.state;
+    
+    const {
+      selectedStudent,
+      selectedAchievement,
+      message,
+      studentOptions,
+      achievementOptions,
+      sidebarOpen,
+      modalIsOpen
+    } = this.state;
 
     return (
-      <div>
-        <div>
-          <label>Estudiante: </label>
-          <Select
-            value={selectedStudent}
-            onChange={this.handleStudentChange}
-            options={studentOptions}
-            formatOptionLabel={this.formatStudentOptionLabel}
-          />
+      <div className="flex h-screen overflow-hidden">
+        <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={this.setSidebarOpen} />
+        <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
+        <Header sidebarOpen={sidebarOpen} setSidebarOpen={this.setSidebarOpen} />
+          <div className="relative p-4 sm:p-6 rounded-sm overflow-hidden mb-8">
+            <div className="relative">
+              <h1 className="text-2xl md:text-3xl text-slate-800 dark:text-slate-100 font-bold mb-1">
+                Asignacion de logro{" "}
+              </h1>
+            </div>
+            <br></br>
+            <div>
+              <div>
+                <label>Estudiante </label>
+                <br></br>
+              
+                <Select
+                  value={selectedStudent}
+                  onChange={this.handleStudentChange}
+                  options={studentOptions}
+                  formatOptionLabel={this.formatStudentOptionLabel}
+                />
+              </div>
+              <br></br>
+      
+              <div>
+                <label>Logro </label>
+                <br></br>
+                
+                <Select
+                  value={selectedAchievement}
+                  onChange={this.handleAchievementChange}
+                  options={achievementOptions}
+                />
+              </div>
+              <br></br>
+              <br></br>
+              <button  className="px-10 py-5 leading-5 text-white transition-colors duration-200 transform bg-gray-800 rounded-md hover:bg-gray-700 focus:outline-none focus:bg-gray-600"
+              type="submit" onClick={this.assignAchievement}>Asignar Logro</button>
+              <div>{message}</div>
+            </div>
+          </div>
         </div>
-        <div>
-          <label>Logro: </label>
-          <Select
-            value={selectedAchievement}
-            onChange={this.handleAchievementChange}
-            options={achievementOptions}
-          />
-        </div>
-        <button onClick={this.assignAchievement}>Asignar Logro</button>
-        <div>{message}</div>
       </div>
     );
   }

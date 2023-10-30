@@ -17,6 +17,7 @@ export default function ProtectedElement({ allowedRoles, element }) {
 
   if (!allowedRoles.includes(currentUser.rol)) {
     console.warn(`Acceso denegado a la ruta: ${location.pathname}`);
+    navigate("/LoginPage", { replace: true, state: { from: location } });
     return null; // redirigir a una página "No Autorizado" 
   }
 

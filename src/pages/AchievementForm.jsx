@@ -18,7 +18,7 @@ function AchievementForm() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   useEffect(() => {
-    Axios.get("https://localhost:7187/api/TypeAchievements")
+    Axios.get("https://localhost:7205/api/TypeAchievements")
       .then((response) => {
         setAchievementTypes(response.data);
       })
@@ -55,7 +55,7 @@ function AchievementForm() {
     }
 
     // Si no hay errores, continuar con el envío del formulario
-    Axios.post("https://localhost:7187/api/Achievements", formData)
+    Axios.post("https://localhost:7205/api/Achievements", formData)
       .then((response) => {
         console.log("Logro creado con éxito:", response.data);
       })

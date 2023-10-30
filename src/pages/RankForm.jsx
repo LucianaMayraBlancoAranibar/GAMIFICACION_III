@@ -12,7 +12,7 @@ function RankForm() {
   useEffect(() => {
     async function fetchAvailableImages() {
       try {
-        const response = await axios.get("https://localhost:7187/api/Ranks/availableImages");
+        const response = await axios.get("https://localhost:7205/api/Ranks/availableImages");
         setAvailableImages(response.data);
       } catch (error) {
         console.error("Error al obtener las imágenes disponibles:", error);
@@ -50,7 +50,7 @@ function RankForm() {
 
     try {
       const response = await axios.post(
-        "https://localhost:7187/api/Ranks",
+        "https://localhost:7205/api/Ranks",
         data
       );
 

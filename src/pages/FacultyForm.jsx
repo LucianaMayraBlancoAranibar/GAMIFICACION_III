@@ -36,7 +36,7 @@ function RankForm() {
 
     try {
       const response = await axios.post(
-        "https://localhost:7187/api/Ranks",
+        "https://localhost:7205/api/Ranks",
         data
       );
 

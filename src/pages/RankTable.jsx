@@ -12,7 +12,7 @@ function RankTable() {
     // Obtener la lista de rangos desde la API y almacenarla en el estado `ranks`
     const fetchRanks = async () => {
       try {
-        const response = await axios.get("https://localhost:7187/api/Ranks");
+        const response = await axios.get("https://localhost:7205/api/Ranks");
         setRanks(response.data);
       } catch (error) {
         console.error("Error al obtener la lista de rangos:", error);
@@ -29,7 +29,7 @@ function RankTable() {
   const handleDelete = async (id) => {
     try {
       // Realiza una solicitud DELETE a la API para eliminar el rango con el ID proporcionado
-      await axios.delete(`https://localhost:7187/api/Ranks/${id}`);
+      await axios.delete(`https://localhost:7205/api/Ranks/${id}`);
 
       // Actualiza la lista de rangos después de eliminar el elemento
       setRanks(ranks.filter((rank) => rank.id !== id));

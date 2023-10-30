@@ -52,7 +52,7 @@ function TypeAchievementForm() {
       try {
        
         const response = await axios.post(
-          "https://localhost:7187/api/TypeAchievements",
+          "https://localhost:7205/api/TypeAchievements",
           data
         );
 
@@ -71,12 +71,8 @@ function TypeAchievementForm() {
 
   return (
     <div className="flex h-screen overflow-hidden">
-      {/* Sidebar */}
       <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-
-      {/* Content area */}
       <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
-        {/* Site header */}
         <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
         <div className="relative p-4 sm:p-6 rounded-sm overflow-hidden mb-8">
           <div className="relative">

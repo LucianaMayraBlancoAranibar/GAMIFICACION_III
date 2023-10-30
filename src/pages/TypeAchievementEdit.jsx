@@ -22,7 +22,7 @@ function TypeAchievementEdit() {
   useEffect(() => {
 
     axios
-      .get(`https://localhost:7187/api/TypeAchievements/${id}`)
+      .get(`https://localhost:7205/api/TypeAchievements/${id}`)
       .then((response) => {
         const typeAchievementData = response.data;
         setFormData({
@@ -72,7 +72,7 @@ function TypeAchievementEdit() {
       try {
        
         const response = await axios.put(
-          `https://localhost:7187/api/TypeAchievements/${id}`, 
+          `https://localhost:7205/api/TypeAchievements/${id}`, 
           data
         );
 

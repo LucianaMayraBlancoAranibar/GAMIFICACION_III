@@ -15,7 +15,7 @@ function FacultyEdit() {
 
   useEffect(() => {
     axios
-      .get(`https://localhost:7187/api/Faculties/${id}`)
+      .get(`https://localhost:7205/api/Faculties/${id}`)
       .then((response) => {
         setFacultad(response.data);
       })
