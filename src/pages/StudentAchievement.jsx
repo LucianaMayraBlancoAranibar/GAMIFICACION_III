@@ -6,6 +6,7 @@ import Header from "../partials/Header";
 import ModalConfirmacion from "../partials/ModalConfirmacion";
 import { Link } from "react-router-dom";
 
+
 class StudentAchievement extends Component {
   
   state = {
@@ -94,7 +95,7 @@ class StudentAchievement extends Component {
 
     axios
       .post(
-        "https://localhost:7005/api/StudentAchievements/AssignAchievement",
+        "https://localhost:7205/api/StudentAchievements/AssignAchievement",
         request
       )
       .then((response) => {
