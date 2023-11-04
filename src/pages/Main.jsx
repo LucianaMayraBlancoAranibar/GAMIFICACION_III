@@ -46,7 +46,15 @@ function Main() {
     script.async = true;
     script.onload = () => {
       swiperRef.current = new Swiper(".containerCarrousel", {
+        effect: "coverflow",
+        grabCursor: true,
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+        centeredSlides: true,
         slidesPerView: "1",
+  
         breakpoints: {
           768:{
             slidesPerView: "3"
@@ -157,7 +165,7 @@ function Main() {
             )}
           </div>
 
-          <h1 className="text-4xl font-semibold px-4 pt-12">Obten uno de nuestros rangos</h1>
+          <h1 className="text-4xl font-semibold px-4 pt-12">Participa y sube de rango</h1>
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
             <div className="swiper mySwiper">
               <div className="containerCarrousel">
@@ -254,6 +262,8 @@ function Main() {
                   </div>
                 </div>
               </div>
+              <div class="swiper-button-next"></div>
+              <div class="swiper-button-prev"></div>
               <div className="swiper-pagination"/>
             </div>
             <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>

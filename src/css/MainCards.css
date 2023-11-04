@@ -73,7 +73,7 @@
 /*Carrousel de imagenes*/
 
 .mySwiper {
-  width: 100%;
+  width: 90%;
   padding: 40px 0;
   height: auto;
 }
@@ -94,7 +94,6 @@
   align-items: center;
   justify-content: center;
   background-color: white;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .box img {
