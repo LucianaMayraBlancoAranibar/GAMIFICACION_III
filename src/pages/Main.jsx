@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import Sidebar from "../partials/Sidebar";
 import Header from "../partials/Header";
@@ -36,6 +36,38 @@ function Main() {
         break;
     }
   };
+
+  const swiperRef = useRef(null);
+
+  useEffect(() => {
+    // Carga Swiper desde el CDN
+    const script = document.createElement("script");
+    script.src = "https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js";
+    script.async = true;
+    script.onload = () => {
+      swiperRef.current = new Swiper(".containerCarrousel", {
+        effect: "coverflow",
+        grabCursor: false,
+        centerSlides: true,
+        loop: true,
+        autoplay: {
+          delay: 5000,
+        },
+        slidesPerView: "auto",
+        coverflowEffect: {
+          rotate: 0,
+          stretch: 1,
+          depth: 100,
+          modifier: 7,
+        },
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+      });
+    };
+    document.body.appendChild(script);
+  }, []);
 
   return (
     <div className="flex h-screen overflow-hidden">
@@ -130,7 +162,109 @@ function Main() {
               </div>
             )}
           </div>
-            
+          
+          <div className="principal">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
+            <div className="swiper mySwiper">
+              <div className="containerCarrousel">
+                <div className="swiper-wrapper">
+                  <div className="swiper-slide">
+                    <div className="box">
+                      <img src="/src/images/rank/Bronce1.png" className="imagesize" alt=""></img>
+                      <span>BRONCE I</span>
+                    </div>
+                  </div>
+                  <div className="swiper-slide">
+                    <div className="box">
+                      <img src="/src/images/rank/Bronce2.png" className="imagesize" alt=""></img>
+                      <span>BRONCE II</span>
+                    </div>
+                  </div>
+                  <div className="swiper-slide">
+                    <div className="box">
+                      <img src="/src/images/rank/Bronce3.png" className="imagesize" alt=""></img>
+                      <span>BRONCE III</span>
+                    </div>
+                  </div>
+                  <div className="swiper-slide">
+                    <div className="box">
+                      <img src="/src/images/rank/Plata1.png" className="imagesize" alt=""></img>
+                      <span>PLATA I</span>
+                    </div>
+                  </div>
+                  <div className="swiper-slide">
+                    <div className="box">
+                      <img src="/src/images/rank/Plata2.png" className="imagesize" alt=""></img>
+                      <span>PLATA II</span>
+                    </div>
+                  </div>
+                  <div className="swiper-slide">
+                    <div className="box">
+                      <img src="/src/images/rank/Plata3.png" className="imagesize" alt=""></img>
+                      <span>PLATA III</span>
+                    </div>
+                  </div>
+                  <div className="swiper-slide">
+                    <div className="box">
+                      <img src="/src/images/rank/Oro1.png" className="imagesize" alt=""></img>
+                      <span>ORO I</span>
+                    </div>
+                  </div>
+                  <div className="swiper-slide">
+                    <div className="box">
+                      <img src="/src/images/rank/Oro2.png" className="imagesize" alt=""></img>
+                      <span>ORO II</span>
+                    </div>
+                  </div>
+                  <div className="swiper-slide">
+                    <div className="box">
+                      <img src="/src/images/rank/Oro3.png" className="imagesize" alt=""></img>
+                      <span>ORO III</span>
+                    </div>
+                  </div>
+                  <div className="swiper-slide">
+                    <div className="box">
+                      <img src="/src/images/rank/Platino1.png" className="imagesize" alt=""></img>
+                      <span>PLATINO I</span>
+                    </div>
+                  </div>
+                  <div className="swiper-slide">
+                    <div className="box">
+                      <img src="/src/images/rank/Platino2.png" className="imagesize" alt=""></img>
+                      <span>PLATINO II</span>
+                    </div>
+                  </div>
+                  <div className="swiper-slide">
+                    <div className="box">
+                      <img src="/src/images/rank/Platino3.png" className="imagesize" alt=""></img>
+                      <span>PLATINO III</span>
+                    </div>
+                  </div>
+                  <div className="swiper-slide">
+                    <div className="box">
+                      <img src="/src/images/rank/Diamante1.png" className="imagesize" alt=""></img>
+                      <span>DIAMANTE I</span>
+                    </div>
+                  </div>
+                  <div className="swiper-slide">
+                    <div className="box">
+                      <img src="/src/images/rank/Diamante2.png" className="imagesize" alt=""></img>
+                      <span>DIAMANTE II</span>
+                    </div>
+                  </div>
+                  <div className="swiper-slide">
+                    <div className="box">
+                      <img src="/src/images/rank/Diamante3.png" className="imagesize" alt=""></img>
+                      <span>DIAMANTE III</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="swiper-pagination"/>
+            </div>
+            <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+          </div>
+
           <div className="rounded-container">
             <label className="container-title">¿DE QUÉ SE TRATA?</label>
             <div className="item-container">

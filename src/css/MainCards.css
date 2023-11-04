@@ -79,3 +79,50 @@
 .fade-in {
   animation: fadeIn 0.3s ease-in;
 }
+
+/*Carrousel de imagenes*/
+
+.mySwiper {
+  width: 100%;
+  padding: 40px 0;
+  height: auto;
+}
+
+.containerCarrousel {
+  margin: 0 40px;
+  overflow: hidden;
+}
+
+.swiper-slide {
+  font-size: 25px;
+  width: 50%;
+}
+
+.box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.box img {
+  width: 30%;
+  object-fit: cover;
+}
+
+
+.box span {
+  position: absolute;
+  bottom: 10px;
+  left: 15px;
+  color: black;
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.swiper-pagination-bullet {
+  background-color: white;
+  width: 9px;
+  height: 9px;
+}
