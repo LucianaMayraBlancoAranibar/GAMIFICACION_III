@@ -46,22 +46,16 @@ function Main() {
     script.async = true;
     script.onload = () => {
       swiperRef.current = new Swiper(".containerCarrousel", {
-        effect: "coverflow",
-        grabCursor: false,
-        centerSlides: true,
-        loop: true,
-        autoplay: {
-          delay: 5000,
+        slidesPerView: "1",
+        breakpoints: {
+          768:{
+            slidesPerView: "3"
+          }
         },
-        slidesPerView: "auto",
-        coverflowEffect: {
-          rotate: 0,
-          stretch: 1,
-          depth: 100,
-          modifier: 7,
-        },
+        spaceBetween: 30,
+        freeMode: true,
         pagination: {
-          el: ".swiper-pagination",
+          /*el: ".swiper-pagination",*/
           clickable: true,
         },
       });
@@ -162,8 +156,8 @@ function Main() {
               </div>
             )}
           </div>
-          
-          <div className="principal">
+
+          <h1 className="text-4xl font-semibold px-4 pt-12">Obten uno de nuestros rangos</h1>
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
             <div className="swiper mySwiper">
               <div className="containerCarrousel">
@@ -263,7 +257,6 @@ function Main() {
               <div className="swiper-pagination"/>
             </div>
             <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-          </div>
 
           <div className="rounded-container">
             <label className="container-title">¿DE QUÉ SE TRATA?</label>
