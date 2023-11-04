@@ -27,6 +27,8 @@ import DepartamentoTable from "./pages/DepartamentoTable";
 import DepartamentoForm from "./pages/DepartamentoForm";
 import DepartamentoEdit from "./pages/DepartamentoEdit";
 import Main from "./pages/Main";
+import UserBadges from "./pages/UserBadges";
+import UserSanction from "./pages/UserSanction";
 
 
 function ScrollToTopOnRouteChange() {
@@ -77,6 +79,8 @@ function App() {
         <Route path="/DepartamentoForm" element={<DepartamentoForm />} />
         <Route path="/DepartamentoEdit/:id" element={<DepartamentoEdit />} />
         <Route path="/Main" element={<Main />} />
+        <Route path="/UserBadges" element={<UserBadges />} />
+        <Route path="/UserSanction" element={<UserSanction />} />
 
       </Routes>
     </Router>

@@ -25,6 +25,7 @@ function ManagerForm() {
   const [lastNameError, setlastNameError] = useState("");
   const [idAcademicUnityError, setidAcademicUnityError] = useState("");
   const [idCareerError, setidCareerError] = useState("");
+  const [serverError, setServerError] = useState("");
 
   const validateForm = () => {
     let isValid = true;
@@ -143,7 +144,11 @@ function ManagerForm() {
         setidAcademicUnity("");
         setidCareer("");
       } catch (error) {
-        console.error("Error al registrar elGestor:", error);
+        if (error.response && error.response.data) {
+          setServerError(error.response.data);
+        } else {
+          setServerError("Error al registrar el gestor.");
+        }
       }
     }
   }
@@ -214,6 +219,7 @@ function ManagerForm() {
                 />
                 {emailError && (
                   <p className="text-red-500">{emailError}</p>)}
+                {serverError && <p className="text-red-500">{serverError}</p>}
                 <br />
                 <label
                   className="text-gray-900 dark:text-gray-900"
