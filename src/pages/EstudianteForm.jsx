@@ -331,10 +331,10 @@ function EstudianteForm() {
                     value={idAcademicUnity}
                     onChange={(e) => {setidAcademicUnity(e.target.value);}}>
                       <option value="">Selecction academia</option>
-                      {idAcademicUnity.map((UnidadAcademica) => (
+                      {UnidadAcademica.map((UnidadAcademica) => (
                         <option 
-                          key={idAcademicUnity.UnidadAcademica}
-                          value={idAcademicUnity.UnidadAcademica}>{idAcademicUnity.UnidadAcademica}</option>
+                          key={UnidadAcademica.idAcademicUnity}
+                          value={UnidadAcademica.idAcademicUnity}>{UnidadAcademica.idAcademicUnity}</option>
                       ))}
                   </select>
                 )}
