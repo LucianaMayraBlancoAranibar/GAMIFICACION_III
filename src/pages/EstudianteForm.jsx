@@ -30,6 +30,7 @@ function EstudianteForm() {
   const [idCareerError, setidCareerError] = useState("");
   const [scoreError, setScoreError] = useState("");
   const [idRankError, setRankError] = useState("");
+  const [existeEmail, setExisteEmail] = useState("");
 
   const validateForm = () => {
     let isValid = true;
@@ -59,6 +60,9 @@ function EstudianteForm() {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if(!emailRegex.test(email)) { 
         setemailError("El email no tiene un formato valido");
+        isValid = false;
+      } else if(existeEmail.includes(email)){
+        setemailError("El email ya existe");
         isValid = false;
       } else { 
         setemailError("");

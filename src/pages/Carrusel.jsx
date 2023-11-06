@@ -4,6 +4,20 @@ import Sidebar from "../partials/Sidebar";
 import Header from "../partials/Header";
 import { Link } from "react-router-dom";
 
+const Carousel = ({ images }) => {
+    const [currentIndex, setCurrentIndex] = useState(0);
+  
+    useEffect(() => {
+      const interval = setInterval(() => {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+      }, 3000); // Cambia de imagen cada 3 segundos (ajusta el intervalo según tus necesidades)
+  
+      return () => {
+        clearInterval(interval);
+      };
+    }, [images]);
+}
+
 function Carrusel() {
 
     return (
@@ -14,28 +28,17 @@ function Carrusel() {
                 <div className="relative p-4 sm:p-6 rounded-sm overflow-hidden mb-8">
                     <h1 className="text-2xl font-semibold mb-4">Carrusel</h1>
 
-                    <Carousel slideInterval={5000}>
-                        <img
-                            alt="..."
-                            src="https://flowbite.com/docs/images/carousel/carousel-1.svg"
-                        />
-                        <img
-                            alt="..."
-                            src="https://flowbite.com/docs/images/carousel/carousel-2.svg"
-                        />
-                        <img
-                            alt="..."
-                            src="https://flowbite.com/docs/images/carousel/carousel-3.svg"
-                        />
-                        <img
-                            alt="..."
-                            src="https://flowbite.com/docs/images/carousel/carousel-4.svg"
-                        />
-                        <img
-                            alt="..."
-                            src="https://flowbite.com/docs/images/carousel/carousel-5.svg"
-                        />
-                    </Carousel>
+                    <div className="carusel-container">
+                        {images.map((image, index) => (
+                            <img
+                            key={index}
+                            src={image}
+                            alt={`Image ${index}`}
+                            className={`carousel-slide ${index === currentIndex ? 'active' : ''} `}
+                            />
+                        ))}
+                    </div>
+
                 </div>
             </div>
         </div>
