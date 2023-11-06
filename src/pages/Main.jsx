@@ -6,7 +6,6 @@ import Footer from "../partials/Footer";
 import { Link } from "react-router-dom";
 import '../css/MainCards.css'
 
-
 function Main() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [showDataListDiamante, setShowDataListDiamante] = useState(false);
@@ -262,8 +261,8 @@ function Main() {
                   </div>
                 </div>
               </div>
-              <div class="swiper-button-next"></div>
-              <div class="swiper-button-prev"></div>
+              <div className="swiper-button-next"></div>
+              <div className="swiper-button-prev"></div>
               <div className="swiper-pagination"/>
             </div>
             <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>

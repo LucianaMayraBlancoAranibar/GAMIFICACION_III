@@ -10,6 +10,7 @@ function ManagerEdit() {
   const { id } = useParams();
   const [idCareer, setIdCarrer] = useState("");
   const [idAcademicUnity, setIdAcademicUnity] = useState("");
+  const [serverError, setServerError] = useState("");
   const [userManager, setUserManager] = useState({
     email: "",
     rol: "",
@@ -152,7 +153,11 @@ function ManagerEdit() {
         console.log(response);
       })
       .catch((error) => {
-        console.log(error);
+        if (error.response && error.response.data) {
+          setServerError(error.response.data);
+        } else {
+          setServerError("Error al registrar el gestor.");
+        }
       });
     }
   };
@@ -225,6 +230,7 @@ function ManagerEdit() {
                 />
                 {emailError && (
                   <p className="text-red-500">{emailError}</p>)}
+                {serverError && <p className="text-red-500">{serverError}</p>}
                 <br />
                 <label
                   className="text-gray-900 dark:text-gray-900"
