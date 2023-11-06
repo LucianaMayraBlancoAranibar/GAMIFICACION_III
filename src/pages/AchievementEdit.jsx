@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import Sidebar from "../partials/Sidebar";
 import Header from "../partials/Header";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import ModalConfirmacion from "../partials/ModalConfirmacion";
 
-function AchievementForm() {
+function AchievementEdit() {
+  const { id } = useParams();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [formData, setFormData] = useState({
     NameAchievemt: "",
@@ -14,7 +15,7 @@ function AchievementForm() {
     IdTypeAchievement: 0,
   });
   const [achievementTypes, setAchievementTypes] = useState([]);
-  const [errors, setErrors] = useState({}); 
+  const [errors, setErrors] = useState({});
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   useEffect(() => {
@@ -25,12 +26,25 @@ function AchievementForm() {
       .catch((error) => {
         console.error("Error al obtener tipos de logro:", error);
       });
-  }, []);
+
+    Axios.get(`https://localhost:7187/api/Achievements/${id}`)
+      .then((response) => {
+        const achievementData = response.data;
+        setFormData({
+          NameAchievemt: achievementData.nameAchievemt || "",
+          Punctuation: achievementData.punctuation || 0,
+          ProjectName: achievementData.projectName || "",
+          IdTypeAchievement: achievementData.idTypeAchievement || 0,
+        });
+      })
+      .catch((error) => {
+        console.error("Error al obtener los datos del logro:", error);
+      });
+  }, [id]);
 
   function handleSubmit(event) {
     event.preventDefault();
 
-   
     const validationErrors = {};
 
     if (!formData.NameAchievemt) {
@@ -42,25 +56,26 @@ function AchievementForm() {
     if (formData.Punctuation <= 0) {
       validationErrors.Punctuation = "La puntuación debe ser mayor que cero.";
     }
-
     if (formData.IdTypeAchievement <= 0) {
       validationErrors.IdTypeAchievement =
         "Debes seleccionar un tipo de logro.";
     }
 
     if (Object.keys(validationErrors).length > 0) {
-   
+    
       setErrors(validationErrors);
       return;
     }
 
-    // Si no hay errores, continuar con el envío del formulario
-    Axios.post("https://localhost:7187/api/Achievements", formData)
+    Axios.put(`https://localhost:7187/api/Achievements/${id}`, formData)
       .then((response) => {
-        console.log("Logro creado con éxito:", response.data);
+        console.log("Logro actualizado con éxito:", response.data);
+        setModalIsOpen(true);
+     
       })
       .catch((error) => {
-        console.error("Error al crear el logro:", error);
+        console.error("Error al actualizar el logro:", error);
+      
       });
   }
 
@@ -68,11 +83,12 @@ function AchievementForm() {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
 
-   
+  
     if (errors[name]) {
       setErrors({ ...errors, [name]: undefined });
     }
   }
+
   function closeModal() {
     setModalIsOpen(false);
   }
@@ -85,7 +101,7 @@ function AchievementForm() {
         <div className="relative p-4 sm:p-6 rounded-sm overflow-hidden mb-8">
           <div className="relative">
             <h1 className="text-2xl md:text-3xl text-slate-800 dark:text-slate-100 font-bold mb-1">
-              Nuevo Logro
+              Editar Logro
             </h1>
           </div>
           <br></br>
@@ -182,7 +198,7 @@ function AchievementForm() {
                   className="px-10 py-5 leading-5 text-white transition-colors duration-200 transform bg-gray-800 rounded-md hover:bg-gray-700 focus:outline-none focus:bg-gray-600"
                   type="submit"
                 >
-                  Registrar
+                  Actualizar
                 </button>
               </div>
             </div>
@@ -197,4 +213,4 @@ function AchievementForm() {
   );
 }
 
-export default AchievementForm;
+export default AchievementEdit;

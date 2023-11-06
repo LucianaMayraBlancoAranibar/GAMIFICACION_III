@@ -5,16 +5,17 @@ import Sidebar from "../partials/Sidebar";
 import Header from "../partials/Header";
 import ModalConfirmacion from "../partials/ModalConfirmacion";
 
-function FacultadEdit() {
+function FacultyEdit() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { id } = useParams();
+  const [errors, setErrors] = useState({ facultyName: "" }); 
   const [facultad, setFacultad] = useState({
     facultyName: "",
   });
 
   useEffect(() => {
     axios
-      .get(`https://localhost:7220/api/Faculties/${id}`)
+      .get(`https://localhost:7187/api/Faculties/${id}`)
       .then((response) => {
         setFacultad(response.data);
       })
@@ -29,19 +30,30 @@ function FacultadEdit() {
       ...prevFacultad,
       [name]: value,
     }));
+
+    if (name === "facultyName" && value.length > 75) {
+      setErrors({ ...errors, facultyName: "El nombre de la facultad no debe exceder los 75 caracteres." });
+    } else {
+      setErrors({ ...errors, facultyName: "" }); 
+    }
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // Crear un objeto con los datos en formato JSON
+
+    if (facultad.facultyName === "") {
+      setErrors({ facultyName: "Este campo es obligatorio." });
+      return; 
+    }
+
     const requestData = {
       idFaculty: id,
       facultyName: facultad.facultyName,
     };
 
     axios
-      .put(`https://localhost:7220/api/Faculties/${id}`, requestData, {
+      .put(`https://localhost:7218/api/Faculties/${id}`, requestData, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -53,6 +65,7 @@ function FacultadEdit() {
         console.log(error);
       });
   };
+
   function closeModal() {
     setModalIsOpen(false);
   }
@@ -81,20 +94,21 @@ function FacultadEdit() {
                 <input
                   type="text"
                   name="facultyName"
-                  className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                  className={`block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring ${errors.facultyName && "border-red-500"}`} 
                   value={facultad.facultyName}
                   onChange={handleInputChange}
                 />
+                {errors.facultyName && <p className="text-red-500">{errors.facultyName}</p>} {/* Muestra el mensaje de error */}
               </div>
               <br></br>
               <div className="flex justify-left">
                 <button
-                  className="px-10 py-5 leading-5 text-white transition-colors duration-200 transform bg-gray-800 rounded-md hover:bg-gray-700 focus:outline-none focus:bg-gray-600"
+                  className="px-10 py-5 leading-5 text-white transition-colors duration-200 transform bg-gray-800 rounded-md hover-bg-gray-700 focus:outline-none focus:bg-gray-600"
                   type="submit"
+                  disabled={!!errors.facultyName} // Deshabilita el botón si hay errores
                 >
                   Guardar Cambios
                 </button>
-                
               </div>
               <br></br>
               <br></br>
@@ -107,4 +121,4 @@ function FacultadEdit() {
   );
 }
 
-export default FacultadEdit;
+export default FacultyEdit;
