@@ -1,48 +1,32 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import Sidebar from "../partials/Sidebar";
-import Header from "../partials/Header";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Carousel } from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
-const Carousel = ({ images }) => {
-    const [currentIndex, setCurrentIndex] = useState(0);
+const CarouselComponent = () => {
+    const images = [
+      'https://www.boliviaentusmanos.com/amarillas1/businesscard/imagenes/univalle1.jpg',
+      'https://www.boliviaentusmanos.com/amarillas1/businesscard/imagenes/univalle4.jpg',
+      'https://4.bp.blogspot.com/-qLFmJSQYXDQ/TskgOVGYpzI/AAAAAAAAAB0/rOQFFiIqiTo/s1600/univalle02.jpg',
+      // Agrega las URLs de tus imágenes
+    ];
   
-    useEffect(() => {
-      const interval = setInterval(() => {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-      }, 3000); // Cambia de imagen cada 3 segundos (ajusta el intervalo según tus necesidades)
-  
-      return () => {
-        clearInterval(interval);
-      };
-    }, [images]);
-}
-
-function Carrusel() {
-
     return (
-        <div className="flex h-screen overflow-hidden">
-            <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-            <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
-                <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-                <div className="relative p-4 sm:p-6 rounded-sm overflow-hidden mb-8">
-                    <h1 className="text-2xl font-semibold mb-4">Carrusel</h1>
-
-                    <div className="carusel-container">
-                        {images.map((image, index) => (
-                            <img
-                            key={index}
-                            src={image}
-                            alt={`Image ${index}`}
-                            className={`carousel-slide ${index === currentIndex ? 'active' : ''} `}
-                            />
-                        ))}
-                    </div>
-
-                </div>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <Carousel
+          autoPlay
+          showStatus={false}
+          showThumbs={false}
+          infiniteLoop
+          interval={3000}
+        >
+          {images.map((image, index) => (
+            <div key={index}>
+              <img src={image} alt={`Image ${index}`} />
             </div>
-        </div>
+          ))}
+        </Carousel>
+      </div>
     );
-
-}
-export default Carrusel();
+  };
+  
+  export default CarouselComponent;

@@ -289,28 +289,12 @@ function EstudianteForm() {
                   id="idRank"
                   className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                   value={idRank}
-                  onChange={(e) => setRank(e.target.value)}
+                  onChange={(e) => setIdRank(e.target.value)}
                 />
-                <br/>
-                {idRank.length === 0? (
-                  <p>Cargando datos...</p>
-                ) : (
-                  <select 
-                    id="idRank"
-                    className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                    value={idRank}
-                    onChange={(e) => {setIdRank(e.target.value);}}>
-                      <option value="">Selecction academia</option>
-                      {Rank.map((Rank) => (
-                        <option 
-                          key={Rank.idRank}
-                          value={Rank.idRank}>
-                            {Rank.rankName}</option>
-                      ))}
-                  </select>
-                )} 
                 {idRankError && (
-                  <p className="text-red-500">{idRankError}</p>)}
+                  <p className="text-red-500">{idRankError}</p>
+                )}
+
                                 
                 <br />
                 <label
@@ -347,10 +331,10 @@ function EstudianteForm() {
                     value={idAcademicUnity}
                     onChange={(e) => {setidAcademicUnity(e.target.value);}}>
                       <option value="">Selecction academia</option>
-                      {UnidadAcademica.map((UnidadAcademica) => (
+                      {idAcademicUnity.map((UnidadAcademica) => (
                         <option 
-                          key={UnidadAcademica.idAcademicUnity}
-                          value={UnidadAcademica.idAcademicUnity}>{UnidadAcademica.idAcademicUnity}</option>
+                          key={idAcademicUnity.UnidadAcademica}
+                          value={idAcademicUnity.UnidadAcademica}>{idAcademicUnity.UnidadAcademica}</option>
                       ))}
                   </select>
                 )}
