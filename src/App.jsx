@@ -27,6 +27,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import Login from "./pages/login";
 import BadgeTable from "./pages/BadgeTable";
+import BadgeStudent from "./pages/BadgeStudent";
 
 function ScrollToTopOnRouteChange() {
   useEffect(() => {
@@ -96,6 +97,7 @@ function App() {
           <Route path="/RankForm" element={<ProtectedElement allowedRoles={[1]} element={<RankForm />} />} />
           <Route path="/RankTable" element={<ProtectedElement allowedRoles={[1]} element={<RankTable />} />} />
           <Route path="/BadgeForm" element={<ProtectedElement allowedRoles={[1]} element={<BadgeForm />} />} />
+          <Route path="/BadgeStudent" element={<ProtectedElement allowedRoles={[1]} element={<BadgeStudent />} />} />
           <Route path="/BadgeTable" element={<BadgeTable />} />
           <Route path="/StudentAchievement" element={<ProtectedElement allowedRoles={[1,2]} element={<StudentAchievement />} />} />
 
