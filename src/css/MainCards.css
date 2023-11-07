@@ -142,4 +142,12 @@
     letter-spacing: 1px;
     padding-bottom: 1rem;
   }
+
+  .fontSizeRank {
+    font-size: 12px;
+  }
+
+  .fontSizeSubrank {
+    font-size: 12px;
+  }
 }

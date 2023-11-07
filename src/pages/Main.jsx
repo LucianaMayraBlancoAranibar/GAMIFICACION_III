@@ -79,92 +79,92 @@ function Main() {
             <button className="font-bold	text-xl	pt-2 w-2/12 h-24 bg-gradient-to-t from-cyan-300 to-blue-500 shadow rounded flex justify-center items-center"
               onClick={() => toggleDataList("DIAMANTE")}
             >
-              DIAMANTE
+              <p className="fontSizeRank">DIAMANTE</p>
             </button>
             {showDataListDiamante && (
               <div className="bg-cyan-300 w-2/12 shadow rounded p-4 text-center text-white fade-in">
-                <div className="py-2">
+                <div className="py-2 fontSizeSubrank">
                   <a href="#">Rango 1</a>
                 </div>
-                <div className="py-2">
+                <div className="py-2 fontSizeSubrank">
                   <a href="#">Rango 2</a>
                 </div>
-                <div className="py-2">
+                <div className="py-2 fontSizeSubrank">
                   <a href="#">Rango 3</a>
                 </div>
               </div>
             )}
-            <button className="font-bold	text-xl	mt-2  w-4/12 h-24 bg-gradient-to-t from-cyan-200 to-gray-200 shadow rounded flex justify-center items-center"
+            <button className="font-bold fontSizeRank text-xl	mt-2  w-4/12 h-24 bg-gradient-to-t from-cyan-200 to-gray-200 shadow rounded flex justify-center items-center"
               onClick={() => toggleDataList("PLATINO")}>
-              PLATINO
+              <p className="fontSizeRank">PLATINO</p>
             </button>
             {showDataListPlatino && (
               <div className="bg-cyan-200 w-4/12 shadow rounded p-4 text-center text-white fade-in">
-                <div className="py-2">
+                <div className="py-2 fontSizeSubrank">
                   <a href="#">Rango 1</a>
                 </div>
-                <div className="py-2">
+                <div className="py-2 fontSizeSubrank">
                   <a href="#">Rango 2</a>
                 </div>
-                <div className="py-2">
+                <div className="py-2 fontSizeSubrank">
                   <a href="#">Rango 3</a>
                 </div>
               </div>
             )}
-            <button className="font-bold	text-xl	 mt-2  w-6/12 h-24 bg-gradient-to-t from-yellow-400 to-yellow-200 shadow rounded flex justify-center items-center"
+            <button className="font-bold fontSizeRank text-xl	 mt-2  w-6/12 h-24 bg-gradient-to-t from-yellow-400 to-yellow-200 shadow rounded flex justify-center items-center"
               onClick={() => toggleDataList("ORO")}>
-              ORO
+              <p className="fontSizeRank">ORO</p>
             </button>
             {showDataListOro && (
               <div className="bg-yellow-400 w-6/12 shadow rounded p-4 text-center text-white	fade-in">
-                <div className="py-2">
+                <div className="py-2 fontSizeSubrank">
                   <a href="#">Rango 1</a>
                 </div>
-                <div className="py-2">
+                <div className="py-2 fontSizeSubrank">
                   <a href="#">Rango 2</a>
                 </div>
-                <div className="py-2">
+                <div className="py-2 fontSizeSubrank">
                   <a href="#">Rango 3</a>
                 </div>
               </div>
             )}
-            <button className="font-bold	text-xl	 mt-2  w-8/12 h-24 bg-gradient-to-t from-gray-400 to-gray-200 shadow rounded flex justify-center items-center"
+            <button className="font-bold fontSizeRank text-xl	 mt-2  w-8/12 h-24 bg-gradient-to-t from-gray-400 to-gray-200 shadow rounded flex justify-center items-center"
               onClick={() => toggleDataList("PLATA")}>
-              PLATA
+              <p className="fontSizeRank">PLATA</p>
             </button>
             {showDataListPlata && (
               <div className="bg-gray-400 w-8/12 shadow rounded p-4 text-center text-white fade-in">
-                <div className="py-2">
+                <div className="py-2 fontSizeSubrank">
                   <a href="#">Rango 1</a>
                 </div>
-                <div className="py-2">
+                <div className="py-2 fontSizeSubrank">
                   <a href="#">Rango 2</a>
                 </div>
-                <div className="py-2">
+                <div className="py-2 fontSizeSubrank">
                   <a href="#">Rango 3</a>
                 </div>
               </div>
             )}
-            <button className="font-bold	text-xl	 mt-2  w-10/12 h-24 bg-gradient-to-t from-amber-600 to-amber-700 shadow rounded flex justify-center items-center"
+            <button className="font-bold fontSizeRank text-xl	 mt-2  w-10/12 h-24 bg-gradient-to-t from-amber-600 to-amber-700 shadow rounded flex justify-center items-center"
               onClick={() => toggleDataList("BRONCE")}>
-              BRONCE
+              <p className="fontSizeRank">BRONCE</p>
             </button>
             {showDataListBronce && (
               <div className="bg-amber-600 w-10/12 shadow rounded p-4 text-center text-white fade-in">
-                <div className="py-2">
+                <div className="py-2 fontSizeSubrank">
                   <a href="#">Rango 1</a>
                 </div>
-                <div className="py-2">
+                <div className="py-2 fontSizeSubrank">
                   <a href="#">Rango 2</a>
                 </div>
-                <div className="py-2">
+                <div className="py-2 fontSizeSubrank">
                   <a href="#">Rango 3</a>
                 </div>
               </div>
             )}
           </div>
 
-          <h1 className="text-4xl font-semibold px-4 pt-12">Participa y sube de rango</h1>
+          <h1 className="text-4xl font-semibold px-4 pt-12 pb-6">Participa y sube de rango</h1>
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
             <div className="swiper mySwiper">
               <div className="containerCarrousel">
