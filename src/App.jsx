@@ -26,6 +26,7 @@ import { AuthProvider } from "./AuthContext";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import Login from "./pages/login";
+import ChangePasswordForm from "./pages/ChangePasswordForm ";
 import BadgeTable from "./pages/BadgeTable";
 import BadgeStudent from "./pages/BadgeStudent";
 import DepartamentoEdit from "./pages/DepartamentoEdit";
@@ -107,7 +108,7 @@ function App() {
           <Route path="/StudentAchievement" element={<ProtectedElement allowedRoles={[1,2]} element={<StudentAchievement />} />} />
 
           <Route path="/LoginPage" element={<LoginPage />} />
-          <Route path="/Login" element={<Login/>} />
+          <Route path="/ChangePasswordForm" element={<ProtectedElement allowedRoles={[1, 2,3]} element={<ChangePasswordForm />}/>}/>
           <Route path="/ForgotPassword" element={<ForgotPassword />} />
           <Route path="/ResetPassword" element={<ResetPassword />} />
         </Routes>

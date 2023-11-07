@@ -27,7 +27,7 @@ function ModalConfirmacion({ isOpen, closeModal }) {
       <div className="bg-white rounded-md p-6">
         <div className="text-center">
           <h2 className="text-lg font-semibold mb-2">
-            Facultad creada con éxito
+            Creado con éxito
           </h2>
           <FontAwesomeIcon
             icon={faCheckCircle}
