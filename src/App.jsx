@@ -28,6 +28,9 @@ import ResetPassword from "./pages/ResetPassword";
 import Login from "./pages/login";
 import BadgeTable from "./pages/BadgeTable";
 import BadgeStudent from "./pages/BadgeStudent";
+import DepartamentoEdit from "./pages/DepartamentoEdit";
+import DepartamentoForm from "./pages/DepartamentoForm";
+import DepartamentoTable from "./pages/DepartamentoTable";
 
 function ScrollToTopOnRouteChange() {
   useEffect(() => {
@@ -83,8 +86,6 @@ function App() {
           <Route path="/FacultadTable" element={<ProtectedElement allowedRoles={[1]} element={<FacultadTable />} />}/>
           <Route path="/SanctionForm" element={<ProtectedElement allowedRoles={[1, 2]} element={<SanctionForm />}/>}/>
           <Route path="/SanctionTable" element={<ProtectedElement allowedRoles={[1, 2]} element={<SanctionTable/>}/>}/>
-          {/* <Route path="/BadgeForm" element={<BadgeForm />} /> */}
-          {/* <Route path="/FacultadTable" element={<FacultadTable />} /> */}
           <Route path="/FacultadEdit/:id" element={ <ProtectedElement allowedRoles={[1]} element={<FacultadEdit />} />} />
           <Route path="/TypeAchievementTable" element={<ProtectedElement allowedRoles={[1]} element={<TypeAchievementTable />} />}
           />
@@ -94,8 +95,12 @@ function App() {
             path="/TypeAchievementEdit/:id"
             element={<ProtectedElement allowedRoles={[1]} element={<TypeAchievementEdit />} />}
           />
-          <Route path="/RankForm" element={<ProtectedElement allowedRoles={[1]} element={<RankForm />} />} />
-          <Route path="/RankTable" element={<ProtectedElement allowedRoles={[1]} element={<RankTable />} />} />
+          <Route path="/DepartamentoForm" element={<ProtectedElement allowedRoles={[1]} element={<DepartamentoForm />} />} />
+          <Route path="/DepartamentoEdit" element={<ProtectedElement allowedRoles={[1]} element={<DepartamentoEdit />} />} />
+          <Route path="/DepartamentoTable" element={<ProtectedElement allowedRoles={[1]} element={<DepartamentoTable/>} />} />
+
+          <Route path="/RankForm" element={<ProtectedElement allowedRoles={[1]} element={<DepartamentoTable />} />} />
+          <Route path="/RankTable" element={<ProtectedElement allowedRoles={[1]} element={<RankTable/>} />} />
           <Route path="/BadgeForm" element={<ProtectedElement allowedRoles={[1]} element={<BadgeForm />} />} />
           <Route path="/BadgeStudent" element={<ProtectedElement allowedRoles={[1]} element={<BadgeStudent />} />} />
           <Route path="/BadgeTable" element={<BadgeTable />} />
