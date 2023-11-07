@@ -48,7 +48,7 @@ function TypeAchievementTable() {
       <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
       <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
         <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-        <div className="relative p-4 sm:p-6 rounded-sm overflow-hidden mb-8">
+        <div className="relative p-4 sm:p-6 rounded-sm mb-8">
           <h1 className="text-2xl font-semibold mb-4">Lista de Tipos Logros</h1>
           <div className="mr-10 grid grid-flow-col sm:auto-cols-max justify-start sm:justify-end gap-2">
             <Link to="/TypeAchievementForm">

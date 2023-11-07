@@ -59,7 +59,7 @@ function TypeAchievementForm() {
         console.log("Respuesta de la API:", response.data);
 
       } catch (error) {
-        // Manejar errores de la solicitud
+        
         console.error("Error al enviar la solicitud:", error.response);
 
       }

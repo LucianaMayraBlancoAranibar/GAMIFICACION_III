@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Select from 'react-select'; // Asegúrate de instalar react-select con npm install react-select
+import Select from 'react-select'; 
 
 const BadgeCreationForm = () => {
   const [badgeName, setBadgeName] = useState('');
@@ -8,12 +8,12 @@ const BadgeCreationForm = () => {
   const [tipoLogros, setTipoLogros] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  // Suponiendo que tengas una URL base para tu API
+
   const API_BASE_URL = "https://localhost:7205/api";
 
-  // Aquí debes cargar tus tipos de logro de la API o definirlos si son estáticos.
+
   useEffect(() => {
-    // Ejemplo de carga de los tipos de logro:
+ 
     const cargarTipoLogros = async () => {
       setLoading(true);
       try {
@@ -33,31 +33,30 @@ const BadgeCreationForm = () => {
     e.preventDefault();
     setLoading(true);
 
-    // Obtener el ID del usuario administrador desde el almacenamiento local.
+    
     const adminId = localStorage.getItem('userID');
 
     try {
       const response = await axios.post(`${API_BASE_URL}/Badges/CreateDefaults`, {
         AdministratorId: adminId,
         BadgeName: badgeName,
-        // Aquí se usa el operador ternario para enviar null si idTypeAchievement no está seleccionado
         IdTypeAchievement: idTypeAchievement ? idTypeAchievement.value : null,
       });
 
       console.log(response.data);
-      // Manejar la respuesta o redirigir al usuario.
+
     } catch (error) {
       console.error('Hubo un error al crear los badges');
   if (error.response) {
-    // La respuesta del servidor fue fuera de rango 2xx
+    
     console.error('Data:', error.response.data);
     console.error('Status:', error.response.status);
     console.error('Headers:', error.response.headers);
   } else if (error.request) {
-    // La solicitud fue hecha pero no se recibió respuesta
+  
     console.error('Request:', error.request);
   } else {
-    // Algo más causó un error
+    
     console.error('Error:', error.message);
   }
     } finally {
