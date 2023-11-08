@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./css/style.css";
 import "./charts/ChartjsConfig";
 import Dashboard from "./pages/Dashboard";
+import Menu from "./pages/Menu";
 import FacultadForm from "./pages/FacultyForm";
 import SucursalForm from "./pages/SucursalForm";
 import TypeAchievementForm from "./pages/TypeAchievementForm";
@@ -25,7 +26,7 @@ import NavigationGuard from "./utils/NavigationGuard";
 import { AuthProvider } from "./AuthContext";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
-import Login from "./pages/login";
+import StudentRankView from "./pages/StudentRankView";
 import ChangePasswordForm from "./pages/ChangePasswordForm ";
 import BadgeTable from "./pages/BadgeTable";
 import BadgeStudent from "./pages/BadgeStudent";
@@ -106,8 +107,9 @@ function App() {
           <Route path="/BadgeStudent" element={<ProtectedElement allowedRoles={[1]} element={<BadgeStudent />} />} />
           <Route path="/BadgeTable" element={<BadgeTable />} />
           <Route path="/StudentAchievement" element={<ProtectedElement allowedRoles={[1,2]} element={<StudentAchievement />} />} />
-
+          <Route path="/StudentRankView" element={<ProtectedElement allowedRoles={[3]} element={<StudentRankView />} />} />
           <Route path="/LoginPage" element={<LoginPage />} />
+          <Route path="/Menu" element={<Menu />} />
           <Route path="/ChangePasswordForm" element={<ProtectedElement allowedRoles={[1, 2,3]} element={<ChangePasswordForm />}/>}/>
           <Route path="/ForgotPassword" element={<ForgotPassword />} />
           <Route path="/ResetPassword" element={<ResetPassword />} />

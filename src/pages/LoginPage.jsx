@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { TEInput, TERipple } from "tw-elements-react";
+
 
 import { useAuth } from "../AuthContext";
 
@@ -58,7 +58,7 @@ function LoginComponent() {
         } else if (data.user.rol === 2) {
           navigate("/"); // Redirecciona al gestor
         } else if (data.user.rol === 3) {
-          navigate("/FacultyForm"); // Redirecciona al estudiante
+          navigate("/StudentRankView"); // Redirecciona al estudiante
         } else {
           setErrors({ form: "Rol no reconocido." });
         }
@@ -145,11 +145,13 @@ function LoginComponent() {
 
           <button
             onClick={handleLogin}
-            className="bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 text-white p-2 mb-4 w-full rounded-full shadow-md transition duration-200 transform hover:scale-105"
+            className={`bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 text-white p-2 mb-4 w-full rounded-full shadow-md transition duration-200 transform hover:scale-105 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
             disabled={loading}
           >
-            Iniciar sesión
+            {loading ? 'Iniciando sesión...' : 'Iniciar sesión'}
           </button>
+
+          {errors.form && <div className="text-red-500 text-center mt-2">{errors.form}</div>}
 
           <p className="text-xs mb-5 text-gray-500">
             <a

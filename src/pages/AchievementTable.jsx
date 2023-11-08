@@ -31,25 +31,23 @@ function AchievementTable() {
   
       if (achievementToDeleteIndex === -1) {
         console.error("Logro no encontrado");
-        setAchievementToDelete(null); // Restablecer el estado
+        setAchievementToDelete(null); 
         return;
       }
-  
-      // Realiza una solicitud DELETE a la API para eliminar el logro
+ 
       axios
         .delete(`https://localhost:7205/api/Achievements/${achievementToDelete}`)
         .then((response) => {
-          // Actualiza la lista de logros después de la eliminación
           setAchievements((prevAchievements) =>
             prevAchievements.filter(
               (achievement) => achievement.idAchievement !== achievementToDelete
             )
           );
-          setAchievementToDelete(null); // Restablece el estado
+          setAchievementToDelete(null); 
         })
         .catch((error) => {
           console.error(error);
-          setAchievementToDelete(null); // Restablece el estado en caso de error
+          setAchievementToDelete(null); 
         });
     }
   };

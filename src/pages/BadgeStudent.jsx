@@ -54,7 +54,7 @@ const AssignBadgeForm = () => {
 
     setLoading(true);
     try {
-      await axios.post(`${API_BASE_URL}/Badges/AssignInitialByName`, {
+      await axios.post(`${API_BASE_URL}/BadgeStudents/AssignInitialByName`, {
         StudentId: selectedStudent.value,
         BadgeName: selectedBadge.label,
       });
@@ -62,7 +62,18 @@ const AssignBadgeForm = () => {
       setSelectedStudent(null);
       setSelectedBadge(null);
     } catch (error) {
-      console.error("Error al asignar el badge:", error);
+      if (error.response) {
+        // La respuesta del servidor fue un error
+        console.error("Error data:", error.response.data);
+        console.error("Error status:", error.response.status);
+        console.error("Error headers:", error.response.headers);
+      } else if (error.request) {
+        // La solicitud fue hecha pero no hubo respuesta
+        console.error("Error request:", error.request);
+      } else {
+        // Algo sucedió al configurar la solicitud que disparó un error
+        console.error('Error message:', error.message);
+      }
       alert("Error al asignar el badge.");
     } finally {
       setLoading(false);
