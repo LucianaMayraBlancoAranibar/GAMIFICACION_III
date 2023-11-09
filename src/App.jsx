@@ -32,6 +32,7 @@ import CareerEdit from './pages/CareerEdit';
 import CarreraForm from './pages/CarreraForm';
 import Login from './pages/Login';
 import CarouselComponent from './pages/Carrusel';
+import NavbarCarrusel from './pages/navbarCarrusel';
 
 
 function ScrollToTopOnRouteChange() {
@@ -87,6 +88,7 @@ function App() {
         <Route path="/CarreraForm" element={<CarreraForm />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/Carrusel" element={<CarouselComponent/>} />
+        <Route path="/navbarCarrusel" element={<NavbarCarrusel/>} />
 
       </Routes>
     </Router>

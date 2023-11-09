@@ -5,13 +5,15 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 const Carrusel = () => {
   const images = [
-    'https://www.boliviaentusmanos.com/amarillas1/businesscard/imagenes/univalle1.jpg',
-    'https://www.boliviaentusmanos.com/amarillas1/businesscard/imagenes/univalle4.jpg',
-    'https://4.bp.blogspot.com/-qLFmJSQYXDQ/TskgOVGYpzI/AAAAAAAAAB0/rOQFFiIqiTo/s1600/univalle02.jpg',
+    'https://previews.123rf.com/images/kalenka8/kalenka82110/kalenka8211000001/175432762-paisaje-de-verano-verde-horizontal-con-hierba-fondo-de-primavera-id%C3%ADlico-y-soleado-con-prados.jpg',
+    'https://previews.123rf.com/images/vertyr/vertyr1506/vertyr150600008/41609231-ilustraci%C3%B3n-de-dibujos-animados-horizontal-del-valle-con-cactus-y-monta%C3%B1as-en-el-fondo-de-tono.jpg',
+    'https://previews.123rf.com/images/vladsogodel/vladsogodel1511/vladsogodel151100002/48690793-sol-naciente-en-un-fondo-de-las-monta%C3%B1as-horizontal-colorido-paisaje-de-la-naturaleza-en-la.jpg',
     // Agrega las URLs de tus imágenes
   ];
 
   return (
+    
+
     <div style={{ position: 'relative', height: '100vh' }}>
       <Carousel
         autoPlay // Habilita la reproducción automática
