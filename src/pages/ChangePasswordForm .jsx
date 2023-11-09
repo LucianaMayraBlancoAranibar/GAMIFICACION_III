@@ -2,139 +2,98 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 const ChangePasswordForm = () => {
+  // Estado para almacenar las entradas del usuario
   const [inputs, setInputs] = useState({
-    currentPassword: '',
+    oldPassword: '',
     newPassword: '',
-    confirmPassword: ''
+    confirmNewPassword: ''
   });
-  const [errors, setErrors] = useState({});
+  // Estado para almacenar mensajes de error o éxito
+  const [message, setMessage] = useState({ error: '', success: '' });
 
+  // Manejador para los cambios en los inputs
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setInputs({ ...inputs, [name]: value });
   };
 
-  const validateForm = () => {
-    let isValid = true;
-    let errors = {};
-
-    if (!inputs.currentPassword) {
-      isValid = false;
-      errors['currentPassword'] = 'Please enter your current password.';
-    }
-
-    const passwordRegex = {
-      lowerCase: new RegExp('(?=.*[a-z])'),
-      upperCase: new RegExp('(?=.*[A-Z])'),
-      number: new RegExp('(?=.*[0-9])'),
-      specialChar: new RegExp('(?=.*[!@#$%^&*])'),
-      minLength: new RegExp('(?=.{8,})') // Adjust the minimum length as needed
-    };
-
-    if (!inputs.newPassword) {
-      isValid = false;
-      errors['newPassword'] = 'Please enter your new password.';
-    } else {
-      if (!passwordRegex.lowerCase.test(inputs.newPassword)) {
-        isValid = false;
-        errors['newPassword'] = 'Password must include at least one lowercase letter.';
-      }
-      if (!passwordRegex.upperCase.test(inputs.newPassword)) {
-        isValid = false;
-        errors['newPassword'] = 'Password must include at least one uppercase letter.';
-      }
-      if (!passwordRegex.number.test(inputs.newPassword)) {
-        isValid = false;
-        errors['newPassword'] = 'Password must include at least one number.';
-      }
-      if (!passwordRegex.specialChar.test(inputs.newPassword)) {
-        isValid = false;
-        errors['newPassword'] = 'Password must include at least one special character (!@#$%^&*).';
-      }
-      if (!passwordRegex.minLength.test(inputs.newPassword)) {
-        isValid = false;
-        errors['newPassword'] = 'Password must be at least 8 characters long.';
-      }
-    }
-
-    if (inputs.newPassword !== inputs.confirmPassword) {
-      isValid = false;
-      errors['confirmPassword'] = 'The new passwords do not match.';
-    }
-
-    setErrors(errors);
-    return isValid;
-};
-
-const handleSubmit = async (event) => {
+  // Manejador para el envío del formulario
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    if (!validateForm()) {
+    // Restablece los mensajes
+    setMessage({ error: '', success: '' });
+
+    // Validación básica en el frontend
+    if (inputs.newPassword !== inputs.confirmNewPassword) {
+      setMessage({ error: 'Las contraseñas nuevas no coinciden.', success: '' });
       return;
     }
 
-    const userID = localStorage.getItem("userID");
+    // Obtiene el email del usuario almacenado, por ejemplo, durante el inicio de sesión
+    const userEmail = localStorage.getItem("userEmail");
 
-    if (!userID) {
-      // Handle the case where userID is not set, which could indicate the user is not logged in
-      console.error("No user ID found in local storage. User might not be logged in.");
+    if (!userEmail) {
+      setMessage({ error: 'No se encontró el correo electrónico del usuario.', success: '' });
       return;
     }
 
     try {
-      // Replace with your API endpoint
-      const endpoint = 'https://localhost:7205/api/Usuarios/api/users/change-password';
-      const payload = {
-        userId: userID,
-        currentPassword: inputs.currentPassword,
-        newPassword: inputs.newPassword
-      };
-      const response = await axios.post(endpoint, payload);
-      // Handle the response accordingly
-      console.log(response.data);
-      // Clear the form or provide further user feedback
+      // Llamada a la API para cambiar la contraseña
+      const response = await axios.post('https://localhost:7205/api/Usuarios/api/users/change-password', {
+        Email: userEmail,
+        OldPassword: inputs.oldPassword,
+        NewPassword: inputs.newPassword,
+        ConfirmNewPassword: inputs.confirmNewPassword
+      });
+
+      // Si todo va bien, actualiza el mensaje de éxito
+      setMessage({ error: '', success: 'Contraseña actualizada con éxito.' });
+      // Opcional: limpia los inputs o redirige al usuario
     } catch (error) {
-      // Handle errors such as incorrect current password, etc.
-      console.error(error);
+      // Actualiza el mensaje de error; podrías personalizar el mensaje basado en la respuesta de la API
+      setMessage({ error: error.response.data, success: '' });
     }
-};
+  };
 
+  // Formulario JSX
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>Current Password</label>
-        <input
-          type="password"
-          name="currentPassword"
-          value={inputs.currentPassword}
-          onChange={handleInputChange}
-        />
-        {errors.currentPassword && <p>{errors.currentPassword}</p>}
-      </div>
-
-      <div>
-        <label>New Password</label>
-        <input
-          type="password"
-          name="newPassword"
-          value={inputs.newPassword}
-          onChange={handleInputChange}
-        />
-        {errors.newPassword && <p>{errors.newPassword}</p>}
-      </div>
-
-      <div>
-        <label>Confirm New Password</label>
-        <input
-          type="password"
-          name="confirmPassword"
-          value={inputs.confirmPassword}
-          onChange={handleInputChange}
-        />
-        {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
-      </div>
-
-      <button type="submit">Change Password</button>
-    </form>
+    <div>
+      {message.error && <p className="error">{message.error}</p>}
+      {message.success && <p className="success">{message.success}</p>}
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>Contraseña Actual:</label>
+          <input
+            type="password"
+            name="oldPassword"
+            value={inputs.oldPassword}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
+        <div>
+          <label>Nueva Contraseña:</label>
+          <input
+            type="password"
+            name="newPassword"
+            value={inputs.newPassword}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
+        <div>
+          <label>Confirmar Nueva Contraseña:</label>
+          <input
+            type="password"
+            name="confirmNewPassword"
+            value={inputs.confirmNewPassword}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
+        <button type="submit">Cambiar Contraseña</button>
+      </form>
+    </div>
   );
 };
 

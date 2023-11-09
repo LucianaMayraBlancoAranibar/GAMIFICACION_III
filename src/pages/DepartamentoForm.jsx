@@ -1,4 +1,5 @@
 
+
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Sidebar from "../partials/Sidebar";
@@ -17,7 +18,7 @@ function DepartamentoForm() {
 
   useEffect(() => {
     axios
-      .get("https://localhost:7220/api/Faculties")
+      .get("https://localhost:7205/api/Faculties")
       .then((response) => {
         console.log(response.data); // Verifica los datos que obtienes
         setFacultad(response.data);
@@ -63,7 +64,7 @@ function DepartamentoForm() {
 
       try {
         const response = await axios.post(
-          "https://localhost:7220/api/Departments",
+          "https://localhost:7205/api/Departments",
           data
         );
 

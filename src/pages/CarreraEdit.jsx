@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
@@ -6,38 +7,38 @@ import Header from "../partials/Header";
 
 import ModalConfirmacion from "../partials/ModalConfirmacion";
 
-function DepartamentoEdit() {
+function CarreraEdit() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { id } = useParams();
-  const [idFaculty, setidFaculty] = useState("");
-  const [departamento, setDepartamento] = useState({
-    DepartmentName: "",
-    IdFaculty: "",
+  const [idDepartment, setidDepartment] = useState("");
+  const [carrera, setcarrera] = useState({
+    CareersName: "",
+    idDepartment: "",
   });
-  const [Facultad, setFacultad] = useState("");
-  const [departmentNameError, setDepartmentNameError] = useState("");
+  const [Usuario, setUsuario] = useState("");
+  const [CareersNameError, setCareersNameError] = useState("");
 
   const validateForm = () => {
     let isValid = true;
 
-    if (!departamento.DepartmentName) {
-      setDepartmentNameError("El nombre del departamento es obligatorio");
+    if (!carrera.CareersName) {
+      setCareersNameError("El nombre del carrera es obligatorio");
       isValid = false;
-    } else if (departamento.DepartmentName.length < 3 || departamento.DepartmentName.length > 15) {
-      setDepartmentNameError("El nombre del departamento debe tener entre 3 y 15 caracteres");
+    } else if (carrera.CareersName.length < 3 || carrera.CareersName.length > 15) {
+      setCareersNameError("El nombre del carrera debe tener entre 3 y 15 caracteres");
       isValid = false;
     } else {
-      setDepartmentNameError("");
+      setCareersNameError("");
     }
     return isValid;
   };
 
   useEffect(() => {
     axios
-      .get(`https://localhost:7205/api/Departments/${id}`)
+      .get(`https://localhost:7205/api/Careers/${id}`)
       .then((response) => {
-        setDepartamento(response.data);
-        setidFaculty(response.data.IdFaculty);
+        setcarrera(response.data);
+        setidDepartment(response.data.idDepartment);
 
       })
       .catch((error) => {
@@ -45,10 +46,10 @@ function DepartamentoEdit() {
       });
     
       axios
-      .get("https://localhost:7205/api/Faculties")
+      .get("https://localhost:7205/api/Careers")
       .then((response) => {
         console.log(response.data); // Verifica los datos que obtienes
-        setFacultad(response.data);
+        setUsuario(response.data);
       })
       .catch((error) => {
         console.error(error); // Verifica si hay errores en la llamada a la API
@@ -57,11 +58,11 @@ function DepartamentoEdit() {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    if (name === "idFaculty") {
-      setidFaculty(value); // Actualiza idFaculty directamente
+    if (name === "idDepartment") {
+      setidDepartment(value); // Actualiza idDepartment directamente
     }
-    setDepartamento((prevDepartamento) => ({
-      ...prevDepartamento,
+    setcarrera((prevcarrera) => ({
+      ...prevcarrera,
       [name]: value,
     }));
   };
@@ -73,12 +74,12 @@ function DepartamentoEdit() {
     // Crear un objeto con los datos en formato JSON
     const requestData = {
       idDepartment: id,
-      departmentName: departamento.DepartmentName,
-      idFaculty: idFaculty,
+      CareersName: carrera.CareersName,
+      idDepartment: idDepartment,
     };
 
     axios
-      .put(`https://localhost:7205/api/Departments/${id}`, requestData, {
+      .put(`https://localhost:7205/api/Careers/${id}`, requestData, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -103,7 +104,7 @@ function DepartamentoEdit() {
         <div className="relative p-4 sm:p-6 rounded-sm overflow-hidden mb-8">
           <div className="relative">
             <h1 className="text-2xl md:text-3xl text-slate-800 dark:text-slate-100 font-bold mb-1">
-              Editar departamento{" "}
+              Editar carrera{" "}
             </h1>
           </div>
           <br></br>
@@ -114,17 +115,17 @@ function DepartamentoEdit() {
                   htmlFor="editSucursalName"
                   className="text-gray-900 dark:text-gray-900"
                 >
-                  Nuevo nombre de departamento
+                  Nuevo nombre de carrera
                 </label>
                 <input
                   type="text"
-                  name="DepartmentName"
+                  name="CareersName"
                   className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                  value={departamento.DepartmentName}
+                  value={carrera.CareersName}
                   onChange={handleInputChange}
                 />
-                {departmentNameError && (
-                  <p className="text-red-500">{departmentNameError}</p>)}
+                {CareersNameError && (
+                  <p className="text-red-500">{CareersNameError}</p>)}
                 <br />
                 <label
                   htmlFor="editSucursalName"
@@ -132,21 +133,21 @@ function DepartamentoEdit() {
                 >
                   Nueva carrera
                 </label>
-                {Facultad.length === 0 ? (
+                {Usuario.length === 0 ? (
                   <p>Cargando datos...</p>
                 ) : (
                   <select
-                    id="idFaculty"
+                    id="idDepartment"
                     className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                    value={idFaculty}
-                    onChange={(e) => setidFaculty(e.target.value)}
+                    value={idDepartment}
+                    onChange={(e) => setidDepartment(e.target.value)}
                   >
-                    {Facultad.map((facultad) => (
+                    {Usuario.map((Usuario) => (
                       <option
-                        key={facultad.idFaculty}
-                        value={facultad.idFaculty}
+                        key={Usuario.idDepartment}
+                        value={Usuario.idDepartment}
                       >
-                        {facultad.facultyName}
+                        {Usuario.facultyName}
                       </option>
                     ))}
                   </select>
@@ -164,7 +165,7 @@ function DepartamentoEdit() {
               </div>
               <br></br>
               <br></br>
-              <Link to="/DepartamentoTable">Volver a la lista de sucursales</Link>
+              <Link to="/carreraTable">Volver a la lista de carrera</Link>
             </div>
           </form>
         </div>
@@ -173,4 +174,4 @@ function DepartamentoEdit() {
   );
 }
 
-export default DepartamentoEdit;
+export default CarreraEdit;

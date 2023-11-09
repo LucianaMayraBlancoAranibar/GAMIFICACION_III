@@ -50,8 +50,10 @@ function LoginComponent() {
         localStorage.setItem("token", data.token);
         localStorage.setItem("user", JSON.stringify(data.user));
         localStorage.setItem("userID", data.user.idUsuario);
+        localStorage.setItem("userEmail", data.user.email);
 
         setCurrentUser(data.user);
+        console.log('User email on load:', localStorage.getItem("userEmail"));
 
         if (data.user.rol === 1) {
           navigate("/"); // Redirecciona al admin

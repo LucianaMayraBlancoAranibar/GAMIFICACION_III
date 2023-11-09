@@ -33,6 +33,16 @@ import BadgeStudent from "./pages/BadgeStudent";
 import DepartamentoEdit from "./pages/DepartamentoEdit";
 import DepartamentoForm from "./pages/DepartamentoForm";
 import DepartamentoTable from "./pages/DepartamentoTable";
+//import CarreraEdit from "./pages/CarreraEdit"
+import CarreraForm from "./pages/CarreraForm"
+import CarreraTable from "./pages/CarreraTable"
+import StudentForm from "./pages/StudentForm"
+import StudentTable from "./pages/StudentTable"
+import StudentEdit from "./pages/StudentEdit"
+import ManagerForm from "./pages/ManagerForm"
+import ManagerTable from "./pages/ManagerTable"
+import ManagerEdit from "./pages/ManagerEdit"
+
 
 function ScrollToTopOnRouteChange() {
   useEffect(() => {
@@ -108,6 +118,12 @@ function App() {
           <Route path="/BadgeTable" element={<BadgeTable />} />
           <Route path="/StudentAchievement" element={<ProtectedElement allowedRoles={[1,2]} element={<StudentAchievement />} />} />
           <Route path="/StudentRankView" element={<ProtectedElement allowedRoles={[3]} element={<StudentRankView />} />} />
+          <Route path="/StudentForm" element={<ProtectedElement allowedRoles={[1]} element={<StudentForm />} />} />
+          <Route path="/StudentEdit/:id" element={<ProtectedElement allowedRoles={[1]} element={<StudentEdit />} />} />
+          <Route path="/StudentTable" element={<ProtectedElement allowedRoles={[1]} element={<StudentTable/>} />} />
+          <Route path="/ManagerForm" element={<ProtectedElement allowedRoles={[1]} element={<ManagerForm />} />} />
+          <Route path="/ManagerEdit/:id" element={<ProtectedElement allowedRoles={[1]} element={<ManagerEdit />} />} />
+          <Route path="/ManagerTable" element={<ProtectedElement allowedRoles={[1]} element={<ManagerTable/>} />} />
           <Route path="/LoginPage" element={<LoginPage />} />
           <Route path="/Menu" element={<Menu />} />
           <Route path="/ChangePasswordForm" element={<ProtectedElement allowedRoles={[1, 2,3]} element={<ChangePasswordForm />}/>}/>
