@@ -40,6 +40,9 @@ import Main from "./pages/Main";
 import UserBadges from "./pages/UserBadges";
 import UserSanction from "./pages/UserSanction";
 
+import StudentTable from "./pages/StudentTable";
+
+
 function ScrollToTopOnRouteChange() {
   useEffect(() => {
     const handleRouteChange = () => {
@@ -100,6 +103,9 @@ function App() {
         <Route path="/ViewTypeArchivement" element={<ViewTypeArchivement />} />
         <Route path="/BadgeTable" element={<BadgeTable />} />
         <Route path="/BadgeEdit/:id" element={<BadgeEdit />} />
+
+        <Route path="/StudentTable" element={<StudentTable />} />
+
       </Routes>
     </Router>
   );

@@ -12,7 +12,7 @@ function FacultyTable() {
   useEffect(() => {
    
     axios
-      .get("https://localhost:7187/api/Faculties")
+      .get("https://localhost:7220/api/Faculties")
       .then((response) => {
         console.log(response.data); 
         setFacultades(response.data);
