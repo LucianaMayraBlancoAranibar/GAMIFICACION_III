@@ -9,7 +9,8 @@ import ModalConfirmacion from "../partials/ModalConfirmacion";
 function EstudianteEdit() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { id } = useParams();
-  const [idUser, setidUser] = useState("");
+  const [idUser, setidUser] = useState("");  
+  const [Carrera, setCarrer] = useState("");
   const [estudiante, setEstudiante] = useState({
     score: "",
     idRank: "",
@@ -25,6 +26,15 @@ function EstudianteEdit() {
     idAcademicUnity: "",
   });
   const [StudentNameError, setStudentNameError] = useState("");
+  const [emailError, setemailError] = useState("");
+  const [passwordError, setpasswordError] = useState("");
+  const [firstNameError, setfirstNameError] = useState("");
+  const [lastNameError, setlastNameError] = useState("");
+  const [idAcademicUnityError, setidAcademicUnityError] = useState("");
+  const [idCareerError, setidCareerError] = useState("");
+  const [scoreError, setScoreError] = useState("");
+  const [idRankError, setRankError] = useState("");
+  const [existeEmail, setExisteEmail] = useState("");
 
   const validateForm = () => {
     let isValid = true;
@@ -38,6 +48,63 @@ function EstudianteEdit() {
     } else {
       setStudentNameError("");
     }
+
+    if (!estudiante.lastName) {
+      setlastNameError("El apellido es obligatorio");
+      isValid = false;
+    } else if (estudiante.lastName.length < 3 || estudiante.lastName.length > 25) {
+      isValid = false;
+    } else {
+      setlastNameError("");
+    }
+
+    if (!Usuario.email) {
+      setemailError("El email es obligatorio");
+      isValid = false;
+    } else {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(Usuario.email)) {
+        setemailError("El email no tiene un formato valido");
+        isValid = false;
+      } else if (existeEmail.includes(Usuario.email)) {
+        setemailError("El email ya existe");
+        isValid = false;
+      } else {
+        setemailError("");
+      }
+    }
+
+    if (!Usuario.password) {
+      setpasswordError("La contraseña es obligatorio");
+      isValid = false;
+    } else if (Usuario.password.length <= 6 || Usuario.password.length > 10) {
+      setpasswordError("La contraseña debe tener entre 6 y 10 caracteres");
+      isValid = false;
+    } else {
+      setpasswordError("");
+    }
+
+    if (!idCareer) {
+      setidCareerError("Debes seleccionar una carrera");
+      isValid = false;
+    } else {
+      setidCareerError("");
+    }
+
+    if (!estudiante.idRank) {
+      setRankError("Debes seleccionar un rank");
+      isValid = false;
+    } else {
+      setRankError("");
+    }
+
+    if (!Usuario.idAcademicUnity) {
+      setidAcademicUnityError("Debes seleccionar una carrera");
+      isValid = false;
+    } else {
+      setidAcademicUnityError("");
+    }
+
     return isValid;
   };
 
@@ -127,18 +194,20 @@ function EstudianteEdit() {
               <div>
                 <label
                   className="text-gray-900 dark:text-gray-900"
-                  htmlFor="firstName"
+                  htmlFor="estudiante.firstName"
                 >
                   Nombre del estudiante
                 </label>
                 <input
                   type="text"
-                  id="firstName"
+                  id="estudiante.firstName"
                   className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                  value={firstName}
-                  onChange={(e) => setfirstName(e.target.value)}
+                  value={estudiante.firstName}
+                  onChange={handleInputChange}
                 />
-
+                {StudentNameError && (
+                  <p className="text-red-500">{StudentNameError}</p>
+                )}
                 <br />
 
                 <label
@@ -151,10 +220,12 @@ function EstudianteEdit() {
                   type="text"
                   id="lastName"
                   className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                  value={lastName}
-                  onChange={(e) => setlastName(e.target.value)}
+                  value={estudiante.lastName}
+                  onChange={handleInputChange}
                 />
-
+                {lastNameError && (
+                  <p className="text-red-500">{lastNameError}</p>
+                )}
                 <br />
 
 
@@ -168,10 +239,12 @@ function EstudianteEdit() {
                   type="text"
                   id="email"
                   className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                  value={email}
-                  onChange={(e) => setemail(e.target.value)}
+                  value={Usuario.email}
+                  onChange={handleInputChange}
                 />
-
+                {emailError && (
+                  <p className="text-red-500">{emailError}</p>
+                )}
                 <br />
                 <label
                   className="text-gray-900 dark:text-gray-900"
@@ -183,9 +256,12 @@ function EstudianteEdit() {
                   type="password"
                   id="password"
                   className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                  value={password}
-                  onChange={(e) => setpassword(e.target.value)}
+                  value={Usuario.password}
+                  onChange={handleInputChange}
                 />
+                {passwordError && (
+                  <p className="text-red-500">{passwordError}</p>
+                )}
 
                 <br />
                 <label
@@ -198,10 +274,12 @@ function EstudianteEdit() {
                   type="text"
                   id="idRank"
                   className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                  value={idRank}
-                  onChange={(e) => setIdRank(e.target.value)}
+                  value={estudiante.idRank}
+                  onChange={handleInputChange}
                 />
-
+                {idRankError && (
+                  <p className="text-red-500">{idRankError}</p>
+                )}
                 <br />
                 <label
                   className="text-gray-900 dark:text-gray-900"
@@ -213,8 +291,8 @@ function EstudianteEdit() {
                   type="text"
                   id="score"
                   className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                  value={score}
-                  onChange={(e) => setScore(e.target.value)}
+                  value={estudiante.score}
+                  onChange={handleInputChange}
                 />
 
                 <br />
@@ -228,16 +306,19 @@ function EstudianteEdit() {
                   type="text"
                   id="idAcademicUnity"
                   className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                  value={idAcademicUnity}
-                  onChange={(e) => setidAcademicUnity(e.target.value)}
+                  value={Usuario.idAcademicUnity}
+                  onChange={handleInputChange}
                 />
+                {idAcademicUnityError && (
+                  <p className="text-red-500">{idAcademicUnityError}</p>
+                )}
 
                 <br />
                 <label
                   className="text-gray-900 dark:text-gray-900"
                   htmlFor="idCareer"
                 >
-                  Carrera
+                  Nueva Carrera
                 </label>
                 <br />
                 {Carrera.length === 0 ? (
@@ -262,6 +343,9 @@ function EstudianteEdit() {
                     ))}
                   </select>
                 )}
+                {idCareerError && (
+                  <p className="text-red-500">{idCareerError}</p>
+                )}
 
                 <br />
               </div>
@@ -278,8 +362,7 @@ function EstudianteEdit() {
             <br></br>
             <Link to="/EstudianteTable">Volver a la lista de estudiante</Link>
           </form>
-          {/* Modal de confirmación */}
-          <ModalConfirmacion isOpen={modalIsOpen} closeModal={closeModal} />
+
         </div>
       </div>
     </div>

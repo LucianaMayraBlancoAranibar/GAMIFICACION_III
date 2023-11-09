@@ -15,7 +15,7 @@ function EstudianteForm() {
   const [Rank, setRank] = useState("");
   const [idRank, setIdRank] = useState("");
   const [rankName, setRankName] = useState("");
-  const [score, setScore] = useState("");
+  const [score, setScore] = useState("0");
   const [idAcademicUnity, setidAcademicUnity] = useState("");
   const [idCareer, setidCareer] = useState("");
   const [Carrera, setCarrer] = useState("");
@@ -34,45 +34,45 @@ function EstudianteForm() {
 
   const validateForm = () => {
     let isValid = true;
-    if(!firstName){
+    if (!firstName) {
       setfirstNameError("El nombre es obligatorio");
       isValid = false;
-    } else if(firstName.length < 3 || firstName.length > 25) {
+    } else if (firstName.length < 3 || firstName.length > 25) {
       setfirstNameError("El nombre debe tener entre 3 y 25 caracteres")
       isValid = false
     } else {
       setfirstNameError("");
     }
 
-    if(!lastName){
+    if (!lastName) {
       setlastNameError("El apellido es obligatorio");
       isValid = false;
-    } else if(lastName.length < 3 || lastName.length > 25){
+    } else if (lastName.length < 3 || lastName.length > 25) {
       isValid = false;
     } else {
       setlastNameError("");
     }
 
-    if(!email) {
+    if (!email) {
       setemailError("El email es obligatorio");
       isValid = false;
-    } else { 
+    } else {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if(!emailRegex.test(email)) { 
+      if (!emailRegex.test(email)) {
         setemailError("El email no tiene un formato valido");
         isValid = false;
-      } else if(existeEmail.includes(email)){
+      } else if (existeEmail.includes(email)) {
         setemailError("El email ya existe");
         isValid = false;
-      } else { 
+      } else {
         setemailError("");
       }
     }
 
-    if(!password) {
+    if (!password) {
       setpasswordError("La contraseña es obligatorio");
       isValid = false;
-    } else if(password.length <= 6 || password.length > 10) { 
+    } else if (password.length <= 6 || password.length > 10) {
       setpasswordError("La contraseña debe tener entre 6 y 10 caracteres");
       isValid = false;
     } else {
@@ -100,16 +100,16 @@ function EstudianteForm() {
       setidAcademicUnityError("");
     }
 
-    if(!score){
+    if (!score) {
       setScoreError("Debe poner una puntuación");
       isValid = false;
-    } else if(score < 0){
+    } else if (score < 0) {
       setScoreError("La puntuacion no puede ser menor a cero");
-      isValid =  false;
+      isValid = false;
     } else {
       setScoreError("");
     }
-    
+
     return isValid;
   }
 
@@ -137,11 +137,11 @@ function EstudianteForm() {
   }, []);
 
   // Función para validar el formulario
-  
+
 
   async function handleSubmit(event) {
     event.preventDefault();
-    if(validateForm()){
+    if (validateForm()) {
       const data = {
         score: score,
         Rank: Rank,
@@ -155,8 +155,8 @@ function EstudianteForm() {
         idCareer: idCareer,
         idAcademicUnity: idAcademicUnity,
       };
-      
-      try{
+
+      try {
         const response = await axios.post(
           "https://localhost:7220/api/StudentUsuario",
           data
@@ -176,7 +176,7 @@ function EstudianteForm() {
         setpassword("");
         setidCareer("");
         setidAcademicUnity("");
-      } catch(error){
+      } catch (error) {
         console.error("Error al registrar al estudiante:", error)
       }
     };
@@ -295,24 +295,8 @@ function EstudianteForm() {
                   <p className="text-red-500">{idRankError}</p>
                 )}
 
-                                
-                <br />
-                <label
-                  className="text-gray-900 dark:text-gray-900"
-                  htmlFor="score"
-                >
-                  Score
-                </label>
-                <input
-                  type="text"
-                  id="score"
-                  className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                  value={score}
-                  onChange={(e) => setScore(e.target.value)}
-                />
-                {scoreError && (
-                  <p className="text-red-500">{scoreError}</p>
-                )}
+
+
 
                 <br />
                 <label
@@ -321,21 +305,22 @@ function EstudianteForm() {
                 >
                   Academia
                 </label>
-                <br/>
-                {UnidadAcademica.length === 0? (
+                <br />
+                {UnidadAcademica.length === 0 ? (
                   <p>Cargando datos...</p>
                 ) : (
-                  <select 
+                  <select
                     id="idAcademicUnity"
                     className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                     value={idAcademicUnity}
-                    onChange={(e) => {setidAcademicUnity(e.target.value);}}>
-                      <option value="">Selecction academia</option>
-                      {UnidadAcademica.map((UnidadAcademica) => (
-                        <option 
-                          key={UnidadAcademica.idAcademicUnity}
-                          value={UnidadAcademica.idAcademicUnity}>{UnidadAcademica.idAcademicUnity}</option>
-                      ))}
+                    onChange={(e) => { setidAcademicUnity(e.target.value); }}>
+                    <option value="">Selecction academia</option>
+                    {UnidadAcademica.map((UnidadAcademica) => (
+                      <option
+                        key={UnidadAcademica.idAcademicUnity}
+                        value={UnidadAcademica.idAcademicUnity}>
+                        {UnidadAcademica.idAcademicUnity}</option>
+                    ))}
                   </select>
                 )}
                 {idAcademicUnityError && (

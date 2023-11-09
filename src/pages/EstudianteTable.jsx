@@ -82,7 +82,7 @@ function EstudianteTable() {
                     <td className="px-6 py-4">{estudianteUser.firstName + " " + estudianteUser.lastName}</td>
                     <td className="px-6 py-4">{estudianteUser.email}</td>
                     <td className="px-6 py-4 text-left">
-                      <Link to={`/ManagerEdit/${estudianteUser.idStudent}`}> {/* Redirigir a la página de edición con el ID */}
+                      <Link to={`/EstudianteEdit/${estudianteUser.idStudent}`}> {/* Redirigir a la página de edición con el ID */}
                         <button
                           className="px-4 py-4 mr-4 leading-5 text-white transition-colors duration-200 transform bg-green-700 rounded-md hover:bg-green-500 focus:outline-none focus:bg-gray-600"
                         >

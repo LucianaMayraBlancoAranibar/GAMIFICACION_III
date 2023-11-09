@@ -16,7 +16,26 @@ function CareerEdit() {
     idDepartment: "",
   });
 
-  
+  //Const para validar
+  const [careerNameError, setCarrerNameError] = useState("");
+
+  // Función para validar el formulario
+  const validateForm = () => {
+    let isValid = true;
+
+    if (!carrera.careerName) {
+      setCarrerNameError("El nombre de la carrera es obligatorio");
+      isValid = false;
+    } else if (carrera.careerName.length < 3 || carrera.careerName.length > 50) {
+      setCarrerNameError("El nombre de la carrera debe tener mayor a 3 caracteres y 50 caracteres como maximo")
+      isValid = false;
+    } else {
+      setCarrerNameError("");
+    }      
+    return isValid;
+  }
+
+
 
   useEffect(() => {
     axios
@@ -29,8 +48,8 @@ function CareerEdit() {
       .catch((error) => {
         console.log(error);
       });
-    
-      axios
+
+    axios
       .get("https://localhost:7220/api/Departments")
       .then((response) => {
         console.log(response.data); // Verifica los datos que obtienes
@@ -38,7 +57,7 @@ function CareerEdit() {
       })
       .catch((error) => {
         console.error(error); // Verifica si hay errores en la llamada a la API
-      });    
+      });
   }, [id]);
 
   const handleInputChange = (event) => {
@@ -54,28 +73,31 @@ function CareerEdit() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    
+    if (validateForm()) {
 
-    // Crear un objeto con los datos en formato JSON
-    const requestData = {
-      idCareer: id,
-      careerName: carrera.careerName,
-      idDepartment: idDepartment,
-    };
 
-    axios
-      .put(`https://localhost:7220/api/Careers/${id}`, requestData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    
+
+
+      // Crear un objeto con los datos en formato JSON
+      const requestData = {
+        idCareer: id,
+        careerName: carrera.careerName,
+        idDepartment: idDepartment,
+      };
+
+      axios
+        .put(`https://localhost:7220/api/Careers/${id}`, requestData, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   };
   function closeModal() {
     setModalIsOpen(false);
@@ -109,7 +131,8 @@ function CareerEdit() {
                   value={carrera.careerName}
                   onChange={handleInputChange}
                 />
-                
+                {careerNameError && (<p className="text-red-500">{careerNameError}</p>)}
+
                 <br />
                 <label
                   htmlFor="editSucursalName"
@@ -136,6 +159,7 @@ function CareerEdit() {
                     ))}
                   </select>
                 )}
+                {idDepartmentError && (<p className="text-red-500">{idDepartmentError}</p>)}
               </div>
               <br></br>
               <div className="flex justify-left">
