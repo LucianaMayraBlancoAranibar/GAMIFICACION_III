@@ -13,7 +13,6 @@ function Main() {
   const [showDataListOro, setShowDataListOro] = useState(false);
   const [showDataListPlata, setShowDataListPlata] = useState(false);
   const [showDataListBronce, setShowDataListBronce] = useState(false);
-
   const toggleDataList = (option) => {
     switch (option) {
       case "DIAMANTE":
@@ -53,9 +52,9 @@ function Main() {
         },
         centeredSlides: true,
         slidesPerView: "1",
-  
+
         breakpoints: {
-          768:{
+          768: {
             slidesPerView: "3"
           }
         },
@@ -68,12 +67,67 @@ function Main() {
       });
     };
     document.body.appendChild(script);
+
+    const buttons = document.querySelectorAll("[data-carousel-button]");
+    const intervalTime = 5000; // Cambiar de imagen cada 5 segundos
+    
+    buttons.forEach(button => {
+      button.addEventListener("click", () => {
+        const offset = button.dataset.carouselButton === "next" ? 1 : -1
+        const slides = button
+          .closest("[data-carousel]")
+          .querySelector("[data-slides]")
+
+        const activeSlide = slides.querySelector("[data-active]")
+        let newIndex = [...slides.children].indexOf(activeSlide) + offset
+        if (newIndex < 0) newIndex = slides.children.length - 1
+        if (newIndex >= slides.children.length) newIndex = 0
+
+        slides.children[newIndex].dataset.active = true
+        delete activeSlide.dataset.active
+      });
+    });
+    
+    function autoChangeSlide() {
+      const nextButton = document.querySelector("[data-carousel-button='next']");
+      nextButton.click();
+    }
+    
+    // Configura un intervalo para cambiar automáticamente las diapositivas
+    let autoChangeInterval = setInterval(autoChangeSlide, intervalTime);
+    
+    // Detiene el cambio automático cuando el mouse está sobre el carrusel
+    const carousel = document.querySelector("[data-carousel]");
+    carousel.addEventListener("mouseover", () => {
+      clearInterval(autoChangeInterval);
+    });
+    
+    // Reanuda el cambio automático cuando el mouse sale del carrusel
+    carousel.addEventListener("mouseout", () => {
+      autoChangeInterval = setInterval(autoChangeSlide, intervalTime);
+    });
+    
   }, []);
 
   return (
     <div className="flex h-screen overflow-hidden">
       <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
         <div className="relative pt-4 rounded-sm overflow-hidden overflow-y-scroll">
+          <div className="carousel" data-carousel>
+            <button className="carousel-button prev" data-carousel-button="prev">&#8656;</button>
+            <button className="carousel-button next" data-carousel-button="next">&#8658;</button>
+            <ul data-slides>
+              <li className="slide" data-active>
+                <img src="/src/images/imageSliderTop/imageS1.jpg" alt="#1" />
+              </li>
+              <li className="slide">
+                <img src="/src/images/imageSliderTop/imageS2.jpg" alt="2" />
+              </li>
+              <li className="slide">
+                <img src="/src/images/imageSliderTop/imageS3.jpg" alt="#3" />
+              </li>
+            </ul>
+          </div>
           <h1 className="text-4xl font-semibold mb-4 px-4">Ranking de estudiantes</h1>
           <div className=" flex flex-col items-center pt-5">
             <button className="font-bold	text-xl	pt-2 w-2/12 h-24 bg-gradient-to-t from-cyan-300 to-blue-500 shadow rounded flex justify-center items-center"
@@ -165,107 +219,107 @@ function Main() {
           </div>
 
           <h1 className="text-4xl font-semibold px-4 pt-12 pb-6">Participa y sube de rango</h1>
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
-            <div className="swiper mySwiper">
-              <div className="containerCarrousel">
-                <div className="swiper-wrapper">
-                  <div className="swiper-slide">
-                    <div className="box">
-                      <img src="/src/images/rank/Bronce1.png" className="imagesize" alt=""></img>
-                      <span>BRONCE I</span>
-                    </div>
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+          <div className="swiper mySwiper">
+            <div className="containerCarrousel">
+              <div className="swiper-wrapper">
+                <div className="swiper-slide">
+                  <div className="box">
+                    <img src="/src/images/rank/Bronce1.png" className="imagesize" alt=""></img>
+                    <span>BRONCE I</span>
                   </div>
-                  <div className="swiper-slide">
-                    <div className="box">
-                      <img src="/src/images/rank/Bronce2.png" className="imagesize" alt=""></img>
-                      <span>BRONCE II</span>
-                    </div>
+                </div>
+                <div className="swiper-slide">
+                  <div className="box">
+                    <img src="/src/images/rank/Bronce2.png" className="imagesize" alt=""></img>
+                    <span>BRONCE II</span>
                   </div>
-                  <div className="swiper-slide">
-                    <div className="box">
-                      <img src="/src/images/rank/Bronce3.png" className="imagesize" alt=""></img>
-                      <span>BRONCE III</span>
-                    </div>
+                </div>
+                <div className="swiper-slide">
+                  <div className="box">
+                    <img src="/src/images/rank/Bronce3.png" className="imagesize" alt=""></img>
+                    <span>BRONCE III</span>
                   </div>
-                  <div className="swiper-slide">
-                    <div className="box">
-                      <img src="/src/images/rank/Plata1.png" className="imagesize" alt=""></img>
-                      <span>PLATA I</span>
-                    </div>
+                </div>
+                <div className="swiper-slide">
+                  <div className="box">
+                    <img src="/src/images/rank/Plata1.png" className="imagesize" alt=""></img>
+                    <span>PLATA I</span>
                   </div>
-                  <div className="swiper-slide">
-                    <div className="box">
-                      <img src="/src/images/rank/Plata2.png" className="imagesize" alt=""></img>
-                      <span>PLATA II</span>
-                    </div>
+                </div>
+                <div className="swiper-slide">
+                  <div className="box">
+                    <img src="/src/images/rank/Plata2.png" className="imagesize" alt=""></img>
+                    <span>PLATA II</span>
                   </div>
-                  <div className="swiper-slide">
-                    <div className="box">
-                      <img src="/src/images/rank/Plata3.png" className="imagesize" alt=""></img>
-                      <span>PLATA III</span>
-                    </div>
+                </div>
+                <div className="swiper-slide">
+                  <div className="box">
+                    <img src="/src/images/rank/Plata3.png" className="imagesize" alt=""></img>
+                    <span>PLATA III</span>
                   </div>
-                  <div className="swiper-slide">
-                    <div className="box">
-                      <img src="/src/images/rank/Oro1.png" className="imagesize" alt=""></img>
-                      <span>ORO I</span>
-                    </div>
+                </div>
+                <div className="swiper-slide">
+                  <div className="box">
+                    <img src="/src/images/rank/Oro1.png" className="imagesize" alt=""></img>
+                    <span>ORO I</span>
                   </div>
-                  <div className="swiper-slide">
-                    <div className="box">
-                      <img src="/src/images/rank/Oro2.png" className="imagesize" alt=""></img>
-                      <span>ORO II</span>
-                    </div>
+                </div>
+                <div className="swiper-slide">
+                  <div className="box">
+                    <img src="/src/images/rank/Oro2.png" className="imagesize" alt=""></img>
+                    <span>ORO II</span>
                   </div>
-                  <div className="swiper-slide">
-                    <div className="box">
-                      <img src="/src/images/rank/Oro3.png" className="imagesize" alt=""></img>
-                      <span>ORO III</span>
-                    </div>
+                </div>
+                <div className="swiper-slide">
+                  <div className="box">
+                    <img src="/src/images/rank/Oro3.png" className="imagesize" alt=""></img>
+                    <span>ORO III</span>
                   </div>
-                  <div className="swiper-slide">
-                    <div className="box">
-                      <img src="/src/images/rank/Platino1.png" className="imagesize" alt=""></img>
-                      <span>PLATINO I</span>
-                    </div>
+                </div>
+                <div className="swiper-slide">
+                  <div className="box">
+                    <img src="/src/images/rank/Platino1.png" className="imagesize" alt=""></img>
+                    <span>PLATINO I</span>
                   </div>
-                  <div className="swiper-slide">
-                    <div className="box">
-                      <img src="/src/images/rank/Platino2.png" className="imagesize" alt=""></img>
-                      <span>PLATINO II</span>
-                    </div>
+                </div>
+                <div className="swiper-slide">
+                  <div className="box">
+                    <img src="/src/images/rank/Platino2.png" className="imagesize" alt=""></img>
+                    <span>PLATINO II</span>
                   </div>
-                  <div className="swiper-slide">
-                    <div className="box">
-                      <img src="/src/images/rank/Platino3.png" className="imagesize" alt=""></img>
-                      <span>PLATINO III</span>
-                    </div>
+                </div>
+                <div className="swiper-slide">
+                  <div className="box">
+                    <img src="/src/images/rank/Platino3.png" className="imagesize" alt=""></img>
+                    <span>PLATINO III</span>
                   </div>
-                  <div className="swiper-slide">
-                    <div className="box">
-                      <img src="/src/images/rank/Diamante1.png" className="imagesize" alt=""></img>
-                      <span>DIAMANTE I</span>
-                    </div>
+                </div>
+                <div className="swiper-slide">
+                  <div className="box">
+                    <img src="/src/images/rank/Diamante1.png" className="imagesize" alt=""></img>
+                    <span>DIAMANTE I</span>
                   </div>
-                  <div className="swiper-slide">
-                    <div className="box">
-                      <img src="/src/images/rank/Diamante2.png" className="imagesize" alt=""></img>
-                      <span>DIAMANTE II</span>
-                    </div>
+                </div>
+                <div className="swiper-slide">
+                  <div className="box">
+                    <img src="/src/images/rank/Diamante2.png" className="imagesize" alt=""></img>
+                    <span>DIAMANTE II</span>
                   </div>
-                  <div className="swiper-slide">
-                    <div className="box">
-                      <img src="/src/images/rank/Diamante3.png" className="imagesize" alt=""></img>
-                      <span>DIAMANTE III</span>
-                    </div>
+                </div>
+                <div className="swiper-slide">
+                  <div className="box">
+                    <img src="/src/images/rank/Diamante3.png" className="imagesize" alt=""></img>
+                    <span>DIAMANTE III</span>
                   </div>
                 </div>
               </div>
-              <div className="swiper-button-next"></div>
-              <div className="swiper-button-prev"></div>
-              <div className="swiper-pagination"/>
             </div>
-            <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+            <div className="swiper-button-next"></div>
+            <div className="swiper-button-prev"></div>
+            <div className="swiper-pagination" />
+          </div>
+          <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 
           <div className="rounded-container">
             <label className="container-title">¿DE QUÉ SE TRATA?</label>
