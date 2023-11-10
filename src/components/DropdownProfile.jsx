@@ -2,13 +2,23 @@ import React, { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Transition from "../utils/Transition";
 
-import UserAvatar from "../images/user-avatar-32.png";
+import UserAvatar from "../images/user_logo.png";
 
 function DropdownProfile({ align }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [userName, setUserName] = useState(""); 
+  const [userRole, setUserRole] = useState("");
 
   const trigger = useRef(null);
   const dropdown = useRef(null);
+
+  useEffect(() => {
+    const userData = JSON.parse(localStorage.getItem("user")); 
+    if (userData) {
+      setUserName(userData.email);
+      setUserRole(userData.rol); 
+    }
+  }, []);
 
   // close on click outside
   useEffect(() => {
@@ -36,7 +46,18 @@ function DropdownProfile({ align }) {
     return () => document.removeEventListener("keydown", keyHandler);
   });
   const navigate = useNavigate(); // <-- Usa el hook useNavigate para obtener la función navigate
-
+  function getRoleName(role) {
+    switch (role) {
+      case 1:
+        return "Administrador";
+      case 2:
+        return "Gestor";
+      case 3:
+        return "Estudiante";
+      default:
+        return "Usuario";
+    }
+  }
   const handleSignOut = () => {
     localStorage.removeItem("authToken"); // Suponiendo que 'authToken' es la clave donde guardas el token de autenticación
     // Redirige al usuario a la página de inicio de sesión usando navigate
@@ -61,7 +82,7 @@ function DropdownProfile({ align }) {
         />
         <div className="flex items-center truncate">
           <span className="truncate ml-2 text-sm font-medium dark:text-slate-300 group-hover:text-slate-800 dark:group-hover:text-slate-200">
-            Acme Inc.
+          {userName} 
           </span>
           <svg
             className="w-3 h-3 shrink-0 ml-1 fill-current text-slate-400"
@@ -91,10 +112,10 @@ function DropdownProfile({ align }) {
         >
           <div className="pt-0.5 pb-2 px-3 mb-1 border-b border-slate-200 dark:border-slate-700">
             <div className="font-medium text-slate-800 dark:text-slate-100">
-              Acme Inc.
+            {getRoleName(userRole)}
             </div>
             <div className="text-xs text-slate-500 dark:text-slate-400 italic">
-              Administrator
+            
             </div>
           </div>
           <ul>
