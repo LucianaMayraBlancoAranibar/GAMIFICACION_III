@@ -46,6 +46,7 @@ import StudentEdit from "./pages/StudentEdit"
 import ManagerForm from "./pages/ManagerForm"
 import ManagerTable from "./pages/ManagerTable"
 import ManagerEdit from "./pages/ManagerEdit"
+import UserManager from "./pages/UserManager"
 
 
 function ScrollToTopOnRouteChange() {
@@ -133,6 +134,7 @@ function App() {
           <Route path="/ManagerForm" element={<ProtectedElement allowedRoles={[1]} element={<ManagerForm />} />} />
           <Route path="/ManagerEdit/:id" element={<ProtectedElement allowedRoles={[1]} element={<ManagerEdit />} />} />
           <Route path="/ManagerTable" element={<ProtectedElement allowedRoles={[1]} element={<ManagerTable/>} />} />
+          <Route path="/UserManager" element={<ProtectedElement allowedRoles={[1]} element={<UserManager />} />} />
           <Route path="/LoginPage" element={<LoginPage />} />
           <Route path="/Menu" element={<Menu />} />
           <Route path="/ChangePasswordForm" element={<ProtectedElement allowedRoles={[1, 2,3]} element={<ChangePasswordForm />}/>}/>

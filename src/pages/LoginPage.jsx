@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import LogoImage from '../images/Univalle_bol_cbb_logo.png'; 
 
 import { useAuth } from "../AuthContext";
 
@@ -53,7 +53,7 @@ function LoginComponent() {
         localStorage.setItem("userEmail", data.user.email);
 
         setCurrentUser(data.user);
-        console.log('User email on load:', localStorage.getItem("userEmail"));
+        console.log("User email on load:", localStorage.getItem("userEmail"));
 
         if (data.user.rol === 1) {
           navigate("/"); // Redirecciona al admin
@@ -86,96 +86,133 @@ function LoginComponent() {
   };
 
   return (
-    <div className="flex flex-wrap h-screen">
-      <div className="w-full sm:w-1/2 flex flex-col justify-center items-center p-10 space-y-6">
-        <div className="flex items-center mb-2 mt-10">
-          <span className="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-blue-700">
-            Gamificación
-          </span>
-        </div>
-        <h3 className="text-xl mb-4 font-normal tracking-wider text-center">
-          Log in
-        </h3>
-        <div className="w-full sm:w-2/3 md:w-1/2">
-          {errors.form && <div className="error mb-4">{errors.form}</div>}
+    <section class="bg-gray-50 dark:bg-gray-900">
+      <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+        <a
+          href="#"
+          class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
+        >
+          <img
+            class="w-8 h-8 mr-2"
+           src={LogoImage}
+            alt="logo"
+          />
+          Univalle
+        </a>
+        <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+          <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+            <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+              Login
+            </h1>
+            <form class="space-y-4 md:space-y-6">
+              {errors.form && <div className="error mb-4">{errors.form}</div>}
 
-          <div className="">
-            <label className="block mb-2 text-sm font-bold">
-              Tipo de Usuario:
-            </label>
-            <select
-              value={userType}
-              onChange={(e) => setUserType(e.target.value)}
-              className="block appearance-none w-full bg-white border mb-4 p-2 rounded-lg shadow focus:outline-none focus:ring focus:ring-blue-100 text-gray-700 py-2 px-4 pr-8 leading-tight focus:bg-white focus:border-blue-500"
-            >
-              <option value="admin">Administrador</option>
-              <option value="gestor">Gestor</option>
-              <option value="student">Estudiante</option>
-            </select>
-            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-              <svg
-                className="fill-current h-4 w-4"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
+              <div className="">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                  Tipo de Usuario:
+                </label>
+                <select
+                  value={userType}
+                  onChange={(e) => setUserType(e.target.value)}
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                >
+                  <option value="admin">Administrador</option>
+                  <option value="gestor">Gestor</option>
+                  <option value="student">Estudiante</option>
+                </select>
+                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                  <svg
+                    className="fill-current h-4 w-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                  </svg>
+                </div>
+              </div>
+              <label
+                for="email"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               >
-                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-              </svg>
-            </div>
+                Your email
+              </label>
+              <input
+                type="email"
+                label="Email address"
+                size="lg"
+                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              {errors.email && <div className="error">{errors.email}</div>}
+              <label
+                for="password"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >
+                Password
+              </label>
+              <input
+                type="password"
+                label="Password"
+                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                size="lg"
+                placeholder="Contraseña"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              {errors.password && (
+                <div className="error">{errors.password}</div>
+              )}
+
+              <button
+                onClick={handleLogin}
+                className={`bg-gradient-to-r from-red-500 to-red-700 hover:from-red-600 hover:to-red-800 text-white p-2 mb-4 w-full font-medium rounded-lg  transition duration-200 transform hover:scale-105 ${
+                  loading ? "opacity-50 cursor-not-allowed" : ""
+                }`}
+                disabled={loading}
+              >
+                {loading ? "Iniciando sesión..." : "Iniciar sesión"}
+              </button>
+
+              {errors.form && (
+                <div className="text-red-500 text-center mt-2">
+                  {errors.form}
+                </div>
+              )}
+
+              <div class="flex items-center justify-between">
+                <div class="flex items-start">
+                  <div class="flex items-center h-5">
+                    <input
+                      id="remember"
+                      aria-describedby="remember"
+                      type="checkbox"
+                      class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
+                      required=""
+                    />
+                  </div>
+                  <div class="ml-3 text-sm">
+                    <label
+                      for="remember"
+                      class="text-gray-500 dark:text-gray-300"
+                    >
+                      Remember me
+                    </label>
+                  </div>
+                </div>
+                <a
+                  href="/ForgotPassword"
+                  class="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
+                >
+                  Forgot password?
+                </a>
+              </div>
+            </form>
           </div>
-
-          <input
-            type="email"
-            label="Email address"
-            size="lg"
-            className="border mb-4 p-2 w-full rounded-lg shadow focus:outline-none focus:ring focus:ring-blue-100"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          {errors.email && <div className="error">{errors.email}</div>}
-
-          <input
-            type="password"
-            label="Password"
-            className="border mb-4 p-2 w-full rounded-lg shadow focus:outline-none focus:ring focus:ring-blue-100"
-            size="lg"
-            placeholder="Contraseña"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          {errors.password && <div className="error">{errors.password}</div>}
-
-          <button
-            onClick={handleLogin}
-            className={`bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 text-white p-2 mb-4 w-full rounded-full shadow-md transition duration-200 transform hover:scale-105 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
-            disabled={loading}
-          >
-            {loading ? 'Iniciando sesión...' : 'Iniciar sesión'}
-          </button>
-
-          {errors.form && <div className="text-red-500 text-center mt-2">{errors.form}</div>}
-
-          <p className="text-xs mb-5 text-gray-500">
-            <a
-              href="/ForgotPassword"
-              className="hover:text-blue-500 transition duration-200"
-            >
-              Forgot password?
-            </a>
-          </p>
         </div>
       </div>
-      {/* Right Section */}
-      <div className="hidden sm:block w-1/2">
-        <img
-          src={
-            "https://scontent.cdninstagram.com/v/t39.30808-6/396718286_764683899031947_8277713279431758848_n.jpg?stp=dst-jpg_e15&efg=eyJ2ZW5jb2RlX3RhZyI6ImltYWdlX3VybGdlbi4xMjgweDEyODAuc2RyIn0&_nc_ht=scontent.cdninstagram.com&_nc_cat=103&_nc_ohc=9s9TydjlUfsAX9qHdGZ&edm=APs17CUAAAAA&ccb=7-5&ig_cache_key=MzIyMzU1ODEwMjc5OTMyNTIzNg%3D%3D.2-ccb7-5&oh=00_AfB1bo9-_wJjP8srAKBf30psbUN55H7eiqowCRPOLd1vXw&oe=6546AB1E&_nc_sid=10d13b"
-          }
-          alt="Login image"
-          className="w-full h-screen object-cover object-left"
-        />
-      </div>
-    </div>
+    </section>
   );
 }
 
