@@ -61,7 +61,7 @@ function DepartamentoTable() {
           <h1 className="text-2xl font-semibold mb-4">Lista de Departamentos</h1>
           <div className="mr-10 grid grid-flow-col sm:auto-cols-max justify-start sm:justify-end gap-2">
             <Link to="/DepartamentoForm"> {/* Enlace a la página de añadir Departamento */}
-              <button  className="px-10 py-5 leading-5 text-white transition-colors duration-200 transform bg-gray-800 rounded-md hover:bg-gray-700 focus:outline-none focus:bg-gray-600">
+              <button  class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Añadir Departamento
               </button>
             </Link>

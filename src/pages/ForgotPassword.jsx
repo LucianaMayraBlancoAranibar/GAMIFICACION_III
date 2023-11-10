@@ -38,7 +38,7 @@ function ForgotPassword() {
 
   return (
     <div>
-      <h2>Forgot Password</h2>
+      <h2 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white" >Forgot Password</h2>
       <p className={isError ? 'error-message' : 'success-message'}>{message}</p>
       <form onSubmit={handleSubmit}>
         <input 

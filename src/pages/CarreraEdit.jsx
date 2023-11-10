@@ -48,11 +48,11 @@ function CarreraEdit() {
       axios
       .get("https://localhost:7205/api/Careers")
       .then((response) => {
-        console.log(response.data); // Verifica los datos que obtienes
+        console.log(response.data); 
         setUsuario(response.data);
       })
       .catch((error) => {
-        console.error(error); // Verifica si hay errores en la llamada a la API
+        console.error(error); 
       });    
   }, [id]);
 
@@ -103,7 +103,7 @@ function CarreraEdit() {
         <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
         <div className="relative p-4 sm:p-6 rounded-sm overflow-hidden mb-8">
           <div className="relative">
-            <h1 className="text-2xl md:text-3xl text-slate-800 dark:text-slate-100 font-bold mb-1">
+            <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Editar carrera{" "}
             </h1>
           </div>

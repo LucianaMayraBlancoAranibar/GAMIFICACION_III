@@ -34,7 +34,7 @@ function ResetPassword() {
 
   return (
     <div>
-      <h2>Reset Password</h2>
+      <h2 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">Reset Password</h2>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="password">New Password:</label>

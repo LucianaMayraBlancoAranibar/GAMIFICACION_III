@@ -68,16 +68,16 @@ function AchievementEdit() {
       return;
     }
 
-    // Si no hay errores, continuar con el envío del formulario
+ 
     Axios.put(`https://localhost:7205/api/Achievements/${id}`, formData)
       .then((response) => {
         console.log("Logro actualizado con éxito:", response.data);
         setModalIsOpen(true);
-        // Puedes mostrar un mensaje de éxito o redirigir al usuario a la lista de logros aquí
+    
       })
       .catch((error) => {
         console.error("Error al actualizar el logro:", error);
-        // Puedes mostrar un mensaje de error o manejar el error de otra manera
+        
       });
   }
 
@@ -85,7 +85,6 @@ function AchievementEdit() {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
 
-    // Limpiar los errores cuando el usuario comienza a corregir los campos
     if (errors[name]) {
       setErrors({ ...errors, [name]: undefined });
     }
@@ -102,7 +101,7 @@ function AchievementEdit() {
         <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
         <div className="relative p-4 sm:p-6 rounded-sm overflow-hidden mb-8">
           <div className="relative">
-            <h1 className="text-2xl md:text-3xl text-slate-800 dark:text-slate-100 font-bold mb-1">
+            <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Editar Logro
             </h1>
           </div>

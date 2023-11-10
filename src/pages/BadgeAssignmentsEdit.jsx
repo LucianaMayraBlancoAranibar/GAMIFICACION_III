@@ -78,7 +78,7 @@ const AssignBadgeForm = () => {
       <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
         <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
         <div className="relative p-4 sm:p-6 rounded-sm overflow-hidden mb-8">
-          <h1 className="text-2xl md:text-3xl text-slate-800 dark:text-slate-100 font-bold mb-1">
+          <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
             {assignmentId
               ? "Actualizar Asignación de Badge"
               : "Asignar Badge a Estudiante"}
