@@ -24,10 +24,9 @@ function SanctionsTable() {
 
   const handleDelete = async (id) => {
     try {
-      // Realiza una solicitud DELETE a la API para eliminar la sanción con el ID proporcionado
+  
       await axios.delete(`https://localhost:7205/api/Sanctions/${id}`);
 
-      // Actualiza la lista de sanciones después de eliminar el elemento
       setSanctions(sanctions.filter((sanction) => sanction.id !== id));
     } catch (error) {
       console.error(`Error al eliminar la sanción con ID ${id}:`, error);

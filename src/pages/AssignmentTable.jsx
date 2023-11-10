@@ -34,10 +34,12 @@ function AssignmentTable() {
         `https://localhost:7205/api/StudentAchievements/${assignmentToDelete}`
       )
       .then(() => {
-        setAssignments(currentAssignments =>
-          currentAssignments.filter(assignment => assignment.id !== assignmentToDelete)
+        setAssignments((currentAssignments) =>
+          currentAssignments.filter(
+            (assignment) => assignment.id !== assignmentToDelete
+          )
         );
-        
+
         setAssignmentToDelete(null);
       })
       .catch((error) => {
@@ -59,14 +61,14 @@ function AssignmentTable() {
           <div className="mr-10 grid grid-flow-col sm:auto-cols-max justify-start sm:justify-end gap-2">
             <Link to="/StudentAchievement">
               <button className="px-10 py-5 leading-5 text-white transition-colors duration-200 transform bg-gray-800 rounded-md hover:bg-gray-700 focus:outline-none focus:bg-gray-600">
-                Añadir Asignacion
+                Asignar Logro
               </button>
             </Link>
           </div>
           {errorMessage && <p className="error-message">{errorMessage}</p>}
           <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-5 max-h-[600px] overflow-y-auto">
-            <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-              <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                   <th scope="col" className="px-6 py-3 text-center">
                     <div className="font-semibold text-left">
@@ -80,32 +82,32 @@ function AssignmentTable() {
                     <div className="font-semibold text-left">puntos</div>
                   </th>
                   <th scope="col" className="px-6 py-3 text-center">
-                    <div className="font-semibold text-left">acciones</div>
+                    <div className="font-semibold text-left">Acciones</div>
                   </th>
                 </tr>
               </thead>
               <tbody className="text-sm font-medium divide-y divide-slate-100 dark:divide-slate-700">
                 {assignments.map((assignment) => (
                   <tr
-                    className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                  className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
                     key={assignment.id}
                   >
                     <td className="px-6 py-4">{assignment.studentName}</td>
                     <td className="px-6 py-4">{assignment.achievementName}</td>
                     <td className="px-6 py-4">{assignment.points}</td>
-                    <td className="px-6 py-4 text-left">
+                    <td  className="px-6 py-4 text-left">
                       <button
-                        className="px-4 py-4 ml-3 leading-5 text-white transition-colors duration-200 transform bg-red-500 rounded-md hover:bg-red-400 focus:outline-none focus:bg-gray-600"
+                         className="px-4 py-4 ml-3 leading-5 text-white transition-colors duration-200 transform bg-red-500 rounded-md hover:bg-red-400 focus:outline-none focus:bg-gray-600"
                         onClick={() => setAssignmentToDelete(assignment.id)}
                       >
                         Eliminar
                       </button>
-
+{/* 
                       <Link to={`/AssigmentEdit/${assignment.id}`}>
                         <button className="px-4 py-4 mr-4 leading-5 text-white transition-colors duration-200 transform bg-green-700 rounded-md hover:bg-green-500 focus:outline-none focus:bg-gray-600">
                           Editar
                         </button>
-                      </Link>
+                      </Link> */}
                     </td>
                   </tr>
                 ))}
@@ -114,7 +116,7 @@ function AssignmentTable() {
           </div>
           {assignmentToDelete && (
             <div className="bg-white p-4 shadow-md rounded-md absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-              <p>¿Seguro que deseas eliminar esta facultad?</p>
+              <p>¿Seguro que deseas eliminar esta asigancion?</p>
               <div className="mt-2">
                 <button
                   className="bg-red-500 hover:bg-red-600 text-white rounded-md px-2 py-1 mx-1"
