@@ -13,7 +13,7 @@ const Navbar = () => {
     };
 
     const handleLoginClick = () => {
-        window.location.href = "index.html";
+        window.location.href = "http://localhost:5173/";
     };
 
     return (

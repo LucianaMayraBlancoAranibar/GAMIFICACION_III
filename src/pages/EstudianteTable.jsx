@@ -95,6 +95,13 @@ function EstudianteTable() {
                       >
                         Eliminar
                       </button>
+                      <Link to={`/EstudianteChangePassword/${estudianteUser.idStudent}`}>
+                        <button
+                          className="px-4 py-4 ml-3 leading-5 text-white transition-colors duration-200 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:bg-gray-600"
+                        >
+                          Cambiar Contraseña
+                        </button>
+                      </Link>
                     </td>
                   </tr>
                 ))}

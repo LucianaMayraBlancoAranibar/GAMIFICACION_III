@@ -2,7 +2,6 @@ import React from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
-
 const Carrusel = () => {
   const images = [
     'https://previews.123rf.com/images/kalenka8/kalenka82110/kalenka8211000001/175432762-paisaje-de-verano-verde-horizontal-con-hierba-fondo-de-primavera-id%C3%ADlico-y-soleado-con-prados.jpg',
@@ -12,8 +11,6 @@ const Carrusel = () => {
   ];
 
   return (
-    
-
     <div style={{ position: 'relative', height: '100vh' }}>
       <Carousel
         autoPlay // Habilita la reproducción automática
@@ -21,10 +18,15 @@ const Carrusel = () => {
         showThumbs={false}
         infiniteLoop
         interval={3000}
+        style={{ width: '100%', height: '100%' }}
       >
         {images.map((image, index) => (
           <div key={index}>
-            <img src={image} alt={`Image ${index}`} />
+            <img
+              src={image}
+              alt={`Image ${index}`}
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            />
           </div>
         ))}
       </Carousel>
@@ -33,9 +35,3 @@ const Carrusel = () => {
 };
 
 export default Carrusel;
-
-
-
-
-
-

@@ -27,12 +27,14 @@ import DepartamentoEdit from "./pages/DepartamentoEdit";
 import EstudianteTable from './pages/EstudianteTable';
 import EstudianteForm from './pages/EstudianteForm';
 import EstudianteEdit from './pages/EstudianteEdit';
+import EstudianteChangePassword from './pages/EstudianteChangePassword';
 import CarreraTable from './pages/CarreraTable';
 import CareerEdit from './pages/CareerEdit';
-import CarreraForm from './pages/CarreraForm';
+import CareerForm from './pages/careerForm';
 import Login from './pages/Login';
 import CarouselComponent from './pages/Carrusel';
 import NavbarCarrusel from './pages/navbarCarrusel';
+
 
 
 function ScrollToTopOnRouteChange() {
@@ -83,9 +85,10 @@ function App() {
         <Route path="/EstudianteTable" element={<EstudianteTable />} />
         <Route path="/EstudianteForm" element={<EstudianteForm />} />
         <Route path="/EstudianteEdit/:id" element={<EstudianteEdit />} />
+        <Route path="/EstudianteChangePassword/:id" element={<EstudianteChangePassword/>}/> 
         <Route path="/CarreraTable" element={<CarreraTable />} />
         <Route path="/CareerEdit/:id" element={<CareerEdit />} />
-        <Route path="/CarreraForm" element={<CarreraForm />} />
+        <Route path="/CareerForm" element={<CareerForm />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/Carrusel" element={<CarouselComponent/>} />
         <Route path="/navbarCarrusel" element={<NavbarCarrusel/>} />

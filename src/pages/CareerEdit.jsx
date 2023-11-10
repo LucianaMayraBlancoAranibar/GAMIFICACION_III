@@ -1,49 +1,29 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import Sidebar from "../partials/Sidebar";
 import Header from "../partials/Header";
-
 import ModalConfirmacion from "../partials/ModalConfirmacion";
+import { Link, useParams } from "react-router-dom";
 
 function CareerEdit() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { id } = useParams();
   const [department, setDepartment] = useState("");
-  const [idDepartment, setidDepartment] = useState("");
-  const [carrera, setcarrera] = useState({
+  const [idDepartment, setIdDepartment] = useState("");
+  const [carrera, setCarrera] = useState({
     careerName: "",
     idDepartment: "",
   });
-
-  //Const para validar
-  const [careerNameError, setCarrerNameError] = useState("");
-
-  // Función para validar el formulario
-  const validateForm = () => {
-    let isValid = true;
-
-    if (!carrera.careerName) {
-      setCarrerNameError("El nombre de la carrera es obligatorio");
-      isValid = false;
-    } else if (carrera.careerName.length < 3 || carrera.careerName.length > 50) {
-      setCarrerNameError("El nombre de la carrera debe tener mayor a 3 caracteres y 50 caracteres como maximo")
-      isValid = false;
-    } else {
-      setCarrerNameError("");
-    }      
-    return isValid;
-  }
-
-
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [careerNameError, setCareerNameError] = useState("");
+  const [idDepartmentError, setIdDepartmentError] = useState("");
 
   useEffect(() => {
     axios
       .get(`https://localhost:7220/api/Careers/${id}`)
       .then((response) => {
-        setcarrera(response.data);
-        setidDepartment(response.data.idDepartment);
-
+        setCarrera(response.data);
+        setIdDepartment(response.data.idDepartment);
       })
       .catch((error) => {
         console.log(error);
@@ -52,33 +32,50 @@ function CareerEdit() {
     axios
       .get("https://localhost:7220/api/Departments")
       .then((response) => {
-        console.log(response.data); // Verifica los datos que obtienes
         setDepartment(response.data);
       })
       .catch((error) => {
-        console.error(error); // Verifica si hay errores en la llamada a la API
+        console.error(error);
       });
   }, [id]);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     if (name === "idDepartment") {
-      setidDepartment(value); // Actualiza idDepartment directamente
+      setIdDepartment(value);
     }
-    setcarrera((prevcarrera) => ({
-      ...prevcarrera,
+    setCarrera((prevCarrera) => ({
+      ...prevCarrera,
       [name]: value,
     }));
+  };
+
+  const validateForm = () => {
+    let isValid = true;
+
+    if (!carrera.careerName) {
+      setCareerNameError("El nombre de la carrera es obligatorio");
+      isValid = false;
+    } else if (carrera.careerName.length < 3 || carrera.careerName.length > 50) {
+      setCareerNameError("El nombre de la carrera debe tener entre 3 y 50 caracteres");
+      isValid = false;
+    } else {
+      setCareerNameError("");
+    }
+
+    if (!idDepartment) {
+      setIdDepartmentError("Debes seleccionar un departamento");
+      isValid = false;
+    } else {
+      setIdDepartmentError("");
+    }
+
+    return isValid;
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     if (validateForm()) {
-
-
-
-
-      // Crear un objeto con los datos en formato JSON
       const requestData = {
         idCareer: id,
         careerName: carrera.careerName,
@@ -99,6 +96,7 @@ function CareerEdit() {
         });
     }
   };
+
   function closeModal() {
     setModalIsOpen(false);
   }
@@ -131,7 +129,9 @@ function CareerEdit() {
                   value={carrera.careerName}
                   onChange={handleInputChange}
                 />
-                {careerNameError && (<p className="text-red-500">{careerNameError}</p>)}
+                {careerNameError && (
+                  <p className="text-red-500">{careerNameError}</p>
+                )}
 
                 <br />
                 <label
@@ -147,7 +147,7 @@ function CareerEdit() {
                     id="idDepartment"
                     className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                     value={idDepartment}
-                    onChange={(e) => setidDepartment(e.target.value)}
+                    onChange={(e) => setIdDepartment(e.target.value)}
                   >
                     {department.map((Department) => (
                       <option
@@ -159,7 +159,9 @@ function CareerEdit() {
                     ))}
                   </select>
                 )}
-                {idDepartmentError && (<p className="text-red-500">{idDepartmentError}</p>)}
+                {idDepartmentError && (
+                  <p className="text-red-500">{idDepartmentError}</p>
+                )}
               </div>
               <br></br>
               <div className="flex justify-left">
@@ -169,7 +171,6 @@ function CareerEdit() {
                 >
                   Guardar Cambios
                 </button>
-
               </div>
               <br></br>
               <br></br>

@@ -13,7 +13,7 @@ function EstudianteForm() {
   const [firstName, setfirstName] = useState("");
   const [lastName, setlastName] = useState("");
   const [Rank, setRank] = useState("");
-  const [idRank, setIdRank] = useState("");
+  const [idRank, setIdRank] = useState("1");
   const [rankName, setRankName] = useState("");
   const [score, setScore] = useState("0");
   const [idAcademicUnity, setidAcademicUnity] = useState("");
@@ -277,57 +277,13 @@ function EstudianteForm() {
                   <p className="text-red-500">{passwordError}</p>
                 )}
 
-                <br />
-                <label
-                  className="text-gray-900 dark:text-gray-900"
-                  htmlFor="idRank"
-                >
-                  Rank
-                </label>
-                <input
-                  type="text"
-                  id="idRank"
-                  className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                  value={idRank}
-                  onChange={(e) => setIdRank(e.target.value)}
-                />
-                {idRankError && (
-                  <p className="text-red-500">{idRankError}</p>
-                )}
                 
-                {Rank.length === 0 ? (
-                  <p>Cargando datos...</p>
-                ) : (
-                  <select
-                    id="idRank"
-                    className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                    value={idRank}
-                    onChange={(e) => {
-                      setidCareer(e.target.value);
-                    }}
-                  >
-                    <option value="">Selecciona un rank</option>
-                    {Rank.map((Rank) => (
-                      <option
-                        key={Rank.idRank}
-                        value={Rank.idRank}
-                      >
-                        {Rank.rankName}
-                      </option>
-                    ))}
-                  </select>
-                )}
-                {idRankError && (
-                  <p className="text-red-500">{idRankError}</p>
-                )}
+
 
 
 
                 <br />
-                <label
-                  className="text-gray-900 dark:text-gray-900"
-                  htmlFor="idAcademicUnity"
-                >
+                <label className="text-gray-900 dark:text-gray-900" htmlFor="idAcademicUnity">
                   Academia
                 </label>
                 <br />
@@ -338,19 +294,23 @@ function EstudianteForm() {
                     id="idAcademicUnity"
                     className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                     value={idAcademicUnity}
-                    onChange={(e) => { setidAcademicUnity(e.target.value); }}>
-                    <option value="">Selecction academia</option>
-                    {UnidadAcademica.map((UnidadAcademica) => (
+                    onChange={(e) => { setidAcademicUnity(e.target.value); }}
+                  >
+                    <option value="">Selecciona academia</option>
+                    {UnidadAcademica.map((unidad) => (
                       <option
-                        key={UnidadAcademica.idAcademicUnity}
-                        value={UnidadAcademica.idAcademicUnity}>
-                        {UnidadAcademica.idAcademicUnity}</option>
+                        key={unidad.idAcademicUnity}
+                        value={unidad.idAcademicUnity}
+                      >
+                        {unidad.academicUnityName} {/* Utiliza academicUnityName para mostrar el nombre de la academia */}
+                      </option>
                     ))}
                   </select>
                 )}
                 {idAcademicUnityError && (
                   <p className="text-red-500">{idAcademicUnityError}</p>
                 )}
+
 
                 <br />
                 <label
