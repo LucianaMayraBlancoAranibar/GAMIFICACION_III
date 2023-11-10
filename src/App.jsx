@@ -18,6 +18,8 @@ import AchievementEdit from "./pages/AchievementEdit";
 import RankForm from "./pages/RankForm";
 import RankTable from "./pages/RankTable";
 import StudentAchievement from "./pages/StudentAchievement";
+import AssignmentTable from "./pages/AssignmentTable";
+import AssigmentEdit from "./pages/AssigmentEdit";
 import SanctionForm from "./pages/SanctionForm";
 import SanctionTable from "./pages/SanctionTable";
 import LoginPage from "./pages/LoginPage";
@@ -117,6 +119,8 @@ function App() {
           <Route path="/BadgeStudent" element={<ProtectedElement allowedRoles={[1]} element={<BadgeStudent />} />} />
           <Route path="/BadgeTable" element={<BadgeTable />} />
           <Route path="/StudentAchievement" element={<ProtectedElement allowedRoles={[1,2]} element={<StudentAchievement />} />} />
+          <Route path="/AssignmentTable" element={<ProtectedElement allowedRoles={[1]} element={<AssignmentTable />} />} />
+          <Route path="/AssigmentEdit/:id" element={<ProtectedElement allowedRoles={[1]} element={<AssigmentEdit />} />} />
           <Route path="/StudentRankView" element={<ProtectedElement allowedRoles={[3]} element={<StudentRankView />} />} />
           <Route path="/StudentForm" element={<ProtectedElement allowedRoles={[1]} element={<StudentForm />} />} />
           <Route path="/StudentEdit/:id" element={<ProtectedElement allowedRoles={[1]} element={<StudentEdit />} />} />

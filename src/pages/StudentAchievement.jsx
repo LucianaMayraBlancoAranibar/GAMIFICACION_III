@@ -12,7 +12,7 @@ class StudentAchievement extends Component {
   state = {
     selectedStudent: null,
     selectedAchievement: null,
-    message: "", // Mensaje para mostrar en caso de éxito o error
+    message: "", 
     studentOptions: [],
     achievementOptions: [],
     sidebarOpen: false,
