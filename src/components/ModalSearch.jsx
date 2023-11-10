@@ -190,48 +190,6 @@ function ModalSearch({
                 </li>
               </ul>
             </div>
-            {/* Recent pages */}
-            <div className="mb-3 last:mb-0">
-              <div className="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase px-2 mb-2">Recent pages</div>
-              <ul className="text-sm">
-                <li>
-                  <Link
-                    className="flex items-center p-2 text-slate-800 dark:text-slate-100 hover:text-white hover:bg-indigo-500 rounded group"
-                    to="#0"
-                    onClick={() => setModalOpen(!modalOpen)}
-                  >
-                    <svg
-                      className="w-4 h-4 fill-current text-slate-400 dark:text-slate-500 group-hover:text-white group-hover:text-opacity-50 shrink-0 mr-3"
-                      viewBox="0 0 16 16"
-                    >
-                      <path d="M14 0H2c-.6 0-1 .4-1 1v14c0 .6.4 1 1 1h8l5-5V1c0-.6-.4-1-1-1zM3 2h10v8H9v4H3V2z" />
-                    </svg>
-                    <span>
-                      <span className="font-medium">Messages</span> -{' '}
-                      <span className="text-slate-600 dark:text-slate-400 group-hover:text-white">Conversation / … / Mike Mills</span>
-                    </span>
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    className="flex items-center p-2 text-slate-800 dark:text-slate-100 hover:text-white hover:bg-indigo-500 rounded group"
-                    to="#0"
-                    onClick={() => setModalOpen(!modalOpen)}
-                  >
-                    <svg
-                      className="w-4 h-4 fill-current text-slate-400 dark:text-slate-500 group-hover:text-white group-hover:text-opacity-50 shrink-0 mr-3"
-                      viewBox="0 0 16 16"
-                    >
-                      <path d="M14 0H2c-.6 0-1 .4-1 1v14c0 .6.4 1 1 1h8l5-5V1c0-.6-.4-1-1-1zM3 2h10v8H9v4H3V2z" />
-                    </svg>
-                    <span>
-                      <span className="font-medium">Messages</span> -{' '}
-                      <span className="text-slate-600 dark:text-slate-400 group-hover:text-white">Conversation / … / Eva Patrick</span>
-                    </span>
-                  </Link>
-                </li>
-              </ul>
-            </div>
           </div>
         </div>
       </Transition>

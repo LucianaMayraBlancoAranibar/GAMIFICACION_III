@@ -10,33 +10,33 @@ function SucursalTable() {
   const [sucursalToDelete, setSucursalToDelete] = useState(null);
 
   useEffect(() => {
-    // Realiza una solicitud a tu API para obtener la lista de Sucursal
+  
     axios
-      .get("https://localhost:7220/api/AcademicUnities")
+      .get("https://localhost:7205/api/AcademicUnities")
       .then((response) => {
-        console.log(response.data); // Verifica los datos que obtienes
+        console.log(response.data); 
         setSucursal(response.data);
       })
       .catch((error) => {
-        console.error(error); // Verifica si hay errores en la llamada a la API
+        console.error(error);
       });
   }, []);
 
   const handleDeleteSucursal = () => {
     if (sucursalToDelete) {
-      // Realiza una solicitud DELETE a la API para eliminar la sucursal
+     
       axios
-        .delete(`https://localhost:7220/api/AcademicUnities/${sucursalToDelete}`)
+        .delete(`https://localhost:7205/api/AcademicUnities/${sucursalToDelete}`)
         .then((response) => {
-          // Actualiza la lista de Sucursal después de la eliminación
+        
           setSucursal((prevSucursal) =>
             prevSucursal.filter((Sucursal) => Sucursal.idAcademicUnity !== sucursalToDelete)
           );
-          setSucursalToDelete(null); // Restablece el estado
+          setSucursalToDelete(null); 
         })
         .catch((error) => {
           console.error(error);
-          setSucursalToDelete(null); // Restablece el estado en caso de error
+          setSucursalToDelete(null); 
         });
     }
   };
@@ -76,7 +76,7 @@ function SucursalTable() {
                 
                   <td className="px-6 py-4">{Sucursal.academicUnityName}</td>
                   <td className="px-6 py-4 text-left">
-                  <Link to={`/SucursalEdit/${Sucursal.idAcademicUnity}`}> {/* Redirigir a la página de edición con el ID */}
+                  <Link to={`/SucursalEdit/${Sucursal.idAcademicUnity}`}> 
                     <button
                      className="px-4 py-4 mr-4 leading-5 text-white transition-colors duration-200 transform bg-green-700 rounded-md hover:bg-green-500 focus:outline-none focus:bg-gray-600"
                     >
@@ -85,7 +85,7 @@ function SucursalTable() {
                     </Link>
                     <button
                      className="px-4 py-4 ml-3 leading-5 text-white transition-colors duration-200 transform bg-red-500 rounded-md hover:bg-red-400 focus:outline-none focus:bg-gray-600"
-                      onClick={() => setSucursalToDelete(Sucursal.idAcademicUnity)} // Establece el ID de la sucursal para eliminar
+                      onClick={() => setSucursalToDelete(Sucursal.idAcademicUnity)}
                     >
                       Eliminar
                     </button>
