@@ -21,7 +21,7 @@ const Carrusel = () => {
         style={{ width: '100%', height: '100%' }}
       >
         {images.map((image, index) => (
-          <div key={index}>
+          <div key={index} style={{ height: '100%', width: '100%' }}>
             <img
               src={image}
               alt={`Image ${index}`}
