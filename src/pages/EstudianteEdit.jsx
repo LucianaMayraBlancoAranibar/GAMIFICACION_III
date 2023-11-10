@@ -168,7 +168,10 @@ function EstudianteEdit() {
         firstName: estudiante.firstName,
         lastName: estudiante.lastName,
         email: Usuario.email,  // Aquí utilizas el email del estado Usuario
-        // ... (resto de los datos)
+        rol: Usuario.rol,
+        password: Usuario.password,
+        idCareer: Usuario.idCareer,
+        idAcademicUnity: Usuario.idAcademicUnity,
       };
 
       axios
