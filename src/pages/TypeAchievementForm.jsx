@@ -55,7 +55,7 @@ function TypeAchievementForm() {
           "https://localhost:7205/api/TypeAchievements",
           data
         );
-
+        setModalIsOpen(true);
         console.log("Respuesta de la API:", response.data);
 
       } catch (error) {

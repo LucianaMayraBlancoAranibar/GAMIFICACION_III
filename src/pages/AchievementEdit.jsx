@@ -3,7 +3,7 @@ import Axios from "axios";
 import Sidebar from "../partials/Sidebar";
 import Header from "../partials/Header";
 import { Link, useParams } from "react-router-dom";
-import ModalConfirmacion from "../partials/ModalConfirmacion";
+import ModalConfirmacion from "../partials/ModalEdit";
 
 function AchievementEdit() {
   const { id } = useParams();

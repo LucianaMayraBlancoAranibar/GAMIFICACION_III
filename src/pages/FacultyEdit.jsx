@@ -53,7 +53,7 @@ function FacultyEdit() {
     };
 
     axios
-      .put(`https://localhost:7218/api/Faculties/${id}`, requestData, {
+      .put(`https://localhost:7205/api/Faculties/${id}`, requestData, {
         headers: {
           "Content-Type": "application/json",
         },

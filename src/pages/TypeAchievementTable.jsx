@@ -4,18 +4,20 @@ import Sidebar from "../partials/Sidebar";
 import Header from "../partials/Header";
 import { Link } from "react-router-dom";
 import { AiFillEdit } from 'react-icons/ai'; 
-import { BsTrashFill } from 'react-icons/bs'; 
+import ModalConfirmacion from "../partials/ModalConfirmacion";
 
 
 function TypeAchievementTable() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [typeAchievements, setTypeAchievements] = useState([]);
   const [typeAchievementToDelete, setTypeAchievementToDelete] = useState(null);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   useEffect(() => {
     axios
       .get("https://localhost:7205/api/TypeAchievements")
       .then((response) => {
+        setModalIsOpen(true);
         console.log(response.data);
         setTypeAchievements(response.data);
       })
@@ -46,6 +48,8 @@ function TypeAchievementTable() {
     }
   };
 
+
+
   return (
     <div className="flex h-screen overflow-hidden">
       <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
@@ -55,7 +59,7 @@ function TypeAchievementTable() {
           <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">Lista de Tipos Logros</h1>
           <div className="mr-10 grid grid-flow-col sm:auto-cols-max justify-start sm:justify-end gap-2">
             <Link to="/TypeAchievementForm">
-              <button className="px-10 py-5 leading-5 text-white transition-colors duration-200 transform bg-gray-800 rounded-md hover:bg-gray-700 focus:outline-none focus:bg-gray-600">
+              <button className="px-10 py-5 leading-5 text-white transition-colors duration-200 transform  bg-green-700 rounded-md hover:bg-green-500  focus:outline-none focus:bg-gray-600">
                 Añadir Logro
               </button>
             </Link>
@@ -97,11 +101,11 @@ function TypeAchievementTable() {
                       <Link
                         to={`/TypeAchievementEdit/${typeAchievement.idTypeAchievement}`}
                       >
-                        <button className="px-4 py-4 mr-4 leading-5 text-white transition-colors duration-200 transform bg-green-700 rounded-md hover:bg-green-500 focus:outline-none focus:bg-gray-600">
+                        <button className="px-4 py-4 mr-4 leading-5 text-white transition-colors duration-200 transform  bg-yellow-600 rounded-md hover:bg-yellow-700 focus:outline-none focus:bg-gray-600">
                         <AiFillEdit />
                         </button>
                       </Link>
-                      <button
+                      {/* <button
                         className="px-4 py-4 ml-3 leading-5 text-white transition-colors duration-200 transform bg-red-500 rounded-md hover:bg-red-400 focus:outline-none focus:bg-gray-600"
                         onClick={() =>
                           setTypeAchievementToDelete(
@@ -110,7 +114,7 @@ function TypeAchievementTable() {
                         }
                       >
                         <BsTrashFill /> 
-                      </button>
+                      </button> */}
                     </td>
                   </tr>
                 ))}

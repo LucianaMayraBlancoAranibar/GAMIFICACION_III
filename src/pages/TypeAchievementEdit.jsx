@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Sidebar from "../partials/Sidebar";
 import Header from "../partials/Header";
-import ModalConfirmacion from "../partials/ModalConfirmacion";
+import ModalConfirmacion from "../partials/ModalEdit";
 import { useParams, Link } from "react-router-dom";
 
 function TypeAchievementEdit() {

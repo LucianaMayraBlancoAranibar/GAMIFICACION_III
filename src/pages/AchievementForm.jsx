@@ -57,6 +57,7 @@ function AchievementForm() {
     // Si no hay errores, continuar con el envío del formulario
     Axios.post("https://localhost:7205/api/Achievements", formData)
       .then((response) => {
+        setModalIsOpen(true);
         console.log("Logro creado con éxito:", response.data);
       })
       .catch((error) => {

@@ -1,4 +1,4 @@
-import React, { Component, useState} from "react";
+import React, { Component, useState } from "react";
 import axios from "axios";
 import Select from "react-select";
 import Sidebar from "../partials/Sidebar";
@@ -6,14 +6,11 @@ import Header from "../partials/Header";
 import ModalConfirmacion from "../partials/ModalConfirmacion";
 import { Link } from "react-router-dom";
 
-
-
 class StudentAchievement extends Component {
-  
   state = {
     selectedStudent: null,
     selectedAchievement: null,
-    message: "", 
+    message: "",
     studentOptions: [],
     achievementOptions: [],
     sidebarOpen: false,
@@ -82,11 +79,11 @@ class StudentAchievement extends Component {
       });
       return;
     }
+    this.setModalIsOpen(true);
 
     const studentNameParts = selectedStudent.value.split(", ");
     const studentFirstName = studentNameParts[0];
     const studentLastName = studentNameParts[1];
-    
 
     const request = {
       StudentName: studentFirstName,
@@ -100,15 +97,14 @@ class StudentAchievement extends Component {
         request
       )
       .then((response) => {
-        this.setState({ message: response.data });
+       
       })
       .catch((error) => {
-        this.setState({ message: error.response.data });
+  
       });
   };
 
   render() {
-    
     const {
       selectedStudent,
       selectedAchievement,
@@ -116,14 +112,20 @@ class StudentAchievement extends Component {
       studentOptions,
       achievementOptions,
       sidebarOpen,
-      modalIsOpen
+      modalIsOpen,
     } = this.state;
 
     return (
       <div className="flex h-screen overflow-hidden">
-        <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={this.setSidebarOpen} />
+        <Sidebar
+          sidebarOpen={sidebarOpen}
+          setSidebarOpen={this.setSidebarOpen}
+        />
         <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
-        <Header sidebarOpen={sidebarOpen} setSidebarOpen={this.setSidebarOpen} />
+          <Header
+            sidebarOpen={sidebarOpen}
+            setSidebarOpen={this.setSidebarOpen}
+          />
           <div className="relative p-4 sm:p-6 rounded-sm overflow-hidden mb-8">
             <div className="relative">
               <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
@@ -135,7 +137,7 @@ class StudentAchievement extends Component {
               <div>
                 <label>Estudiante </label>
                 <br></br>
-              
+
                 <Select
                   value={selectedStudent}
                   onChange={this.handleStudentChange}
@@ -144,11 +146,11 @@ class StudentAchievement extends Component {
                 />
               </div>
               <br></br>
-      
+
               <div>
                 <label>Logro </label>
                 <br></br>
-                
+
                 <Select
                   value={selectedAchievement}
                   onChange={this.handleAchievementChange}
@@ -157,10 +159,21 @@ class StudentAchievement extends Component {
               </div>
               <br></br>
               <br></br>
-              <button  className="px-10 py-5 leading-5 text-white transition-colors duration-200 transform bg-gray-800 rounded-md hover:bg-gray-700 focus:outline-none focus:bg-gray-600"
-              type="submit" onClick={this.assignAchievement}>Asignar Logro</button>
+              <button
+                className="px-10 py-5 leading-5 text-white transition-colors duration-200 transform bg-gray-800 rounded-md hover:bg-gray-700 focus:outline-none focus:bg-gray-600"
+                type="submit"
+                onClick={this.assignAchievement}
+              >
+                Asignar Logro
+              </button>
               <div>{message}</div>
             </div>
+            <ModalConfirmacion
+              isOpen={modalIsOpen}
+              onConfirm={this.confirmAssignment}
+              onCancel={() => this.setModalIsOpen(false)}
+              // ...otros props si son necesarios
+            />
           </div>
         </div>
       </div>
