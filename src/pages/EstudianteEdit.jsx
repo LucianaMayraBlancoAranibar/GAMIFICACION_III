@@ -44,12 +44,13 @@ function EstudianteEdit() {
           firstName,
           lastName,
         });
-        setUsuario({
+        setUsuario((prevUsuario) => ({
+          ...prevUsuario,
           idUser,
-          email,  // Aquí obtienes el email de la respuesta
+          email,
           idCareer,
           idAcademicUnity,
-        });
+        }));
       })
       .catch((error) => {
         console.log(error);
@@ -83,7 +84,77 @@ function EstudianteEdit() {
   const validateForm = () => {
     let isValid = true;
 
-    // ... (resto del código de validación)
+    if (!estudiante.firstName) {
+      setStudentNameError("El nombre del estudiante es obligatorio");
+      isValid = false;
+    } else if (
+      estudiante.firstName.length < 3 ||
+      estudiante.firstName.length > 15
+    ) {
+      setStudentNameError(
+        "El nombre del estudiante debe tener entre 3 y 15 caracteres"
+      );
+      isValid = false;
+    } else {
+      setStudentNameError("");
+    }
+
+    if (!estudiante.lastName) {
+      setLastNameError("El apellido es obligatorio");
+      isValid = false;
+    } else if (estudiante.lastName.length < 3 || estudiante.lastName.length > 25) {
+      setLastNameError("El apellido debe tener entre 3 y 25 caracteres");
+      isValid = false;
+    } else {
+      setLastNameError("");
+    }
+
+    if (!Usuario.email) {
+      setEmailError("El email es obligatorio");
+      isValid = false;
+    } else {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(Usuario.email)) {
+        setEmailError("El email no tiene un formato válido");
+        isValid = false;
+      } else if (existeEmail) {
+        setEmailError("El email ya existe");
+        isValid = false;
+      } else {
+        setEmailError("");
+      }
+    }
+
+    if (!Usuario.password) {
+      setPasswordError("La contraseña es obligatoria");
+      isValid = false;
+    } else if (Usuario.password.length < 6 || Usuario.password.length > 10) {
+      setPasswordError("La contraseña debe tener entre 6 y 10 caracteres");
+      isValid = false;
+    } else {
+      setPasswordError("");
+    }
+
+    if (!Usuario.idCareer) {
+      setIdCareerError("Debes seleccionar una carrera");
+      isValid = false;
+    } else {
+      setIdCareerError("");
+    }
+
+    if (!estudiante.idRank) {
+      setIdRankError("Debes seleccionar un rank");
+      isValid = false;
+    } else {
+      setIdRankError("");
+    }
+
+    if (!Usuario.idAcademicUnity) {
+      setIdAcademicUnityError("Debes seleccionar una unidad académica");
+      isValid = false;
+    } else {
+      setIdAcademicUnityError("");
+    }
 
     return isValid;
   };
