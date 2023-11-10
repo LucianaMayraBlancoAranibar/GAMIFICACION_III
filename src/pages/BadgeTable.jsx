@@ -4,6 +4,7 @@ import Sidebar from "../partials/Sidebar";
 import Header from "../partials/Header";
 import { Link } from "react-router-dom";
 
+
 const BadgesTable = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [badges, setBadges] = useState([]);

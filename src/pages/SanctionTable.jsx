@@ -3,6 +3,7 @@ import axios from "axios";
 import Sidebar from "../partials/Sidebar";
 import Header from "../partials/Header";
 import { Link } from "react-router-dom";
+import { BsTrashFill } from 'react-icons/bs';
 
 function SanctionsTable() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -85,7 +86,7 @@ function SanctionsTable() {
                     <td className="px-6 py-4">{sanction.studentName}</td>
                     <td className="px-6 py-4">
                       <button className="bg-red-500 text-white p-2 rounded" onClick={() => handleDelete(sanction.id)}>
-                        Eliminar
+                      <BsTrashFill /> 
                       </button>
                     </td>
                   </tr>

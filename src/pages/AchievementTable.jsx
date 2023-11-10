@@ -3,6 +3,8 @@ import axios from "axios";
 import Sidebar from "../partials/Sidebar";
 import Header from "../partials/Header";
 import { Link } from "react-router-dom";
+import { AiFillEdit } from 'react-icons/ai'; 
+import { BsTrashFill } from 'react-icons/bs'; 
 
 function AchievementTable() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -10,7 +12,7 @@ function AchievementTable() {
   const [achievementToDelete, setAchievementToDelete] = useState(null);
 
   useEffect(() => {
-    // Realiza una solicitud a tu API para obtener la lista de logros
+   
     axios
       .get("https://localhost:7205/api/Achievements")
       .then((response) => {
@@ -18,13 +20,13 @@ function AchievementTable() {
         setAchievements(response.data);
       })
       .catch((error) => {
-        console.error(error); // Verifica si hay errores en la llamada a la API
+        console.error(error); 
       });
   }, []);
 
   const handleDeleteAchievement = () => {
     if (achievementToDelete) {
-      // Verificar si el logro existe antes de eliminarlo
+
       const achievementToDeleteIndex = achievements.findIndex(
         (achievement) => achievement.idAchievement === achievementToDelete
       );
@@ -93,7 +95,7 @@ function AchievementTable() {
                         to={`/AchievementEdit/${achievement.idAchievement}`}
                       >
                         <button className="px-4 py-4 mr-4 leading-5 text-white transition-colors duration-200 transform bg-green-700 rounded-md hover:bg-green-500 focus:outline-none focus:bg-gray-600">
-                          Editar
+                        <AiFillEdit /> 
                         </button>
                       </Link>
                       <button
@@ -102,7 +104,7 @@ function AchievementTable() {
                           setAchievementToDelete(achievement.idAchievement)
                         }
                       >
-                        Eliminar
+                          <BsTrashFill /> 
                       </button>
                     </td>
                   </tr>

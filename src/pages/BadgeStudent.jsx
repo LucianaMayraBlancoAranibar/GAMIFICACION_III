@@ -3,6 +3,8 @@ import axios from "axios";
 import Select from "react-select";
 import Sidebar from "../partials/Sidebar";
 import Header from "../partials/Header";
+import { AiFillEdit } from 'react-icons/ai'; 
+import { BsTrashFill } from 'react-icons/bs'; 
 
 const AssignBadgeForm = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);

@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import Sidebar from "../partials/Sidebar";
 import Header from "../partials/Header";
+import { BsTrashFill } from 'react-icons/bs'; 
 
 function AssignmentTable() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -100,7 +101,7 @@ function AssignmentTable() {
                          className="px-4 py-4 ml-3 leading-5 text-white transition-colors duration-200 transform bg-red-500 rounded-md hover:bg-red-400 focus:outline-none focus:bg-gray-600"
                         onClick={() => setAssignmentToDelete(assignment.id)}
                       >
-                        Eliminar
+                         <BsTrashFill /> 
                       </button>
 {/* 
                       <Link to={`/AssigmentEdit/${assignment.id}`}>

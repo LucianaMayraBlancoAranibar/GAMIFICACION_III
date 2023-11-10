@@ -3,6 +3,9 @@ import axios from "axios";
 import Sidebar from "../partials/Sidebar";
 import Header from "../partials/Header";
 import { Link } from "react-router-dom";
+import { AiFillEdit } from 'react-icons/ai'; 
+import { BsTrashFill } from 'react-icons/bs'; 
+
 
 function TypeAchievementTable() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -95,7 +98,7 @@ function TypeAchievementTable() {
                         to={`/TypeAchievementEdit/${typeAchievement.idTypeAchievement}`}
                       >
                         <button className="px-4 py-4 mr-4 leading-5 text-white transition-colors duration-200 transform bg-green-700 rounded-md hover:bg-green-500 focus:outline-none focus:bg-gray-600">
-                          Editar
+                        <AiFillEdit />
                         </button>
                       </Link>
                       <button
@@ -106,7 +109,7 @@ function TypeAchievementTable() {
                           )
                         }
                       >
-                        Eliminar
+                        <BsTrashFill /> 
                       </button>
                     </td>
                   </tr>
