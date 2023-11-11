@@ -189,6 +189,10 @@ function EstudianteEdit() {
     }
   };
 
+  function closeModal() {
+    setModalIsOpen(false);
+  }
+
   return (
     <div className="flex h-screen overflow-hidden">
       <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
