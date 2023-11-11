@@ -4,6 +4,7 @@ import Sidebar from "../partials/Sidebar";
 import Header from "../partials/Header";
 import Footer from "../partials/Footer";
 import { Link } from "react-router-dom";
+import Header2 from "../partials/Header2";
 import '../css/MainCards.css'
 
 function Main() {
@@ -68,6 +69,7 @@ function Main() {
     };
     document.body.appendChild(script);
 
+    /*Carrousel de imagenes de arriba de la pagina*/
     const buttons = document.querySelectorAll("[data-carousel-button]");
     const intervalTime = 5000; // Cambiar de imagen cada 5 segundos
     
@@ -112,6 +114,8 @@ function Main() {
   return (
     <div className="flex h-screen overflow-hidden">
       <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
+        <Header2 sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+
         <div className="relative pt-4 rounded-sm overflow-hidden overflow-y-scroll">
           <div className="carousel" data-carousel>
             <button className="carousel-button prev" data-carousel-button="prev">&#8656;</button>
