@@ -46,6 +46,7 @@ import CarreraTable from "./pages/CarreraTable"
 import StudentForm from "./pages/StudentForm"
 import StudentTable from "./pages/StudentTable"
 import StudentEdit from "./pages/StudentEdit"
+import StudentPortfolioView from "./pages/StudentPortfolioView";
 import ManagerForm from "./pages/ManagerForm"
 import ManagerTable from "./pages/ManagerTable"
 import ManagerEdit from "./pages/ManagerEdit"
@@ -134,6 +135,7 @@ function App() {
           <Route path="/AssignmentTable" element={<ProtectedElement allowedRoles={[1]} element={<AssignmentTable />} />} />
           <Route path="/AssigmentEdit/:id" element={<ProtectedElement allowedRoles={[1]} element={<AssigmentEdit />} />} />
           <Route path="/StudentRankView" element={<ProtectedElement allowedRoles={[3]} element={<StudentRankView />} />} />
+          <Route path="/StudentPortfolioView" element={<ProtectedElement allowedRoles={[3]} element={<StudentPortfolioView/>} />} />
           <Route path="/StudentForm" element={<ProtectedElement allowedRoles={[1]} element={<StudentForm />} />} />
           <Route path="/StudentEdit/:id" element={<ProtectedElement allowedRoles={[1]} element={<StudentEdit />} />} />
           <Route path="/StudentTable" element={<ProtectedElement allowedRoles={[1]} element={<StudentTable/>} />} />
