@@ -32,7 +32,8 @@ import NavigationGuard from "./utils/NavigationGuard";
 import { AuthProvider } from "./AuthContext";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
-import StudentRankView from "./pages/StudentRankView";
+import StudentView from "./pages/StudentView";
+import StudentRankView from "./pages/StudentRankView ";
 import ChangePasswordForm from "./pages/ChangePasswordForm ";
 import BadgeTable from "./pages/BadgeTable";
 import BadgeStudent from "./pages/BadgeStudent";
@@ -139,6 +140,7 @@ function App() {
           <Route path="/StudentAchievement" element={<ProtectedElement allowedRoles={[1,2]} element={<StudentAchievement />} />} />
           <Route path="/AssignmentTable" element={<ProtectedElement allowedRoles={[1]} element={<AssignmentTable />} />} />
           <Route path="/AssigmentEdit/:id" element={<ProtectedElement allowedRoles={[1]} element={<AssigmentEdit />} />} />
+          <Route path="/StudentView" element={<ProtectedElement allowedRoles={[3]} element={<StudentView />} />} />
           <Route path="/StudentRankView" element={<ProtectedElement allowedRoles={[3]} element={<StudentRankView />} />} />
           <Route path="/StudentPortfolioView" element={<ProtectedElement allowedRoles={[3]} element={<StudentPortfolioView/>} />} />
           <Route path="/StudentAchievementsView" element={<ProtectedElement allowedRoles={[3]} element={<StudentAchievementsView/>} />} />

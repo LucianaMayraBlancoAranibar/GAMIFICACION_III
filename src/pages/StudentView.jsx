@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const StudentRankView = () => {
+const StudentView = () => {
   const [studentRank, setStudentRank] = useState({
    
     firstName: '',
@@ -23,7 +23,7 @@ const StudentRankView = () => {
     if (!studentId) {
       setError('No student ID found');
       setLoading(false);
-      navigate('/login');
+      navigate('/LoginPage');
       return;
     }
 
@@ -75,4 +75,4 @@ const InfoCard = ({ label, value, icon }) => (
   </div>
 );
 
-export default StudentRankView;
+export default StudentView;

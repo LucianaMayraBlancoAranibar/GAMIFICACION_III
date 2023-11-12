@@ -83,7 +83,7 @@ function TypeAchievementForm() {
           <br></br>
           <form onSubmit={handleSubmit}>
             <div>
-              <label htmlFor="NameTypeAchievement">
+              <label htmlFor="NameTypeAchievement" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 Nombre del tipo de logro:
               </label>
               <input
@@ -106,7 +106,7 @@ function TypeAchievementForm() {
             <br></br>
 
             <div>
-              <label htmlFor="Image">Seleccione una imagen:</label>
+              <label htmlFor="Image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Seleccione una imagen:</label>
               <input
                 type="file"
                 id="Image"
@@ -127,7 +127,7 @@ function TypeAchievementForm() {
             </button>
             <br></br>
             <br></br>
-            <Link to="/TypeAchievementTable">
+            <Link to="/TypeAchievementTable" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
               Volver a la lista de Tipos de logros
             </Link>
           </form>

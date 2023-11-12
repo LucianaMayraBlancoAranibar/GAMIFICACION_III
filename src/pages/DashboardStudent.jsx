@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import SidebarStudent from "../partials/SiderbarStudent";
 import Header from "../partials/Header";
 import WelcomeBannerStudent from "../partials/dashboard/WelcomeBannerStudent";
-import StudentRankView from "../pages/StudentRankView";
+import StudentView from "./StudentView";
 
 
 function Dashboard() {
@@ -26,7 +26,7 @@ function Dashboard() {
 
             {/* Dashboard actions */}
             <div className="sm:flex sm:justify-between sm:items-center mb-8">
-           <StudentRankView  />
+           <StudentView  />
        
             </div>
 

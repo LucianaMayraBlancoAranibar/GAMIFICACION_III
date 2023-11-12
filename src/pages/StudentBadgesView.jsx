@@ -14,7 +14,7 @@ const StudentBadgesView = ({ studentId }) => {
     if (!studentId) {
       setError("No student ID found");
       setLoading(false);
-      navigate("/login");
+      navigate("/LoginPage");
       return;
     }
     axios
@@ -46,9 +46,13 @@ const StudentBadgesView = ({ studentId }) => {
         {/* Site header */}
         <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
         <div className="container mx-auto p-4">
-          <h1 className="text-2xl font-bold mb-4">Badges</h1>
+          <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+            Badges
+          </h1>
+          <div></div>
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {badges.map((badge, index) => (
+              
               <div
                 key={index}
                 className="bg-white shadow rounded-lg p-4 flex flex-col items-center"

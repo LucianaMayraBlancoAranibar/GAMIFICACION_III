@@ -41,31 +41,43 @@ const StudentSanctionsView = ({ studentId }) => {
         sidebarOpen={sidebarOpen}
         setSidebarOpen={setSidebarOpen}
       />
-
-      {/* Content area */}
       <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
         {/* Site header */}
         <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
         <div className="container mx-auto p-4">
-          <h1 className="text-2xl font-bold mb-4">Sanctions</h1>
-          <table className="min-w-full table-auto">
-            <thead>
-              <tr>
-                <th className="px-4 py-2 border">Name</th>
-                <th className="px-4 py-2 border">Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              {sanctions.map((sanction) => (
-                <tr key={sanction.idSanction}>
-                  <td className="px-4 py-2 border">
-                    {sanction.sanctionDescription}
-                  </td>
-                  <td className="px-4 py-2 border">{sanction.sanctionValue}</td>
+          <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+            Sanciones
+          </h1>
+          <div></div>
+          <div></div>
+          <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-5 max-h-[600px] overflow-y-auto">
+            <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+              <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                  <th scope="col" className="px-6 py-3 text-center">
+                    <div className="font-semibold text-left">Name</div>
+                  </th>
+
+                  <th scope="col" className="px-6 py-3 text-center">
+                    <div className="font-semibold text-left">Description</div>
+                  </th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="text-sm font-medium divide-y divide-slate-100 dark:divide-slate-700">
+                {sanctions.map((sanction) => (
+                  <tr
+                    key={sanction.idSanction}
+                    className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                  >
+                    <td className="px-6 py-4">
+                      {sanction.sanctionDescription}
+                    </td>
+                    <td className="px-6 py-4">{sanction.sanctionValue}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
