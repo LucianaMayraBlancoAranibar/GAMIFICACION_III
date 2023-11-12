@@ -221,10 +221,11 @@ function SidebarStudent({ sidebarOpen, setSidebarOpen }) {
                       </a>
                       <div className="lg:hidden lg:sidebar-expanded:block 2xl:block">
                         <ul className={`pl-9 mt-1 ${!open && "hidden"}`}>
+                         
                           <li className="mb-1 last:mb-0">
                             <NavLink
                               end
-                              to="/"
+                              to="/DashboardStudent"
                               className={({ isActive }) =>
                                 "block transition duration-150 truncate " +
                                 (isActive
@@ -237,54 +238,8 @@ function SidebarStudent({ sidebarOpen, setSidebarOpen }) {
                               </span>
                             </NavLink>
                           </li>
-                          <li className="mb-1 last:mb-0">
-                            <NavLink
-                              end
-                              to="/Main"
-                              className={({ isActive }) =>
-                                "block transition duration-150 truncate " +
-                                (isActive
-                                  ? "text-indigo-500"
-                                  : "text-slate-400 hover:text-slate-200")
-                              }
-                            >
-                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                Main2
-                              </span>
-                            </NavLink>
-                          </li>
-                          <li className="mb-1 last:mb-0">
-                            <NavLink
-                              end
-                              to="/dashboard/analytics"
-                              className={({ isActive }) =>
-                                "block transition duration-150 truncate " +
-                                (isActive
-                                  ? "text-indigo-500"
-                                  : "text-slate-400 hover:text-slate-200")
-                              }
-                            >
-                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                Analytics
-                              </span>
-                            </NavLink>
-                          </li>
-                          <li className="mb-1 last:mb-0">
-                            <NavLink
-                              end
-                              to="/dashboard/fintech"
-                              className={({ isActive }) =>
-                                "block transition duration-150 truncate " +
-                                (isActive
-                                  ? "text-indigo-500"
-                                  : "text-slate-400 hover:text-slate-200")
-                              }
-                            >
-                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                Fintech
-                              </span>
-                            </NavLink>
-                          </li>
+                         
+                         
                         </ul>
                       </div>
                     </React.Fragment>
