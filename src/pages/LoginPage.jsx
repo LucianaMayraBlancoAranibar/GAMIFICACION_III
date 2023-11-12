@@ -60,7 +60,7 @@ function LoginComponent() {
         } else if (data.user.rol === 2) {
           navigate("/"); // Redirecciona al gestor
         } else if (data.user.rol === 3) {
-          navigate("/StudentRankView"); // Redirecciona al estudiante
+          navigate("/DashboardStudent"); // Redirecciona al estudiante
         } else {
           setErrors({ form: "Rol no reconocido." });
         }
