@@ -41,6 +41,8 @@ import UserBadges from "./pages/UserBadges";
 import UserSanction from "./pages/UserSanction";
 
 import StudentTable from "./pages/StudentTable";
+import StudentForm from "./pages/StudentForm";
+import StudentEdit from "./pages/StudentEdit";
 
 
 function ScrollToTopOnRouteChange() {
@@ -105,6 +107,8 @@ function App() {
         <Route path="/BadgeEdit/:id" element={<BadgeEdit />} />
 
         <Route path="/StudentTable" element={<StudentTable />} />
+        <Route path="/StudentForm" element={<StudentForm />} />
+        <Route path="/StudentEdit/:id" element={<StudentEdit />} />
 
       </Routes>
     </Router>
