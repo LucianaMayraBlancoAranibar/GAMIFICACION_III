@@ -57,6 +57,8 @@ import ManagerTable from "./pages/ManagerTable"
 import ManagerEdit from "./pages/ManagerEdit"
 import UserManager from "./pages/UserManager"
 
+import Main from "./pages/Main"
+
 
 function ScrollToTopOnRouteChange() {
   useEffect(() => {
@@ -158,6 +160,7 @@ function App() {
           <Route path="/ChangePasswordForm" element={<ProtectedElement allowedRoles={[1, 2,3]} element={<ChangePasswordForm />}/>}/>
           <Route path="/ForgotPassword" element={<ForgotPassword />} />
           <Route path="/ResetPassword" element={<ResetPassword />} />
+          <Route path="/Main" element={<Main />} />
         </Routes>
       </Router>
     </AuthProvider>
