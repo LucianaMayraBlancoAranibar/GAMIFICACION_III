@@ -40,9 +40,9 @@ import BadgeAssignmentsEdit from "./pages/BadgeAssignmentsEdit"
 import DepartamentoEdit from "./pages/DepartamentoEdit";
 import DepartamentoForm from "./pages/DepartamentoForm";
 import DepartamentoTable from "./pages/DepartamentoTable";
-//import CarreraEdit from "./pages/CarreraEdit"
-import CarreraForm from "./pages/CarreraForm"
-import CarreraTable from "./pages/CarreraTable"
+import CarreraTable from './pages/CarreraTable';
+import CarreraEdit from './pages/CarreraEdit';
+import CarreraForm from './pages/CarreraForm';
 import StudentForm from "./pages/StudentForm"
 import StudentTable from "./pages/StudentTable"
 import StudentEdit from "./pages/StudentEdit"
@@ -146,6 +146,14 @@ function App() {
           <Route path="/ChangePasswordForm" element={<ProtectedElement allowedRoles={[1, 2,3]} element={<ChangePasswordForm />}/>}/>
           <Route path="/ForgotPassword" element={<ForgotPassword />} />
           <Route path="/ResetPassword" element={<ResetPassword />} />
+
+          <Route path="/CarreraTable" element={<CarreraTable />} />
+          <Route path="/CarreraEdit/:id" element={<CarreraEdit />} />
+          <Route path="/CarreraForm" element={<CarreraForm />} />
+          <Route path="/StudentTable" element={<StudentTable />} />
+          <Route path="/StudentForm" element={<StudentForm />} />
+          <Route path="/StudentEdit/:id" element={<StudentEdit />} />
+
         </Routes>
       </Router>
     </AuthProvider>

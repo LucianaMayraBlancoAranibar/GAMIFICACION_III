@@ -3,74 +3,114 @@ import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import Sidebar from "../partials/Sidebar";
 import Header from "../partials/Header";
-
 import ModalConfirmacion from "../partials/ModalConfirmacion";
 
-function EstudianteEdit() {
+function StudentEdit() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { id } = useParams();
-  const [idUser, setidUser] = useState("");
-  const [estudiante, setEstudiante] = useState({
-    score: "",
-    idRank: "",
-    firstName: "",
-    lastName: "",
-    
-  });
-  const [Usuario, setUsuario] = useState({
+  const [idCareer, setIdCarrer] = useState("");
+  const [idAcademicUnity, setIdAcademicUnity] = useState("");
+  const [serverError, setServerError] = useState("");
+  const [studentUser, setStudentUser] = useState({
     email: "",
     rol: "",
-    password: "",
+    firstName: "",
+    lastName: "",
     idCareer: "",
     idAcademicUnity: "",
   });
-  const [StudentNameError, setStudentNameError] = useState("");
+  const [Carrera, setCarrer] = useState("");
+  const [AcademicUnity, setAcademicUnity] = useState("");
+
+  const [emailError, setemailError] = useState("");
+  const [firstNameError, setfirstNameError] = useState("");
+  const [lastNameError, setlastNameError] = useState("")
 
   const validateForm = () => {
     let isValid = true;
-
-    if (!estudiante.StudentName) {
-      setStudentNameError("El nombre del estudiante es obligatorio");
+  
+    if (!studentUser.firstName) {
+      setfirstNameError("El nombre es obligatorio");
       isValid = false;
-    } else if (estudiante.StudentName.length < 3 || estudiante.StudentName.length > 15) {
-      setStudentNameError("El nombre del estudiante debe tener entre 3 y 15 caracteres");
+    } else if (studentUser.firstName.length < 3 || studentUser.firstName.length > 25) {
+      setfirstNameError("El nombre debe tener entre 3 y 25 caracteres");
       isValid = false;
     } else {
-      setStudentNameError("");
+      setfirstNameError("");
     }
+
+    if (!studentUser.lastName) {
+      setlastNameError("El apellido es obligatorio");
+      isValid = false;
+    } else if (studentUser.lastName.length < 3 || studentUser.lastName.length > 25) {
+      setlastNameError("El apellido debe tener entre 3 y 25 caracteres");
+      isValid = false;
+    } else {
+      setlastNameError("");
+    }
+
+    if (!studentUser.email) {
+      setemailError("El email es obligatorio");
+      isValid = false;
+    } else {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(studentUser.email)) {
+        setemailError("El email no tiene un formato válido");
+        isValid = false;
+      } else {
+        setemailError("");
+      }
+    }
+      
     return isValid;
   };
 
   useEffect(() => {
     axios
-      .get(`https://localhost:7205/api/StudentUsuario/${id}`)
+      .get(`https://localhost:7205/api/Students/${id}`)
       .then((response) => {
-        setEstudiante(response.data);
-        setidUser(response.data.idUser);
-
+        console.log(response.data); // Verifica los datos que obtienes
+        setStudentUser(response.data);
+        setIdCarrer(response.data.idCareer)
+        setIdAcademicUnity(response.data.idAcademicUnity)
       })
       .catch((error) => {
         console.log(error);
       });
-    
-      axios
-      .get("https://localhost:7205/api/StudentUsuario")
+
+    axios
+      .get(`https://localhost:7205/api/Careers`)
       .then((response) => {
         console.log(response.data); // Verifica los datos que obtienes
-        setUsuario(response.data);
+        setCarrer(response.data);
       })
       .catch((error) => {
-        console.error(error); // Verifica si hay errores en la llamada a la API
-      });    
+        console.log(error);
+      });
+
+    axios
+      .get(`https://localhost:7205/api/AcademicUnities`)
+      .then((response) => {
+        console.log(response.data); // Verifica los datos que obtienes
+        setAcademicUnity(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, [id]);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    if (name === "idUser") {
-      setidUser(value); // Actualiza idUser directamente
+    if (name === "idCareer") {
+      setIdCarrer(value); // Actualiza idFaculty directamente
     }
-    setEstudiante((prevestudiante) => ({
-      ...prevestudiante,
+    
+    if (name === "idAcademicUnity") {
+      setIdCarrer(value); // Actualiza idFaculty directamente
+    }
+
+    setStudentUser((prevUserStudent) => ({
+      ...prevUserStudent,
       [name]: value,
     }));
   };
@@ -81,19 +121,16 @@ function EstudianteEdit() {
 
     // Crear un objeto con los datos en formato JSON
     const requestData = {
-        score: score,
-        idRank: idRank,
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        rol: rol,
-        password: password,
-        idCareer: idCareer,
-        idAcademicUnity: idAcademicUnity,
+      idStudent: id,
+      email: studentUser.email,
+      rol: studentUser.rol,
+      firstName: studentUser.firstName,
+      lastName: studentUser.lastName,
+      idCareer: idCareer,
+      idAcademicUnity: idAcademicUnity,
     };
-
     axios
-      .put(`https://localhost:7205/api/StudentAchievements/${id}`, requestData, {
+      .put(`https://localhost:7205/api/Students/${id}`, requestData, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -102,7 +139,11 @@ function EstudianteEdit() {
         console.log(response);
       })
       .catch((error) => {
-        console.log(error);
+        if (error.response && error.response.data) {
+          setServerError(error.response.data);
+        } else {
+          setServerError("Error al registrar el estudiante.");
+        }
       });
     }
   };
@@ -115,9 +156,9 @@ function EstudianteEdit() {
       <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
       <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
         <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-        <div className="relative p-4 sm:p-6 rounded-sm overflow-hidden mb-8">
+        <div className="relative p-4 sm:p-6 rounded-sm overflow-hidden mb-8 overflow-y-scroll">
           <div className="relative">
-            <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+            <h1 className="text-2xl md:text-3xl text-slate-800 dark:text-slate-100 font-bold mb-1">
               Editar Estudiante{" "}
             </h1>
           </div>
@@ -126,120 +167,67 @@ function EstudianteEdit() {
             <div>
               <div>
                 <label
+                  htmlFor="editUserManager"
                   className="text-gray-900 dark:text-gray-900"
-                  htmlFor="firstName"
                 >
-                  Nombre del estudiante
+                  Nombre
                 </label>
                 <input
                   type="text"
+                  name="firstName"
                   id="firstName"
+                  maxLength={35}
                   className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                  value={firstName}
-                  onChange={(e) => setfirstName(e.target.value)}
+                  value={studentUser.firstName}
+                  onChange={handleInputChange}
                 />
-
+                {firstNameError && (
+                  <p className="text-red-500">{firstNameError}</p>)}
                 <br />
-
                 <label
                   className="text-gray-900 dark:text-gray-900"
-                  htmlFor="firstName"
+                  htmlFor="editlastName"
                 >
-                  Apellido del estudiante
+                  Apellidos
                 </label>
                 <input
                   type="text"
                   id="lastName"
+                  name="lastName"
+                  maxLength={60}
                   className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                  value={lastName}
-                  onChange={(e) => setlastName(e.target.value)}
+                  value={studentUser.lastName}
+                  onChange={handleInputChange}
                 />
-
+                {lastNameError && (
+                  <p className="text-red-500">{lastNameError}</p>)}
                 <br />
-
-
                 <label
                   className="text-gray-900 dark:text-gray-900"
-                  htmlFor="email"
+                  htmlFor="editemail"
                 >
                   Email
                 </label>
                 <input
                   type="text"
                   id="email"
+                  name="email"
+                  maxLength={40}
                   className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                  value={email}
-                  onChange={(e) => setemail(e.target.value)}
+                  value={studentUser.email}
+                  onChange={handleInputChange}
                 />
-
+                {emailError && (
+                  <p className="text-red-500">{emailError}</p>)}
+                {serverError && <p className="text-red-500">{serverError}</p>}
                 <br />
                 <label
                   className="text-gray-900 dark:text-gray-900"
-                  htmlFor="password"
-                >
-                  Contraseña
-                </label>
-                <input
-                  type="password"
-                  id="password"
-                  className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                  value={password}
-                  onChange={(e) => setpassword(e.target.value)}
-                />
-
-                <br />
-                <label
-                  className="text-gray-900 dark:text-gray-900"
-                  htmlFor="idRank"
-                >
-                  Rank
-                </label>
-                <input
-                  type="text"
-                  id="idRank"
-                  className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                  value={idRank}
-                  onChange={(e) => setIdRank(e.target.value)}
-                />
-
-                <br />
-                <label
-                  className="text-gray-900 dark:text-gray-900"
-                  htmlFor="score"
-                >
-                  Score
-                </label>
-                <input
-                  type="text"
-                  id="score"
-                  className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                  value={score}
-                  onChange={(e) => setScore(e.target.value)}
-                />
-
-                <br />
-                <label
-                  className="text-gray-900 dark:text-gray-900"
-                  htmlFor="idAcademicUnity"
-                >
-                  Academia
-                </label>
-                <input
-                  type="text"
-                  id="idAcademicUnity"
-                  className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                  value={idAcademicUnity}
-                  onChange={(e) => setidAcademicUnity(e.target.value)}
-                />
-
-                <br />
-                <label
-                  className="text-gray-900 dark:text-gray-900"
-                  htmlFor="idCareer"
+                  htmlFor="editidCareer"
                 >
                   Carrera
                 </label>
-                <br />
+                <br/>
                 {Carrera.length === 0 ? (
                   <p>Cargando datos...</p>
                 ) : (
@@ -247,11 +235,8 @@ function EstudianteEdit() {
                     id="idCareer"
                     className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                     value={idCareer}
-                    onChange={(e) => {
-                      setidCareer(e.target.value);
-                    }}
-                  >
-                    <option value="">Selecciona una Carrera</option>
+                    onChange={(e) => setIdCarrer(e.target.value)}
+                    >
                     {Carrera.map((Carrera) => (
                       <option
                         key={Carrera.idCareer}
@@ -261,9 +246,35 @@ function EstudianteEdit() {
                       </option>
                     ))}
                   </select>
-                )}
-
+                )}          
                 <br />
+                <label
+                  className="text-gray-900 dark:text-gray-900"
+                  htmlFor="idAcademicUnity"
+                >
+                  Unidad Academica
+                </label>
+                {AcademicUnity.length === 0 ? (
+                  <p>Cargando datos...</p>
+                ) : (
+                  <select
+                    id="idAcademicUnity"
+                    className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                    value={idAcademicUnity}
+                    onChange={(e) => {
+                      setIdAcademicUnity(e.target.value);
+                    }} 
+                    >
+                    {AcademicUnity.map((academicUnity) => (
+                      <option
+                        key={academicUnity.idAcademicUnity}
+                        value={academicUnity.idAcademicUnity}
+                      >
+                        {academicUnity.academicUnityName}
+                      </option>
+                    ))}
+                  </select>
+                )}    
               </div>
               <br></br>
               <div className="flex justify-left">
@@ -271,19 +282,18 @@ function EstudianteEdit() {
                   className="px-10 py-5 leading-5 text-white transition-colors duration-200 transform bg-gray-800 rounded-md hover:bg-gray-700 focus:outline-none focus:bg-gray-600"
                   type="submit"
                 >
-                  Registrar
+                  Guardar Cambios
                 </button>
               </div>
+              <br></br>
+              <br></br>
+              <Link to="/StudentTable">Volver a la lista de estudiantes</Link>
             </div>
-            <br></br>
-            <Link to="/EstudianteTable">Volver a la lista de estudiante</Link>
           </form>
-          {/* Modal de confirmación */}
-          <ModalConfirmacion isOpen={modalIsOpen} closeModal={closeModal} />
         </div>
       </div>
     </div>
   );
 }
 
-export default EstudianteEdit;
+export default StudentEdit;
