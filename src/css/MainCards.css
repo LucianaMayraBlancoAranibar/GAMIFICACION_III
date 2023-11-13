@@ -239,4 +239,24 @@
       background-color: rgba(0, 0, 0, .1);
     }
   }
-  
+  .swiper-slide {
+    font-size: 25px;
+    width: 2rem; /* Asegúrate de que este valor sea el adecuado */
+}
+/* Asegúrate de que la sección no tenga un margen negativo que la empuje hacia arriba */
+.section {
+  margin-top: 0; /* Ajusta este valor según sea necesario */
+}
+
+/* Revisa el z-index del carrusel y los elementos siguientes */
+.carousel {
+  z-index: 1; /* Asegúrate de que sea menor que el contenido que sigue */
+}
+
+/* Asegúrate de que la altura del contenedor del carrusel sea la correcta */
+.carousel-container {
+  height: auto; /* O un valor fijo que se ajuste al contenido del carrusel */
+}
+
+/* Ajustes adicionales según sea necesario */
+

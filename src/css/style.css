@@ -8,3 +8,15 @@
 @import 'additional-styles/flatpickr.css';
 
 @import 'tailwindcss/utilities';
+#about,
+#services,
+#testimonials,
+#team,
+#contact,
+#footer {
+  width: 111%;
+}
+
+#portfolio {
+  width: 110%;
+}

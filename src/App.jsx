@@ -56,7 +56,7 @@ import ManagerForm from "./pages/ManagerForm"
 import ManagerTable from "./pages/ManagerTable"
 import ManagerEdit from "./pages/ManagerEdit"
 import UserManager from "./pages/UserManager"
-
+import InfoMain from "./pages/InfoMain"
 import Main from "./pages/Main"
 
 
@@ -161,6 +161,7 @@ function App() {
           <Route path="/ForgotPassword" element={<ForgotPassword />} />
           <Route path="/ResetPassword" element={<ResetPassword />} />
           <Route path="/Main" element={<Main />} />
+          <Route path="/InfoMain" element={<InfoMain />} />
         </Routes>
       </Router>
     </AuthProvider>
