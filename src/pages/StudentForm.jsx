@@ -68,8 +68,8 @@ function StudentForm() {
     if (!password) {
       setpasswordError("La contraseña es obligatoria");
       isValid = false;
-    } else if (password.length <= 6 || password.length > 10) {
-      setpasswordError("La contraseña debe tener entre 6 y 10 caracteres");
+    } else if (password.length < 6 ) {
+      setpasswordError("La contraseña debe tener mas de 6 caracteres");
       isValid = false;
     } else {
       setpasswordError("");
@@ -187,6 +187,7 @@ function StudentForm() {
                 <input
                   type="text"
                   id="firstName"
+                  maxLength={35}
                   className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                   value={firstName}
                   onChange={(e) => setfirstName(e.target.value)}
@@ -203,6 +204,7 @@ function StudentForm() {
                 <input
                   type="text"
                   id="lastName"
+                  maxLength={60}
                   className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                   value={lastName}
                   onChange={(e) => setlastName(e.target.value)}
@@ -219,6 +221,7 @@ function StudentForm() {
                 <input
                   type="text"
                   id="email"
+                  maxLength={40}
                   className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                   value={email}
                   onChange={(e) => setemail(e.target.value)}
@@ -236,6 +239,7 @@ function StudentForm() {
                 <input
                   type="password"
                   id="password"
+                  maxLength={15}
                   className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                   value={password}
                   onChange={(e) => setpassword(e.target.value)}

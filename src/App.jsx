@@ -28,9 +28,11 @@ import DepartamentoEdit from "./pages/DepartamentoEdit";
 import EstudianteTable from './pages/EstudianteTable';
 import EstudianteForm from './pages/EstudianteForm';
 import EstudianteEdit from './pages/EstudianteEdit';
-import CarreraTable from './pages/CarreraTable';
-import CarreraEdit from './pages/CarreraEdit';
-import CarreraForm from './pages/CarreraForm';
+
+import CareerTable from './pages/CareerTable';
+import CareerEdit from './pages/CareerEdit';
+import CareerForm from './pages/CareerForm';
+
 import RegisterTypeArchivement from './pages/RegisterTypeArchivement'
 import EditTypeArchivement from './pages/EditTypeArchivement'
 import BadgeTable from "./pages/BadgeTable";
@@ -94,9 +96,9 @@ function App() {
         <Route path="/EstudianteTable" element={<EstudianteTable />} />
         <Route path="/EstudianteForm" element={<EstudianteForm />} />
         <Route path="/EstudianteEdit/ :id" element={<EstudianteEdit />} />
-        <Route path="/CarreraTable" element={<CarreraTable />} />
-        <Route path="/CarreraEdit/ :id" element={<CarreraEdit />} />
-        <Route path="/CarreraForm" element={<CarreraForm />} />
+        <Route path="/CareerTable" element={<CareerTable />} />
+        <Route path="/CareerEdit/:id" element={<CareerEdit />} />
+        <Route path="/CareerForm" element={<CareerForm />} />
         <Route path="/Main" element={<Main />} />
         <Route path="/UserBadges" element={<UserBadges />} />
         <Route path="/UserSanction" element={<UserSanction />} />
