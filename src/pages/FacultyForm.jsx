@@ -1,53 +1,33 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
+import Sidebar from "../partials/Sidebar";
+import Header from "../partials/Header";
+import ModalConfirmacion from "../partials/ModalConfirmacion"; // Importa el nuevo componente
 
-function RankForm() {
-  const [NameRank, setNameRank] = useState("");
-  const [NameSubrank, setNameSubrank] = useState("");
-  const [selectedImage, setSelectedImage] = useState("");
-  const [errors, setErrors] = useState({});
+function FacultadForm() {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [FacultyName, setNombreFacultad] = useState("");
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   async function handleSubmit(event) {
     event.preventDefault();
 
-    setErrors({});
-
-    if (!NameRank) {
-      setErrors({ NameRank: "El nombre del rango es obligatorio." });
-      return;
-    }
-
-    if (!NameSubrank) {
-      setErrors({ NameSubrank: "El nombre del subrango es obligatorio." });
-      return;
-    }
-
-    if (!selectedImage) {
-      setErrors({ selectedImage: "Debes seleccionar una imagen." });
-      return;
-    }
-
     const data = {
-      NameRank: NameRank,
-      NameSubrank: NameSubrank,
-      ImagePath: selectedImage,
+      FacultyName: FacultyName,
     };
 
     try {
       const response = await axios.post(
-        "https://localhost:7205/api/Ranks",
+        "https://localhost:7205/api/Faculties",
         data
       );
 
-      console.log("Rango creado con éxito:", response.data);
+      console.log("Facultad registrada con éxito:", response.data);
 
       setModalIsOpen(true);
-      setNameRank("");
-      setNameSubrank("");
-      setSelectedImage("");
+      setNombreFacultad("");
     } catch (error) {
-      console.error("Error al crear el rango:", error);
+      console.error("Error al registrar la facultad:", error);
     }
   }
 
@@ -56,55 +36,51 @@ function RankForm() {
   }
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <div>
-            <label htmlFor="NameRank">Nombre de Rango</label>
-            <input
-              type="text"
-              id="NameRank"
-              value={NameRank}
-              onChange={(e) => setNameRank(e.target.value)}
-            />
-            {errors.NameRank && (
-              <p className="error">{errors.NameRank}</p>
-            )}
+    <div className="flex h-screen overflow-hidden">
+      <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+      <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
+        <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+        <div className="relative p-4 sm:p-6 rounded-sm overflow-hidden mb-8">
+          <div className="relative">
+            <h1 className="text-2xl md:text-3xl text-slate-800 dark:text-slate-100 font-bold mb-1">
+              Nueva Facultad{" "}
+            </h1>
           </div>
-          <div>
-            <label htmlFor="NameSubrank">Nombre de Subrango</label>
-            <input
-              type="text"
-              id="NameSubrank"
-              value={NameSubrank}
-              onChange={(e) => setNameSubrank(e.target.value)}
-            />
-            {errors.NameSubrank && (
-              <p className="error">{errors.NameSubrank}</p>
-            )}
-          </div>
-          <div>
-            <label htmlFor="selectedImage">Selecciona una imagen</label>
-            <select
-              id="selectedImage"
-              value={selectedImage}
-              onChange={(e) => setSelectedImage(e.target.value)}
-            >
-              <option value="">Selecciona una imagen</option>
-              <option value="image1.jpg">Imagen 1</option>
-              <option value="image2.jpg">Imagen 2</option>
-              <option value="image3.jpg">Imagen 3</option>
-            </select>
-            {errors.selectedImage && (
-              <p className="error">{errors.selectedImage}</p>
-            )}
-          </div>
+          <br></br>
+          <form onSubmit={handleSubmit}>
+            <div>
+              <div>
+                <label
+                  className="text-gray-900 dark:text-gray-900"
+                  htmlFor="FacultyName"
+                >
+                  Nombre de Facultad
+                </label>
+                <input
+                  type="text"
+                  id="FacultyName"
+                  className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                  value={FacultyName}
+                  onChange={(e) => setNombreFacultad(e.target.value)}
+                />
+              </div>
+              <br></br>
+              <div className="flex justify-left">
+                <button
+                  className="px-10 py-5 leading-5 text-white transition-colors duration-200 transform bg-gray-800 rounded-md hover:bg-gray-700 focus:outline-none focus:bg-gray-600"
+                  type="submit"
+                >
+                  Registrar
+                </button>
+              </div>
+            </div>
+          </form>
+          {/* Modal de confirmación */}
+          <ModalConfirmacion isOpen={modalIsOpen} closeModal={closeModal} />
         </div>
-        <button type="submit">Crear Rango</button>
-      </form>
-      <Modal isOpen={modalIsOpen} closeModal={closeModal} />
+      </div>
     </div>
   );
 }
 
-export default RankForm;
+export default FacultadForm;

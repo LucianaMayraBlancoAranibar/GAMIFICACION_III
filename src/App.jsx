@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./css/style.css";
 import "./charts/ChartjsConfig";
 import Dashboard from "./pages/Dashboard";
+import DashboardStudent from "./pages/DashboardStudent"
 import Menu from "./pages/Menu";
 import FacultadForm from "./pages/FacultyForm";
 import SucursalForm from "./pages/SucursalForm";
@@ -31,7 +32,8 @@ import NavigationGuard from "./utils/NavigationGuard";
 import { AuthProvider } from "./AuthContext";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
-import StudentRankView from "./pages/StudentRankView";
+import StudentView from "./pages/StudentView";
+import StudentRankView from "./pages/StudentRankView ";
 import ChangePasswordForm from "./pages/ChangePasswordForm ";
 import BadgeTable from "./pages/BadgeTable";
 import BadgeStudent from "./pages/BadgeStudent";
@@ -46,10 +48,16 @@ import CarreraForm from './pages/CarreraForm';
 import StudentForm from "./pages/StudentForm"
 import StudentTable from "./pages/StudentTable"
 import StudentEdit from "./pages/StudentEdit"
+import StudentPortfolioView from "./pages/StudentPortfolioView";
+import StudentAchievementsView from "./pages/StudentAchievementsView ";
+import StudentSanctionsView from "./pages/StudentSanctionsView";
+import StudentBadgesView from "./pages/StudentBadgesView";
 import ManagerForm from "./pages/ManagerForm"
 import ManagerTable from "./pages/ManagerTable"
 import ManagerEdit from "./pages/ManagerEdit"
 import UserManager from "./pages/UserManager"
+import InfoMain from "./pages/InfoMain"
+import Main from "./pages/Main"
 
 
 function ScrollToTopOnRouteChange() {
@@ -98,6 +106,7 @@ function App() {
         <PreventCache />
         <Routes>
           <Route path="/" element={ <ProtectedElement allowedRoles={[1,2]} element={<Dashboard />} />} />
+          <Route path="/DashboardStudent" element={ <ProtectedElement allowedRoles={[3]} element={<DashboardStudent />} />} />
           <Route path="/SucursalForm" element={<ProtectedElement allowedRoles={[1]} element={<SucursalForm />} />} />
           <Route path="/SucursalTable" element={<ProtectedElement allowedRoles={[1]} element={<SucursalTable />} />} />
           <Route path="/SucursaEdit/:id" element={<ProtectedElement allowedRoles={[1]} element={<SucursalEdit />} />} />
@@ -133,7 +142,12 @@ function App() {
           <Route path="/StudentAchievement" element={<ProtectedElement allowedRoles={[1,2]} element={<StudentAchievement />} />} />
           <Route path="/AssignmentTable" element={<ProtectedElement allowedRoles={[1]} element={<AssignmentTable />} />} />
           <Route path="/AssigmentEdit/:id" element={<ProtectedElement allowedRoles={[1]} element={<AssigmentEdit />} />} />
+          <Route path="/StudentView" element={<ProtectedElement allowedRoles={[3]} element={<StudentView />} />} />
           <Route path="/StudentRankView" element={<ProtectedElement allowedRoles={[3]} element={<StudentRankView />} />} />
+          <Route path="/StudentPortfolioView" element={<ProtectedElement allowedRoles={[3]} element={<StudentPortfolioView/>} />} />
+          <Route path="/StudentAchievementsView" element={<ProtectedElement allowedRoles={[3]} element={<StudentAchievementsView/>} />} />
+          <Route path="/StudentSanctionsView" element={<ProtectedElement allowedRoles={[3]} element={<StudentSanctionsView/>} />} />
+          <Route path="/StudentBadgesView" element={<ProtectedElement allowedRoles={[3]} element={<StudentBadgesView/>} />} />
           <Route path="/StudentForm" element={<ProtectedElement allowedRoles={[1]} element={<StudentForm />} />} />
           <Route path="/StudentEdit/:id" element={<ProtectedElement allowedRoles={[1]} element={<StudentEdit />} />} />
           <Route path="/StudentTable" element={<ProtectedElement allowedRoles={[1]} element={<StudentTable/>} />} />
@@ -154,6 +168,8 @@ function App() {
           <Route path="/StudentForm" element={<StudentForm />} />
           <Route path="/StudentEdit/:id" element={<StudentEdit />} />
 
+          <Route path="/Main" element={<Main />} />
+          <Route path="/InfoMain" element={<InfoMain />} />
         </Routes>
       </Router>
     </AuthProvider>
