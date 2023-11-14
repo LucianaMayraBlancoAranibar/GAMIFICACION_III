@@ -58,7 +58,7 @@ function LoginComponent() {
         if (data.user.rol === 1) {
           navigate("/"); // Redirecciona al admin
         } else if (data.user.rol === 2) {
-          navigate("/"); // Redirecciona al gestor
+          navigate("/DashboardGestor"); // Redirecciona al gestor
         } else if (data.user.rol === 3) {
           navigate("/DashboardStudent"); // Redirecciona al estudiante
         } else {

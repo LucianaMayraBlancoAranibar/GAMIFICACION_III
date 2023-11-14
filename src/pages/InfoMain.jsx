@@ -2,18 +2,23 @@ import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import Sidebar from "../partials/Sidebar";
 import "../css/MainCards.css";
+import { PageTitle } from "../utils/page-title";
 
 function InfoMain() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div>
+    <div style={{ background: '#522b46' }}>
       <div className="rounded-container">
-        <label className="container-title">¿DE QUÉ SE TRATA?</label>
+        
+        <PageTitle heading="Explorando el Sistema de Logros Estudiantiles">
+        Descubre cómo nuestro sistema de logros y rankings potencia tu experiencia educativa.
+        </PageTitle>
+        
         <div className="item-container">
           <div className="card">
             <img src="/src/images/imgM1.png" alt="User" />
-            <label className="card-title">RANKING ESTUDIANTIL</label>
+            <label className="card-title">Tu Progreso en Competencia</label>
             <label className="card-text">
               El ranking estudiantil es una carrera entre los estudiantes para
               medir los logros que ganen en su tiempo de estudio.
@@ -23,24 +28,21 @@ function InfoMain() {
             <img src="/src/images/imgM2.png" alt="User" />
             <label className="card-title">¿CÓMO SUBIR DE RANGO?</label>
             <label className="card-text">
-              Se podrá subir de rango dependiendo de los logros que ganen
+            Descubre cómo tus logros académicos te impulsan a subir de rango y destacarte.
             </label>
           </div>
           <div className="card">
             <img src="/src/images/imgM3.png" alt="User" />
             <label className="card-title">¿CÓMO PARTICIPO EN ESTO?</label>
             <label className="card-text">
-              Se podrá participar cuando la persona se inscriba en la
-              Universidad Univalle y comenzará en el rango más bajo
+            Tu aventura inicia al matricularte en Univalle, comenzando desde el primer escalón hacia la cima.
             </label>
           </div>
           <div className="card">
             <img src="/src/images/imgM4.png" alt="User" />
             <label className="card-title">¿QUÉ SON LOS BADGES?</label>
             <label className="card-text">
-              Los badges son pequeñas insignias que se utilizan para representar
-              información adicional o destacar ciertos logros, características o
-              estados.
+            Conoce los badges, emblemas únicos que destacan tus logros y habilidades especiales.
             </label>
           </div>
         </div>
