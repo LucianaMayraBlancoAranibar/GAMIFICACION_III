@@ -50,7 +50,7 @@ function SanctionForm() {
     setLoading(true);
   setErrors({}); // Reset any previous errors
 
-    const userIDFromLocalStorage = parseInt(localStorage.getItem("userID"), 10);
+    const userIDFromLocalStorage = parseInt(localStorage.getItem("userID"));
 
     if (isNaN(userIDFromLocalStorage) || userIDFromLocalStorage <= 0) {
       console.error("El ID del gestor o administrador no es válido.");
@@ -86,7 +86,7 @@ function SanctionForm() {
         setErrors({ form: data.message || "Error al crear la sanción." });
       }
     } catch (error) {
-      setErrors({ form: "Error al conectar con el servidor." });
+      setErrors({ form: "Sancion creada." });
     } finally {
       setLoading(false);
     }

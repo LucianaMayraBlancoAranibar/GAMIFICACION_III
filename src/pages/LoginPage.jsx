@@ -59,7 +59,7 @@ function LoginComponent() {
         console.log("User email on load:", localStorage.getItem("userEmail"));
 
         if (data.user.rol === 1) {
-          navigate("/"); // Redirecciona al admin
+          navigate("/Dashboard"); // Redirecciona al admin
         } else if (data.user.rol === 2) {
           navigate("/DashboardGestor"); // Redirecciona al gestor
         } else if (data.user.rol === 3) {

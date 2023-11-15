@@ -3,6 +3,7 @@ import axios from "axios";
 import Sidebar from "../partials/Sidebar";
 import Header from "../partials/Header";
 import { PageTitle} from "../utils/page-title";
+import StudentsPopup from "./StudentsPopup";
 
 import "../css/MainCards.css";
 
@@ -13,6 +14,25 @@ function RankMain() {
   const [showDataListOro, setShowDataListOro] = useState(false);
   const [showDataListPlata, setShowDataListPlata] = useState(false);
   const [showDataListBronce, setShowDataListBronce] = useState(false);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [selectedRankId, setSelectedRankId] = useState(null);
+  const [studentsOfSelectedRank, setStudentsOfSelectedRank] = useState([]);
+
+  const fetchStudentsOfRank = async (rankId) => {
+    try {
+      const response = await axios.get(`https://localhost:7205/api/Students/GetStudentsByRank/${rankId}`);
+      setStudentsOfSelectedRank(response.data);
+      setIsPopupOpen(true);
+    } catch (error) {
+      console.error("Error al cargar estudiantes:", error);
+    }
+  };
+
+  const handleClickRank = (rankId) => {
+    setSelectedRankId(rankId);
+    fetchStudentsOfRank(rankId);
+  };
+  
   const toggleDataList = (option) => {
     switch (option) {
       case "DIAMANTE":
@@ -107,13 +127,13 @@ function RankMain() {
         {showDataListPlata && (
           <div className="bg-gray-400 w-8/12 shadow rounded p-4 text-center text-white fade-in">
             <div className="py-2 fontSizeSubrank">
-              <a href="#">Rango 1</a>
+              <a onClick={() => handleClickRank(8)}>Rango 1</a>
             </div>
             <div className="py-2 fontSizeSubrank">
-              <a href="#">Rango 2</a>
+              <a onClick={() => handleClickRank(8)}>Rango 2</a>
             </div>
             <div className="py-2 fontSizeSubrank">
-              <a href="#">Rango 3</a>
+              <a onClick={() => handleClickRank(8)}>Rango 3</a>
             </div>
           </div>
         )}
@@ -137,6 +157,11 @@ function RankMain() {
           </div>
         )}
       </div>
+      <StudentsPopup
+        isOpen={isPopupOpen}
+        students={studentsOfSelectedRank}
+        onClose={() => setIsPopupOpen(false)}
+      />
     </div>
   );
 }

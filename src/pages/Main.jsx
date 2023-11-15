@@ -105,10 +105,10 @@ function Main() {
     });
 
     function autoChangeSlide() {
-      const nextButton = document.querySelector(
-        "[data-carousel-button='next']"
-      );
-      nextButton.click();
+      const nextButton = document.querySelector("[data-carousel-button='next']");
+      if (nextButton) {
+        nextButton.click();
+      }
     }
 
     // Configura un intervalo para cambiar automáticamente las diapositivas
@@ -130,12 +130,12 @@ function Main() {
     <div>
         
         <Navbar routes={routes} />
+       
     <div className="flex h-screen overflow-hidden">
         
       <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
      
         <div className="relative pt-4 rounded-sm overflow-hidden overflow-y-scroll"  style={{ background: 'white' }}>
-   
           <div className="carousel" data-carousel>
             <button
               className="carousel-button prev"

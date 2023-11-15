@@ -67,7 +67,7 @@ export function Navbar({ brandName, routes, action }) {
             <div className="flex items-center py-5 px-2">
               <img src={LogoImage} alt="Logo" className="h-10" />{" "}
               {/* Ajusta la clase de altura según sea necesario */}
-              <Link to="/Main" className="text-xl text-white font-bold ml-2">
+              <Link to="/" className="text-xl text-white font-bold ml-2">
                 Univalle
               </Link>
             </div>

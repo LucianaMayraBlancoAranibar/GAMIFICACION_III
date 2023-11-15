@@ -115,7 +115,7 @@ function App() {
         <NavigationGuard />
         <PreventCache />
         <Routes>
-          <Route path="/" element={ <ProtectedElement allowedRoles={[1,2]} element={<Dashboard />} />} />
+          <Route path="/Dashboard" element={ <ProtectedElement allowedRoles={[1]} element={<Dashboard />} />} />
           <Route path="/DashboardStudent" element={ <ProtectedElement allowedRoles={[3]} element={<DashboardStudent />} />} />
           <Route path="/DashboardGestor" element={ <ProtectedElement allowedRoles={[2]} element={<DashboardGestor />} />} />
           <Route path="/SucursalForm" element={<ProtectedElement allowedRoles={[1]} element={<SucursalForm />} />} />
@@ -182,7 +182,7 @@ function App() {
           <Route path="/ChangePasswordForm" element={<ProtectedElement allowedRoles={[1, 2,3]} element={<ChangePasswordForm />}/>}/>
           <Route path="/ForgotPassword" element={<ForgotPassword />} />
           <Route path="/ResetPassword" element={<ResetPassword />} />
-          <Route path="/Main" element={<Main />} />
+          <Route path="/" element={<Main />} />
           <Route path="/InfoMain" element={<InfoMain />} />
          
         </Routes>

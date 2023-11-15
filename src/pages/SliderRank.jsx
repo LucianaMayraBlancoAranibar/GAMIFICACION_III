@@ -4,7 +4,7 @@ import { PageTitle} from "../utils/page-title";
 
 import "../css/MainCards.css";
 
-function Main() {
+function SliderRank() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [showDataListDiamante, setShowDataListDiamante] = useState(false);
   const [showDataListPlatino, setShowDataListPlatino] = useState(false);
@@ -36,37 +36,6 @@ function Main() {
   const swiperRef = useRef(null);
 
   useEffect(() => {
-    // Carga Swiper desde el CDN
-    const script = document.createElement("script");
-    script.src = "https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js";
-    script.async = true;
-    script.onload = () => {
-      swiperRef.current = new Swiper(".containerCarrousel", {
-        effect: "coverflow",
-        grabCursor: true,
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-        },
-        centeredSlides: true,
-        slidesPerView: "1",
-
-        breakpoints: {
-          768: {
-            slidesPerView: "3",
-          },
-        },
-        spaceBetween: 30,
-        freeMode: true,
-        pagination: {
-          /*el: ".swiper-pagination",*/
-          clickable: true,
-        },
-      });
-    };
-    document.body.appendChild(script);
-
-    /*Carrousel de imagenes de arriba de la pagina*/
     const buttons = document.querySelectorAll("[data-carousel-button]");
     const intervalTime = 5000; // Cambiar de imagen cada 5 segundos
 
@@ -84,15 +53,23 @@ function Main() {
 
         slides.children[newIndex].dataset.active = true;
         delete activeSlide.dataset.active;
+
+        const autoChangeInterval = setInterval(autoChangeSlide, intervalTime);
+
+        // Función de limpieza que se ejecutará cuando el componente se desmonte
+        return () => {
+          clearInterval(autoChangeInterval);
+        };
       });
     });
 
     function autoChangeSlide() {
-      const nextButton = document.querySelector(
-        "[data-carousel-button='next']"
-      );
-      nextButton.click();
+      const nextButton = document.querySelector("[data-carousel-button='next']");
+      if (nextButton) {
+        nextButton.click();
+      }
     }
+    
 
     // Configura un intervalo para cambiar automáticamente las diapositivas
     let autoChangeInterval = setInterval(autoChangeSlide, intervalTime);
@@ -285,4 +262,4 @@ function Main() {
   );
 }
 
-export default Main;
+export default SliderRank;
