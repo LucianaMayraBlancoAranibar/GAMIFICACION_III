@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LogoImage from '../images/Univalle_bol_cbb_logo.png'; 
+import Cookies from 'js-cookie';
 
 import { useAuth } from "../AuthContext";
 
@@ -47,7 +48,9 @@ function LoginComponent() {
       console.log("Rol del usuario:", data.user?.rol);
 
       if (response.status === 200) {
-        localStorage.setItem("token", data.token);
+        Cookies.set('token', data.token, { expires: 1 });
+
+        // Sigue usando localStorage para información no sensible
         localStorage.setItem("user", JSON.stringify(data.user));
         localStorage.setItem("userID", data.user.idUsuario);
         localStorage.setItem("userEmail", data.user.email);

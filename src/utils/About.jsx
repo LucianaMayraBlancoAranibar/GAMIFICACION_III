@@ -15,7 +15,7 @@ const AboutUs = () => {
       <div className="border-b-3  border-red-900 w-1/4"></div> 
     <br></br>
           <p className="mb-4">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          El concepto de "Univalle para toda la vida" responde a la necesidad de convertir la educación superior en una constante, acompañando al futuro profesional incluso antes de ser parte de nuestra casa de estudios superiores, a través de programas de orientación vocacional y apoyo académico.
           </p>
           <h3 className="text-2xl font-bold mb-4">Why Choose Us?</h3>
           <ul className="list-none space-y-2">

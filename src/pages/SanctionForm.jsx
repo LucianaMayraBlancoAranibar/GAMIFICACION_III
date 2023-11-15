@@ -48,6 +48,7 @@ function SanctionForm() {
     }
 
     setLoading(true);
+  setErrors({}); // Reset any previous errors
 
     const userIDFromLocalStorage = parseInt(localStorage.getItem("userID"), 10);
 
@@ -60,7 +61,7 @@ function SanctionForm() {
     const payload = {
       IdStudent: idStudent,
       SanctionDescription: sanctionDescription,
-      SanctionValue: parseInt(sanctionValue, 10),
+      SanctionValue: parseInt(sanctionValue),
       ResponsibleGestorId: currentUser?.id || userIDFromLocalStorage,
     };
 
@@ -79,6 +80,7 @@ function SanctionForm() {
       console.log("Respuesta del servidor:", data);
 
       if (response.status === 200) {
+        setModalIsOpen(true);
         alert("Sanción creada exitosamente!");
       } else {
         setErrors({ form: data.message || "Error al crear la sanción." });
@@ -89,7 +91,9 @@ function SanctionForm() {
       setLoading(false);
     }
   };
-
+  function closeModal() {
+    setModalIsOpen(false);
+  }
   return (
     <div className="flex h-screen overflow-hidden">
       <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
@@ -144,6 +148,7 @@ function SanctionForm() {
               Crear Sanción
             </button>
           </div>
+          <ModalConfirmacion isOpen={modalIsOpen} closeModal={closeModal} />
         </div>
       </div>
     </div>

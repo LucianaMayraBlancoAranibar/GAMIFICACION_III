@@ -35,7 +35,7 @@ function DashboardGestor() {
                 {/* Filter button */}
                 <FilterButton />
                 {/* Datepicker built with flatpickr */}
-                <Datepicker />
+              
                 {/* Add view button */}
                 <button className="btn bg-indigo-500 hover:bg-indigo-600 text-white">
                   <svg

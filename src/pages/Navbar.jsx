@@ -56,18 +56,27 @@ export function Navbar({ brandName, routes, action }) {
   };
 
   return (
-    <nav className=" bg-[#522b46] bg-transparent absolute top-0 left-0 w-full z-10">
+    <nav className=" bg-[#522b46] bg-transparent absolute top-0 left-0 w-full z-10" style={{ background: '#522b46' }}>
     <div className="max-w-7xl mx-auto px-8">
       <div className="flex justify-between">
         <div className="flex space-x-4">
           {/* Logo */}
           <div className="flex items-center py-5 px-2">
             <img src={LogoImage} alt="Logo" className="h-10" /> {/* Ajusta la clase de altura según sea necesario */}
-            <Link to="/" className="text-xl text-white font-bold ml-2">Univalle</Link>
+            <Link to="/Main" className="text-xl text-white font-bold ml-2">Univalle</Link>
           </div>
-
+          <div className="flex-grow"></div>
+          <div className="flex-grow"></div>
+          <div className="flex-grow"></div>
+          <div className="flex-grow"></div>
+          <div className="flex-grow"></div>
+          <div className="flex-grow"></div>
+          <div className="flex-grow"></div>
+          <div className="flex-grow"></div>
+          <div className="flex-grow"></div>
+          <div className="flex-grow"></div>
           {/* Primary Nav */}
-          <div className={`md:flex items-center space-x-1 ${openNav ? "block" : "hidden"}`}>
+          <div className={`md:flex items-center space-x-1 ml-auto ${openNav ? "block" : "hidden"}`}>
             {routes.map((route) => (
               <Link key={route.name} to={route.href} className="py-5 px-3 text-white hover:text-gray-200">
                 {route.name}
@@ -78,8 +87,8 @@ export function Navbar({ brandName, routes, action }) {
 
         {/* Secondary Nav */}
         <div className="hidden md:flex items-center space-x-1">
-          <Link to="/login" className="py-2 px-3 text-white hover:text-gray-200">Login</Link>
-          <Link to="/signup" className="py-2 px-3 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-300">Sign Up</Link>
+         
+          <Link to="/LoginPage" className="py-2 px-3 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-300">Login</Link>
         </div>
 
         {/* Mobile button */}         

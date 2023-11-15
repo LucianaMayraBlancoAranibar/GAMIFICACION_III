@@ -46,6 +46,7 @@ import DepartamentoTable from "./pages/DepartamentoTable";
 //import CarreraEdit from "./pages/CarreraEdit"
 import CarreraForm from "./pages/CarreraForm"
 import CarreraTable from "./pages/CarreraTable"
+import CarreraEdit from "./pages/CarreraEdit"
 import StudentForm from "./pages/StudentForm"
 import StudentTable from "./pages/StudentTable"
 import StudentEdit from "./pages/StudentEdit"
@@ -143,6 +144,10 @@ function App() {
           <Route path="/DepartamentoForm" element={<ProtectedElement allowedRoles={[1]} element={<DepartamentoForm />} />} />
           <Route path="/DepartamentoEdit" element={<ProtectedElement allowedRoles={[1]} element={<DepartamentoEdit />} />} />
           <Route path="/DepartamentoTable" element={<ProtectedElement allowedRoles={[1]} element={<DepartamentoTable/>} />} />
+
+          <Route path="/CarreraForm" element={<ProtectedElement allowedRoles={[1]} element={<CarreraForm />} />} />
+          <Route path="/CarreraEdit" element={<ProtectedElement allowedRoles={[1]} element={<CarreraEdit />} />} />
+          <Route path="/CarreraTable" element={<ProtectedElement allowedRoles={[1]} element={<CarreraTable/>} />} />
 
           <Route path="/RankForm" element={<ProtectedElement allowedRoles={[1]} element={<DepartamentoTable />} />} />
           <Route path="/RankTable" element={<ProtectedElement allowedRoles={[1]} element={<RankTable/>} />} />

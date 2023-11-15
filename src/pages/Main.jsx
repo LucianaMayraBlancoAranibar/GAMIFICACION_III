@@ -11,6 +11,7 @@ import RankMain from "./RankMain";
 import  InfoMain  from "./InfoMain";
 import SliderRank from "./SliderRank";
 import About from "../utils/About"
+import Footer from "./Footer"
 import { Collapse } from "@material-tailwind/react";
 
 function Main() {
@@ -42,8 +43,10 @@ function Main() {
     }
   };
   const routes = [
-    { name: "Slider", href: "#slider" },
+    { name: "Sobre Nosotros", href: "#slider" },
     { name: "Información", href: "#informacion" },
+    { name: "Ranking", href: "#informacion" },
+    { name: "Medallas", href: "#informacion" },
     // Agrega más rutas según sea necesario
   ];
 
@@ -130,9 +133,9 @@ function Main() {
     <div className="flex h-screen overflow-hidden">
         
       <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
-      
-        <div className="relative pt-4 rounded-sm overflow-hidden overflow-y-scroll">
      
+        <div className="relative pt-4 rounded-sm overflow-hidden overflow-y-scroll"  style={{ background: 'white' }}>
+   
           <div className="carousel" data-carousel>
             <button
               className="carousel-button prev"
@@ -172,6 +175,9 @@ function Main() {
           </div>
           <div>
          <InfoMain></InfoMain>
+          </div>
+          <div>
+         <Footer></Footer>
           </div>
         </div>
       </div>

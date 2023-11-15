@@ -15,13 +15,17 @@ class StudentAchievement extends Component {
     achievementOptions: [],
     sidebarOpen: false,
     modalIsOpen: false,
+    achievementCreated: false,
   };
   setSidebarOpen = (open) => {
     this.setState({ sidebarOpen: open });
   };
-
   setModalIsOpen = (isOpen) => {
     this.setState({ modalIsOpen: isOpen });
+  };
+
+  closeModal = () => {
+    this.setModalIsOpen(false);
   };
   componentDidMount() {
     this.loadStudentOptions();
@@ -76,6 +80,7 @@ class StudentAchievement extends Component {
     if (!selectedStudent || !selectedAchievement) {
       this.setState({
         message: "Por favor, seleccione un estudiante y un logro.",
+        achievementCreated: false,
       });
       return;
     }
@@ -97,12 +102,18 @@ class StudentAchievement extends Component {
         request
       )
       .then((response) => {
-       
+        this.setState({
+          achievementCreated: true, // La asignación se creó con éxito
+        });
+        this.setModalIsOpen(true); // Abre el modal solo si se creó con éxito
       })
       .catch((error) => {
-  
+        this.setState({
+          message: "Error al crear la asignación.",
+          achievementCreated: false, // La asignación no se creó con éxito
+        });
       });
-  };
+    };
 
   render() {
     const {
@@ -112,9 +123,13 @@ class StudentAchievement extends Component {
       studentOptions,
       achievementOptions,
       sidebarOpen,
+      achievementCreated,
       modalIsOpen,
     } = this.state;
-
+   
+    
+    
+  
     return (
       <div className="flex h-screen overflow-hidden">
         <Sidebar
@@ -168,13 +183,9 @@ class StudentAchievement extends Component {
               </button>
               <div>{message}</div>
             </div>
-            <ModalConfirmacion
-              isOpen={modalIsOpen}
-              onConfirm={this.confirmAssignment}
-              onCancel={() => this.setModalIsOpen(false)}
-              // ...otros props si son necesarios
-            />
-          </div>
+            {achievementCreated && ( // Muestra el modal solo si la asignación se creó con éxito
+          <ModalConfirmacion isOpen={modalIsOpen} closeModal={this.closeModal} />
+        )}</div>
         </div>
       </div>
     );

@@ -14,7 +14,6 @@ function ManagerEdit() {
   const [userManager, setUserManager] = useState({
     email: "",
     rol: "",
-    password: "",
     firstName: "",
     lastName: "",
     idCareer: "",
@@ -24,7 +23,6 @@ function ManagerEdit() {
   const [AcademicUnity, setAcademicUnity] = useState("");
 
   const [emailError, setemailError] = useState("");
-  const [passwordError, setpasswordError] = useState("");
   const [firstNameError, setfirstNameError] = useState("");
   const [lastNameError, setlastNameError] = useState("")
 
@@ -34,8 +32,8 @@ function ManagerEdit() {
     if (!userManager.firstName) {
       setfirstNameError("El nombre es obligatorio");
       isValid = false;
-    } else if (userManager.firstName.length < 3 || userManager.firstName.length > 25) {
-      setfirstNameError("El nombre debe tener entre 3 y 25 caracteres");
+    } else if (userManager.firstName.length < 3 ) {
+      setfirstNameError("El nombre debe tener mas de 3 caracteres");
       isValid = false;
     } else {
       setfirstNameError("");
@@ -44,8 +42,8 @@ function ManagerEdit() {
     if (!userManager.lastName) {
       setlastNameError("El apellido es obligatorio");
       isValid = false;
-    } else if (userManager.lastName.length < 3 || userManager.lastName.length > 25) {
-      setlastNameError("El apellido debe tener entre 3 y 25 caracteres");
+    } else if (userManager.lastName.length < 3) {
+      setlastNameError("El apellido debe tener mas de 3 caracteres");
       isValid = false;
     } else {
       setlastNameError("");
@@ -62,16 +60,6 @@ function ManagerEdit() {
       } else {
         setemailError("");
       }
-    }
-
-    if (!userManager.password) {
-      setpasswordError("La contraseña es obligatoria");
-      isValid = false;
-    } else if (userManager.password.length <= 5 || userManager.password.length > 10) {
-      setpasswordError("La contraseña debe tener entre 6 y 10 caracteres");
-      isValid = false;
-    } else {
-      setpasswordError("");
     }
       
     return isValid;
@@ -137,7 +125,6 @@ function ManagerEdit() {
       idGestor: id,
       email: userManager.email,
       rol: userManager.rol,
-      password: userManager.password,
       firstName: userManager.firstName,
       lastName: userManager.lastName,
       idCareer: idCareer,
@@ -186,6 +173,7 @@ function ManagerEdit() {
                   type="text"
                   name="firstName"
                   id="firstName"
+                  maxLength={30}
                   className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                   value={userManager.firstName}
                   onChange={handleInputChange}
@@ -203,6 +191,7 @@ function ManagerEdit() {
                   type="text"
                   id="lastName"
                   name="lastName"
+                  maxLength={50}
                   className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                   value={userManager.lastName}
                   onChange={handleInputChange}
@@ -220,29 +209,13 @@ function ManagerEdit() {
                   type="text"
                   id="email"
                   name="email"
+                  maxLength={40}
                   className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                   value={userManager.email}
                   onChange={handleInputChange}
                 />
                 {emailError && (
                   <p className="text-red-500">{emailError}</p>)}
-                <br />
-                <label
-                  className="text-gray-900 dark:text-gray-900"
-                  htmlFor="editpassword"
-                >
-                  Contraseña
-                </label>
-                <input
-                  type="password"
-                  id="password"
-                  name="password"
-                  className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                  value={userManager.password}
-                  onChange={handleInputChange}
-                />
-                {passwordError && (
-                  <p className="text-red-500">{passwordError}</p>)}
                 <br />
                 <label
                   className="text-gray-900 dark:text-gray-900"

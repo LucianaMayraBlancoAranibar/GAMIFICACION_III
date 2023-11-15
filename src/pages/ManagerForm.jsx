@@ -35,8 +35,8 @@ function ManagerForm() {
     if (!firstName) {
       setfirstNameError("El nombre es obligatorio");
       isValid = false;
-    } else if (firstName.length < 3 || firstName.length > 25) {
-      setfirstNameError("El nombre debe tener entre 3 y 25 caracteres");
+    } else if (firstName.length < 3) {
+      setfirstNameError("El nombre debe tener mas de 3 caracteres");
       isValid = false;
     } else {
       setfirstNameError("");
@@ -45,8 +45,8 @@ function ManagerForm() {
     if (!lastName) {
       setlastNameError("El apellido es obligatorio");
       isValid = false;
-    } else if (lastName.length < 3 || lastName.length > 25) {
-      setlastNameError("El apellido debe tener entre 3 y 25 caracteres");
+    } else if (lastName.length < 3) {
+      setlastNameError("El apellido debe tener mas de 3 caracteres");
       isValid = false;
     } else {
       setlastNameError("");
@@ -68,8 +68,8 @@ function ManagerForm() {
     if (!password) {
       setpasswordError("La contraseña es obligatoria");
       isValid = false;
-    } else if (password.length <= 6 || password.length > 10) {
-      setpasswordError("La contraseña debe tener entre 6 y 10 caracteres");
+    } else if (password.length <= 6 || password.length > 15) {
+      setpasswordError("La contraseña debe tener entre 6 y 15 caracteres");
       isValid = false;
     } else {
       setpasswordError("");
@@ -179,6 +179,7 @@ function ManagerForm() {
                 <input
                   type="text"
                   id="firstName"
+                  maxLength={30}
                   className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                   value={firstName}
                   onChange={(e) => setfirstName(e.target.value)}
@@ -195,6 +196,7 @@ function ManagerForm() {
                 <input
                   type="text"
                   id="lastName"
+                  maxLength={60}
                   className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                   value={lastName}
                   onChange={(e) => setlastName(e.target.value)}
@@ -211,6 +213,7 @@ function ManagerForm() {
                 <input
                   type="text"
                   id="email"
+                  maxLength={40}
                   className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                   value={email}
                   onChange={(e) => setemail(e.target.value)}
@@ -227,6 +230,7 @@ function ManagerForm() {
                 <input
                   type="password"
                   id="password"
+                  maxLength={15}
                   className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                   value={password}
                   onChange={(e) => setpassword(e.target.value)}

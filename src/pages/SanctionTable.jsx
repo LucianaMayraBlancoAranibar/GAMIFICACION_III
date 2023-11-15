@@ -12,11 +12,18 @@ function SanctionsTable() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    // Obtener la lista de sanciones desde la API y almacenarla en el estado `sanctions`
     const fetchSanctions = async () => {
       try {
         const response = await axios.get("https://localhost:7205/api/Sanctions");
-        setSanctions(response.data);
+        const sanctionsWithNames = await Promise.all(response.data.map(async (sanction) => {
+          // Suponiendo que tienes una endpoint para obtener los detalles del estudiante por su ID
+          const studentResponse = await axios.get(`https://localhost:7205/api/Students/${sanction.idStudent}`);
+          return {
+            ...sanction,
+            studentName: studentResponse.data.firstName + ' ' + studentResponse.data.lastName // Asegúrate de que estos campos correspondan a los nombres de los campos en la respuesta de tu API
+          };
+        }));
+        setSanctions(sanctionsWithNames);
         setLoading(false);
       } catch (error) {
         console.error("Error al obtener la lista de sanciones:", error);
@@ -24,10 +31,10 @@ function SanctionsTable() {
         setLoading(false);
       }
     };
-
+  
     fetchSanctions();
   }, []);
-
+  
   const handleDelete = async (id) => {
     try {
       await axios.delete(`https://localhost:7205/api/Sanctions/${id}`);
@@ -82,7 +89,7 @@ function SanctionsTable() {
                 {sanctions.map((sanction) => (
                   <tr key={sanction.id}>
                     <td className="px-6 py-4">{sanction.description}</td>
-                    <td className="px-6 py-4">{sanction.sanctionValue}</td>
+                    <td className="px-6 py-4">{sanction.sanction1}</td>
                     <td className="px-6 py-4">{sanction.studentName}</td>
                     <td className="px-6 py-4">
                       <button className="bg-red-500 text-white p-2 rounded" onClick={() => handleDelete(sanction.id)}>

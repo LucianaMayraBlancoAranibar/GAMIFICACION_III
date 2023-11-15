@@ -1,8 +1,10 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import Cookies from 'js-cookie';
 
 const AuthContext = createContext({
   currentUser: null,
   setCurrentUser: () => {},
+  loading: true
 });
 
 export const useAuth = () => {
@@ -38,7 +40,7 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const initAuth = async () => {
-      const storedToken = localStorage.getItem('token');
+      const storedToken = Cookies.get('token');
       if (storedToken) {
         const userDetails = await fetchUserDetails(storedToken);
         if (userDetails) {
