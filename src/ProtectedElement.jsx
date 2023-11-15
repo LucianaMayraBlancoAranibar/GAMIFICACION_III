@@ -1,25 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from './AuthContext';
 
 export default function ProtectedElement({ allowedRoles, element }) {
-  const { currentUser } = useAuth();
+  const { currentUser, loading } = useAuth(); // Incluye 'loading' aquí
   const navigate = useNavigate();
   const location = useLocation();
 
-  console.log('CurrentUser en ProtectedElement:', currentUser);
+  useEffect(() => {
+    if (!loading) { // Solo realiza acciones si no está cargando
+      if (!currentUser) {
+        // Si el usuario no está autenticado, redirige al login
+        navigate("/LoginPage", { state: { from: location } });
+      } else if (!allowedRoles.includes(currentUser.rol)) {
+        // Si el usuario no tiene el rol permitido, redirige o muestra una página de error
+        console.warn(`Acceso denegado a la ruta: ${location.pathname}`);
+        navigate("/unauthorized", { replace: true });
+      }
+    }
+  }, [currentUser, allowedRoles, navigate, location, loading]); // Incluye 'loading' como dependencia
 
-  if (!currentUser) {
-    // Si el usuario no está autenticado, redirige al login
-    navigate("/LoginPage", { state: { from: location } });
-    return null;
+  if (loading || !currentUser || !allowedRoles.includes(currentUser.rol)) {
+    return null; // Renderiza null mientras se espera la redirección o la finalización de la carga
   }
 
-  if (!allowedRoles.includes(currentUser.rol)) {
-    console.warn(`Acceso denegado a la ruta: ${location.pathname}`);
-    navigate("/LoginPage", { replace: true, state: { from: location } });
-    return null; // redirigir a una página "No Autorizado" 
-  }
-
-  return element;
+  return element; // Renderiza el elemento protegido si el usuario tiene acceso y no está cargando
 }

@@ -1,9 +1,8 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const AuthContext = createContext({
   currentUser: null,
   setCurrentUser: () => {},
-  hasRole: () => {}
 });
 
 export const useAuth = () => {
@@ -12,19 +11,56 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const hasRole = (role) => {
-    return currentUser?.rol === role;
+  const fetchUserDetails = async (token) => {
+    try {
+      const response = await fetch('https://localhost:7205/api/Usuarios/api/users/user-details', {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error('No se pudo recuperar la información del usuario');
+      }
+
+      const userData = await response.json();
+      return userData;
+    } catch (error) {
+      console.error('Error al recuperar los detalles del usuario:', error);
+      return null;
+    }
   };
 
-  const value = {
-    currentUser,
-    setCurrentUser,
-    hasRole
-  };
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  useEffect(() => {
+    const initAuth = async () => {
+      const storedToken = localStorage.getItem('token');
+      if (storedToken) {
+        const userDetails = await fetchUserDetails(storedToken);
+        if (userDetails) {
+          setCurrentUser(userDetails);
+        }
+      }
+      setLoading(false);
+    };
+
+    initAuth();
+  }, []);
+
+  if (loading) {
+    return <div>Cargando...</div>; 
+  }
+
+  return (
+    <AuthContext.Provider value={{ currentUser, setCurrentUser, loading }}>
+      {!loading && children}
+    </AuthContext.Provider>
+  );
+  
 };
 
-export default AuthContext;
-
+export default AuthProvider;
