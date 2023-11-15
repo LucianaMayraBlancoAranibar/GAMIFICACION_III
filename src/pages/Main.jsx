@@ -43,11 +43,11 @@ function Main() {
     }
   };
   const routes = [
-    { name: "Sobre Nosotros", href: "#slider" },
+    { name: "Sobre Nosotros", href: "#about" },
     { name: "Información", href: "#informacion" },
-    { name: "Ranking", href: "#informacion" },
-    { name: "Medallas", href: "#informacion" },
-    // Agrega más rutas según sea necesario
+    { name: "Ranking", href: "#rank" },
+    { name: "Medallas", href: "#medallas" },
+   
   ];
 
   const swiperRef = useRef(null);
@@ -161,19 +161,19 @@ function Main() {
               </li>
             </ul>
           </div>
-          <div>
+          <div id="about">
             <br></br><br></br>
             <About />
           </div>
-          <div>
+          <div id="rank">
             <br></br><br></br>
             <RankMain />
           </div>
-          <div>
+          <div id="medallas">
           <br></br><br></br>
             <SliderRank/>
           </div>
-          <div>
+          <div id="informacion">
          <InfoMain></InfoMain>
           </div>
           <div>

@@ -51,7 +51,15 @@ const BadgeBarChart = () => {
             });
     }, []);
 
-    return <Bar data={chartData} />;
+    return   <div className="w-full max-w-2xl mx-auto my-10 p-6 bg-white rounded-lg shadow">
+    <h2 className="text-xl font-semibold mb-4 text-center">
+      Distribución de Logros por Tipo
+    </h2>
+    <div className="h-auto">
+   
+      <Bar data={chartData} />
+    </div>
+  </div>;
 };
 
 export default BadgeBarChart;

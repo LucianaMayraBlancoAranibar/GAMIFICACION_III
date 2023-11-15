@@ -65,6 +65,7 @@ import AchievementTableG from "./pages/AchievementTableG";
 import BadgeTableG from "./pages/BadgeTableG";
 import SanctionTableG from "./pages/SanctionTableG";
 import StudentAchievementG from "./pages/StudentAchievementG";
+import AssignmentTableG from "./pages/AssignmentTableG";
 
 
 function ScrollToTopOnRouteChange() {
@@ -160,6 +161,7 @@ function App() {
           <Route path="/BadgeTableG" element={<ProtectedElement allowedRoles={[2]} element={<BadgeTableG/>} />} />
           <Route path="/StudentAchievement" element={<ProtectedElement allowedRoles={[1]} element={<StudentAchievement />} />} />
           <Route path="/StudentAchievementG" element={<ProtectedElement allowedRoles={[2]} element={<StudentAchievementG />} />} />
+          <Route path="/AssignmentTableG" element={<ProtectedElement allowedRoles={[2]} element={<AssignmentTableG />} />} />
           <Route path="/AssignmentTable" element={<ProtectedElement allowedRoles={[1]} element={<AssignmentTable />} />} />
           <Route path="/AssigmentEdit/:id" element={<ProtectedElement allowedRoles={[1]} element={<AssigmentEdit />} />} />
           <Route path="/StudentView" element={<ProtectedElement allowedRoles={[3]} element={<StudentView />} />} />
