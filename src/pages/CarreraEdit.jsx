@@ -23,8 +23,8 @@ function CarreraEdit() {
     if (!career.CareerName) {
       setDepartmentNameError("El nombre la carrera es obligatorio");
       isValid = false;
-    } else if (career.CareerName.length < 3) {
-      setDepartmentNameError("El nombre de la carrera debe tener mas de 3 caracteres");
+    } else if (career.CareerName.length < 3 | career.CareerName.length > 30) {
+      setDepartmentNameError("El nombre de la carrera debe tener entre 3 a 30 caracteres");
       isValid = false;
     } else {
       setDepartmentNameError("");

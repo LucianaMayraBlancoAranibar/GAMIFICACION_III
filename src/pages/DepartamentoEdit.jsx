@@ -23,8 +23,8 @@ function DepartamentoEdit() {
     if (!departamento.DepartmentName) {
       setDepartmentNameError("El nombre del departamento es obligatorio");
       isValid = false;
-    } else if (departamento.DepartmentName.length < 3 || departamento.DepartmentName.length > 15) {
-      setDepartmentNameError("El nombre del departamento debe tener entre 3 y 15 caracteres");
+    } else if (departamento.DepartmentName.length < 3 | departamento.DepartmentName.length > 25) {
+      setDepartmentNameError("El nombre del departamento debe tener entre 3 a 25 caracteres");
       isValid = false;
     } else {
       setDepartmentNameError("");
@@ -119,6 +119,7 @@ function DepartamentoEdit() {
                 <input
                   type="text"
                   name="DepartmentName"
+                  maxLength={30}
                   className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                   value={departamento.DepartmentName}
                   onChange={handleInputChange}

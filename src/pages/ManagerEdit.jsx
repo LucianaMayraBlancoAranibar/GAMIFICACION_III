@@ -21,6 +21,7 @@ function ManagerEdit() {
   });
   const [Carrera, setCarrer] = useState("");
   const [AcademicUnity, setAcademicUnity] = useState("");
+  const [originalEmail, setOriginalEmail] = useState("");
 
   const [emailError, setemailError] = useState("");
   const [firstNameError, setfirstNameError] = useState("");
@@ -32,8 +33,8 @@ function ManagerEdit() {
     if (!userManager.firstName) {
       setfirstNameError("El nombre es obligatorio");
       isValid = false;
-    } else if (userManager.firstName.length < 3 ) {
-      setfirstNameError("El nombre debe tener mas de 3 caracteres");
+    } else if (userManager.firstName.length < 3 | userManager.firstName.length > 25 ) {
+      setfirstNameError("El nombre debe tener entre 3 a 25 caracteres");
       isValid = false;
     } else {
       setfirstNameError("");
@@ -42,8 +43,8 @@ function ManagerEdit() {
     if (!userManager.lastName) {
       setlastNameError("El apellido es obligatorio");
       isValid = false;
-    } else if (userManager.lastName.length < 3) {
-      setlastNameError("El apellido debe tener mas de 3 caracteres");
+    } else if (userManager.lastName.length < 3 | userManager.lastName.length > 35) {
+      setlastNameError("El apellido debe tener entre 3 a 35 caracteres");
       isValid = false;
     } else {
       setlastNameError("");
@@ -74,6 +75,7 @@ function ManagerEdit() {
         setUserManager(response.data);
         setIdCarrer(response.data.idCareer)
         setIdAcademicUnity(response.data.idAcademicUnity)
+        setOriginalEmail(response.data.email); // Aquí estableces el correo electrónico original
       })
       .catch((error) => {
         console.log(error);
@@ -119,31 +121,56 @@ function ManagerEdit() {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (validateForm()) {
-
-    // Crear un objeto con los datos en formato JSON
-    const requestData = {
-      idGestor: id,
-      email: userManager.email,
-      rol: userManager.rol,
-      firstName: userManager.firstName,
-      lastName: userManager.lastName,
-      idCareer: idCareer,
-      idAcademicUnity: idAcademicUnity,
-    };
-    axios
-      .put(`https://localhost:7205/api/Gestors/${id}`, requestData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      // Crear un objeto con los datos en formato JSON
+      const requestData = {
+        idGestor: id,
+        email: userManager.email,
+        rol: userManager.rol,
+        firstName: userManager.firstName,
+        lastName: userManager.lastName,
+        idCareer: idCareer,
+        idAcademicUnity: idAcademicUnity,
+      };
+  
+      // Si el correo electrónico no ha cambiado, proceder con la actualización
+      if (userManager.email === originalEmail) {
+        axios.put(`https://localhost:7205/api/Gestors/${id}`, requestData, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        .then((response) => {
+          console.log(response);
+        });
+      } else {
+        // Si el correo electrónico ha cambiado, obtener todos los gestores y realizar la validación
+        axios.get('https://localhost:7205/api/Gestors')
+          .then((response) => {
+            const gestors = response.data;
+  
+            // Comprobar si el correo electrónico ya existe
+            const existingGestor = gestors.find(gestor => gestor.email === requestData.email);
+  
+            // Si el correo electrónico ya existe, mostrar un mensaje de error
+            if (existingGestor) {
+              setemailError("El correo electronico ya esta siendo usado");
+              isValid = false;
+            } else {
+              // Si el correo electrónico no existe, proceder con la actualización
+              axios.put(`https://localhost:7205/api/Gestors/${id}`, requestData, {
+                headers: {
+                  "Content-Type": "application/json",
+                },
+              })
+              .then((response) => {
+                console.log(response);
+              });
+            }
+          });
+      }
     }
-  };
+  }
+
   function closeModal() {
     setModalIsOpen(false);
   }
@@ -191,7 +218,7 @@ function ManagerEdit() {
                   type="text"
                   id="lastName"
                   name="lastName"
-                  maxLength={50}
+                  maxLength={40}
                   className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                   value={userManager.lastName}
                   onChange={handleInputChange}

@@ -127,7 +127,7 @@ function App() {
             element={<ProtectedElement allowedRoles={[1]} element={<TypeAchievementEdit />} />}
           />
           <Route path="/DepartamentoForm" element={<ProtectedElement allowedRoles={[1]} element={<DepartamentoForm />} />} />
-          <Route path="/DepartamentoEdit" element={<ProtectedElement allowedRoles={[1]} element={<DepartamentoEdit />} />} />
+          <Route path="/DepartamentoEdit/:id" element={<ProtectedElement allowedRoles={[1]} element={<DepartamentoEdit />} />} />
           <Route path="/DepartamentoTable" element={<ProtectedElement allowedRoles={[1]} element={<DepartamentoTable/>} />} />
 
           <Route path="/RankForm" element={<ProtectedElement allowedRoles={[1]} element={<DepartamentoTable />} />} />
@@ -161,12 +161,12 @@ function App() {
           <Route path="/ForgotPassword" element={<ForgotPassword />} />
           <Route path="/ResetPassword" element={<ResetPassword />} />
 
-          <Route path="/CarreraTable" element={<CarreraTable />} />
-          <Route path="/CarreraEdit/:id" element={<CarreraEdit />} />
-          <Route path="/CarreraForm" element={<CarreraForm />} />
-          <Route path="/StudentTable" element={<StudentTable />} />
-          <Route path="/StudentForm" element={<StudentForm />} />
-          <Route path="/StudentEdit/:id" element={<StudentEdit />} />
+          <Route path="/CarreraTable" element={<ProtectedElement allowedRoles={[1]} element={<CarreraTable />} />} />
+          <Route path="/CarreraEdit/:id" element={<ProtectedElement allowedRoles={[1]} element={<CarreraEdit />} />} />
+          <Route path="/CarreraForm" element={<ProtectedElement allowedRoles={[1]} element={<CarreraForm />} />} />
+          <Route path="/StudentTable" element={<ProtectedElement allowedRoles={[1]} element={<StudentTable />} />} />
+          <Route path="/StudentForm" element={<ProtectedElement allowedRoles={[1]} element={<StudentForm />} />} />
+          <Route path="/StudentEdit/:id" element={<ProtectedElement allowedRoles={[1]} element={<StudentEdit />} />} />
 
           <Route path="/Main" element={<Main />} />
           <Route path="/InfoMain" element={<InfoMain />} />
