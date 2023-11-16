@@ -1,33 +1,60 @@
 // StudentsPopup.js
 
 function StudentsPopup({ isOpen, students, onClose }) {
-    if (!isOpen) return null;
-  
-    return (
-      <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex justify-center items-center">
-        <div className="relative bg-white rounded-lg shadow-lg p-5 md:p-8 max-w-lg mx-auto">
-          <div className="flex justify-between items-center">
-            <h2 className="text-xl font-semibold text-gray-700">Lista de Estudiantes</h2>
-            <button 
-              onClick={onClose}
-              className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
+  if (!isOpen) return null;
+
+  return (
+    <div
+      id="static-modal"
+      data-modal-backdrop="static"
+      tabindex="-1"
+      aria-hidden="true"
+      className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex justify-center items-center"
+    >
+      <div className="relative bg-white p-4 w-full  rounded-lg max-w-2xl max-h-full">
+        <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+            Lista de Estudiantes
+          </h3>
+          <button
+            type="button"
+            onClick={onClose}
+            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+            data-modal-hide="static-modal"
+          >
+            <svg
+              class="w-3 h-3"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 14 14"
             >
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7.707 7.707a1 1 0 011.414-1.414L10 8.586l1.293-1.293a1 1 0 111.414 1.414L11.414 10l1.293 1.293a1 1 0 01-1.414 1.414L10 11.414l-1.293 1.293a1 1 0 01-1.414-1.414L8.586 10 7.293 8.707a1 1 0 010-1.414z" clipRule="evenodd" />
-              </svg>
-            </button>
-          </div>
-          <div className="mt-3">
-            <ul className="max-h-60 overflow-auto">
-              {students.map(student => (
-                <li key={student.id} className="py-1 border-b border-gray-200">{student.name}</li>
-              ))}
-            </ul>
-          </div>
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+              />
+            </svg>
+            <span class="sr-only">Close modal</span>
+          </button>
+        </div>
+        <div class="p-4 md:p-5 space-y-4">
+          <ul className="max-h-60 overflow-auto">
+            {students.map((student) => (
+              <li
+                key={student.id}
+                className="text-base leading-relaxed text-gray-500 dark:text-gray-400"
+              >
+                {student.name}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
-    );
-  }
-  
-  export default StudentsPopup;
-  
+    </div>
+  );
+}
+
+export default StudentsPopup;
