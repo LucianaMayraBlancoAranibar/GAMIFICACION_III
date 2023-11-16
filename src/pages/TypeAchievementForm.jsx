@@ -88,6 +88,7 @@ function TypeAchievementForm() {
               </label>
               <input
                 type="text"
+                maxLength={30}
                 id="NameTypeAchievement"
                 name="NameTypeAchievement"
                 value={formData.NameTypeAchievement}
@@ -125,6 +126,10 @@ function TypeAchievementForm() {
             >
               Registrar
             </button>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
             <br></br>
             <br></br>
             <Link to="/TypeAchievementTable" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">

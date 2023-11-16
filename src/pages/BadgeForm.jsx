@@ -98,6 +98,7 @@ const BadgeCreationForm = () => {
               </label>
               <input
                 type="text"
+                maxLength={30}
                 id="badgeName"
                 value={badgeName}
                 onChange={(e) => setBadgeName(e.target.value)}
