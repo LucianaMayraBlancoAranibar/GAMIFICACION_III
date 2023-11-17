@@ -80,18 +80,9 @@ class StudentAchievement extends Component {
     if (!selectedStudent || !selectedAchievement) {
       this.setState({
         message: "Por favor, seleccione tanto un estudiante como un logro para la asignación.",
-        achievementCreated: false,
+        
       });
-      return; // Evita que se realice la asignación si falta alguno de los valores
-    }
-  
-    // Verifica si el estudiante tiene un "badge" antes de asignar el logro
-    if (!selectedStudent.badge) {
-      this.setState({
-        message: "El estudiante debe tener un badge antes de asignar un logro.",
-        achievementCreated: false,
-      });
-      return; // Evita que se realice la asignación si el estudiante no tiene un badge
+      return; 
     }
   
     this.setModalIsOpen(true);

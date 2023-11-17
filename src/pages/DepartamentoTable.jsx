@@ -3,6 +3,8 @@ import axios from "axios";
 import Sidebar from "../partials/Sidebar";
 import Header from "../partials/Header";
 import { Link } from "react-router-dom";
+import { AiFillEdit } from "react-icons/ai";
+import { BsTrashFill } from "react-icons/bs";
 
 function DepartamentoTable() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -95,17 +97,15 @@ function DepartamentoTable() {
                   <td className="px-6 py-4">{Facultad.find((Facultad) => Facultad.idFaculty === Departamento.idFaculty)?.facultyName}</td>
                   <td className="px-6 py-4 text-left">
                   <Link to={`/DepartamentoEdit/${Departamento.idDepartment}`}> {/* Redirigir a la página de edición con el ID */}
-                    <button
-                     className="px-4 py-4 mr-4 leading-5 text-white transition-colors duration-200 transform bg-green-700 rounded-md hover:bg-green-500 focus:outline-none focus:bg-gray-600"
-                    >
-                      Editar
-                    </button>
+                  <button className="px-4 py-4 mr-4 leading-5 text-white transition-colors duration-200 transform bg-green-700 rounded-md hover:bg-green-500 focus:outline-none focus:bg-gray-600">
+                          <AiFillEdit />
+                        </button>
                     </Link>
                     <button
                      className="px-4 py-4 ml-3 leading-5 text-white transition-colors duration-200 transform bg-red-500 rounded-md hover:bg-red-400 focus:outline-none focus:bg-gray-600"
                       onClick={() => setDepartamentoToDelete(Departamento.idDepartment)} // Establece el ID de la Departamento para eliminar
                     >
-                      Eliminar
+                          <BsTrashFill />
                     </button>
                   </td>
                 </tr>

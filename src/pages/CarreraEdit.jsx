@@ -3,13 +3,13 @@ import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import Sidebar from "../partials/Sidebar";
 import Header from "../partials/Header";
-
-import ModalConfirmacion from "../partials/ModalConfirmacion";
+import ModalEdit from "../partials/ModalEdit";
 
 function CarreraEdit() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { id } = useParams();
   const [idDepartment, setIdDepartment] = useState("");
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const [career, setCareer] = useState({
     CareerName: "",
     IdDepartment: "",
@@ -83,6 +83,7 @@ function CarreraEdit() {
         },
       })
       .then((response) => {
+        setModalIsOpen(true);
         console.log(response);
       })
       .catch((error) => {
@@ -168,6 +169,7 @@ function CarreraEdit() {
               <Link to="/CarreraTable">Volver a la lista de carreras</Link>
             </div>
           </form>
+          <ModalEdit isOpen={modalIsOpen} closeModal={closeModal} />
         </div>
       </div>
     </div>

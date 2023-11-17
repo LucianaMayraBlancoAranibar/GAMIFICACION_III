@@ -17,10 +17,10 @@ function Login() {
           <input  placeholder="Email address"className="border mb-4 p-2 w-full rounded-lg shadow focus:outline-none focus:ring focus:ring-blue-100" type="email"/>
           <input className="border mb-4 p-2 w-full rounded-lg shadow focus:outline-none focus:ring focus:ring-blue-100" placeholder="Password" type="password"/>
   
-          <button className="bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 text-white p-2 mb-4 w-full rounded-full shadow-md transition duration-200 transform hover:scale-105">Login</button>
+          <button className="bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 text-white p-2 mb-4 w-full rounded-full shadow-md transition duration-200 transform hover:scale-105">Inicio de Sesion</button>
         </div>
         <p className="text-xs mb-5 text-gray-500">
-          <a href="#!" className="hover:text-blue-500 transition duration-200">Forgot password?</a>
+          <a href="#!" className="hover:text-blue-500 transition duration-200">Olvidaste tu contraseña?</a>
         </p>
        
 

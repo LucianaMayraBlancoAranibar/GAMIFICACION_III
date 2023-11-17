@@ -47,32 +47,44 @@ const StudentView = () => {
   return (
     <div className="container mx-auto p-4">
       <div className="text-center mb-8">
-      
         <p className="text-xl text-gray-600">Aquí está tu progreso actual:</p>
       </div>
       <div className="flex flex-wrap justify-around items-stretch gap-4">
-     
-        <InfoCard label="Nombre de Rango" value={studentRank.rankName} icon="🏅" />
-        <InfoCard label="Nombre de Sub Rango" value={studentRank.subRankName} icon="🌟" />
+        {/* Primer elemento con imagen */}
+        <InfoCard
+          label="Nombre del Rango"
+          value={studentRank.rankName}
+          imageSrc={studentRank.imagePath}
+          isFirst={true}
+        />
+        {/* Resto de elementos con iconos */}
+        <InfoCard label="Nombre del Sub Rango" value={studentRank.subRankName} icon="🌟" />
         <InfoCard label="Score" value={studentRank.score} icon="✔️" />
-        <InfoCard label="Logros" value={studentRank.achievementsCount} icon="🏆" /> 
-        {/* Si quieres mostrar la imagen, puedes hacerlo directamente o en otro componente */}
-        <div className="flex justify-center items-center">
-          <img src={studentRank.imagePath} alt="Rank" className="h-32" />
-        </div>
+        <InfoCard label="Logros" value={studentRank.achievementsCount} icon="🏆" />
       </div>
     </div>
   );
 };
 
-const InfoCard = ({ label, value, icon }) => (
-  <div className="flex flex-col items-center p-6 bg-white rounded-xl shadow-lg w-full md:w-1/4 transform hover:scale-105 transition-transform duration-300">
-    <span className="text-6xl">{icon}</span>
+
+const InfoCard = ({ label, value, icon, imageSrc, isFirst }) => (
+  <div
+    className={`flex flex-col items-center p-6 bg-white rounded-xl shadow-lg w-full md:w-1/4 transform hover:scale-105 transition-transform duration-300 ${
+      isFirst ? 'border border-gray-300' : ''
+    }`}
+  >
+    {isFirst ? (
+      <img src={imageSrc} alt="Rank" style={{ height: '80px', width: '80px' }} />
+
+    ) : (
+      <span className="text-6xl">{icon}</span>
+    )}
     <div className="mt-3">
       <div className="text-gray-700 text-2xl font-semibold">{value}</div>
       <div className="text-gray-500">{label}</div>
     </div>
   </div>
 );
+
 
 export default StudentView;

@@ -3,11 +3,12 @@ import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import Sidebar from "../partials/Sidebar";
 import Header from "../partials/Header";
-import ModalConfirmacion from "../partials/ModalConfirmacion";
+import ModalEdit from "../partials/ModalEdit";
 
 function FacultyEdit() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { id } = useParams();
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const [errors, setErrors] = useState({ facultyName: "" }); 
   const [facultad, setFacultad] = useState({
     facultyName: "",
@@ -56,9 +57,11 @@ function FacultyEdit() {
       .put(`https://localhost:7205/api/Faculties/${id}`, requestData, {
         headers: {
           "Content-Type": "application/json",
-        },
+        }
+        
       })
       .then((response) => {
+        setModalIsOpen(true);
         console.log(response);
       })
       .catch((error) => {
@@ -116,6 +119,7 @@ function FacultyEdit() {
               <Link to="/FacultadTable">Volver a la lista de facultades</Link>
             </div>
           </form>
+          <ModalEdit isOpen={modalIsOpen} closeModal={closeModal} />
         </div>
       </div>
     </div>

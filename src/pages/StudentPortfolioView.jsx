@@ -63,7 +63,7 @@ const StudentProfileView = () => {
             <InfoField label="Carrera" value={studentProfile.career} />
             <InfoField label="Facultad" value={studentProfile.faculty} />
             <InfoField label="Departamento" value={studentProfile.department} />
-            <InfoField label="Sucursal" value={studentProfile.academicUnit} />
+            {/* <InfoField label="Sucursal" value={studentProfile.academicUnit} /> */}
           </div>
         </main>
       </div>

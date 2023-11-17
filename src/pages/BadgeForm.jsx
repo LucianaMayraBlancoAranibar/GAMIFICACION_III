@@ -51,7 +51,7 @@ const BadgeCreationForm = () => {
           IdTypeAchievement: idTypeAchievement ? idTypeAchievement.value : null,
         }
       );
-
+      setModalIsOpen(true);
       console.log(response.data);
     } catch (error) {
       console.error("Hubo un error al crear los badges");
@@ -136,6 +136,7 @@ const BadgeCreationForm = () => {
               </button>
             </div>
           </form>
+          <ModalConfirmacion isOpen={modalIsOpen} closeModal={closeModal} />
         </div>
       </div>
     </div>

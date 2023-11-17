@@ -3,13 +3,13 @@ import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import Sidebar from "../partials/Sidebar";
 import Header from "../partials/Header";
-
-import ModalConfirmacion from "../partials/ModalConfirmacion";
+import ModalEdit from "../partials/ModalEdit";
 
 function DepartamentoEdit() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { id } = useParams();
   const [idFaculty, setidFaculty] = useState("");
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const [departamento, setDepartamento] = useState({
     DepartmentName: "",
     IdFaculty: "",
@@ -84,6 +84,7 @@ function DepartamentoEdit() {
         },
       })
       .then((response) => {
+        setModalIsOpen(true);
         console.log(response);
       })
       .catch((error) => {
@@ -168,6 +169,7 @@ function DepartamentoEdit() {
               <Link to="/DepartamentoTable">Volver a la lista de sucursales</Link>
             </div>
           </form>
+          <ModalEdit isOpen={modalIsOpen} closeModal={closeModal} />
         </div>
       </div>
     </div>

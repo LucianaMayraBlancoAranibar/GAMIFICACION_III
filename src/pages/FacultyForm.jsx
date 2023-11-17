@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import Sidebar from "../partials/Sidebar";
 import Header from "../partials/Header";
-import ModalConfirmacion from "../partials/ModalConfirmacion"; // Importa el nuevo componente
+import ModalConfirmacion from "../partials/ModalConfirmacion"; 
 
 function FacultadForm() {
   const [sidebarOpen, setSidebarOpen] = useState(false);

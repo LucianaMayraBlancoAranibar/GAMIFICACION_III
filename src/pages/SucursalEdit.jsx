@@ -3,10 +3,11 @@ import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import Sidebar from "../partials/Sidebar";
 import Header from "../partials/Header";
-import ModalConfirmacion from "../partials/ModalConfirmacion";
+import ModalEdit from "../partials/ModalEdit";
 
 function SucursalEdit() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const { id } = useParams();
   const [sucursal, setSucursal] = useState({
     academicUnityName: "",
@@ -64,6 +65,7 @@ function SucursalEdit() {
           },
         })
         .then((response) => {
+          setModalIsOpen(true);
           console.log(response);
         })
         .catch((error) => {
@@ -122,6 +124,7 @@ function SucursalEdit() {
               <Link to="/SucursalTable">Volver a la lista de sucursales</Link>
             </div>
           </form>
+          <ModalEdit isOpen={modalIsOpen} closeModal={closeModal} />
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import LogoImage from '../images/Univalle_bol_cbb_logo.png'; 
-import Cookies from 'js-cookie';
+import LogoImage from "../images/Univalle_bol_cbb_logo.png";
+import Cookies from "js-cookie";
 
 import { useAuth } from "../AuthContext";
 
@@ -48,7 +48,7 @@ function LoginComponent() {
       console.log("Rol del usuario:", data.user?.rol);
 
       if (response.status === 200) {
-        Cookies.set('token', data.token, { expires: 1 });
+        Cookies.set("token", data.token, { expires: 1 });
 
         // Sigue usando localStorage para información no sensible
         localStorage.setItem("user", JSON.stringify(data.user));
@@ -71,14 +71,23 @@ function LoginComponent() {
         setErrors({ form: data.message || "Error al iniciar sesión." });
       }
     } catch (error) {
-      setErrors({ form: "Error al conectar con el servidor." });
+      setErrors({ form: "Correo o contraseña incorrectos." });
     } finally {
       setLoading(false);
     }
   };
 
+  function validateEmail(email) {
+    var re =
+      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  }
   const validateForm = () => {
     let formErrors = {};
+    if (!validateEmail(email)) {
+      formErrors.email = "Correo electrónico no válido";
+      return;
+    }
 
     if (!email) formErrors.email = "El email es obligatorio.";
     if (!password) formErrors.password = "La contraseña es obligatoria.";
@@ -87,7 +96,6 @@ function LoginComponent() {
 
     return Object.keys(formErrors).length === 0;
   };
-
   return (
     <section class="bg-gray-50 dark:bg-gray-900">
       <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -95,20 +103,16 @@ function LoginComponent() {
           href="#"
           class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
         >
-          <img
-            class="w-8 h-8 mr-2"
-           src={LogoImage}
-            alt="logo"
-          />
+          <img class="w-8 h-8 mr-2" src={LogoImage} alt="logo" />
           Univalle
         </a>
         <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-              Login
+              Inicio de Sesion
             </h1>
             <form class="space-y-4 md:space-y-6">
-              {errors.form && <div className="error mb-4">{errors.form}</div>}
+             
 
               <div className="">
                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -137,7 +141,7 @@ function LoginComponent() {
                 for="email"
                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               >
-                Your email
+                Correo Electronico
               </label>
               <input
                 type="email"
@@ -153,7 +157,7 @@ function LoginComponent() {
                 for="password"
                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               >
-                Password
+                Contraseña
               </label>
               <input
                 type="password"
@@ -195,20 +199,13 @@ function LoginComponent() {
                       required=""
                     />
                   </div>
-                  <div class="ml-3 text-sm">
-                    <label
-                      for="remember"
-                      class="text-gray-500 dark:text-gray-300"
-                    >
-                      Remember me
-                    </label>
-                  </div>
+                  
                 </div>
                 <a
                   href="/ForgotPassword"
                   class="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
                 >
-                  Forgot password?
+                  Olvidaste tu contraseña?
                 </a>
               </div>
             </form>

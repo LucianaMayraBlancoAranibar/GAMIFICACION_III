@@ -57,7 +57,7 @@ export function Navbar({ brandName, routes, action }) {
 
   return (
     <nav
-      className=" bg-[#522b46] bg-transparent absolute top-0 left-0 w-full z-10 sticky-navbar"
+      className=" bg-[#9a1447] bg-transparent absolute top-0 left-0 w-full z-10 sticky-navbar"
       style={{ background: "#522b46" }}
     >
       <div className="max-w-7xl mx-auto px-8">

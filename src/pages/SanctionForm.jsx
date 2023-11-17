@@ -87,6 +87,7 @@ function SanctionForm() {
         setErrors({ form: data.message || "Error al crear la sanción." });
       }
     } catch (error) {
+      setModalIsOpen(true);
       setErrors({ form: "Sancion creada." });
     } finally {
       setLoading(false);
