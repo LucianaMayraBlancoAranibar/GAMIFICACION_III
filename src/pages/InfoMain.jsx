@@ -8,7 +8,7 @@ function InfoMain() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div style={{ background: '#522b46' }}>
+    <div style={{ background: '#ffffff' }}>
       <div className="rounded-container">
         
         <PageTitle heading="Explorando el Sistema de Logros Estudiantiles">

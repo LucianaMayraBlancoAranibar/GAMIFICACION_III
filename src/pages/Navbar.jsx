@@ -57,8 +57,8 @@ export function Navbar({ brandName, routes, action }) {
 
   return (
     <nav
-      className=" bg-[#9a1447] bg-transparent absolute top-0 left-0 w-full z-10 sticky-navbar"
-      style={{ background: "#522b46" }}
+      className=" bg-gray-700 absolute top-0 left-0 w-full z-10 sticky-navbar"
+      style={{ background: "bg-gray-700" }}
     >
       <div className="max-w-7xl mx-auto px-8">
         <div className="flex justify-between">
@@ -107,7 +107,7 @@ export function Navbar({ brandName, routes, action }) {
               to="/LoginPage"
               className="py-2 px-3 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-300"
             >
-              Login
+              Iniciar sesion
             </Link>
           </div>
 

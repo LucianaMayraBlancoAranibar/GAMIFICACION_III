@@ -12,6 +12,7 @@ import  InfoMain  from "./InfoMain";
 import SliderRank from "./SliderRank";
 import About from "../utils/About"
 import Footer from "./Footer"
+import RankTableStatic from "./RankTableStatic"
 import { Collapse } from "@material-tailwind/react";
 
 function Main() {
@@ -172,6 +173,10 @@ function Main() {
           <div id="medallas">
           <br></br><br></br>
             <SliderRank/>
+          </div>
+          <div id="medallas">
+          <br></br><br></br>
+            <RankTableStatic/>
           </div>
           <div id="informacion">
          <InfoMain></InfoMain>

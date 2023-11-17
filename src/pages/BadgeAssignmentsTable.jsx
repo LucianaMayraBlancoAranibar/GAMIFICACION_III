@@ -32,26 +32,33 @@ function BadgeAssignmentsTable() {
       });
   }, []);
   const handleDelete = () => {
-    if (!badgeAssignmentToDelete) return; // Verifica si hay un ID para eliminar
+    console.log(
+      "Intentando eliminar la asignación con ID:",
+      badgeAssignmentToDelete
+    );
+    if (!badgeAssignmentToDelete) {
+      console.log("No se ha seleccionado ninguna asignación para eliminar.");
+      return;
+    }
+
+    console.log("Eliminando la asignación con ID:", badgeAssignmentToDelete);
 
     axios
       .delete(
         `https://localhost:7205/api/BadgeStudents/${badgeAssignmentToDelete}`
       )
       .then(() => {
-        // Filtra y actualiza el estado para reflejar la eliminación
-        setBadgeAssignments(
-          badgeAssignments.filter(
-            (assignment) => assignment.id !== badgeAssignmentToDelete
-          )
+        const updatedBadgeAssignments = badgeAssignments.filter(
+          (assignment) => assignment.idBadgeStudent !== badgeAssignmentToDelete
         );
-        setBadgeAssignmentToDelete(null); // Restablece el estado
+        setBadgeAssignments(updatedBadgeAssignments);
+        setBadgeAssignmentToDelete(null);
       })
+
       .catch((error) => {
-        // Maneja cualquier error aquí
-        console.error("Error deleting badge assignment:", error);
-        setError("Error al eliminar la asignación de badge.");
-        setBadgeAssignmentToDelete(null); // Restablece el estado en caso de error
+        console.error("Error al eliminar la asignación de badge:", error);
+        setError("Error al eliminar la asignación de badge: " + error.message);
+        setBadgeAssignmentToDelete(null);
       });
   };
 
@@ -115,34 +122,41 @@ function BadgeAssignmentsTable() {
                 </tr>
               </thead>
               <tbody className="text-sm font-medium divide-y divide-slate-100 dark:divide-slate-700">
-                {filteredBadgeAssignments.map((assignment) => (
-                  <tr
-                    className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-                    key={assignment.Id}
-                  >
-                    <td className="px-6 py-4">{assignment.studentFullName}</td>
-                    <td className="px-6 py-4">{assignment.badgeName}</td>
-                    <td className="px-6 py-4">
-                      {assignment.accumulatedPoints}
-                    </td>
-                    <td className="px-6 py-4 text-left">
-                      {/* <Link to={`/BadgeAssignmentsEdit/${assignment.id}`}>
+                {filteredBadgeAssignments.map((assignment) => {
+                  console.log("Asignación:", assignment);
+                  return (
+                    <tr
+                      className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                      key={assignment.idBadgeStudent}
+                    >
+                      <td className="px-6 py-4">
+                        {assignment.studentFullName}
+                      </td>
+                      <td className="px-6 py-4">{assignment.badgeName}</td>
+                      <td className="px-6 py-4">
+                        {assignment.accumulatedPoints}
+                      </td>
+                      <td className="px-6 py-4 text-left">
+                        {/* <Link to={`/BadgeAssignmentsEdit/${assignment.id}`}>
                         <button className="px-4 py-4 mr-4 leading-5 text-white transition-colors duration-200 transform bg-green-700 rounded-md hover:bg-green-500 focus:outline-none focus:bg-gray-600">
                         <AiFillEdit />
                         </button>
                       </Link> */}
 
-                      <button
-                        className="px-4 py-4 ml-3 leading-5 text-white transition-colors duration-200 transform bg-red-500 rounded-md hover:bg-red-400 focus:outline-none focus:bg-gray-600"
-                        onClick={() =>
-                          setBadgeAssignmentToDelete(assignment.id)
-                        }
-                      >
-                        <BsTrashFill />
-                      </button>
-                    </td>
-                  </tr>
-                ))}
+                        <button
+                          className="px-4 py-4 ml-3 leading-5 text-white transition-colors duration-200 transform bg-red-500 rounded-md hover:bg-red-400 focus:outline-none focus:bg-gray-600"
+                          onClick={() =>
+                            setBadgeAssignmentToDelete(
+                              assignment.idBadgeStudent
+                            )
+                          }
+                        >
+                          <BsTrashFill />
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>

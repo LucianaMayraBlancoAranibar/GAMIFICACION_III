@@ -141,7 +141,7 @@ const AssignBadgeForm = () => {
             <br></br>
             <br></br>
             <br></br>
-            <Link to="/BadgeTable">Volver a la lista de Insignias</Link>
+            <Link to="/BadgeAssignmentsTable">Volver a la lista de Insignias</Link>
         </div>
       </div>
     </div>

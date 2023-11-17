@@ -414,10 +414,11 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                               </span>
                             </NavLink>
                           </li>
+                          
                           <li className="mb-1 last:mb-0">
                             <NavLink
                               end
-                              to="/SucursalTable"
+                              to="/DepartamentoTable"
                               className={({ isActive }) =>
                                 "block transition duration-150 truncate " +
                                 (isActive
@@ -426,11 +427,10 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                               }
                             >
                               <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                Sucursales
+                                Departamento
                               </span>
                             </NavLink>
                           </li>
-
                           <li className="mb-1 last:mb-0">
                             <NavLink
                               end
@@ -451,7 +451,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                           <li className="mb-1 last:mb-0">
                             <NavLink
                               end
-                              to="/DepartamentoTable"
+                              to="/SucursalTable"
                               className={({ isActive }) =>
                                 "block transition duration-150 truncate " +
                                 (isActive
@@ -460,7 +460,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                               }
                             >
                               <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                Departamento
+                                Sucursales
                               </span>
                             </NavLink>
                           </li>
@@ -521,7 +521,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                               />
                             </svg>
                             <span className="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                              Badges
+                            Insignias
                             </span>
                           </div>
                           {/* Icon */}
@@ -551,7 +551,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                               }
                             >
                               <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                Badge
+                                Insignia
                               </span>
                             </NavLink>
                           </li>
