@@ -68,8 +68,8 @@ function StudentForm() {
     if (!password) {
       setpasswordError("La contraseña es obligatoria");
       isValid = false;
-    } else if (password.length < 6 ) {
-      setpasswordError("La contraseña debe tener mas de 6 caracteres");
+    } else if (password.length < 6 | password.length > 12) {
+      setpasswordError("La contraseña debe tener entre 6 a 12 caracteres");
       isValid = false;
     } else {
       setpasswordError("");
