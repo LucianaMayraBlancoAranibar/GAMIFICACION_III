@@ -93,6 +93,7 @@ function FacultyEdit() {
                 </label>
                 <input
                   type="text"
+                  maxLength={30}
                   name="facultyName"
                   className={`block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring ${errors.facultyName && "border-red-500"}`} 
                   value={facultad.facultyName}

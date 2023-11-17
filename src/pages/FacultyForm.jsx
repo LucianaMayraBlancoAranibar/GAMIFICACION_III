@@ -40,12 +40,11 @@ function FacultadForm() {
       <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
       <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
         <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-        <div className="relative p-4 sm:p-6 rounded-sm overflow-hidden mb-8">
-          <div className="relative">
-            <h1 className="text-2xl md:text-3xl text-slate-800 dark:text-slate-100 font-bold mb-1">
-              Nueva Facultad{" "}
-            </h1>
-          </div>
+        <div className="relative p-4 sm:p-6 rounded-sm mb-8">
+          <h1 className="text-2xl md:text-3xl text-slate-800 dark:text-slate-100 font-bold mb-1">
+            Nueva Facultad{" "}
+          </h1>
+
           <br></br>
           <form onSubmit={handleSubmit}>
             <div>
@@ -59,6 +58,7 @@ function FacultadForm() {
                 <input
                   type="text"
                   id="FacultyName"
+                  maxLength={30}
                   className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                   value={FacultyName}
                   onChange={(e) => setNombreFacultad(e.target.value)}

@@ -16,7 +16,7 @@ function UserManager() {
         <main className="relative p-4 sm:p-6 rounded-sm overflow-hidden mb-8">
           <div className="relative">
             <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-              Nuevo Tipo de Usuario{" "}
+              Tipos de Usuario{" "}
             </h1>
           </div>
           <br></br>
@@ -48,6 +48,17 @@ function UserManager() {
                  
                      Registrar
                     </Link>
+                    
+                  </div>
+                  <div class="flex mt-4 space-x-3 md:mt-6">
+                    <Link
+                      to="/ManagerTable"
+                      class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    >
+                 
+                     Lista de Gestores
+                    </Link>
+                    
                   </div>
                 </div>
               </div>
@@ -71,10 +82,18 @@ function UserManager() {
                   </span>
                   <div class="flex mt-4 space-x-3 md:mt-6">
                     <a
-                      href="#"
+                      href="/StudentForm"
                       class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                     >
                      Registrar
+                    </a>
+                  </div>
+                  <div class="flex mt-4 space-x-3 md:mt-6">
+                    <a
+                      href="/StudentTable"
+                      class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    >
+                     Lista de Estudiantes
                     </a>
                   </div>
                 </div>

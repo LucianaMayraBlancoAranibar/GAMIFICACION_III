@@ -117,6 +117,7 @@ function AchievementEdit() {
                 </label>
                 <input
                   type="text"
+                  maxLength={30}
                   id="NameAchievemt"
                   name="NameAchievemt"
                   value={formData.NameAchievemt}
@@ -158,6 +159,7 @@ function AchievementEdit() {
                 <input
                   type="text"
                   id="ProjectName"
+                  maxLength={30}
                   name="ProjectName"
                   value={formData.ProjectName}
                   onChange={handleInputChange}

@@ -11,6 +11,7 @@ import RankMain from "./RankMain";
 import  InfoMain  from "./InfoMain";
 import SliderRank from "./SliderRank";
 import About from "../utils/About"
+import Footer from "./Footer"
 import { Collapse } from "@material-tailwind/react";
 
 function Main() {
@@ -42,9 +43,11 @@ function Main() {
     }
   };
   const routes = [
-    { name: "Slider", href: "#slider" },
+    { name: "Sobre Nosotros", href: "#about" },
     { name: "Información", href: "#informacion" },
-    // Agrega más rutas según sea necesario
+    { name: "Ranking", href: "#rank" },
+    { name: "Medallas", href: "#medallas" },
+   
   ];
 
   const swiperRef = useRef(null);
@@ -102,10 +105,10 @@ function Main() {
     });
 
     function autoChangeSlide() {
-      const nextButton = document.querySelector(
-        "[data-carousel-button='next']"
-      );
-      nextButton.click();
+      const nextButton = document.querySelector("[data-carousel-button='next']");
+      if (nextButton) {
+        nextButton.click();
+      }
     }
 
     // Configura un intervalo para cambiar automáticamente las diapositivas
@@ -127,12 +130,12 @@ function Main() {
     <div>
         
         <Navbar routes={routes} />
+       
     <div className="flex h-screen overflow-hidden">
         
       <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
-      
-        <div className="relative pt-4 rounded-sm overflow-hidden overflow-y-scroll">
      
+        <div className="relative pt-4 rounded-sm overflow-hidden overflow-y-scroll"  style={{ background: 'white' }}>
           <div className="carousel" data-carousel>
             <button
               className="carousel-button prev"
@@ -158,20 +161,23 @@ function Main() {
               </li>
             </ul>
           </div>
-          <div>
+          <div id="about">
             <br></br><br></br>
             <About />
           </div>
-          <div>
+          <div id="rank">
             <br></br><br></br>
             <RankMain />
           </div>
-          <div>
+          <div id="medallas">
           <br></br><br></br>
             <SliderRank/>
           </div>
-          <div>
+          <div id="informacion">
          <InfoMain></InfoMain>
+          </div>
+          <div>
+         <Footer></Footer>
           </div>
         </div>
       </div>

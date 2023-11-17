@@ -7,7 +7,7 @@ export function PageTitle({ heading, children }) {
       <Typography variant="h2" style={{ color: '#810236' }} className="mb-2 text-4xl font-semibold">
         {heading}
       </Typography>
-      <div className="border-b-3 border-red-900 mx-auto w-1/4"></div> {/* Ajuste aquí */}
+      <div className="border-b-3 border-red-900 mx-auto w-1/4"></div> 
       <Typography variant="lead" color="gray-600" className="mt-4 text-lg">
         {children}
       </Typography>

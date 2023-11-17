@@ -74,7 +74,7 @@ function TypeAchievementForm() {
       <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
       <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
         <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-        <div className="relative p-4 sm:p-6 rounded-sm overflow-hidden mb-8">
+        <div className="relative p-4 sm:p-6 rounded-sm  mb-8">
           <div className="relative">
             <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Nuevo Tipo de logro{" "}
@@ -88,6 +88,7 @@ function TypeAchievementForm() {
               </label>
               <input
                 type="text"
+                maxLength={30}
                 id="NameTypeAchievement"
                 name="NameTypeAchievement"
                 value={formData.NameTypeAchievement}
@@ -125,6 +126,10 @@ function TypeAchievementForm() {
             >
               Registrar
             </button>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
             <br></br>
             <br></br>
             <Link to="/TypeAchievementTable" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">

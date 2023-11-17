@@ -37,7 +37,7 @@ function SucursalForm() {
 
       try {
         const response = await axios.post(
-          "https://localhost:7220/api/AcademicUnities",
+          "https://localhost:7205/api/AcademicUnities",
           data
         );
 
@@ -78,6 +78,7 @@ function SucursalForm() {
                 </label>
                 <input
                   type="text"
+                  maxLength={30}
                   id="AcademicUnityName"
                   className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                   value={AcademicUnityName}

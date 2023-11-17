@@ -105,7 +105,7 @@ function BadgeAssignmentsTable() {
                     className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
                     key={assignment.Id}
                   >
-                    <td className="px-6 py-4">{assignment.studentName}</td>
+                    <td className="px-6 py-4">{assignment.studentFullName}</td>
                     <td className="px-6 py-4">{assignment.badgeName}</td>
                     <td className="px-6 py-4">
                       {assignment.accumulatedPoints}

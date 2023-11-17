@@ -96,7 +96,7 @@ function CarreraTable() {
                   <td className="px-6 py-4">{career.careerName}</td>
                   <td className="px-6 py-4">{department.find((department) => department.idDepartment === career.idDepartment)?.departmentName}</td>
                   <td className="px-6 py-4 text-left">
-                  <Link to={`/CareerEdit/${career.idCareer}`}> {/* Redirigir a la página de edición con el ID */}
+                  <Link to={`/CarreraEdit/${career.idCareer}`}> {/* Redirigir a la página de edición con el ID */}
                     <button
                      className="px-4 py-4 mr-4 leading-5 text-white transition-colors duration-200 transform bg-green-700 rounded-md hover:bg-green-500 focus:outline-none focus:bg-gray-600"
                     >

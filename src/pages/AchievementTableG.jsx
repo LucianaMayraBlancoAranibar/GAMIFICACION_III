@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Sidebar from "../partials/Sidebar";
+import SidebarGestor from "../partials/SidebarGestor";
 import Header from "../partials/Header";
 import { Link } from "react-router-dom";
-import { AiFillEdit } from 'react-icons/ai'; 
-import { BsTrashFill } from 'react-icons/bs'; 
+import { AiFillEdit } from "react-icons/ai";
+import { BsTrashFill } from "react-icons/bs";
 
 function AchievementTable() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -12,7 +12,6 @@ function AchievementTable() {
   const [achievementToDelete, setAchievementToDelete] = useState(null);
 
   useEffect(() => {
-   
     axios
       .get("https://localhost:7205/api/Achievements")
       .then((response) => {
@@ -20,56 +19,54 @@ function AchievementTable() {
         setAchievements(response.data);
       })
       .catch((error) => {
-        console.error(error); 
+        console.error(error);
       });
   }, []);
 
   const handleDeleteAchievement = () => {
     if (achievementToDelete) {
-
       const achievementToDeleteIndex = achievements.findIndex(
         (achievement) => achievement.idAchievement === achievementToDelete
       );
-  
+
       if (achievementToDeleteIndex === -1) {
         console.error("Logro no encontrado");
-        setAchievementToDelete(null); 
+        setAchievementToDelete(null);
         return;
       }
- 
+
       axios
-        .delete(`https://localhost:7205/api/Achievements/${achievementToDelete}`)
+        .delete(
+          `https://localhost:7205/api/Achievements/${achievementToDelete}`
+        )
         .then((response) => {
           setAchievements((prevAchievements) =>
             prevAchievements.filter(
               (achievement) => achievement.idAchievement !== achievementToDelete
             )
           );
-          setAchievementToDelete(null); 
+          setAchievementToDelete(null);
         })
         .catch((error) => {
           console.error(error);
-          setAchievementToDelete(null); 
+          setAchievementToDelete(null);
         });
     }
   };
-  
 
   return (
     <div className="flex h-screen overflow-hidden">
-      <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+      <SidebarGestor
+        sidebarOpen={sidebarOpen}
+        setSidebarOpen={setSidebarOpen}
+      />
       <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
         <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
         <div className="relative p-4 sm:p-6 rounded-sm mb-8">
-        <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-            Lista de Logros</h1>
-          <div className="mr-10 grid grid-flow-col sm:auto-cols-max justify-start sm:justify-end gap-2">
-            <Link to="/AchievementForm">
-              <button className="px-10 py-5 leading-5 text-white transition-colors duration-200 transform bg-gray-800 rounded-md hover:bg-gray-700 focus:outline-none focus:bg-gray-600">
-                Añadir Logro
-              </button>
-            </Link>
-          </div>
+          <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+            Lista de Logros
+          </h1>
+
           <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-5 max-h-[600px] overflow-y-auto">
             <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
               <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -80,12 +77,7 @@ function AchievementTable() {
                     </div>
                   </th>
                   <th scope="col" className="px-6 py-3 text-center">
-                    <div className="font-semibold text-left">
-                      Puntuacion
-                    </div>
-                  </th>
-                  <th scope="col" className="px-6 py-3 text-center">
-                    <div className="font-semibold text-left">Acciones</div>
+                    <div className="font-semibold text-left">Puntuacion</div>
                   </th>
                 </tr>
               </thead>
@@ -97,23 +89,6 @@ function AchievementTable() {
                   >
                     <td className="px-6 py-4">{achievement.nameAchievemt}</td>
                     <td className="px-6 py-4">{achievement.punctuation}</td>
-                    <td className="px-6 py-4 text-left">
-                      <Link
-                        to={`/AchievementEdit/${achievement.idAchievement}`}
-                      >
-                        <button className="px-4 py-4 mr-4 leading-5 text-white transition-colors duration-200 transform bg-green-700 rounded-md hover:bg-green-500 focus:outline-none focus:bg-gray-600">
-                        <AiFillEdit /> 
-                        </button>
-                      </Link>
-                      <button
-                        className="px-4 py-4 ml-3 leading-5 text-white transition-colors duration-200 transform bg-red-500 rounded-md hover:bg-red-400 focus:outline-none focus:bg-gray-600"
-                        onClick={() =>
-                          setAchievementToDelete(achievement.idAchievement)
-                        }
-                      >
-                          <BsTrashFill /> 
-                      </button>
-                    </td>
                   </tr>
                 ))}
               </tbody>

@@ -1,7 +1,7 @@
 import React, { Component, useState } from "react";
 import axios from "axios";
 import Select from "react-select";
-import Sidebar from "../partials/Sidebar";
+import SidebarGestor from "../partials/SidebarGestor";
 import Header from "../partials/Header";
 import ModalConfirmacion from "../partials/ModalConfirmacion";
 import { Link } from "react-router-dom";
@@ -15,17 +15,13 @@ class StudentAchievement extends Component {
     achievementOptions: [],
     sidebarOpen: false,
     modalIsOpen: false,
-    achievementCreated: false,
   };
   setSidebarOpen = (open) => {
     this.setState({ sidebarOpen: open });
   };
+
   setModalIsOpen = (isOpen) => {
     this.setState({ modalIsOpen: isOpen });
-  };
-
-  closeModal = () => {
-    this.setModalIsOpen(false);
   };
   componentDidMount() {
     this.loadStudentOptions();
@@ -80,7 +76,6 @@ class StudentAchievement extends Component {
     if (!selectedStudent || !selectedAchievement) {
       this.setState({
         message: "Por favor, seleccione un estudiante y un logro.",
-        achievementCreated: false,
       });
       return;
     }
@@ -102,18 +97,12 @@ class StudentAchievement extends Component {
         request
       )
       .then((response) => {
-        this.setState({
-          achievementCreated: true, // La asignación se creó con éxito
-        });
-        this.setModalIsOpen(true); // Abre el modal solo si se creó con éxito
+       
       })
       .catch((error) => {
-        this.setState({
-          message: "Error al crear la asignación.",
-          achievementCreated: false, // La asignación no se creó con éxito
-        });
+  
       });
-    };
+  };
 
   render() {
     const {
@@ -123,16 +112,12 @@ class StudentAchievement extends Component {
       studentOptions,
       achievementOptions,
       sidebarOpen,
-      achievementCreated,
       modalIsOpen,
     } = this.state;
-   
-    
-    
-  
+
     return (
       <div className="flex h-screen overflow-hidden">
-        <Sidebar
+        <SidebarGestor
           sidebarOpen={sidebarOpen}
           setSidebarOpen={this.setSidebarOpen}
         />
@@ -141,7 +126,7 @@ class StudentAchievement extends Component {
             sidebarOpen={sidebarOpen}
             setSidebarOpen={this.setSidebarOpen}
           />
-          <div className="relative p-4 sm:p-6 rounded-sm  mb-8">
+          <div className="relative p-4 sm:p-6 rounded-sm overflow-hidden mb-8">
             <div className="relative">
               <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Asignacion de logro{" "}
@@ -183,9 +168,13 @@ class StudentAchievement extends Component {
               </button>
               <div>{message}</div>
             </div>
-            {achievementCreated && ( // Muestra el modal solo si la asignación se creó con éxito
-          <ModalConfirmacion isOpen={modalIsOpen} closeModal={this.closeModal} />
-        )}</div>
+            <ModalConfirmacion
+              isOpen={modalIsOpen}
+              onConfirm={this.confirmAssignment}
+              onCancel={() => this.setModalIsOpen(false)}
+              // ...otros props si son necesarios
+            />
+          </div>
         </div>
       </div>
     );

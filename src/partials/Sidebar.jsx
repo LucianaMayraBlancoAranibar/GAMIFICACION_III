@@ -113,7 +113,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
               {/* Dashboard */}
               <SidebarLinkGroup
                 activecondition={
-                  pathname === "/" || pathname.includes("dashboard")
+                  pathname === "/Dashboard" || pathname.includes("dashboard")
                 }
               >
                 {(handleClick, open) => {
@@ -189,7 +189,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                           <li className="mb-1 last:mb-0">
                             <NavLink
                               end
-                              to="/"
+                              to="/Dashboard"
                               className={({ isActive }) =>
                                 "block transition duration-150 truncate " +
                                 (isActive
@@ -605,22 +605,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                               </span>
                             </NavLink>
                           </li>
-                          <li className="mb-1 last:mb-0">
-                            <NavLink
-                              end
-                              to="/finance/transaction-details"
-                              className={({ isActive }) =>
-                                "block transition duration-150 truncate " +
-                                (isActive
-                                  ? "text-indigo-500"
-                                  : "hover:text-white hover:text-slate-200")
-                              }
-                            >
-                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                Transaction Details
-                              </span>
-                            </NavLink>
-                          </li>
+                         
                         </ul>
                       </div>
                     </React.Fragment>
@@ -712,38 +697,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                               </span>
                             </NavLink>
                           </li>
-                          <li className="mb-1 last:mb-0">
-                            <NavLink
-                              end
-                              to="/job/job-post"
-                              className={({ isActive }) =>
-                                "block transition duration-150 truncate " +
-                                (isActive
-                                  ? "text-indigo-500"
-                                  : "hover:text-white hover:text-slate-200")
-                              }
-                            >
-                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                Job Post
-                              </span>
-                            </NavLink>
-                          </li>
-                          <li className="mb-1 last:mb-0">
-                            <NavLink
-                              end
-                              to="/job/company-profile"
-                              className={({ isActive }) =>
-                                "block transition duration-150 truncate " +
-                                (isActive
-                                  ? "text-indigo-500"
-                                  : "hover:text-white hover:text-slate-200")
-                              }
-                            >
-                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                Company Profile
-                              </span>
-                            </NavLink>
-                          </li>
+                          
                         </ul>
                       </div>
                     </React.Fragment>

@@ -3,8 +3,8 @@ import axios from "axios";
 import Sidebar from "../partials/Sidebar";
 import Header from "../partials/Header";
 import { PageTitle} from "../utils/page-title";
+import StudentsPopup from "./StudentsPopup";
 
-import "../css/MainCards.css";
 
 function RankMain() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -13,6 +13,25 @@ function RankMain() {
   const [showDataListOro, setShowDataListOro] = useState(false);
   const [showDataListPlata, setShowDataListPlata] = useState(false);
   const [showDataListBronce, setShowDataListBronce] = useState(false);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [selectedRankId, setSelectedRankId] = useState(null);
+  const [studentsOfSelectedRank, setStudentsOfSelectedRank] = useState([]);
+
+  const fetchStudentsOfRank = async (rankId) => {
+    try {
+      const response = await axios.get(`https://localhost:7205/api/Students/GetStudentsByRank/${rankId}`);
+      setStudentsOfSelectedRank(response.data);
+      setIsPopupOpen(true);
+    } catch (error) {
+      console.error("Error al cargar estudiantes:", error);
+    }
+  };
+
+  const handleClickRank = (rankId) => {
+    setSelectedRankId(rankId);
+    fetchStudentsOfRank(rankId);
+  };
+  
   const toggleDataList = (option) => {
     switch (option) {
       case "DIAMANTE":
@@ -50,13 +69,13 @@ function RankMain() {
         {showDataListDiamante && (
           <div className="bg-cyan-300 w-2/12 shadow rounded p-4 text-center text-white fade-in">
             <div className="py-2 fontSizeSubrank">
-              <a href="#">Rango 1</a>
+            <a onClick={() => handleClickRank(17)}>Rango 1</a>
             </div>
             <div className="py-2 fontSizeSubrank">
-              <a href="#">Rango 2</a>
+            <a onClick={() => handleClickRank(18)}>Rango 1</a>
             </div>
             <div className="py-2 fontSizeSubrank">
-              <a href="#">Rango 3</a>
+            <a onClick={() => handleClickRank(19)}>Rango 1</a>
             </div>
           </div>
         )}
@@ -69,13 +88,13 @@ function RankMain() {
         {showDataListPlatino && (
           <div className="bg-cyan-200 w-4/12 shadow rounded p-4 text-center text-white fade-in">
             <div className="py-2 fontSizeSubrank">
-              <a href="#">Rango 1</a>
+            <a onClick={() => handleClickRank(14)}>Rango 1</a>
             </div>
             <div className="py-2 fontSizeSubrank">
-              <a href="#">Rango 2</a>
+            <a onClick={() => handleClickRank(15)}>Rango 1</a>
             </div>
             <div className="py-2 fontSizeSubrank">
-              <a href="#">Rango 3</a>
+            <a onClick={() => handleClickRank(16)}>Rango 1</a>
             </div>
           </div>
         )}
@@ -88,13 +107,13 @@ function RankMain() {
         {showDataListOro && (
           <div className="bg-yellow-400 w-6/12 shadow rounded p-4 text-center text-white	fade-in">
             <div className="py-2 fontSizeSubrank">
-              <a href="#">Rango 1</a>
+            <a onClick={() => handleClickRank(11)}>Rango 1</a>
             </div>
             <div className="py-2 fontSizeSubrank">
-              <a href="#">Rango 2</a>
+            <a onClick={() => handleClickRank(12)}>Rango 1</a>
             </div>
             <div className="py-2 fontSizeSubrank">
-              <a href="#">Rango 3</a>
+            <a onClick={() => handleClickRank(13)}>Rango 1</a>
             </div>
           </div>
         )}
@@ -107,13 +126,13 @@ function RankMain() {
         {showDataListPlata && (
           <div className="bg-gray-400 w-8/12 shadow rounded p-4 text-center text-white fade-in">
             <div className="py-2 fontSizeSubrank">
-              <a href="#">Rango 1</a>
+              <a onClick={() => handleClickRank(8)}>Rango 1</a>
             </div>
             <div className="py-2 fontSizeSubrank">
-              <a href="#">Rango 2</a>
+              <a onClick={() => handleClickRank(9)}>Rango 2</a>
             </div>
             <div className="py-2 fontSizeSubrank">
-              <a href="#">Rango 3</a>
+              <a onClick={() => handleClickRank(10)}>Rango 3</a>
             </div>
           </div>
         )}
@@ -126,17 +145,22 @@ function RankMain() {
         {showDataListBronce && (
           <div className="bg-amber-600 w-10/12 shadow rounded p-4 text-center text-white fade-in">
             <div className="py-2 fontSizeSubrank">
-              <a href="#">Rango 1</a>
+            <a onClick={() => handleClickRank(5)}>Rango 1</a>
             </div>
             <div className="py-2 fontSizeSubrank">
-              <a href="#">Rango 2</a>
+            <a onClick={() => handleClickRank(6)}>Rango 1</a>
             </div>
             <div className="py-2 fontSizeSubrank">
-              <a href="#">Rango 3</a>
+            <a onClick={() => handleClickRank(7)}>Rango 1</a>
             </div>
           </div>
         )}
       </div>
+      <StudentsPopup
+        isOpen={isPopupOpen}
+        students={studentsOfSelectedRank}
+        onClose={() => setIsPopupOpen(false)}
+      />
     </div>
   );
 }

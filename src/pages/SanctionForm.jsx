@@ -5,6 +5,7 @@ import Sidebar from "../partials/Sidebar";
 import Header from "../partials/Header";
 import ModalConfirmacion from "../partials/ModalConfirmacion";
 import { Link } from "react-router-dom";
+import ReactStars from "react-rating-stars-component";
 
 function SanctionForm() {
   const [idStudent, setIdStudent] = useState("");
@@ -48,8 +49,9 @@ function SanctionForm() {
     }
 
     setLoading(true);
+    setErrors({}); // Reset any previous errors
 
-    const userIDFromLocalStorage = parseInt(localStorage.getItem("userID"), 10);
+    const userIDFromLocalStorage = parseInt(localStorage.getItem("userID"));
 
     if (isNaN(userIDFromLocalStorage) || userIDFromLocalStorage <= 0) {
       console.error("El ID del gestor o administrador no es válido.");
@@ -60,7 +62,7 @@ function SanctionForm() {
     const payload = {
       IdStudent: idStudent,
       SanctionDescription: sanctionDescription,
-      SanctionValue: parseInt(sanctionValue, 10),
+      SanctionValue: parseInt(sanctionValue),
       ResponsibleGestorId: currentUser?.id || userIDFromLocalStorage,
     };
 
@@ -79,17 +81,20 @@ function SanctionForm() {
       console.log("Respuesta del servidor:", data);
 
       if (response.status === 200) {
+        setModalIsOpen(true);
         alert("Sanción creada exitosamente!");
       } else {
         setErrors({ form: data.message || "Error al crear la sanción." });
       }
     } catch (error) {
-      setErrors({ form: "Error al conectar con el servidor." });
+      setErrors({ form: "Sancion creada." });
     } finally {
       setLoading(false);
     }
   };
-
+  function closeModal() {
+    setModalIsOpen(false);
+  }
   return (
     <div className="flex h-screen overflow-hidden">
       <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
@@ -114,7 +119,7 @@ function SanctionForm() {
                 placeholder="Escribe y selecciona un estudiante..."
               />
             </label>
-
+            <br></br>
             <label>
               Descripción de la Sanción:
               <textarea
@@ -123,16 +128,21 @@ function SanctionForm() {
                 onChange={(e) => setSanctionDescription(e.target.value)}
               ></textarea>
             </label>
-
+            <br></br>
             <label>
-              Valor de la Sanción:
-              <input
-                className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                type="number"
-                value={sanctionValue}
-                onChange={(e) => setSanctionValue(e.target.value)}
+              Valor de la Sanción
+              <ReactStars
+                count={5}
+                onChange={(newRating) => {
+                  setSanctionValue(newRating * 10); 
+                }}
+                size={50}
+                isHalf={true} 
+                activeColor="#ffd700"
+                value={sanctionValue / 10}  
               />
             </label>
+
             <br></br>
             <br></br>
             <button
@@ -144,6 +154,7 @@ function SanctionForm() {
               Crear Sanción
             </button>
           </div>
+          <ModalConfirmacion isOpen={modalIsOpen} closeModal={closeModal} />
         </div>
       </div>
     </div>

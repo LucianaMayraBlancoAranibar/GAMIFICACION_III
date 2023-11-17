@@ -4,40 +4,35 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 function WelcomeBanner() {
-  const [studentRank, setStudentRank] = useState({
-   
+  const [gestorData, setGestorData] = useState({
     firstName: '',
     lastName: '',
-    score: 0,
-    rankName: '',
-    subRankName: '',
-    imagePath: '',
-    
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
-    const studentId = localStorage.getItem('userID');
-    if (!studentId) {
-      setError('No student ID found');
+    const gestorId = localStorage.getItem('userID');
+    if (!gestorId) {
+      setError('No gestor ID found');
       setLoading(false);
-      navigate('/LoginPage');
+      navigate('/login');
       return;
     }
 
-    axios.get(`https://localhost:7205/api/Students/${studentId}/GetStudentRank`)
+    axios.get(`https://localhost:7205/api/Gestors/${gestorId}`)
       .then(response => {
-        setStudentRank(response.data); // Asegúrate de que la estructura del objeto de respuesta coincida con el estado inicial
+        setGestorData(response.data); // Asegúrate de que la estructura del objeto de respuesta coincida con el estado inicial
       })
       .catch(err => {
-        setError('Error fetching student data: ' + err.message);
+        setError('Error fetching gestor data: ' + err.message);
       })
       .finally(() => {
         setLoading(false);
       });
   }, [navigate]);
+
   return (
     <div className="relative bg-gray-200 dark:bg-gray-500 p-4 sm:p-6 rounded-sm overflow-hidden mb-8">
       {/* Background illustration */}
@@ -84,7 +79,7 @@ function WelcomeBanner() {
 
       {/* Content */}
       <div className="relative">
-      <h1 className="text-4xl font-extrabold text-gray-800 mb-2">Welcome back, {studentRank.firstName} {studentRank.lastName}!</h1>
+      <h1 className="text-4xl font-extrabold text-gray-800 mb-2">Welcome back, {gestorData.firstName} {gestorData.lastName}!</h1>
         <p className="dark:text-indigo-200">Univalle</p>
       </div>
     </div>
