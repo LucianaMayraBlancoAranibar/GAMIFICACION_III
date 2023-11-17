@@ -106,6 +106,7 @@ function DepartamentoForm() {
                 </label>
                 <input
                   type="text"
+                  maxLength={35}
                   id="departmentName"
                   className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                   value={departmentName}
@@ -145,6 +146,9 @@ function DepartamentoForm() {
                   <p className="text-red-500">{idFacultyError}</p>
                 )}
               </div>
+              <br></br>
+              <br></br>
+              <br></br>
               <br></br>
               <div className="flex justify-left">
                 <button

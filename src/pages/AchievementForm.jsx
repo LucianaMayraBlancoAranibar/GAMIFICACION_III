@@ -4,6 +4,7 @@ import Sidebar from "../partials/Sidebar";
 import Header from "../partials/Header";
 import { Link } from "react-router-dom";
 import ModalConfirmacion from "../partials/ModalConfirmacion";
+import ReactStars from "react-rating-stars-component";
 
 function AchievementForm() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -69,7 +70,6 @@ function AchievementForm() {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
 
-  
     if (errors[name]) {
       setErrors({ ...errors, [name]: undefined });
     }
@@ -83,7 +83,7 @@ function AchievementForm() {
       <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
       <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
         <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-        <div className="relative p-4 sm:p-6 rounded-sm overflow-hidden mb-8">
+        <div className="relative p-4 sm:p-6 rounded-sm mb-8">
           <div className="relative">
             <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Nuevo Logro
@@ -94,8 +94,8 @@ function AchievementForm() {
             <div>
               <div>
                 <label
-                      className="text-gray-900 dark:text-gray-900"
-                      htmlFor="Punctuation"
+                  className="text-gray-900 dark:text-gray-900"
+                  htmlFor="Punctuation"
                 >
                   Nombre del Logro
                 </label>
@@ -120,19 +120,22 @@ function AchievementForm() {
                 >
                   Puntuación
                 </label>
-                <input
-                  type="number"
-                  id="Punctuation"
-                  name="Punctuation"
-                  value={formData.Punctuation}
-                  onChange={handleInputChange}
-                  className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                <ReactStars
+                  count={5}
+                  onChange={(newRating) => {
+                    setFormData({ ...formData, Punctuation: newRating * 10 }); // Multiplicar por 2, ya que cada estrella completa vale 2 puntos
+                  }}
+                  size={50}
+                  isHalf={true} // Permitir medias estrellas
+                  activeColor="#ffd700"
+                  value={formData.Punctuation / 10} // Dividir por 2 para convertir la puntuación numérica en número de estrellas
                 />
+
                 {errors.Punctuation && (
                   <p className="text-red-500 text-sm">{errors.Punctuation}</p>
                 )}
               </div>
-              <br></br>
+              
               <div>
                 <label
                   className="text-gray-900 dark:text-gray-900"

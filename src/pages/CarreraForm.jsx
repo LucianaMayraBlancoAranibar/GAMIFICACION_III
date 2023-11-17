@@ -154,7 +154,7 @@ function CarreraForm() {
               </div>
             </div>
             <br></br>
-            <Link to="/CareerTable">Volver a la lista de carreras</Link>
+            <Link to="/CarreraTable">Volver a la lista de carreras</Link>
           </form>
           {/* Modal de confirmación */}
           <ModalConfirmacion isOpen={modalIsOpen} closeModal={closeModal} />

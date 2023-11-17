@@ -48,7 +48,7 @@ function SucursalTable() {
       <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
       <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
         <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-        <div className="relative p-4 sm:p-6 rounded-sm overflow-hidden mb-8">
+        <div className="relative p-4 sm:p-6 rounded-sm mb-8">
         <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Lista de Sucursales
             </h1>

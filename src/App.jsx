@@ -120,7 +120,7 @@ function App() {
           <Route path="/DashboardGestor" element={ <ProtectedElement allowedRoles={[2]} element={<DashboardGestor />} />} />
           <Route path="/SucursalForm" element={<ProtectedElement allowedRoles={[1]} element={<SucursalForm />} />} />
           <Route path="/SucursalTable" element={<ProtectedElement allowedRoles={[1]} element={<SucursalTable />} />} />
-          <Route path="/SucursaEdit/:id" element={<ProtectedElement allowedRoles={[1]} element={<SucursalEdit />} />} />
+          <Route path="/SucursalEdit/:id" element={<ProtectedElement allowedRoles={[1]} element={<SucursalEdit />} />} />
           <Route path="/TypeAchievementForm" element={<ProtectedElement allowedRoles={[1]} element={<TypeAchievementForm />} />}
           />
           <Route path="/AchievementForm" element={<ProtectedElement allowedRoles={[1,2]} element={<AchievementForm/>} />} />
@@ -143,11 +143,11 @@ function App() {
             element={<ProtectedElement allowedRoles={[1]} element={<TypeAchievementEdit />} />}
           />
           <Route path="/DepartamentoForm" element={<ProtectedElement allowedRoles={[1]} element={<DepartamentoForm />} />} />
-          <Route path="/DepartamentoEdit" element={<ProtectedElement allowedRoles={[1]} element={<DepartamentoEdit />} />} />
+          <Route path="/DepartamentoEdit/:1" element={<ProtectedElement allowedRoles={[1]} element={<DepartamentoEdit />} />} />
           <Route path="/DepartamentoTable" element={<ProtectedElement allowedRoles={[1]} element={<DepartamentoTable/>} />} />
 
-          <Route path="/CarreraForm" element={<ProtectedElement allowedRoles={[1]} element={<CarreraForm />} />} />
-          <Route path="/CarreraEdit" element={<ProtectedElement allowedRoles={[1]} element={<CarreraEdit />} />} />
+          <Route path="/CareerForm" element={<ProtectedElement allowedRoles={[1]} element={<CarreraForm />} />} />
+          <Route path="/CarreraEdit/:id" element={<ProtectedElement allowedRoles={[1]} element={<CarreraEdit />} />} />
           <Route path="/CarreraTable" element={<ProtectedElement allowedRoles={[1]} element={<CarreraTable/>} />} />
 
           <Route path="/RankForm" element={<ProtectedElement allowedRoles={[1]} element={<DepartamentoTable />} />} />

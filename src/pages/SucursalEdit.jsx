@@ -30,7 +30,7 @@ function SucursalEdit() {
 
   useEffect(() => {
     axios
-      .get(`https://localhost:7220/api/AcademicUnities/${id}`)
+      .get(`https://localhost:7205/api/AcademicUnities/${id}`)
       .then((response) => {
         setSucursal(response.data);
       })
@@ -58,7 +58,7 @@ function SucursalEdit() {
       };
 
       axios
-        .put(`https://localhost:7220/api/AcademicUnities/${id}`, requestData, {
+        .put(`https://localhost:7205/api/AcademicUnities/${id}`, requestData, {
           headers: {
             "Content-Type": "application/json",
           },
@@ -99,6 +99,7 @@ function SucursalEdit() {
                 <input
                   type="text"
                   name="academicUnityName"
+                  maxLength={30}
                   className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                   value={sucursal.academicUnityName}
                   onChange={handleInputChange}

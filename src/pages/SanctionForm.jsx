@@ -5,6 +5,7 @@ import Sidebar from "../partials/Sidebar";
 import Header from "../partials/Header";
 import ModalConfirmacion from "../partials/ModalConfirmacion";
 import { Link } from "react-router-dom";
+import ReactStars from "react-rating-stars-component";
 
 function SanctionForm() {
   const [idStudent, setIdStudent] = useState("");

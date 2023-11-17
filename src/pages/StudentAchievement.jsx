@@ -141,7 +141,7 @@ class StudentAchievement extends Component {
             sidebarOpen={sidebarOpen}
             setSidebarOpen={this.setSidebarOpen}
           />
-          <div className="relative p-4 sm:p-6 rounded-sm overflow-hidden mb-8">
+          <div className="relative p-4 sm:p-6 rounded-sm  mb-8">
             <div className="relative">
               <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Asignacion de logro{" "}
