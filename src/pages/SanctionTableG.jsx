@@ -10,6 +10,7 @@ function SanctionsTableG() {
   const [sanctions, setSanctions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [sanctionToDelete, setSanctionToDelete] = useState(null);
 
   useEffect(() => {
     // Obtener la lista de sanciones desde la API y almacenarla en el estado `sanctions`
@@ -32,7 +33,9 @@ function SanctionsTableG() {
     try {
       await axios.delete(`https://localhost:7205/api/Sanctions/${id}`);
       setSanctions(sanctions.filter((sanction) => sanction.id !== id));
+      setSanctionToDelete(null);
     } catch (error) {
+      setSanctionToDelete(null);
       console.error(`Error al eliminar la sanción con ID ${id}:`, error);
     }
   };
@@ -90,6 +93,25 @@ function SanctionsTableG() {
               </tbody>
             </table>
           </div>
+          {sanctionToDelete && (
+            <div className="bg-white p-4 shadow-md rounded-md absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+              <p>¿Seguro que deseas eliminar esta Departamento?</p>
+              <div className="mt-2">
+                <button
+                  className="bg-red-500 hover:bg-red-600 text-white rounded-md px-2 py-1 mx-1"
+                  onClick={handleDelete}
+                >
+                  Confirmar
+                </button>
+                <button
+                  className="bg-gray-300 hover:bg-gray-400 text-gray-700 rounded-md px-2 py-1 mx-1"
+                  onClick={() => setSanctionToDelete(null)} // Cancelar la eliminación
+                >
+                  Cancelar
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

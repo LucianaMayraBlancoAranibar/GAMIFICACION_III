@@ -11,6 +11,7 @@ function SanctionsTable() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
+  const [careerToDelete, setCareerToDelete] = useState(null);
 
   const filteredSanctions = sanctions.filter((sanction) =>
     sanction.studentName.toLowerCase().includes(searchTerm.toLowerCase())
@@ -50,11 +51,27 @@ function SanctionsTable() {
   }, []);
 
   const handleDelete = async (id) => {
+    if (id === undefined) {
+      console.error("ID de sanción indefinido.");
+      return;
+    }
+
     try {
-      await axios.delete(`https://localhost:7205/api/Sanctions/${id}`);
-      setSanctions(sanctions.filter((sanction) => sanction.id !== id));
+      const response = await axios.delete(
+        `https://localhost:7205/api/Sanctions/${id}`
+      );
+      if (response.status === 200) {
+        // Eliminación exitosa, actualiza la lista de sanciones
+        setSanctions((prevSanctions) =>
+          prevSanctions.filter((sanction) => sanction.idSanctions !== id)
+        );
+      } else {
+        // Maneja otros posibles casos de respuesta del servidor
+        console.error("Error en la eliminación:", response.statusText);
+      }
     } catch (error) {
-      console.error(`Error al eliminar la sanción con ID ${id}:`, error);
+      // Maneja errores de red u otros errores
+      console.error("Error en la eliminación:", error.message);
     }
   };
 
@@ -123,7 +140,16 @@ function SanctionsTable() {
                     <td className="px-6 py-4">
                       <button
                         className="bg-red-500 text-white p-2 rounded"
-                        onClick={() => handleDelete(sanction.id)}
+                        onClick={() => {
+                          if (
+                            sanction.idSanctions !== null &&
+                            sanction.idSanctions !== undefined
+                          ) {
+                            handleDelete(sanction.idSanctions);
+                          } else {
+                            console.error("ID de sanción no válido.");
+                          }
+                        }}
                       >
                         <BsTrashFill />
                       </button>

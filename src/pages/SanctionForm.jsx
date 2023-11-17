@@ -134,12 +134,12 @@ function SanctionForm() {
               <ReactStars
                 count={5}
                 onChange={(newRating) => {
-                  setSanctionValue(newRating * 10); 
+                  setSanctionValue(newRating * 20); 
                 }}
                 size={50}
                 isHalf={true} 
                 activeColor="#ffd700"
-                value={sanctionValue / 10}  
+                value={sanctionValue / 20}  
               />
             </label>
 

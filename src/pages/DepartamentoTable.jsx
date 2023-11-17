@@ -3,8 +3,6 @@ import axios from "axios";
 import Sidebar from "../partials/Sidebar";
 import Header from "../partials/Header";
 import { Link } from "react-router-dom";
-import { AiFillEdit } from 'react-icons/ai'; 
-import { BsTrashFill } from 'react-icons/bs'; 
 
 function DepartamentoTable() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -55,11 +53,11 @@ function DepartamentoTable() {
   };
 
   return (
-    <div className="flex h-screen overflow-hidden">
+      <div className="flex h-screen overflow-hidden">
       <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
       <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
         <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-        <div className="relative p-4 sm:p-6 rounded-sm overflow-hidden mb-8">
+        <div className="relative p-4 sm:p-6 rounded-sm  mb-8">
           <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">Lista de Departamentos</h1>
           <div className="mr-10 grid grid-flow-col sm:auto-cols-max justify-start sm:justify-end gap-2">
             <Link to="/DepartamentoForm"> {/* Enlace a la página de añadir Departamento */}
@@ -100,14 +98,14 @@ function DepartamentoTable() {
                     <button
                      className="px-4 py-4 mr-4 leading-5 text-white transition-colors duration-200 transform bg-green-700 rounded-md hover:bg-green-500 focus:outline-none focus:bg-gray-600"
                     >
-                      <AiFillEdit /> 
+                      Editar
                     </button>
                     </Link>
                     <button
                      className="px-4 py-4 ml-3 leading-5 text-white transition-colors duration-200 transform bg-red-500 rounded-md hover:bg-red-400 focus:outline-none focus:bg-gray-600"
                       onClick={() => setDepartamentoToDelete(Departamento.idDepartment)} // Establece el ID de la Departamento para eliminar
                     >
-                      <BsTrashFill />
+                      Eliminar
                     </button>
                   </td>
                 </tr>

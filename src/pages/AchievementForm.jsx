@@ -124,12 +124,12 @@ function AchievementForm() {
                 <ReactStars
                   count={5}
                   onChange={(newRating) => {
-                    setFormData({ ...formData, Punctuation: newRating * 10 }); 
+                    setFormData({ ...formData, Punctuation: newRating * 20 }); 
                   }}
                   size={50}
                   isHalf={true} 
                   activeColor="#ffd700"
-                  value={formData.Punctuation / 10} 
+                  value={formData.Punctuation / 20} 
                 />
 
                 {errors.Punctuation && (
