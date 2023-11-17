@@ -83,7 +83,7 @@ function CarreraEdit() {
         },
       })
       .then((response) => {
-        console.log(response);
+        console.log("Carrera editada con éxito:", response);
       })
       .catch((error) => {
         console.log(error);

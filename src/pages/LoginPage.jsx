@@ -71,14 +71,22 @@ function LoginComponent() {
         setErrors({ form: data.message || "Error al iniciar sesión." });
       }
     } catch (error) {
-      setErrors({ form: "Error al conectar con el servidor." });
+      setErrors({ form: "Correo o contraseña incorrectos." });
     } finally {
       setLoading(false);
     }
   };
 
+  function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
   const validateForm = () => {
     let formErrors = {};
+    if (!validateEmail(email)) {
+    formErrors.email = "Correo electrónico no válido";
+    return;
+}
 
     if (!email) formErrors.email = "El email es obligatorio.";
     if (!password) formErrors.password = "La contraseña es obligatoria.";
@@ -105,11 +113,9 @@ function LoginComponent() {
         <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-              Login
+              Iniciar Sesion
             </h1>
             <form class="space-y-4 md:space-y-6">
-              {errors.form && <div className="error mb-4">{errors.form}</div>}
-
               <div className="">
                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                   Tipo de Usuario:
@@ -137,7 +143,7 @@ function LoginComponent() {
                 for="email"
                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               >
-                Your email
+                Email
               </label>
               <input
                 type="email"
@@ -145,6 +151,7 @@ function LoginComponent() {
                 size="lg"
                 class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Email"
+                required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -153,13 +160,14 @@ function LoginComponent() {
                 for="password"
                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               >
-                Password
+                Contraseña
               </label>
               <input
                 type="password"
                 label="Password"
                 class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 size="lg"
+                required
                 placeholder="Contraseña"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -200,7 +208,7 @@ function LoginComponent() {
                       for="remember"
                       class="text-gray-500 dark:text-gray-300"
                     >
-                      Remember me
+                      Recuerdame
                     </label>
                   </div>
                 </div>
@@ -208,7 +216,7 @@ function LoginComponent() {
                   href="/ForgotPassword"
                   class="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
                 >
-                  Forgot password?
+                  Olvido su contraseña?
                 </a>
               </div>
             </form>

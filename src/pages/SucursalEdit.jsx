@@ -64,7 +64,7 @@ function SucursalEdit() {
           },
         })
         .then((response) => {
-          console.log(response);
+          console.log("Sucursal editada con éxito:", response);
         })
         .catch((error) => {
           console.log(error);

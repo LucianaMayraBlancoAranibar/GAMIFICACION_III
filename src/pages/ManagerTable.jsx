@@ -5,8 +5,6 @@ import Header from "../partials/Header";
 import { AiFillEdit } from 'react-icons/ai'; 
 import { BsTrashFill } from 'react-icons/bs'; 
 import { Link } from "react-router-dom";
-import { AiFillEdit } from 'react-icons/ai'; 
-import { BsTrashFill } from 'react-icons/bs'; 
 
 function ManagerTable() {
   const [sidebarOpen, setSidebarOpen] = useState(false);

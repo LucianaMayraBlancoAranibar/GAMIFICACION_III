@@ -84,7 +84,7 @@ function DepartamentoEdit() {
         },
       })
       .then((response) => {
-        console.log(response);
+        console.log("Departamento editada con éxito:", response);
       })
       .catch((error) => {
         console.log(error);
@@ -165,7 +165,7 @@ function DepartamentoEdit() {
               </div>
               <br></br>
               <br></br>
-              <Link to="/DepartamentoTable">Volver a la lista de sucursales</Link>
+              <Link to="/DepartamentoTable">Volver a la lista de departamentos</Link>
             </div>
           </form>
         </div>
