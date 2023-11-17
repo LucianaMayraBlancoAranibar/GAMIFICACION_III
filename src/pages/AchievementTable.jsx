@@ -80,6 +80,11 @@ function AchievementTable() {
                     </div>
                   </th>
                   <th scope="col" className="px-6 py-3 text-center">
+                    <div className="font-semibold text-left">
+                      Puntuacion
+                    </div>
+                  </th>
+                  <th scope="col" className="px-6 py-3 text-center">
                     <div className="font-semibold text-left">Acciones</div>
                   </th>
                 </tr>
@@ -91,6 +96,7 @@ function AchievementTable() {
                     className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
                   >
                     <td className="px-6 py-4">{achievement.nameAchievemt}</td>
+                    <td className="px-6 py-4">{achievement.punctuation}</td>
                     <td className="px-6 py-4 text-left">
                       <Link
                         to={`/AchievementEdit/${achievement.idAchievement}`}

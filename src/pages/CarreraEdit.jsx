@@ -165,7 +165,7 @@ function CarreraEdit() {
               </div>
               <br></br>
               <br></br>
-              <Link to="/CareerTable">Volver a la lista de carreras</Link>
+              <Link to="/CarreraTable">Volver a la lista de carreras</Link>
             </div>
           </form>
         </div>

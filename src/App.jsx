@@ -143,7 +143,7 @@ function App() {
             element={<ProtectedElement allowedRoles={[1]} element={<TypeAchievementEdit />} />}
           />
           <Route path="/DepartamentoForm" element={<ProtectedElement allowedRoles={[1]} element={<DepartamentoForm />} />} />
-          <Route path="/DepartamentoEdit/:1" element={<ProtectedElement allowedRoles={[1]} element={<DepartamentoEdit />} />} />
+          <Route path="/DepartamentoEdit/:id" element={<ProtectedElement allowedRoles={[1]} element={<DepartamentoEdit />} />} />
           <Route path="/DepartamentoTable" element={<ProtectedElement allowedRoles={[1]} element={<DepartamentoTable/>} />} />
 
           <Route path="/CareerForm" element={<ProtectedElement allowedRoles={[1]} element={<CarreraForm />} />} />

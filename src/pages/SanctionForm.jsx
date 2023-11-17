@@ -49,7 +49,7 @@ function SanctionForm() {
     }
 
     setLoading(true);
-  setErrors({}); // Reset any previous errors
+    setErrors({}); // Reset any previous errors
 
     const userIDFromLocalStorage = parseInt(localStorage.getItem("userID"));
 
@@ -119,7 +119,7 @@ function SanctionForm() {
                 placeholder="Escribe y selecciona un estudiante..."
               />
             </label>
-
+            <br></br>
             <label>
               Descripción de la Sanción:
               <textarea
@@ -128,16 +128,21 @@ function SanctionForm() {
                 onChange={(e) => setSanctionDescription(e.target.value)}
               ></textarea>
             </label>
-
+            <br></br>
             <label>
-              Valor de la Sanción:
-              <input
-                className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                type="number"
-                value={sanctionValue}
-                onChange={(e) => setSanctionValue(e.target.value)}
+              Valor de la Sanción
+              <ReactStars
+                count={5}
+                onChange={(newRating) => {
+                  setSanctionValue(newRating * 2); // Cada estrella completa vale 2 puntos
+                }}
+                size={50}
+                isHalf={true} // Permitir medias estrellas
+                activeColor="#ffd700"
+                value={sanctionValue / 2} // Convertir la puntuación numérica en número de estrellas
               />
             </label>
+
             <br></br>
             <br></br>
             <button
