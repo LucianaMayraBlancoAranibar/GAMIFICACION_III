@@ -3,14 +3,14 @@ import axios from "axios";
 import Sidebar from "../partials/Sidebar";
 import Header from "../partials/Header";
 import { Link } from "react-router-dom";
-import { AiFillEdit } from 'react-icons/ai';
-import { BsTrashFill } from 'react-icons/bs';
- 
+import { AiFillEdit } from 'react-icons/ai'; 
+import { BsTrashFill } from 'react-icons/bs'; 
+
 function ManagerTable() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [gestorUser, setGestorUser] = useState([]);
   const [gestorUserToDelete, setGestorUserToDelete] = useState(null);
- 
+
   useEffect(() => {
     // Realiza una solicitud a tu API para obtener la lista de gestorUser
     axios
@@ -23,16 +23,16 @@ function ManagerTable() {
         console.error(error); // Verifica si hay errores en la llamada a la API
       });
   }, []);
-  
+  //AREGLAR ESTO MAS RATO
   const handleDeleteFaculty = () => {
     if (gestorUserToDelete) {
-      // Realiza una solicitud DELETE a la API
+      // Realiza una solicitud DELETE a la API para eliminar la facultad
       axios
         .delete(`https://localhost:7205/api/Gestors/${gestorUserToDelete}`)
         .then((response) => {
-          // Elimina el gestor de la lista en lugar de marcarlo como inactivo
-          setGestorUser(prevGestorUser => 
-            prevGestorUser.filter(gestorUser => gestorUser.idGestor !== gestorUserToDelete)
+          // Actualiza la lista de gestorUser después de la eliminación
+          setGestorUser((prevGestorUser) =>
+            prevGestorUser.filter((gestorUser) => gestorUser.idGestor !== gestorUserToDelete)
           );
           setGestorUserToDelete(null); // Restablece el estado
         })
@@ -42,9 +42,7 @@ function ManagerTable() {
         });
     }
   };
-  
-  
- 
+
   return (
     <div className="flex h-screen overflow-hidden">
       <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
@@ -63,7 +61,7 @@ function ManagerTable() {
             <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
               <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
- 
+
                   <th scope="col" className="px-6 py-3 text-center">
                     <div className="font-semibold text-left">
                       Nombre
@@ -82,7 +80,7 @@ function ManagerTable() {
               <tbody className="text-sm font-medium divide-y divide-slate-100 dark:divide-slate-700">
                 {gestorUser.map((gestorUser) => (
                   <tr key={gestorUser.idGestor} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
- 
+
                     <td className="px-6 py-4">{gestorUser.firstName + " " + gestorUser.lastName}</td>
                     <td className="px-6 py-4">{gestorUser.email}</td>
                     <td className="px-6 py-4 text-left">
@@ -90,7 +88,7 @@ function ManagerTable() {
                         <button
                           className="px-4 py-4 mr-4 leading-5 text-white transition-colors duration-200 transform bg-green-700 rounded-md hover:bg-green-500 focus:outline-none focus:bg-gray-600"
                         >
-                      <AiFillEdit />
+                      <AiFillEdit /> 
                         </button>
                       </Link>
                       <button
@@ -129,5 +127,5 @@ function ManagerTable() {
     </div>
   );
 }
- 
+
 export default ManagerTable;

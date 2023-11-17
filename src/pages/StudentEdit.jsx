@@ -21,6 +21,7 @@ function StudentEdit() {
   });
   const [Carrera, setCarrer] = useState("");
   const [AcademicUnity, setAcademicUnity] = useState("");
+  const [originalEmail, setOriginalEmail] = useState("");
 
   const [emailError, setemailError] = useState("");
   const [firstNameError, setfirstNameError] = useState("");
@@ -28,7 +29,7 @@ function StudentEdit() {
 
   const validateForm = () => {
     let isValid = true;
-  
+
     if (!studentUser.firstName) {
       setfirstNameError("El nombre es obligatorio");
       isValid = false;
@@ -61,7 +62,7 @@ function StudentEdit() {
         setemailError("");
       }
     }
-      
+
     return isValid;
   };
 
@@ -73,6 +74,7 @@ function StudentEdit() {
         setStudentUser(response.data);
         setIdCarrer(response.data.idCareer)
         setIdAcademicUnity(response.data.idAcademicUnity)
+        setOriginalEmail(response.data.email); // Aquí estableces el correo electrónico original
       })
       .catch((error) => {
         console.log(error);
@@ -104,7 +106,7 @@ function StudentEdit() {
     if (name === "idCareer") {
       setIdCarrer(value); // Actualiza idFaculty directamente
     }
-    
+
     if (name === "idAcademicUnity") {
       setIdCarrer(value); // Actualiza idFaculty directamente
     }
@@ -119,32 +121,52 @@ function StudentEdit() {
     event.preventDefault();
     if (validateForm()) {
 
-    // Crear un objeto con los datos en formato JSON
-    const requestData = {
-      idStudent: id,
-      email: studentUser.email,
-      rol: studentUser.rol,
-      firstName: studentUser.firstName,
-      lastName: studentUser.lastName,
-      idCareer: idCareer,
-      idAcademicUnity: idAcademicUnity,
-    };
-    axios
-      .put(`https://localhost:7205/api/Students/${id}`, requestData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        if (error.response && error.response.data) {
-          setServerError(error.response.data);
-        } else {
-          setServerError("Error al registrar el estudiante.");
-        }
-      });
+      // Crear un objeto con los datos en formato JSON
+      const requestData = {
+        idStudent: id,
+        email: studentUser.email,
+        rol: studentUser.rol,
+        firstName: studentUser.firstName,
+        lastName: studentUser.lastName,
+        idCareer: idCareer,
+        idAcademicUnity: idAcademicUnity,
+      };
+      // Si el correo electrónico no ha cambiado, proceder con la actualización
+      if (studentUser.email === originalEmail) {
+        axios.put(`https://localhost:7205/api/Students/${id}`, requestData, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => {
+            console.log(response);
+          });
+      } else {
+        // Si el correo electrónico ha cambiado, obtener todos los gestores y realizar la validación
+        axios.get('https://localhost:7205/api/Students')
+          .then((response) => {
+            const students = response.data;
+
+            // Comprobar si el correo electrónico ya existe
+            const existingStudent = students.find(student => student.email === requestData.email);
+
+            // Si el correo electrónico ya existe, mostrar un mensaje de error
+            if (existingStudent) {
+              setemailError("El correo electronico ya esta siendo usado");
+              isValid = false;
+            } else {
+              // Si el correo electrónico no existe, proceder con la actualización
+              axios.put(`https://localhost:7205/api/Students/${id}`, requestData, {
+                headers: {
+                  "Content-Type": "application/json",
+                },
+              })
+                .then((response) => {
+                  console.log(response);
+                });
+            }
+          });
+      }
     }
   };
   function closeModal() {
@@ -227,7 +249,7 @@ function StudentEdit() {
                 >
                   Carrera
                 </label>
-                <br/>
+                <br />
                 {Carrera.length === 0 ? (
                   <p>Cargando datos...</p>
                 ) : (
@@ -236,7 +258,7 @@ function StudentEdit() {
                     className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                     value={idCareer}
                     onChange={(e) => setIdCarrer(e.target.value)}
-                    >
+                  >
                     {Carrera.map((Carrera) => (
                       <option
                         key={Carrera.idCareer}
@@ -246,7 +268,7 @@ function StudentEdit() {
                       </option>
                     ))}
                   </select>
-                )}          
+                )}
                 <br />
                 <label
                   className="text-gray-900 dark:text-gray-900"
@@ -263,8 +285,8 @@ function StudentEdit() {
                     value={idAcademicUnity}
                     onChange={(e) => {
                       setIdAcademicUnity(e.target.value);
-                    }} 
-                    >
+                    }}
+                  >
                     {AcademicUnity.map((academicUnity) => (
                       <option
                         key={academicUnity.idAcademicUnity}
@@ -274,7 +296,7 @@ function StudentEdit() {
                       </option>
                     ))}
                   </select>
-                )}    
+                )}
               </div>
               <br></br>
               <div className="flex justify-left">
