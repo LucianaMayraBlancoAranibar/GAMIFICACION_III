@@ -85,9 +85,9 @@ function SanctionsTable() {
                   </th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="text-sm font-medium divide-y divide-slate-100 dark:divide-slate-700">
                 {sanctions.map((sanction) => (
-                  <tr key={sanction.id}>
+                  <tr key={sanction.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                     <td className="px-6 py-4">{sanction.description}</td>
                     <td className="px-6 py-4">{sanction.sanction1}</td>
                     <td className="px-6 py-4">{sanction.studentName}</td>

@@ -2,8 +2,9 @@ import React, { useState } from "react";
 
 import SidebarGestor from "../partials/SidebarGestor";
 import Header from "../partials/Header";
-import WelcomeBanner from "../partials/dashboard/WelcomeBanner";
-
+import WelcomeBannerGestor from "../partials/dashboard/WelcomeBannerGestor";
+import DashboardCard05 from "../partials/dashboard/AchievementHistogram";
+import DashboardCard06 from "../partials/dashboard/AchievementDoughnutChart";
 import FilterButton from "../components/DropdownFilter";
 
 
@@ -23,8 +24,9 @@ function DashboardGestor() {
         <main>
           <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
             {/* Welcome banner */}
-            <WelcomeBanner />
-
+            <WelcomeBannerGestor />
+            <DashboardCard05 />
+            <DashboardCard06/>
             {/* Dashboard actions */}
             <div className="sm:flex sm:justify-between sm:items-center mb-8">
               {/* Left: Avatars */}

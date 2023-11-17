@@ -134,12 +134,12 @@ function SanctionForm() {
               <ReactStars
                 count={5}
                 onChange={(newRating) => {
-                  setSanctionValue(newRating * 2); // Cada estrella completa vale 2 puntos
+                  setSanctionValue(newRating * 10); 
                 }}
                 size={50}
-                isHalf={true} // Permitir medias estrellas
+                isHalf={true} 
                 activeColor="#ffd700"
-                value={sanctionValue / 2} // Convertir la puntuación numérica en número de estrellas
+                value={sanctionValue / 10}  
               />
             </label>
 

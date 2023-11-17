@@ -123,12 +123,12 @@ function AchievementForm() {
                 <ReactStars
                   count={5}
                   onChange={(newRating) => {
-                    setFormData({ ...formData, Punctuation: newRating * 10 }); // Multiplicar por 2, ya que cada estrella completa vale 2 puntos
+                    setFormData({ ...formData, Punctuation: newRating * 10 }); 
                   }}
                   size={50}
-                  isHalf={true} // Permitir medias estrellas
+                  isHalf={true} 
                   activeColor="#ffd700"
-                  value={formData.Punctuation / 10} // Dividir por 2 para convertir la puntuación numérica en número de estrellas
+                  value={formData.Punctuation / 10} 
                 />
 
                 {errors.Punctuation && (
