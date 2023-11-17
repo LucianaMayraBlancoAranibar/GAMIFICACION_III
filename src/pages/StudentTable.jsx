@@ -93,7 +93,6 @@ function StudentTable() {
           <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
             Lista de Estudiantes
           </h1>
-          <Link to="/UserManager"> Volver</Link>
           <div className="mr-10 grid grid-flow-col sm:auto-cols-max justify-start sm:justify-end gap-2">
             <Link to="/StudentForm">
               {" "}
@@ -103,8 +102,8 @@ function StudentTable() {
               </button>
             </Link>
           </div>
-         
-          <div className="my-4">
+          <Link to="/UserManager"> Volver</Link>
+          <div className="my-4 ">
             <input
               type="text"
               className="w-3/4 p-2 border rounded"
@@ -136,7 +135,7 @@ function StudentTable() {
                 </tr>
               </thead>
               <tbody className="text-sm font-medium divide-y divide-slate-100 dark:divide-slate-700">
-                {filteredStudentUsers.map((student) => (
+                {filteredStudentUsers.map((studentUser) => (
                   <tr
                     key={studentUser.idStudent}
                     className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"

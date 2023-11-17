@@ -76,26 +76,36 @@ class StudentAchievement extends Component {
 
   assignAchievement = () => {
     const { selectedStudent, selectedAchievement } = this.state;
-
+  
     if (!selectedStudent || !selectedAchievement) {
       this.setState({
-        message: "Por favor, seleccione un estudiante y un logro.",
+        message: "Por favor, seleccione tanto un estudiante como un logro para la asignación.",
         achievementCreated: false,
       });
-      return;
+      return; // Evita que se realice la asignación si falta alguno de los valores
     }
+  
+    // Verifica si el estudiante tiene un "badge" antes de asignar el logro
+    if (!selectedStudent.badge) {
+      this.setState({
+        message: "El estudiante debe tener un badge antes de asignar un logro.",
+        achievementCreated: false,
+      });
+      return; // Evita que se realice la asignación si el estudiante no tiene un badge
+    }
+  
     this.setModalIsOpen(true);
-
+  
     const studentNameParts = selectedStudent.value.split(", ");
     const studentFirstName = studentNameParts[0];
     const studentLastName = studentNameParts[1];
-
+  
     const request = {
       StudentName: studentFirstName,
       StudentLastName: studentLastName,
       AchievementName: selectedAchievement.value,
     };
-
+  
     axios
       .post(
         "https://localhost:7205/api/StudentAchievements/AssignAchievement",
@@ -113,7 +123,8 @@ class StudentAchievement extends Component {
           achievementCreated: false, // La asignación no se creó con éxito
         });
       });
-    };
+  };
+  
 
   render() {
     const {
