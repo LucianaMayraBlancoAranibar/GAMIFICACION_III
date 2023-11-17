@@ -172,6 +172,8 @@ class StudentAchievement extends Component {
               </button>
               <div>{message}</div>
             </div>
+            <br></br>
+            <Link to="/AssignmentTableG">Volver a la lista de asignaciones</Link>
             <ModalConfirmacion isOpen={modalIsOpen} closeModal={this.closeModal} />
           </div>
         </div>

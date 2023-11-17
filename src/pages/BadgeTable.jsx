@@ -52,13 +52,13 @@ const BadgesTable = () => {
         <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
         <div className="relative p-4 sm:p-6 rounded-sm mb-8">
           <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-            Lista de Badges
+            Lista de Insignias
           </h1>
           <div className="mr-10 grid grid-flow-col sm:auto-cols-max justify-start sm:justify-end gap-2">
             <br></br>
             <Link to="/BadgeForm">
               <button className="px-10 py-5 leading-5 text-white transition-colors duration-200 transform bg-gray-800 rounded-md hover:bg-gray-700 focus:outline-none focus:bg-gray-600">
-                Añadir Badge
+                Añadir Insignia
               </button>
             </Link>
           </div>
@@ -66,7 +66,7 @@ const BadgesTable = () => {
             <input
               type="text"
               className="w-3/4 p-2 border rounded"
-              placeholder="Buscar por nombre del badge..."
+              placeholder="Buscar por nombre de la insignia..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -77,20 +77,20 @@ const BadgesTable = () => {
               <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                   <th scope="col" className="px-6 py-3 text-center">
-                    <div className="font-semibold text-left">Badge Name</div>
+                    <div className="font-semibold text-left">Nombre de la Insignia</div>
                   </th>
                   <th scope="col" className="px-6 py-3 text-center">
-                    <div className="font-semibold text-left">Level</div>
+                    <div className="font-semibold text-left">Nivel</div>
                   </th>
                   <th scope="col" className="px-6 py-3 text-center">
-                    <div className="font-semibold text-left">Points</div>
+                    <div className="font-semibold text-left">Puntos</div>
                   </th>
                   <th scope="col" className="px-6 py-3 text-center">
-                    <div className="font-semibold text-left">Image</div>
+                    <div className="font-semibold text-left">Imagen</div>
                   </th>
                   <th scope="col" className="px-6 py-3 text-center">
                     <div className="font-semibold text-left">
-                      Type Achievement ID
+                      Tipo de logro
                     </div>
                   </th>
                 </tr>

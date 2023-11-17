@@ -3,6 +3,7 @@ import axios from "axios";
 import Sidebar from "../partials/Sidebar";
 import Header from "../partials/Header";
 import ModalConfirmacion from "../partials/ModalConfirmacion"; 
+import { Link } from "react-router-dom";
 
 function FacultadForm() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -74,6 +75,9 @@ function FacultadForm() {
                 </button>
               </div>
             </div>
+            <br></br>
+            <br></br>
+            <Link to="/FacultadTable">Volver a la lista de facultades</Link>
           </form>
           {/* Modal de confirmación */}
           <ModalConfirmacion isOpen={modalIsOpen} closeModal={closeModal} />

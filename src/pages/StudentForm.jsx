@@ -10,7 +10,7 @@ function StudentForm() {
   const [email, setemail] = useState("");
   const [rol, setrol] = useState("3");
   const [score, setScore] = useState("1");
-  const [idRank, setIdRank] = useState("1");
+  const [idRank, setIdRank] = useState("5");
   const [password, setpassword] = useState("");
   const [firstName, setfirstName] = useState("");
   const [lastName, setlastName] = useState("");

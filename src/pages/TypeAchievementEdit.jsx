@@ -61,7 +61,7 @@ function TypeAchievementEdit() {
             `https://localhost:7205/api/TypeAchievements/${id}`,
             data
         );
-        // ... manejo de la respuesta ...
+        setModalIsOpen(true);
     } catch (error) {
         console.error("Error al enviar la solicitud:", error.response);
     }

@@ -154,6 +154,9 @@ function SanctionForm() {
             >
               Crear Sanción
             </button>
+            <br></br>
+            <br></br>
+            <Link to="/SanctionTable">Volver a la lista de Sanciones</Link>
           </div>
           <ModalConfirmacion isOpen={modalIsOpen} closeModal={closeModal} />
         </div>

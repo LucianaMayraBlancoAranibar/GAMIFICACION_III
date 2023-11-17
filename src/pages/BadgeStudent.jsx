@@ -5,6 +5,7 @@ import Sidebar from "../partials/Sidebar";
 import Header from "../partials/Header";
 import { AiFillEdit } from 'react-icons/ai'; 
 import { BsTrashFill } from 'react-icons/bs'; 
+import { Link } from "react-router-dom";
 
 const AssignBadgeForm = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -94,7 +95,7 @@ const AssignBadgeForm = () => {
         <div className="relative p-4 sm:p-6 rounded-sm overflow-hidden mb-8">
           <div className="relative">
             <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-              Asignar badge a estudiante{" "}
+              Asignar Insignia a un estudiante{" "}
             </h1>
           </div>
           <br></br>
@@ -118,7 +119,7 @@ const AssignBadgeForm = () => {
             onChange={setSelectedBadge}
             options={badges}
             isLoading={loading}
-            placeholder="Seleccione un badge..."
+            placeholder="Seleccione una Insignia..."
             isClearable
             isSearchable
             name="badges"
@@ -126,15 +127,21 @@ const AssignBadgeForm = () => {
            <br></br>
            <br></br>
            <br></br>
-           <br></br>
+      
           <button
             className="px-10 py-5 leading-5 text-white transition-colors duration-200 transform bg-gray-800 rounded-md hover:bg-gray-700 focus:outline-none focus:bg-gray-600"
             type="submit"
             onClick={handleAssignBadge}
             disabled={loading || !selectedStudent || !selectedBadge}
           >
-            {loading ? "Asignando..." : "Asignar Badge"}
+            {loading ? "Asignando..." : "Asignar Insignia"}
           </button>
+
+          <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <Link to="/BadgeTable">Volver a la lista de Insignias</Link>
         </div>
       </div>
     </div>

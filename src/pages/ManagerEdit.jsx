@@ -4,7 +4,7 @@ import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import Sidebar from "../partials/Sidebar";
 import Header from "../partials/Header";
-import ModalConfirmacion from "../partials/ModalConfirmacion";
+import ModalConfirmacion from "../partials/ModalEdit";
 
 function ManagerEdit() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -22,7 +22,7 @@ function ManagerEdit() {
   const [Carrera, setCarrer] = useState("");
   const [AcademicUnity, setAcademicUnity] = useState("");
   const [originalEmail, setOriginalEmail] = useState("");
-
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const [emailError, setemailError] = useState("");
   const [firstNameError, setfirstNameError] = useState("");
   const [lastNameError, setlastNameError] = useState("")
@@ -66,7 +66,9 @@ function ManagerEdit() {
     return isValid;
   };
 
-
+  function closeModal() {
+    setModalIsOpen(false);
+  }
   useEffect(() => {
     axios
       .get(`https://localhost:7205/api/Gestors/${id}`)
@@ -163,6 +165,7 @@ function ManagerEdit() {
                 },
               })
               .then((response) => {
+                setModalIsOpen(true);
                 console.log(response);
               });
             }

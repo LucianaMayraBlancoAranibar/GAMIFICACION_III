@@ -3,8 +3,8 @@ import axios from "axios";
 import Sidebar from "../partials/Sidebar";
 import Header from "../partials/Header";
 import { Link } from "react-router-dom";
-import { AiFillEdit } from 'react-icons/ai'; 
-import { BsTrashFill } from 'react-icons/bs'; 
+import { AiFillEdit } from "react-icons/ai";
+import { BsTrashFill } from "react-icons/bs";
 
 function BadgeAssignmentsTable() {
   const [badgeAssignments, setBadgeAssignments] = useState([]);
@@ -12,12 +12,12 @@ function BadgeAssignmentsTable() {
   const [error, setError] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [badgeAssignmentToDelete, setBadgeAssignmentToDelete] = useState(null);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
 
-  const filteredBadgeAssignments = badgeAssignments.filter(assignment =>
+  const filteredBadgeAssignments = badgeAssignments.filter((assignment) =>
     assignment.studentFullName.toLowerCase().includes(searchTerm.toLowerCase())
   );
-  
+
   useEffect(() => {
     axios
       .get("https://localhost:7205/api/BadgeStudents/AllBadgeAssignments")
@@ -80,14 +80,14 @@ function BadgeAssignmentsTable() {
             </Link>
           </div>
           <div className="my-4">
-  <input
-    type="text"
-    className="w-3/4 p-2 border rounded"
-    placeholder="Buscar por nombre del estudiante..."
-    value={searchTerm}
-    onChange={(e) => setSearchTerm(e.target.value)}
-  />
-</div>
+            <input
+              type="text"
+              className="w-3/4 p-2 border rounded"
+              placeholder="Buscar por nombre del estudiante..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
 
           <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-5 max-h-[600px] overflow-y-auto">
             <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -115,7 +115,7 @@ function BadgeAssignmentsTable() {
                 </tr>
               </thead>
               <tbody className="text-sm font-medium divide-y divide-slate-100 dark:divide-slate-700">
-              {filteredBadgeAssignments.map((assignment) => (
+                {filteredBadgeAssignments.map((assignment) => (
                   <tr
                     className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
                     key={assignment.Id}
@@ -126,11 +126,11 @@ function BadgeAssignmentsTable() {
                       {assignment.accumulatedPoints}
                     </td>
                     <td className="px-6 py-4 text-left">
-                      <Link to={`/BadgeAssignmentsEdit/${assignment.id}`}>
+                      {/* <Link to={`/BadgeAssignmentsEdit/${assignment.id}`}>
                         <button className="px-4 py-4 mr-4 leading-5 text-white transition-colors duration-200 transform bg-green-700 rounded-md hover:bg-green-500 focus:outline-none focus:bg-gray-600">
                         <AiFillEdit />
                         </button>
-                      </Link>
+                      </Link> */}
 
                       <button
                         className="px-4 py-4 ml-3 leading-5 text-white transition-colors duration-200 transform bg-red-500 rounded-md hover:bg-red-400 focus:outline-none focus:bg-gray-600"

@@ -119,7 +119,7 @@ function DepartamentoForm() {
                   className="text-gray-900 dark:text-gray-900"
                   htmlFor="departmentName"
                 >
-                  Carrera
+                  Facultad
                 </label>
 
                 {Facultad.length === 0 ? (
@@ -131,7 +131,7 @@ function DepartamentoForm() {
                     value={idFaculty}
                     onChange={(e) => setidFaculty(e.target.value)}
                   >
-                    <option value="">Selecciona una Carrera</option>
+                    <option value="">Selecciona una Facultad</option>
                     {Facultad.map((facultad) => (
                       <option
                         key={facultad.idFaculty}

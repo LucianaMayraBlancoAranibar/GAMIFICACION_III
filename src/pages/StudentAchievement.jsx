@@ -184,7 +184,11 @@ class StudentAchievement extends Component {
                 Asignar Logro
               </button>
               <div>{message}</div>
+              <br></br>
+            <br></br>
+            <Link to="/AssignmentTable">Volver a la lista de asignaciones</Link>
             </div>
+
             {achievementCreated && ( // Muestra el modal solo si la asignación se creó con éxito
           <ModalConfirmacion isOpen={modalIsOpen} closeModal={this.closeModal} />
         )}</div>

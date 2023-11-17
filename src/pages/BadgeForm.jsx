@@ -4,6 +4,7 @@ import Select from "react-select";
 import Sidebar from "../partials/Sidebar";
 import Header from "../partials/Header";
 import ModalConfirmacion from "../partials/ModalConfirmacion";
+import { Link } from "react-router-dom";
 
 const BadgeCreationForm = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -84,7 +85,7 @@ const BadgeCreationForm = () => {
         <div className="relative p-4 sm:p-6 rounded-sm overflow-hidden mb-8">
           <div className="relative">
             <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-              Crear Badge{" "}
+              Crear Insignia{" "}
             </h1>
           </div>
           <br></br>
@@ -94,7 +95,7 @@ const BadgeCreationForm = () => {
                 htmlFor="badgeName"
                 className="block text-sm font-medium text-gray-700"
               >
-                Nombre del Badge
+                Nombre de la Insignia
               </label>
               <input
                 type="text"
@@ -135,6 +136,9 @@ const BadgeCreationForm = () => {
                 {loading ? "Creando..." : "Crear Badges"}
               </button>
             </div>
+            <br></br>
+            <br></br>
+            <Link to="/BadgeTable">Volver a la lista de Insignias</Link>
           </form>
           <ModalConfirmacion isOpen={modalIsOpen} closeModal={closeModal} />
         </div>
