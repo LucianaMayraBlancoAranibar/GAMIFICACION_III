@@ -48,14 +48,14 @@ const StudentView = () => {
     <div className="container mx-auto p-4">
       <div className="text-center mb-8">
       
-        <p className="text-xl text-gray-600">Here's your current progress:</p>
+        <p className="text-xl text-gray-600">Aquí está tu progreso actual:</p>
       </div>
       <div className="flex flex-wrap justify-around items-stretch gap-4">
      
-        <InfoCard label="Rank Name" value={studentRank.rankName} icon="🏅" />
-        <InfoCard label="Sub Rank Name" value={studentRank.subRankName} icon="🌟" />
+        <InfoCard label="Nombre de Rango" value={studentRank.rankName} icon="🏅" />
+        <InfoCard label="Nombre de Sub Rango" value={studentRank.subRankName} icon="🌟" />
         <InfoCard label="Score" value={studentRank.score} icon="✔️" />
-        <InfoCard label="Achievements" value={studentRank.achievementsCount} icon="🏆" /> 
+        <InfoCard label="Logros" value={studentRank.achievementsCount} icon="🏆" /> 
         {/* Si quieres mostrar la imagen, puedes hacerlo directamente o en otro componente */}
         <div className="flex justify-center items-center">
           <img src={studentRank.imagePath} alt="Rank" className="h-32" />

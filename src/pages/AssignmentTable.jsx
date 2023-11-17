@@ -3,13 +3,18 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import Sidebar from "../partials/Sidebar";
 import Header from "../partials/Header";
-import { BsTrashFill } from 'react-icons/bs'; 
+import { BsTrashFill } from "react-icons/bs";
 
 function AssignmentTable() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [assignments, setAssignments] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
   const [assignmentToDelete, setAssignmentToDelete] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const filteredAssignments = assignments.filter((assignment) =>
+    assignment.studentName.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   useEffect(() => {
     axios
@@ -66,10 +71,20 @@ function AssignmentTable() {
               </button>
             </Link>
           </div>
+          <div className="my-4">
+            <input
+              type="text"
+              className="w-3/4 p-2 border rounded"
+              placeholder="Buscar por nombre del estudiante..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
+
           {errorMessage && <p className="error-message">{errorMessage}</p>}
           <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-5 max-h-[600px] overflow-y-auto">
-          <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+              <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                   <th scope="col" className="px-6 py-3 text-center">
                     <div className="font-semibold text-left">
@@ -88,22 +103,22 @@ function AssignmentTable() {
                 </tr>
               </thead>
               <tbody className="text-sm font-medium divide-y divide-slate-100 dark:divide-slate-700">
-                {assignments.map((assignment) => (
+                {filteredAssignments.map((assignment) => (
                   <tr
-                  className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                    className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
                     key={assignment.id}
                   >
                     <td className="px-6 py-4">{assignment.studentName}</td>
                     <td className="px-6 py-4">{assignment.achievementName}</td>
                     <td className="px-6 py-4">{assignment.points}</td>
-                    <td  className="px-6 py-4 text-left">
+                    <td className="px-6 py-4 text-left">
                       <button
-                         className="px-4 py-4 ml-3 leading-5 text-white transition-colors duration-200 transform bg-red-500 rounded-md hover:bg-red-400 focus:outline-none focus:bg-gray-600"
+                        className="px-4 py-4 ml-3 leading-5 text-white transition-colors duration-200 transform bg-red-500 rounded-md hover:bg-red-400 focus:outline-none focus:bg-gray-600"
                         onClick={() => setAssignmentToDelete(assignment.id)}
                       >
-                         <BsTrashFill /> 
+                        <BsTrashFill />
                       </button>
-{/* 
+                      {/* 
                       <Link to={`/AssigmentEdit/${assignment.id}`}>
                         <button className="px-4 py-4 mr-4 leading-5 text-white transition-colors duration-200 transform bg-green-700 rounded-md hover:bg-green-500 focus:outline-none focus:bg-gray-600">
                           Editar

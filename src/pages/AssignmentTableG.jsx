@@ -12,13 +12,11 @@ function AssignmentTable() {
   const [assignmentToDelete, setAssignmentToDelete] = useState(null);
 
   useEffect(() => {
-    const currentUserId = localStorage.getItem("userID"); // Obtén el ID del usuario actual
-  
-    axios.get("https://localhost:7205/api/StudentAchievements/AllAssignments")
+    axios
+      .get("https://localhost:7205/api/StudentAchievements/AllAssignments")
       .then((response) => {
         console.log("Asignaciones recibidas:", response.data);
-        const filteredAssignments = response.data.filter(assignment => assignment.creatorId === currentUserId);
-        setAssignments(filteredAssignments);
+        setAssignments(response.data);
       })
       .catch((error) => {
         console.error("Error fetching assignments:", error);

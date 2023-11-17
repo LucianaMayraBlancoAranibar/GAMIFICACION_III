@@ -45,7 +45,7 @@ const BadgesTable = () => {
       <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
         <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
         <div className="relative p-4 sm:p-6 rounded-sm mb-8">
-          <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">Lista de Badges</h1>
+          <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">Lista de Insignias</h1>
           <div className="mr-10 grid grid-flow-col sm:auto-cols-max justify-start sm:justify-end gap-2">
             <br></br>
            
@@ -55,20 +55,20 @@ const BadgesTable = () => {
               <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                   <th scope="col" className="px-6 py-3 text-center">
-                    <div className="font-semibold text-left">Badge Name</div>
+                    <div className="font-semibold text-left">Nombre Insignia</div>
                   </th>
                   <th scope="col" className="px-6 py-3 text-center">
-                    <div className="font-semibold text-left">Level</div>
+                    <div className="font-semibold text-left">Nivel</div>
                   </th>
                   <th scope="col" className="px-6 py-3 text-center">
-                    <div className="font-semibold text-left">Points</div>
+                    <div className="font-semibold text-left">puntos</div>
                   </th>
                   <th scope="col" className="px-6 py-3 text-center">
-                    <div className="font-semibold text-left">Image</div>
+                    <div className="font-semibold text-left">imagen</div>
                   </th>
                   <th scope="col" className="px-6 py-3 text-center">
                     <div className="font-semibold text-left">
-                      Type Achievement ID
+                     tipo de logro
                     </div>
                   </th>
                 </tr>

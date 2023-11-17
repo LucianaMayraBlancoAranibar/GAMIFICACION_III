@@ -84,7 +84,7 @@ function WelcomeBanner() {
 
       {/* Content */}
       <div className="relative">
-      <h1 className="text-4xl font-extrabold text-gray-800 mb-2">Welcome back, {studentRank.firstName} {studentRank.lastName}!</h1>
+      <h1 className="text-4xl font-extrabold text-gray-800 mb-2">Bienvenido de nuevo,  {studentRank.firstName} {studentRank.lastName}!</h1>
         <p className="dark:text-indigo-200">Univalle</p>
       </div>
     </div>

@@ -12,6 +12,13 @@ function TypeAchievementTable() {
   const [typeAchievements, setTypeAchievements] = useState([]);
   const [typeAchievementToDelete, setTypeAchievementToDelete] = useState(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const filteredTypeAchievements = typeAchievements.filter((typeAchievement) =>
+    typeAchievement.nameTypeAchievement
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase())
+  );
 
   useEffect(() => {
     axios
@@ -57,7 +64,15 @@ function TypeAchievementTable() {
         <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
         <div className="relative p-4 sm:p-6 rounded-sm mb-8">
           <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">Lista de Tipos Logros</h1>
-        
+          <div className="my-4">
+            <input
+              type="text"
+              className="w-3/4 p-2 border rounded"
+              placeholder="Buscar tipo de logro..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
           <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-5 max-h-[600px] overflow-y-auto">
             <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
               <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -74,7 +89,7 @@ function TypeAchievementTable() {
                 </tr>
               </thead>
               <tbody className="text-sm text-gray-900  divide-y divide-slate-100 dark:divide-slate-700">
-                {typeAchievements.map((typeAchievement) => (
+              {filteredTypeAchievements.map((typeAchievement) => (
                   <tr
                     key={typeAchievement.idTypeAchievement}
                     className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"

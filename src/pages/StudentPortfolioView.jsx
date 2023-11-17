@@ -57,13 +57,13 @@ const StudentProfileView = () => {
             </h1>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <InfoField label="First Name" value={studentProfile.firstName} />
-            <InfoField label="Last Name" value={studentProfile.lastName} />
+            <InfoField label="Nombres" value={studentProfile.firstName} />
+            <InfoField label="Apellidos" value={studentProfile.lastName} />
             <InfoField label="Email" value={studentProfile.email} />
-            <InfoField label="Career" value={studentProfile.career} />
-            <InfoField label="Faculty" value={studentProfile.faculty} />
-            <InfoField label="Department" value={studentProfile.department} />
-            <InfoField label="Academic Unit" value={studentProfile.academicUnit} />
+            <InfoField label="Carrera" value={studentProfile.career} />
+            <InfoField label="Facultad" value={studentProfile.faculty} />
+            <InfoField label="Departamento" value={studentProfile.department} />
+            <InfoField label="Sucursal" value={studentProfile.academicUnit} />
           </div>
         </main>
       </div>

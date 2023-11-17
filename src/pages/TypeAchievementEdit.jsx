@@ -9,82 +9,63 @@ function TypeAchievementEdit() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [formData, setFormData] = useState({
+    IdTypeAchievement: "", // El ID del logro a editar
     NameTypeAchievement: "",
     Image: null,
-    IdAdministrator: 1, 
+    IdAdministrator: "", // ID del administrador
   });
-
-
   const [errors, setErrors] = useState({});
 
-  const { id } = useParams(); 
+  const { id } = useParams();
 
   useEffect(() => {
-
-    axios
-      .get(`https://localhost:7205/api/TypeAchievements/${id}`)
-      .then((response) => {
+    const fetchTypeAchievementData = async () => {
+      try {
+        const response = await axios.get(
+          `https://localhost:7205/api/TypeAchievements/${id}`
+        );
         const typeAchievementData = response.data;
+
         setFormData({
+          IdTypeAchievement: typeAchievementData.idTypeAchievement,
           NameTypeAchievement: typeAchievementData.nameTypeAchievement || "",
-          IdAdministrator: typeAchievementData.IdAdministrator || 1,
+          IdAdministrator: typeAchievementData.idAdministrator || "",
+          Image: typeAchievementData.imagePath || ""
         });
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error("Error al cargar los datos del tipo de logro:", error);
-      });
+      }
+    };
+
+    fetchTypeAchievementData();
   }, [id]);
 
   const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    setFormData({ ...formData, Image: file });
-  };
+    if (e.target.files && e.target.files[0]) {
+        const file = e.target.files[0];
+        setFormData({ ...formData, Image: file });
+    }
+};
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const data = new FormData();
+    data.append("IdTypeAchievement", id);
     data.append("NameTypeAchievement", formData.NameTypeAchievement);
     data.append("Image", formData.Image);
     data.append("IdAdministrator", formData.IdAdministrator);
-
-    // Reiniciar los errores en cada envío
-    setErrors({});
-
-    // Realizar validaciones
-    let formIsValid = true;
-    if (!formData.NameTypeAchievement) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        NameTypeAchievement: "El nombre del tipo de logro es obligatorio",
-      }));
-      formIsValid = false;
-    }
-    if (!formData.Image) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        Image: "La imagen es obligatoria",
-      }));
-      formIsValid = false;
-    }
-
-    if (formIsValid) {
-      try {
-       
-        const response = await axios.put(
-          `https://localhost:7205/api/TypeAchievements/${id}`, 
-          data
-        );
-
-        console.log("Respuesta de la API:", response.data);
-
-      } catch (error) {
     
+    try {
+        const response = await axios.put(
+            `https://localhost:7205/api/TypeAchievements/${id}`,
+            data
+        );
+        // ... manejo de la respuesta ...
+    } catch (error) {
         console.error("Error al enviar la solicitud:", error.response);
-      }
     }
-  };
-
+};
   function closeModal() {
     setModalIsOpen(false);
   }
@@ -120,7 +101,7 @@ function TypeAchievementEdit() {
                   })
                 }
               />
-           
+
               {errors.NameTypeAchievement && (
                 <p className="text-red-500">{errors.NameTypeAchievement}</p>
               )}

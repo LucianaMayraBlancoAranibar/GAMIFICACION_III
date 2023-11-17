@@ -12,7 +12,12 @@ function BadgeAssignmentsTable() {
   const [error, setError] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [badgeAssignmentToDelete, setBadgeAssignmentToDelete] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
 
+  const filteredBadgeAssignments = badgeAssignments.filter(assignment =>
+    assignment.studentFullName.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+  
   useEffect(() => {
     axios
       .get("https://localhost:7205/api/BadgeStudents/AllBadgeAssignments")
@@ -74,6 +79,16 @@ function BadgeAssignmentsTable() {
               </button>
             </Link>
           </div>
+          <div className="my-4">
+  <input
+    type="text"
+    className="w-3/4 p-2 border rounded"
+    placeholder="Buscar por nombre del estudiante..."
+    value={searchTerm}
+    onChange={(e) => setSearchTerm(e.target.value)}
+  />
+</div>
+
           <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-5 max-h-[600px] overflow-y-auto">
             <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
               <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -100,7 +115,7 @@ function BadgeAssignmentsTable() {
                 </tr>
               </thead>
               <tbody className="text-sm font-medium divide-y divide-slate-100 dark:divide-slate-700">
-                {badgeAssignments.map((assignment) => (
+              {filteredBadgeAssignments.map((assignment) => (
                   <tr
                     className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
                     key={assignment.Id}

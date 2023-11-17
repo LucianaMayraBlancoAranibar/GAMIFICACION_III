@@ -198,7 +198,7 @@ function SidebarStudent({ sidebarOpen, setSidebarOpen }) {
                               }
                             >
                               <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                Main
+                                Principal
                               </span>
                             </NavLink>
                           </li>
@@ -234,7 +234,7 @@ function SidebarStudent({ sidebarOpen, setSidebarOpen }) {
                       />
                     </svg>
                     <span className="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                      Mis Badges
+                      Mis Insignias
                     </span>
                   </div>
                 </NavLink>
@@ -286,7 +286,7 @@ function SidebarStudent({ sidebarOpen, setSidebarOpen }) {
                       />
                     </svg>
                     <span className="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                      Mi Rank
+                      Mi Rango
                     </span>
                   </div>
                 </NavLink>

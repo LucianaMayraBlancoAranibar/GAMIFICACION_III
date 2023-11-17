@@ -17,6 +17,7 @@ function AchievementForm() {
   const [achievementTypes, setAchievementTypes] = useState([]);
   const [errors, setErrors] = useState({});
   const [modalIsOpen, setModalIsOpen] = useState(false);
+ 
 
   useEffect(() => {
     Axios.get("https://localhost:7205/api/TypeAchievements")

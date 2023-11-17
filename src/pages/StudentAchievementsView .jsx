@@ -47,27 +47,27 @@ const StudentAchievementsView = ({ studentId }) => {
         <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
         <div className="relative p-4 sm:p-6 rounded-sm mb-8">
           <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-            Achievements
+            Logros
           </h1>
           <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-5 max-h-[600px] overflow-y-auto">
             <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
               <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                   <th scope="col" className="px-6 py-3 text-center">
-                    <div className="font-semibold text-left">Name </div>
+                    <div className="font-semibold text-left">Nombre </div>
                   </th>
                   <th scope="col" className="px-6 py-3 text-center">
                     {" "}
-                    <div className="font-semibold text-left">Punctuation</div>
+                    <div className="font-semibold text-left">Puntuacion</div>
                   </th>
                   <th scope="col" className="px-6 py-3 text-center">
                     {" "}
-                    <div className="font-semibold text-left">Project Name</div>
+                    <div className="font-semibold text-left">Nombre del Proyecto</div>
                   </th>
                   <th scope="col" className="px-6 py-3 text-center">
                     {" "}
                     <div className="font-semibold text-left">
-                      Type Achievement
+                      Tipo de Logro
                     </div>
                   </th>
                 </tr>

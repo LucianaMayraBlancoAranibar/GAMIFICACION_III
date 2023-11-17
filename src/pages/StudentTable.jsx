@@ -3,9 +3,8 @@ import axios from "axios";
 import Sidebar from "../partials/Sidebar";
 import Header from "../partials/Header";
 import { Link } from "react-router-dom";
-import { AiFillEdit } from 'react-icons/ai'; 
-import { BsTrashFill } from 'react-icons/bs'; 
-
+import { AiFillEdit } from "react-icons/ai";
+import { BsTrashFill } from "react-icons/bs";
 
 function StudentTable() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -14,9 +13,15 @@ function StudentTable() {
   const [academicUnities, setAcademicUnities] = useState([]);
   const [career, setCareer] = useState([]);
   const [studentUserToDelete, setStudentUserToDelete] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const filteredStudentUsers = studentUser.filter((student) =>
+    (student.firstName + " " + student.lastName)
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase())
+  );
 
   useEffect(() => {
-   
     axios
       .get("https://localhost:7205/api/Students")
       .then((response) => {
@@ -27,7 +32,7 @@ function StudentTable() {
         console.error(error); // Verifica si hay errores en la llamada a la API
       });
 
-      axios
+    axios
       .get("https://localhost:7205/api/Usuarios")
       .then((response) => {
         console.log(response.data); // Verifica los datos que obtienes
@@ -37,7 +42,7 @@ function StudentTable() {
         console.error(error); // Verifica si hay errores en la llamada a la API
       });
 
-      axios
+    axios
       .get("https://localhost:7205/api/Careers")
       .then((response) => {
         console.log(response.data); // Verifica los datos que obtienes
@@ -47,7 +52,7 @@ function StudentTable() {
         console.error(error); // Verifica si hay errores en la llamada a la API
       });
 
-      axios
+    axios
       .get("https://localhost:7205/api/AcademicUnities")
       .then((response) => {
         console.log(response.data); // Verifica los datos que obtienes
@@ -66,7 +71,9 @@ function StudentTable() {
         .then((response) => {
           // Actualiza la lista de studentUser después de la eliminación
           setStudentUser((prevStudentUser) =>
-            prevStudentUser.filter((studentUser) => studentUser.idStudent !== studentUserToDelete)
+            prevStudentUser.filter(
+              (studentUser) => studentUser.idStudent !== studentUserToDelete
+            )
           );
           setStudentUserToDelete(null); // Restablece el estado
         })
@@ -83,39 +90,45 @@ function StudentTable() {
       <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
         <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
         <div className="relative p-4 sm:p-6 rounded-sm mb-8">
-          <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">Lista de Estudiantes</h1>
+          <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+            Lista de Estudiantes
+          </h1>
+          <Link to="/UserManager"> Volver</Link>
           <div className="mr-10 grid grid-flow-col sm:auto-cols-max justify-start sm:justify-end gap-2">
-            <Link to="/StudentForm"> {/* Enlace a la página de añadir studentUser */}
+            <Link to="/StudentForm">
+              {" "}
+              {/* Enlace a la página de añadir studentUser */}
               <button className="px-10 py-5 leading-5 text-white transition-colors duration-200 transform bg-gray-800 rounded-md hover:bg-gray-700 focus:outline-none focus:bg-gray-600">
                 Añadir Estudiante
               </button>
             </Link>
           </div>
-          <Link to="/UserManager">   Volver</Link>
+         
+          <div className="my-4">
+            <input
+              type="text"
+              className="w-3/4 p-2 border rounded"
+              placeholder="Buscar por nombre del estudiante..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
+
           <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-5 max-h-[600px] overflow-y-auto">
             <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
               <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
-
                   <th scope="col" className="px-6 py-3 text-center">
-                    <div className="font-semibold text-left">
-                      Nombre
-                    </div>
+                    <div className="font-semibold text-left">Nombre</div>
                   </th>
                   <th scope="col" className="px-6 py-3 text-center">
-                    <div className="font-semibold text-left">
-                      Correo
-                    </div>
+                    <div className="font-semibold text-left">Correo</div>
                   </th>
                   <th scope="col" className="px-6 py-3 text-center">
-                    <div className="font-semibold text-left">
-                      Carrera
-                    </div>
+                    <div className="font-semibold text-left">Carrera</div>
                   </th>
                   <th scope="col" className="px-6 py-3 text-center">
-                    <div className="font-semibold text-left">
-                      Academia
-                    </div>
+                    <div className="font-semibold text-left">Academia</div>
                   </th>
                   <th scope="col" className="px-6 py-3 text-center">
                     <div className="font-semibold text-left">Acciones</div>
@@ -123,44 +136,53 @@ function StudentTable() {
                 </tr>
               </thead>
               <tbody className="text-sm font-medium divide-y divide-slate-100 dark:divide-slate-700">
-                {studentUser.map((studentUser) => (
-                  <tr key={studentUser.idStudent} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-
-                    <td className="px-6 py-4">{studentUser.firstName + " " + studentUser.lastName}</td>
+                {filteredStudentUsers.map((student) => (
+                  <tr
+                    key={studentUser.idStudent}
+                    className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                  >
+                    <td className="px-6 py-4">
+                      {studentUser.firstName + " " + studentUser.lastName}
+                    </td>
                     <td className="px-6 py-4">{studentUser.email}</td>
                     <td className="px-6 py-4">
-                      {
-                        user.find((u) => u.idUsuario === studentUser.idStudent)
-                          ? (
-                            career.find((c) => c.idCareer === user.find((u) => u.idUsuario === studentUser.idStudent).idCareer)?.careerName
-                            || "Carrera No Encontrada"
-                          )
-                          : "Usuario No Encontrado"
-                      }
+                      {user.find((u) => u.idUsuario === studentUser.idStudent)
+                        ? career.find(
+                            (c) =>
+                              c.idCareer ===
+                              user.find(
+                                (u) => u.idUsuario === studentUser.idStudent
+                              ).idCareer
+                          )?.careerName || "Carrera No Encontrada"
+                        : "Usuario No Encontrado"}
                     </td>
                     <td className="px-6 py-4">
-                      {
-                        user.find((u) => u.idUsuario === studentUser.idStudent)
-                          ? (
-                            academicUnities.find((a) => a.idAcademicUnity === user.find((u) => u.idUsuario === studentUser.idStudent).idAcademicUnity)?.academicUnityName
-                            || "Unidad Académica No Encontrada"
-                          )
-                          : "Usuario No Encontrado"
-                      }
+                      {user.find((u) => u.idUsuario === studentUser.idStudent)
+                        ? academicUnities.find(
+                            (a) =>
+                              a.idAcademicUnity ===
+                              user.find(
+                                (u) => u.idUsuario === studentUser.idStudent
+                              ).idAcademicUnity
+                          )?.academicUnityName ||
+                          "Unidad Académica No Encontrada"
+                        : "Usuario No Encontrado"}
                     </td>
                     <td className="px-6 py-4 text-left">
-                      <Link to={`/StudentEdit/${studentUser.idStudent}`}> {/* Redirigir a la página de edición con el ID */}
-                        <button
-                          className="px-4 py-4 mr-4 leading-5 text-white transition-colors duration-200 transform bg-green-700 rounded-md hover:bg-green-500 focus:outline-none focus:bg-gray-600"
-                        >
-                      <AiFillEdit /> 
+                      <Link to={`/StudentEdit/${studentUser.idStudent}`}>
+                        {" "}
+                        {/* Redirigir a la página de edición con el ID */}
+                        <button className="px-4 py-4 mr-4 leading-5 text-white transition-colors duration-200 transform bg-green-700 rounded-md hover:bg-green-500 focus:outline-none focus:bg-gray-600">
+                          <AiFillEdit />
                         </button>
                       </Link>
                       <button
                         className="px-4 py-4 ml-3 leading-5 text-white transition-colors duration-200 transform bg-red-500 rounded-md hover:bg-red-400 focus:outline-none focus:bg-gray-600"
-                        onClick={() => setStudentUserToDelete(studentUser.idStudent)} // Establece el ID de la facultad para eliminar
+                        onClick={() =>
+                          setStudentUserToDelete(studentUser.idStudent)
+                        } // Establece el ID de la facultad para eliminar
                       >
-                      <BsTrashFill />
+                        <BsTrashFill />
                       </button>
                     </td>
                   </tr>

@@ -55,11 +55,11 @@ const StudentSanctionsView = ({ studentId }) => {
               <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                   <th scope="col" className="px-6 py-3 text-center">
-                    <div className="font-semibold text-left">Name</div>
+                    <div className="font-semibold text-left">Descripcion</div>
                   </th>
 
                   <th scope="col" className="px-6 py-3 text-center">
-                    <div className="font-semibold text-left">Description</div>
+                    <div className="font-semibold text-left">Valor de la sancion</div>
                   </th>
                 </tr>
               </thead>

@@ -4,6 +4,7 @@ import Sidebar from "../partials/Sidebar";
 import Header from "../partials/Header";
 import { Link, useParams } from "react-router-dom";
 import ModalConfirmacion from "../partials/ModalEdit";
+import ReactStars from "react-rating-stars-component";
 
 function AchievementEdit() {
   const { id } = useParams();
@@ -68,16 +69,13 @@ function AchievementEdit() {
       return;
     }
 
- 
     Axios.put(`https://localhost:7205/api/Achievements/${id}`, formData)
       .then((response) => {
         console.log("Logro actualizado con éxito:", response.data);
         setModalIsOpen(true);
-    
       })
       .catch((error) => {
         console.error("Error al actualizar el logro:", error);
-        
       });
   }
 
@@ -136,18 +134,20 @@ function AchievementEdit() {
                 >
                   Puntuación
                 </label>
-                <input
-                  type="number"
-                  id="Punctuation"
-                  name="Punctuation"
-                  value={formData.Punctuation}
-                  onChange={handleInputChange}
-                  className="block w-1/2 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                <ReactStars
+                  count={5}
+                  onChange={(newRating) => {
+                    setFormData({ ...formData, Punctuation: newRating * 10 });
+                  }}
+                  size={50}
+                  value={formData.Punctuation / 10}
                 />
+
                 {errors.Punctuation && (
                   <p className="text-red-500 text-sm">{errors.Punctuation}</p>
                 )}
               </div>
+
               <br></br>
               <div>
                 <label

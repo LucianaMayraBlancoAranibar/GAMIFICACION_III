@@ -23,6 +23,10 @@ class StudentAchievement extends Component {
   setModalIsOpen = (isOpen) => {
     this.setState({ modalIsOpen: isOpen });
   };
+
+  closeModal = () => {
+    this.setModalIsOpen(false);
+  };
   componentDidMount() {
     this.loadStudentOptions();
     this.loadAchievementOptions();
@@ -168,12 +172,7 @@ class StudentAchievement extends Component {
               </button>
               <div>{message}</div>
             </div>
-            <ModalConfirmacion
-              isOpen={modalIsOpen}
-              onConfirm={this.confirmAssignment}
-              onCancel={() => this.setModalIsOpen(false)}
-              // ...otros props si son necesarios
-            />
+            <ModalConfirmacion isOpen={modalIsOpen} closeModal={this.closeModal} />
           </div>
         </div>
       </div>

@@ -66,7 +66,7 @@ import BadgeTableG from "./pages/BadgeTableG";
 import SanctionTableG from "./pages/SanctionTableG";
 import StudentAchievementG from "./pages/StudentAchievementG";
 import AssignmentTableG from "./pages/AssignmentTableG";
-
+import RankTableStatic from "./pages/RankTableStatic"
 
 function ScrollToTopOnRouteChange() {
   useEffect(() => {
@@ -106,7 +106,7 @@ function PreventCache() {
 }
 
 function App() {
-
+ 
 
   return (
     <AuthProvider>
@@ -184,7 +184,7 @@ function App() {
           <Route path="/ResetPassword" element={<ResetPassword />} />
           <Route path="/" element={<Main />} />
           <Route path="/InfoMain" element={<InfoMain />} />
-         
+          <Route path="/RankTableStatic" element={<RankTableStatic />} />
         </Routes>
       </Router>
     </AuthProvider>
